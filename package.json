@@ -1,11 +1,12 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "Blog",
   "main": "index.js",
   "dependencies": {
     "marked": "^0.3.6",
-    "rss": "^1.2.1"
+    "rss": "^1.2.1",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {},
   "scripts": {
