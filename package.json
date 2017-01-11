@@ -1,0 +1,29 @@
+{
+  "name": "npm-landscape",
+  "version": "1.0.0",
+  "description": "no poor modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nohmapp/npm-landscape.git"
+  },
+  "keywords": [
+    "npm",
+    "d3",
+    "npmjsio",
+    "search",
+    "dependency"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nohmapp/npm-landscape/issues"
+  },
+  "homepage": "https://github.com/nohmapp/npm-landscape#readme",
+  "dependencies": {
+    "got": "^6.7.1"
+  }
+}
