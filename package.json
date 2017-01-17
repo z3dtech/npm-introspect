@@ -25,6 +25,8 @@
   "homepage": "https://github.com/nohmapp/npm-landscape#readme",
   "dependencies": {
     "async": "^2.1.4",
-    "got": "^6.7.1"
+    "bluebird": "^3.4.7",
+    "got": "^6.7.1",
+    "request": "^2.79.0"
   }
 }

@@ -1,7 +1,75 @@
-const got = require('got');
-const http = require('http');
+
+
 const fs = require('fs');
-const async = require('async')
+const Promise = require('bluebird')
+//const request = Promise.promisify(require('request'));
+const got = require('got');
+
+//var sites = ['http://www.google.com', 'http://www.example.com', 'http://www.yahoo.com']
+
+// var requests = sites.map(request)
+// Promise.all(requests).then(function(results){
+//   console.log(results)
+//    console.log("All done") // you can access the results of the requests here
+// });
+
+var requests = ["https://api.npms.io/v2/package/d3", "https://api.npms.io/v2/package/react", "https://api.npms.io/v2/package/bluebird"];
+
+
+
+function doNext(){
+if(!requests.length) return;
+requests.shift().then((resolved) =>{
+if(resolved.property === "Success"){
+  ...
+  doNext();
+}else{
+  let file = fs.createWriteStream('data.json');
+  let stream = resolved.pipe(file);
+  stream.on('finish', () =>{
+
+    doNext();
+  });
+}
+
+})
+}
+doNext();
+or break up the handler to a controller and Promisified handler:
+
+function streamOrNot(obj){
+return new Promise(resolve, reject){
+if(obj.property === something){
+  resolve();
+  return;
+}
+let filetodomvc.com
+  resolve();
+});
+}
+}
+
+function doNext(){
+if(!requests.length) return;
+return requests.shift().then(streamOrNot).then(doNext);
+}
+
+doNext()
+
+
+
+///////////////////////////
+//
+// got('https://api.npms.io/v2/package/d3')
+//     .then(response => {
+//         console.log(response.body);
+//         //=> '<!doctype html> ...'
+//     })
+//     .catch(error => {
+//         console.log(error.response.body);
+//         //=> 'Internal server error ...'
+//     });
+/*
 
 //search suggestions
 //I really like the warning lfags that this gives, think I'll have to check both
@@ -14,17 +82,17 @@ const async = require('async')
 //if I could always retrieve the right module
 //got.stream("https://api.npms.io/v2/package/d3").pipe(fs.createWriteStream('data.json'));
 
-package = ['d3', 'react', 'optomist']
-
-
-
-got.stream("https://api.npms.io/v2/package/d3")
-  .on('response', function(res){
-    console.log(res)
-  }).on('end', ()=> {console.log('this has ended')})
-
-
-// got('https:\//api.npms.io/v2/package/' + package[i])
+// package = ['d3', 'react', 'optomist']
+//
+//
+//
+// got.stream("https://api.npms.io/v2/package/d3")
+//   .on('response', function(res){
+//     console.log(res)
+//   }).on('end', ()=> {console.log('this has ended')})
+//
+//
+// // got('https:\//api.npms.io/v2/package/' + package[i])
 //     .then(response => {
 //         console.log(response.body);
 //         body+= response.body.toString();
@@ -54,14 +122,14 @@ got.stream("https://api.npms.io/v2/package/d3")
 /*
 
 
-    let promises = [];
-promises.push(promise1);
-promises.push(promise2);
-promises.push(promise3);
+    let requests = [];
+requests.push(promise1);
+requests.push(promise2);
+requests.push(promise3);
 
 function doNext(){
-  if(!promises.length) return;
-  promises.shift().then((resolved) =>{
+  if(!requests.length) return;
+  requests.shift().then((resolved) =>{
     if(resolved.property === something){
       ...
       doNext();
@@ -92,8 +160,8 @@ function streamOrNot(obj){
 }
 
 function doNext(){
-  if(!promises.length) return;
-  return promises.shift().then(streamOrNot).then(doNext);
+  if(!requests.length) return;
+  return requests.shift().then(streamOrNot).then(doNext);
 }
 
 doNext()
