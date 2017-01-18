@@ -3,8 +3,24 @@ const Promise = require("bluebird");
 const request = require('request-promise');
 const parse = require('./parse.js')
 
-let urls = parse()
-console.log(urls)
+
+
+
+  var urls = parse();
+  console.log(urls)
+  console.log(typeof urls)
+  /*
+  console.log(typeof urls)
+  var requests = urls.map((key, index) => {
+     console.log(urls[key])
+    console.log(index)//'https://api.npms.io/v2/package/' )
+  })
+  //console.log(requests)
+
+*/
+
+
+
 /*
 var requests = [{
   url: 'https://api.npms.io/v2/package/d3',
@@ -33,7 +49,7 @@ Promise.map(requests, function(obj) {
   // handle all your errors here
   console.log(err)
 });
-*/
+
 
 //use a stream ot pipe data and filter
 /*

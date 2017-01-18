@@ -11,7 +11,6 @@ fs.readFile('./package.json', 'utf-8', (err, data) => {
   let contents = JSON.parse(data);
   //console.log(Object.keys(contents['dependencies']) + Object.keys(contents['devDependencies']))
   let result = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']))
-  console.log(result)
   return result;
 
 });
