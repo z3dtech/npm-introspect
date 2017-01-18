@@ -1,20 +1,42 @@
-
-
 const fs = require('fs');
+const Promise = require("bluebird");
+const request = require('request-promise');
+const parse = require('./parse.js')
 
-//const request = Promise.promisifyAll(require('request'));
-const got = require('got');
+let urls = parse()
+console.log(urls)
+/*
+var requests = [{
+  url: 'https://api.npms.io/v2/package/d3',
+}, {
+  url: 'https://api.npms.io/v2/package/react',
+}, {
+  url: 'https://api.npms.io/v2/package/bluebird',
+},
+{
+  url: 'https://api.npms.io/v2/package/react-router',
+},
+{
+  url: 'https://api.npms.io/v2/package/webpack',
+}];
 
-// const Promise = require('bluebird');
-// const fs = Promise.promisifyAll(require('fs'));
-// const files = ["file1.txt", "fileA.txt", "fileB.txt"];
-//
-// Promise.map(files, fs.readFileAsync).then(function(results) {
-//     // files data in results Array
-// }, function(err) {
-//     // error here
-// });
+Promise.map(requests, function(obj) {
+  return request(obj).then(function(body) {
+    return JSON.parse(body);
+  });
+}).then(function(results) {
+  console.log(results);
+  for (var i = 0; i < results.length; i++) {
+  //  console.log(results)
+  }
+}, function(err) {
+  // handle all your errors here
+  console.log(err)
+});
+*/
 
+//use a stream ot pipe data and filter
+/*
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 var urls = ["https://api.npms.io/v2/package/d3"]//, "https://api.npms.io/v2/package/react", "https://api.npms.io/v2/package/bluebird"];
@@ -26,31 +48,8 @@ Promise.map(urls, request.get, {concurrency: 4}).then(function(results) {
     console.log(err);
 });
 ///////////////////////////////////////////////////////
-// const request = require('request');
-//
-// function requestAsync(url, options) {
-//     return new Promise(function(resolve, reject) {
-//         request.get(url, options, function(err, data) {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                  resolve(data);
-//             }
-//         });
-//     });
-// }
-//
-// requestAsync('https://api.npms.io/v2/package/d3').then(function(data) {
-//    console.log(data);
-// });
 
-// var requests = sites.map(request)
-// Promise.all(requests).then(function(results){
-//   console.log(results)
-//    console.log("All done") // you can access the results of the requests here
-// });
-
-// var requestss = ["https://api.npms.io/v2/package/d3", "https://api.npms.io/v2/package/react", "https://api.npms.io/v2/package/bluebird"];
+/
 //
 // let requests = []
 // requests.push(got('https://api.npms.io/v2/package/d3'))
@@ -76,22 +75,4 @@ Promise.map(urls, request.get, {concurrency: 4}).then(function(results) {
 // }
 // doNext();
 
-//Promise.mapSeries()
-//or break up the handler to a controller and Promisified handler:
-//
-// function streamOrNot(obj){
-// return new Promise(resolve, reject){
-// if(obj.property === something){
-//   resolve();
-//   return;
-// }
-// let filetodomvc.com
-//   resolve();
-// });
-// }
-// }
-//
-// function doNext(){
-// if(!requests.length) return;
-// return requests.shift().then(streamOrNot).then(doNext);
-// }
+*/

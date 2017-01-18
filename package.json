@@ -27,6 +27,11 @@
     "async": "^2.1.4",
     "bluebird": "^3.4.7",
     "got": "^6.7.1",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "yargs": "^6.6.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.14.0"
   }
 }
