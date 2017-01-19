@@ -4,9 +4,13 @@ const request = require('request-promise');
 const parse = require('./parse.js')
 
 
+var urls
 
-
-  var urls = parse();
+parse((x, err) => {
+  if(err) console.log(err);
+  urls = x;
+  console.log(urls)
+});
   console.log(urls)
   console.log(typeof urls)
   /*
