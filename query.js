@@ -4,50 +4,17 @@ const request = require('request-promise');
 //onst parse = require('./parse.js')
 const parse = require('./parse');
 
+let requests = {}
+parse().then((packages) => {
+  //let requests = {}
+  //console.log(packages)
+  for (const package in packages){
+    //console.log(packages[package])
+    requests["url"] = "https://api.npms.io/v2/package/" + packages[package]
+    //console.log(requests.url)
+  }
 
-
-//
-// parse((x, err) => {
-//   if(err) console.log(err);
-//   urls = x;
-//   console.log(urls)
-// });
-var url;
-
-parse().then((result) => {
-  console.log(result)
-  url = result;
-  console.log(typeof result)
-}).then(console.log('hey')) //Object.keys(result))//.map(key, index) => {
-//   console.log(result[key])
-//   console.log(index)
-//})
-
-  //
-  // var requests = function(urls.map((key, index) => {
-  //    console.log(urls[key])
-  //   console.log(index)//'https://api.npms.io/v2/package/' )
-  // })
-  // //console.log(requests)
-
-
-
-
-
-/*
-var requests = [{
-  url: 'https://api.npms.io/v2/package/d3',
-}, {
-  url: 'https://api.npms.io/v2/package/react',
-}, {
-  url: 'https://api.npms.io/v2/package/bluebird',
-},
-{
-  url: 'https://api.npms.io/v2/package/react-router',
-},
-{
-  url: 'https://api.npms.io/v2/package/webpack',
-}];
+}).then(console.log('hey'))
 
 Promise.map(requests, function(obj) {
   return request(obj).then(function(body) {
