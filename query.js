@@ -1,27 +1,36 @@
 const fs = require('fs');
 const Promise = require("bluebird");
 const request = require('request-promise');
-const parse = require('./parse.js')
+//onst parse = require('./parse.js')
+const parse = require('./parse');
 
 
-var urls
 
-parse((x, err) => {
-  if(err) console.log(err);
-  urls = x;
-  console.log(urls)
-});
-  console.log(urls)
-  console.log(typeof urls)
-  /*
-  console.log(typeof urls)
-  var requests = urls.map((key, index) => {
-     console.log(urls[key])
-    console.log(index)//'https://api.npms.io/v2/package/' )
-  })
-  //console.log(requests)
+//
+// parse((x, err) => {
+//   if(err) console.log(err);
+//   urls = x;
+//   console.log(urls)
+// });
+var url;
 
-*/
+parse().then((result) => {
+  console.log(result)
+  url = result;
+  console.log(typeof result)
+}).then(console.log('hey')) //Object.keys(result))//.map(key, index) => {
+//   console.log(result[key])
+//   console.log(index)
+//})
+
+  //
+  // var requests = function(urls.map((key, index) => {
+  //    console.log(urls[key])
+  //   console.log(index)//'https://api.npms.io/v2/package/' )
+  // })
+  // //console.log(requests)
+
+
 
 
 

@@ -1,13 +1,16 @@
 const fs = require('fs');
- function parse(cb, err){
-    fs.readFile('./package.json', 'utf-8', (err, data) => {
-      if (err) cb(null, err);
-      let contents = JSON.parse(data);
-      let result = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
-      console.log(result);
-      cb(result)
-      return result;
-});
+
+function parse(cb, err){
+   return new Promise((resolve, reject) => {
+     fs.readFile('./package.json', 'utf-8', (err, data) => {
+
+       let contents = JSON.parse(data);
+       let result = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
+
+       resolve(result)
+        reject(err)
+   });
+  });
 }
 module.exports = parse;
 
