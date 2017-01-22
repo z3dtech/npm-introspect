@@ -5,10 +5,9 @@ var parse = function (){
      fs.readFile('./package.json', 'utf-8', (err, data) => {
        if (err) reject(err)
        let contents = JSON.parse(data);//try and catch all the JSON parse, reject(new Error('OH SHiT'))
-       let result = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
-       console.log(result + "end");
-       resolve(result);
+       let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
 
+       resolve(packages)
    });
   });
 }
