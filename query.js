@@ -1,20 +1,17 @@
 const fs = require('fs');
 const Promise = require("bluebird");
 const request = require('request-promise');
-//onst parse = require('./parse.js')
 const parse = require('./parse');
 
 let requests = {}
 parse().then((packages) => {
-  //let requests = {}
-  //console.log(packages)
   for (const package in packages){
-    //console.log(packages[package])
     requests["url"] = "https://api.npms.io/v2/package/" + packages[package]
-    //console.log(requests.url)
+    console.log(requests.url)
   }
 
-}).then(console.log('hey'))
+
+})
 
 Promise.map(requests, function(obj) {
   return request(obj).then(function(body) {
@@ -33,6 +30,7 @@ Promise.map(requests, function(obj) {
 
 //use a stream ot pipe data and filter
 /*
+*
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 var urls = ["https://api.npms.io/v2/package/d3"]//, "https://api.npms.io/v2/package/react", "https://api.npms.io/v2/package/bluebird"];
