@@ -7,7 +7,8 @@ const parse = require('./parse');
 
 var query = function(requests){
 Promise.map(requests, request.get, {concurrency: 4}).then(function(results) {
-
+  var data1 = dataParse(results)
+  console.log(data1)
   fs.writeFile('new.json', results, (err) => {
     if (err) throw err;
     console.log('done')
@@ -27,7 +28,15 @@ parse().then((packages) => {
 
   })
 
-
+var dataParse = function(dataBody){
+//make this loop through each part and parse(maybe)
+//then grab a list of all the headlines I want
+//check with matt about error handling
+//later optimize this
+  var cData = JSON.parse(dataBody[1])
+  var cleanData = cData.collected
+  return cleanData
+}
 
 
 
