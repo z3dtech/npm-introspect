@@ -59,8 +59,18 @@ pkgInfo = pkgInfo.replace(/[\u0000-\u0019]+/g,"");
      console.log(e)
     }
 
+
+    filteredPkg['name'] = parsedPkg.collected.metadata.name
+    filteredPkg['version'] = parsedPkg.collected.metadata.version
+    filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies
+    filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies
+    //peer deps
+    filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads
+    filteredPkg['github.starsCount']= parsedPkg.collected.github.starsCount
+    filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount
+    //vulnerabilities
+    //add outdated dependencies and try and catch for each
     filteredPkg['score'] = parsedPkg.score
-   //add try/catch for more complex calls
     filteredPkg['evaluation'] = parsedPkg.evaluation
 
     filteredInfo.push(filteredPkg)
