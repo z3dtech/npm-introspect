@@ -9,8 +9,20 @@
   <body>
 
     <script>
+      d3.json('data.json', function(err, json){
+        if (err) console.log(err)
+
+
+
+
       const height = window.innerHeight;
       const width = window.innerWidth;
+      const data = [
+        {'d': 23},
+        {'d': 23},
+        {'d': 34}
+      ]
+
 
       const svg = d3.select("body").append("svg")
         .attrs({
@@ -18,15 +30,17 @@
           height: height
         });
 
-      const nodes = svg.append("circle")
+      const nodes = svg.selectAll('nodes')
+        .data(json)
+        .enter()
+        .append('circle')
         .attrs({
           cx: (width/2),
           cy: (height/2),
-          r: 20,
-
+          r: 20
         })
+    })
 
-        d3.json()
 
     </script>
   </body>
