@@ -9,7 +9,7 @@ const fs = require('fs')
 //got.stream("https://api.npms.io/v2/search/suggestions?q=react-native").pipe(fs.createWriteStream('afetchSuggestions.json'));
 
 //Get Package Info
-//got.stream("https://api.npms.io/v2/package/react-native").pipe(fs.createWriteStream('agetPackageInfo.json'));
+got.stream("https://api.npms.io/v2/package/react-native").pipe(fs.createWriteStream('test.json'));
 
 //Get various package info
 //fs.createReadStream('apackageInfo.json').pipe(got.stream.post("https://api.npms.io/v2/package/react-native"));

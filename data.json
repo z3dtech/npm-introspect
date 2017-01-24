@@ -1,1 +1,204 @@
-[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[{
+    "score": {
+        "final": 0.8257435092962571,
+        "detail": {
+            "quality": 0.8524216305521797,
+            "popularity": 0.9619852495001013,
+            "maintenance": 0.6666348080159079
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9999999999999999,
+            "tests": 0.272,
+            "health": 1,
+            "branding": 0.44999999999999996
+        },
+        "popularity": {
+            "communityInterest": 23980,
+            "downloadsCount": 35794870.666666664,
+            "downloadsAcceleration": 22124.753272450558,
+            "dependentsCount": 16393
+        },
+        "maintenance": {
+            "releasesFrequency": 0.9253424657534247,
+            "commitsFrequency": 1,
+            "openIssues": 1,
+            "issuesDistribution": 0
+        }
+    }
+}, {
+    "score": {
+        "final": 0.9638121093660186,
+        "detail": {
+            "quality": 0.9621701301400686,
+            "popularity": 0.929083905944142,
+            "maintenance": 0.9999477235529952
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9999999999999999,
+            "tests": 0.85,
+            "health": 1,
+            "branding": 0.15
+        },
+        "popularity": {
+            "communityInterest": 16083,
+            "downloadsCount": 10481780.333333334,
+            "downloadsAcceleration": 22461.89060121763,
+            "dependentsCount": 10267
+        },
+        "maintenance": {
+            "releasesFrequency": 1,
+            "commitsFrequency": 1,
+            "openIssues": 1,
+            "issuesDistribution": 0.9158052386388158
+        }
+    }
+}, {
+    "score": {
+        "final": 0.882756824116233,
+        "detail": {
+            "quality": 0.9860165351046501,
+            "popularity": 0.677171051494422,
+            "maintenance": 0.9998342730336867
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9199999999999999,
+            "tests": 1,
+            "health": 0.8181818181818181,
+            "branding": 0.44999999999999996
+        },
+        "popularity": {
+            "communityInterest": 1595,
+            "downloadsCount": 3381926,
+            "downloadsAcceleration": 6706.889155251138,
+            "dependentsCount": 635
+        },
+        "maintenance": {
+            "releasesFrequency": 1,
+            "commitsFrequency": 0.9411712328767123,
+            "openIssues": 1,
+            "issuesDistribution": 0.880089854829079
+        }
+    }
+}, {
+    "score": {
+        "final": 0.8494970711851876,
+        "detail": {
+            "quality": 0.9579117329474499,
+            "popularity": 0.9394126354624799,
+            "maintenance": 0.6666546539688134
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9999999999999999,
+            "tests": 0.7395,
+            "health": 0.8,
+            "branding": 0.6
+        },
+        "popularity": {
+            "communityInterest": 17245,
+            "downloadsCount": 17839154.666666668,
+            "downloadsAcceleration": 12290.703272450512,
+            "dependentsCount": 18404
+        },
+        "maintenance": {
+            "releasesFrequency": 0.9661815068493151,
+            "commitsFrequency": 0.9177808219178082,
+            "openIssues": 1,
+            "issuesDistribution": 0
+        }
+    }
+}, {
+    "score": {
+        "final": 0.8708290868412576,
+        "detail": {
+            "quality": 0.988460466031682,
+            "popularity": 0.6482382131595191,
+            "maintenance": 0.9925930640740612
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9199999999999999,
+            "tests": 1,
+            "health": 1,
+            "branding": 0.44999999999999996
+        },
+        "popularity": {
+            "communityInterest": 1556,
+            "downloadsCount": 941315,
+            "downloadsAcceleration": 5146.3372907153735,
+            "dependentsCount": 1354
+        },
+        "maintenance": {
+            "releasesFrequency": 0.6907534246575343,
+            "commitsFrequency": 0.7186301369863013,
+            "openIssues": 1,
+            "issuesDistribution": 0.7170798302574619
+        }
+    }
+}, {
+    "score": {
+        "final": 0.9234123692849505,
+        "detail": {
+            "quality": 0.9270445043085286,
+            "popularity": 0.8474442164935505,
+            "maintenance": 0.9962672634847125
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.8699999999999999,
+            "tests": 1,
+            "health": 0.5,
+            "branding": 1
+        },
+        "popularity": {
+            "communityInterest": 3081,
+            "downloadsCount": 16917740.666666668,
+            "downloadsAcceleration": 39527.942827245046,
+            "dependentsCount": 4025
+        },
+        "maintenance": {
+            "releasesFrequency": 1,
+            "commitsFrequency": 1,
+            "openIssues": 1,
+            "issuesDistribution": 0.7027312889928699
+        }
+    }
+}, {
+    "score": {
+        "final": 0.8463461956665528,
+        "detail": {
+            "quality": 0.931452713724161,
+            "popularity": 0.8515337193430714,
+            "maintenance": 0.7682102279406555
+        }
+    },
+    "evaluation": {
+        "quality": {
+            "carefulness": 0.9199999999999999,
+            "tests": 0.991,
+            "health": 0.5,
+            "branding": 0.6
+        },
+        "popularity": {
+            "communityInterest": 27424,
+            "downloadsCount": 3222004.6666666665,
+            "downloadsAcceleration": 13198.287576103496,
+            "dependentsCount": 2192
+        },
+        "maintenance": {
+            "releasesFrequency": 1,
+            "commitsFrequency": 1,
+            "openIssues": 1,
+            "issuesDistribution": 0.13818459445527087
+        }
+    }
+}]

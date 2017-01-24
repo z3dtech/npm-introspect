@@ -59,10 +59,12 @@ pkgInfo = pkgInfo.replace(/[\u0000-\u0019]+/g,"");
      console.log(e)
     }
 
-    filteredPkg['score'] = parsedPkg.score //add try/catch for more complex calls
+    filteredPkg['score'] = parsedPkg.score
+   //add try/catch for more complex calls
     filteredPkg['evaluation'] = parsedPkg.evaluation
+
     filteredInfo.push(filteredPkg)
-    console.log(filteredInfo)
+
   })
-  return filteredInfo
+  return JSON.stringify(filteredInfo)
 }
