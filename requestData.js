@@ -1,10 +1,16 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
+const path = require('path')
 const Promise = require("bluebird");
 const request = require('request-promise');
 
+//function that takes a pkg name and does a get search
+//then passes to parse function
+
 var parsePkgJSON = function (){
    return new Promise((resolve, reject) => {
-     fs.readFile('./package.json', 'utf-8', (err, data) => {
+     fs.readFile(path.resolve(_dirname + 'package.json'), 'utf-8', (err, data) => {
        if (err) reject(err)
        let contents = JSON.parse(data);//try and catch all the JSON parse, reject(new Error('OH SHiT'))
        let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
@@ -60,18 +66,18 @@ pkgInfo = pkgInfo.replace(/[\u0000-\u0019]+/g,"");
     }
 
 
-    filteredPkg['name'] = parsedPkg.collected.metadata.name
-    filteredPkg['version'] = parsedPkg.collected.metadata.version
-    filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies
-    filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies
-    //peer deps
-    filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads
-    filteredPkg['github.starsCount']= parsedPkg.collected.github.starsCount
-    filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount
-    //vulnerabilities
-    //add outdated dependencies and try and catch for each
-    filteredPkg['score'] = parsedPkg.score
-    filteredPkg['evaluation'] = parsedPkg.evaluation
+    filteredPkg['name'] = parsedPkg.collected.metadata.name;
+    filteredPkg['version'] = parsedPkg.collected.metadata.version;
+    filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
+    filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies;
+    filteredPkg['peerDependencies'] = parsedPkg.collected.metadata.peerDependencies;
+    filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
+    filteredPkg['github.starsCount']= parsedPkg.collected.github.starsCount;
+    filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount;
+    filteredPkg['outdatedDependencies']= parsedPkg.collected.source.outdatedDependencies;
+    filteredPkg['vulnerabilities']= parsedPkg.collected.source.vulnerabilities;
+    filteredPkg['score'] = parsedPkg.score;
+    filteredPkg['evaluation'] = parsedPkg.evaluation;
 
     filteredInfo.push(filteredPkg)
 

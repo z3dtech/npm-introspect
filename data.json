@@ -1,12 +1,4 @@
 [{
-    "score": {
-        "final": 0.8268074715117455,
-        "detail": {
-            "quality": 0.852420710177169,
-            "popularity": 0.9650259419871473,
-            "maintenance": 0.6666347964659806
-        }
-    },
     "name": "async",
     "version": "2.1.4",
     "dependencies": {
@@ -78,6 +70,14 @@
     }],
     "github.starsCount": 20267,
     "github.forksCount": 1962,
+    "score": {
+        "final": 0.8268312547885615,
+        "detail": {
+            "quality": 0.8524272547953758,
+            "popularity": 0.9650882911966567,
+            "maintenance": 0.6666347898031968
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9999999999999999,
@@ -99,14 +99,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.9636035121645239,
-        "detail": {
-            "quality": 0.9621706734827805,
-            "popularity": 0.9284921371653123,
-            "maintenance": 0.9999430346052303
-        }
-    },
     "name": "bluebird",
     "version": "3.4.7",
     "devDependencies": {
@@ -162,6 +154,14 @@
     }],
     "github.starsCount": 13621,
     "github.forksCount": 1665,
+    "score": {
+        "final": 0.963410081478637,
+        "detail": {
+            "quality": 0.962171249383722,
+            "popularity": 0.9279389861869745,
+            "maintenance": 0.9999430328516555
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9999999999999999,
@@ -183,14 +183,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.8829124894688143,
-        "detail": {
-            "quality": 0.9860164617056657,
-            "popularity": 0.6776158604832503,
-            "maintenance": 0.999834285108506
-        }
-    },
     "name": "got",
     "version": "6.7.1",
     "dependencies": {
@@ -245,6 +237,21 @@
     }],
     "github.starsCount": 1402,
     "github.forksCount": 74,
+    "outdatedDependencies": {
+        "unzip-response": {
+            "required": "^2.0.1",
+            "stable": "2.0.1",
+            "latest": "1.0.2"
+        }
+    },
+    "score": {
+        "final": 0.8825720873330631,
+        "detail": {
+            "quality": 0.986015958621376,
+            "popularity": 0.6766437208923629,
+            "maintenance": 0.9998342783837808
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9199999999999999,
@@ -266,14 +273,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.8487203205752761,
-        "detail": {
-            "quality": 0.9579123916306042,
-            "popularity": 0.9371938725115028,
-            "maintenance": 0.6666535648773401
-        }
-    },
     "name": "request",
     "version": "2.79.0",
     "dependencies": {
@@ -347,6 +346,26 @@
     }],
     "github.starsCount": 14022,
     "github.forksCount": 1728,
+    "outdatedDependencies": {
+        "hawk": {
+            "required": "~3.1.3",
+            "stable": "6.0.1",
+            "latest": "6.0.1"
+        },
+        "har-validator": {
+            "required": "~2.0.6",
+            "stable": "4.2.0",
+            "latest": "4.2.0"
+        }
+    },
+    "score": {
+        "final": 0.8487415788866409,
+        "detail": {
+            "quality": 0.9579135210098555,
+            "popularity": 0.9372536482204441,
+            "maintenance": 0.666653559161511
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9999999999999999,
@@ -368,14 +387,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.8711971101048035,
-        "detail": {
-            "quality": 0.9884598095882788,
-            "popularity": 0.6492919264915316,
-            "maintenance": 0.9925914084465253
-        }
-    },
     "name": "request-promise",
     "version": "4.1.1",
     "dependencies": {
@@ -397,6 +408,9 @@
         "request": "^2.34.0",
         "rimraf": "~2.5.3",
         "run-sequence": "~1.2.2"
+    },
+    "peerDependencies": {
+        "request": "^2.34"
     },
     "downloadsAcceleration": [{
         "from": "2017-01-19T00:00:00.000Z",
@@ -425,6 +439,14 @@
     }],
     "github.starsCount": 1285,
     "github.forksCount": 95,
+    "score": {
+        "final": 0.8709234922746139,
+        "detail": {
+            "quality": 0.9884592435769858,
+            "popularity": 0.6485119588867848,
+            "maintenance": 0.9925900959746958
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9199999999999999,
@@ -446,14 +468,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.9234477655208244,
-        "detail": {
-            "quality": 0.9270474393026716,
-            "popularity": 0.8474904767666807,
-            "maintenance": 0.9963196196048136
-        }
-    },
     "name": "yargs",
     "version": "6.6.0",
     "dependencies": {
@@ -513,6 +527,41 @@
     }],
     "github.starsCount": 2464,
     "github.forksCount": 181,
+    "outdatedDependencies": {
+        "camelcase": {
+            "required": "^3.0.0",
+            "stable": "4.0.0",
+            "latest": "4.0.0"
+        },
+        "read-pkg-up": {
+            "required": "^1.0.1",
+            "stable": "2.0.0",
+            "latest": "2.0.0"
+        },
+        "string-width": {
+            "required": "^1.0.2",
+            "stable": "2.0.0",
+            "latest": "2.0.0"
+        },
+        "os-locale": {
+            "required": "^1.4.0",
+            "stable": "2.0.0",
+            "latest": "2.0.0"
+        },
+        "yargs-parser": {
+            "required": "^4.2.0",
+            "stable": "4.2.1",
+            "latest": "4.2.1-candidate.1"
+        }
+    },
+    "score": {
+        "final": 0.9234270022905906,
+        "detail": {
+            "quality": 0.927046949151246,
+            "popularity": 0.8474317027160336,
+            "maintenance": 0.9963194902703003
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.8699999999999999,
@@ -534,14 +583,6 @@
         }
     }
 }, {
-    "score": {
-        "final": 0.8474793109545282,
-        "detail": {
-            "quality": 0.9314561110301603,
-            "popularity": 0.8548181038889202,
-            "maintenance": 0.7681604036695945
-        }
-    },
     "name": "webpack",
     "version": "1.14.0",
     "dependencies": {
@@ -624,6 +665,56 @@
     }],
     "github.starsCount": 23457,
     "github.forksCount": 2687,
+    "outdatedDependencies": {
+        "enhanced-resolve": {
+            "required": "~0.9.0",
+            "stable": "3.0.3",
+            "latest": "3.0.3"
+        },
+        "interpret": {
+            "required": "^0.6.4",
+            "stable": "1.0.1",
+            "latest": "1.0.1"
+        },
+        "async": {
+            "required": "^1.3.0",
+            "stable": "2.1.4",
+            "latest": "2.1.4"
+        },
+        "memory-fs": {
+            "required": "~0.3.0",
+            "stable": "0.4.1",
+            "latest": "0.4.1"
+        },
+        "acorn": {
+            "required": "^3.0.0",
+            "stable": "4.0.4",
+            "latest": "4.0.4"
+        },
+        "clone": {
+            "required": "^1.0.2",
+            "stable": "2.1.0",
+            "latest": "2.1.0"
+        },
+        "tapable": {
+            "required": "~0.1.8",
+            "stable": "0.2.6",
+            "latest": "0.2.6"
+        },
+        "watchpack": {
+            "required": "^0.2.1",
+            "stable": "1.2.0",
+            "latest": "1.2.0"
+        }
+    },
+    "score": {
+        "final": 0.8472689882948441,
+        "detail": {
+            "quality": 0.9314560219565173,
+            "popularity": 0.8542184299956291,
+            "maintenance": 0.7681592320269108
+        }
+    },
     "evaluation": {
         "quality": {
             "carefulness": 0.9199999999999999,
