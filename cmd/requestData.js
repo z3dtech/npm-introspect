@@ -1,8 +1,32 @@
+'use strict'
+
 const fs = require('fs');
 const path = require('path')
 const Promise = require("bluebird");
 const request = require('request-promise');
 
+const chalk = require('chalk')
+const handleError = require('./util/handleError');
+
+exports.command = 'parse something';
+exports.describe = 'here is a description';
+exports.builder = (yargs) =>
+  yargs
+    .strict()
+    .demand()
+    .options({
+      go : {
+        alias: 'g',
+        describe: 'Another hting'
+      }
+    });
+
+    exports.handler = (args) => {
+      console.log('ffffff')
+    }
+
+
+/*
 
   var parsePkgJSON = function (){
    return new Promise((resolve, reject) => {
@@ -62,14 +86,14 @@ var pkgInfoParse = function(pkgInfo){
 
 ///////////////////////////////////////////////
 
-exports.go = () => {
+// exports.go = () => {
   parsePkgJSON().then((packages) => {
   let packageUrls = packages.map((name) => {
     return "https://api.npms.io/v2/package/" + name
   })
     npmSearchQuery(packageUrls)
   })
-}
+// }
 
 
 /*
