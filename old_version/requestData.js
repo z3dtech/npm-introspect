@@ -1,12 +1,16 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path')
 const Promise = require("bluebird");
 const request = require('request-promise');
 
+//function that takes a pkg name and does a get search
+//then passes to parse function
 
-  var parsePkgJSON = function (){
+var parsePkgJSON = function (){
    return new Promise((resolve, reject) => {
-     fs.readFile(path.resolve('package.json'), 'utf-8', (err, data) => {
+     fs.readFile(path.resolve(_dirname + 'package.json'), 'utf-8', (err, data) => {
        if (err) reject(err)
        let contents = JSON.parse(data);//try and catch all the JSON parse, reject(new Error('OH SHiT'))
        let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
@@ -18,18 +22,37 @@ const request = require('request-promise');
 var npmSearchQuery = function(requests){
 Promise.map(requests, request.get, {concurrency: 4}).then(function(apiResults) {
   let filteredNPM = pkgInfoParse(apiResults)
-  console.log(filteredNPM)
-//   fs.writeFile('data.json', filteredNPM, (err) => {
-//     if (err) throw err;
-//     console.log('done')
-//   })
-// }, function(err) {
-//     console.log(err);
+
+  fs.writeFile('data.json', filteredNPM, (err) => {
+    if (err) throw err;
+    console.log('done')
+  })
+}, function(err) {
+    console.log(err);
 });
 }
 
-var pkgInfoParse = function(pkgInfo){
 
+parsePkgJSON().then((packages) => {
+  let packageUrls = packages.map((name) => {
+    return "https://api.npms.io/v2/package/" + name
+  })
+    npmSearchQuery(packageUrls)
+  })
+
+var pkgInfoParse = function(pkgInfo){
+/*
+Use in case I abstract parse from the loop and need to pull out odd characters
+pkgInfo = pkgInfo.replace(/\\n/g, "\\n")
+                 .replace(/\\'/g, "\\'")
+                 .replace(/\\"/g, '\\"')
+                 .replace(/\\&/g, "\\&")
+                 .replace(/\\r/g, "\\r")
+                 .replace(/\\t/g, "\\t")
+                 .replace(/\\b/g, "\\b")
+                 .replace(/\\f/g, "\\f");
+pkgInfo = pkgInfo.replace(/[\u0000-\u0019]+/g,"");
+*/
   let filteredInfo = []
 
   pkgInfo.forEach((pkg) =>{
@@ -41,6 +64,8 @@ var pkgInfoParse = function(pkgInfo){
     } catch(e){
      console.log(e)
     }
+
+
     filteredPkg['name'] = parsedPkg.collected.metadata.name;
     filteredPkg['version'] = parsedPkg.collected.metadata.version;
     filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
@@ -59,28 +84,3 @@ var pkgInfoParse = function(pkgInfo){
   })
   return JSON.stringify(filteredInfo)
 }
-
-///////////////////////////////////////////////
-
-exports.go = () => {
-  parsePkgJSON().then((packages) => {
-  let packageUrls = packages.map((name) => {
-    return "https://api.npms.io/v2/package/" + name
-  })
-    npmSearchQuery(packageUrls)
-  })
-}
-
-
-/*
-Use in case I abstract parse from the loop and need to pull out odd characters
-pkgInfo = pkgInfo.replace(/\\n/g, "\\n")
-                 .replace(/\\'/g, "\\'")
-                 .replace(/\\"/g, '\\"')
-                 .replace(/\\&/g, "\\&")
-                 .replace(/\\r/g, "\\r")
-                 .replace(/\\t/g, "\\t")
-                 .replace(/\\b/g, "\\b")
-                 .replace(/\\f/g, "\\f");
-pkgInfo = pkgInfo.replace(/[\u0000-\u0019]+/g,"");
-*/

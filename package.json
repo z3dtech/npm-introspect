@@ -2,7 +2,7 @@
   "name": "npm-landscape",
   "version": "1.0.0",
   "description": "no poor modules",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,6 +29,7 @@
     "got": "^6.7.1",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
+    "update-notifier": "^1.0.3",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
