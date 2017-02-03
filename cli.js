@@ -17,6 +17,7 @@ yargs
   //.demand()
   //.option()
 
-  .command(require('./cmd/requestData'))
+  .command(require('./cmd/scores'))
+  .command(require('./cmd/dependencies'))
 
   .argv;
