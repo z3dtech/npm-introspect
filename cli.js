@@ -5,17 +5,26 @@
 const yargs = require('yargs');
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
-const requestData = require('./cmd/requestData');
+
 
 updateNotifier({pkg}).notify();
 
 yargs
   .strict()
   .wrap(Math.min(80, yargs.terminalWidth()))
+  .alias('version', 'v')
+  .version(pkg.version)
   .alias('help', 'h')
   .help('help')
-  //.demand()
-  //.option()
+  .demand(1, 'Please supply a valid command')
+
+  .option('color', {
+      describe: 'Allows disabling or enabling colored output',
+      type: 'boolean',
+      default: true,
+      global: true,
+  })
+
 
   .command(require('./cmd/scores'))
   .command(require('./cmd/dependencies'))

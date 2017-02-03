@@ -65,14 +65,14 @@ var pkgInfoParse = function(pkgInfo){
 
 ///////////////////////////////////////////////
 
-// exports.go = () => {
+exports.go = () => {
   parsePkgJSON().then((packages) => {
   let packageUrls = packages.map((name) => {
     return "https://api.npms.io/v2/package/" + name
   })
     npmSearchQuery(packageUrls)
   })
-// }
+}
 
 
 /*

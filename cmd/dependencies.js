@@ -1,8 +1,8 @@
 const chalk = require('chalk')
 const handleError = require('./util/handleError');
 
-exports.command = 'score';
-exports.describe = 'here is a description';
+exports.command = 'dddd';
+exports.describe = 'Build landscape of dependencies\' scores from npms.io ';
 exports.builder = (yargs) =>
   yargs
     .strict()
@@ -11,7 +11,12 @@ exports.builder = (yargs) =>
       go : {
         alias: 'g',
         describe: 'Another hting'
+      },
+      recommend : {
+        alias: 'h',
+        describe: 'recommend shit that dont'
       }
+
     });
 
     exports.handler = (args) => {
