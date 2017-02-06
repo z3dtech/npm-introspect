@@ -9,7 +9,7 @@ const request = require('request-promise');
 
 var parsePkgJSON = function (){
  return new Promise((resolve, reject) => {
-   fs.readFile(path.resolve('package.json'), 'utf-8', (err, data) => {
+   fs.readFile(path.resolve( '__dirname' + 'package.json'), 'utf-8', (err, data) => {
      if (err) reject(err)
      let contents = JSON.parse(data);//try and catch all the JSON parse, reject(new Error('OH SHiT'))
      let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
@@ -22,14 +22,15 @@ var npmSearchQuery = function(requests){
 Promise.map(requests, request.get, {concurrency: 4}).then(function(apiResults) {
   let filteredNPM = pkgInfoParse(apiResults)
   console.log(filteredNPM)
-  fs.writeFile('data.json', filteredNPM, (err) => {
-    if (err) throw err;
-    console.log('done')
-  })
-}, function(err) {
-    console.log(err);
-});
-}
+//   fs.writeFile('data.json', filteredNPM, (err) => {
+//     if (err) throw err;
+//     console.log('done')
+//   })
+// }, function(err) {
+//     console.log(err);
+// });
+})
+};
 
 var pkgInfoParse = function(pkgInfo){
 
@@ -44,20 +45,21 @@ var pkgInfoParse = function(pkgInfo){
     } catch(e){
      console.log(e)
     }
-    filteredPkg['name'] = parsedPkg.collected.metadata.name;
-    filteredPkg['version'] = parsedPkg.collected.metadata.version;
-    filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
-    filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies;
-    filteredPkg['peerDependencies'] = parsedPkg.collected.metadata.peerDependencies;
-    filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
-    filteredPkg['github.starsCount']= parsedPkg.collected.github.starsCount;
-    filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount;
-    filteredPkg['outdatedDependencies']= parsedPkg.collected.source.outdatedDependencies;
-    filteredPkg['vulnerabilities']= parsedPkg.collected.source.vulnerabilities;
-    filteredPkg['score'] = parsedPkg.score;
-    filteredPkg['evaluation'] = parsedPkg.evaluation;
-
-    filteredInfo.push(filteredPkg)
+    // filteredPkg['name'] = parsedPkg.collected.metadata.name;
+    // filteredPkg['version'] = parsedPkg.collected.metadata.version;
+    // filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
+    // filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies;
+    // filteredPkg['peerDependencies'] = parsedPkg.collected.metadata.peerDependencies;
+    // filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
+    // filteredPkg['github.starsCount']= parsedPkg.collected.github.starsCount;
+    // filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount;
+    // filteredPkg['outdatedDependencies']= parsedPkg.collected.source.outdatedDependencies;
+    // filteredPkg['vulnerabilities']= parsedPkg.collected.source.vulnerabilities;
+    // filteredPkg['score'] = parsedPkg.score;
+    // filteredPkg['evaluation'] = parsedPkg.evaluation;
+    //
+    // filteredInfo.push(filteredPkg)
+    filteredInfo.push(parsedPkg)
 
   })
   return JSON.stringify(filteredInfo)

@@ -1,17 +1,37 @@
-var WebSocketServer = require("ws").Server,
-    express = require("express"),
-    http = require("http"),
-    app = express(),
-    server = http.createServer(app);
+#!/usr/bin/env node
 
-app.post("/login", login);
-app.get("/...", callSomething);
-// ...
+'use strict';
 
-server.listen(8000);
+const requestData = require('../server/requestData')
+const express = require('express')
+const app = express()
 
-var wss = new WebSocketServer({server: server, path: "/hereIsWS"});
+module.exports.go = () => {
 
-wss.on("connection", function(ws){
-   // ...
-});
+
+  app.get('/', function (req, res) {
+      requestData.go()
+      .then(function (data) {
+          res.setHeader('Content-Type', 'text/plain');
+          res.end(data);
+      })
+      .catch(function (e) {
+          res.status(500, {
+              error: e
+          });
+      });
+  });
+
+
+
+
+
+  app.listen(8080, function () {
+    console.log('Example app listening on port 8080!')
+
+  })
+
+
+
+
+}
