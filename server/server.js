@@ -10,7 +10,7 @@ module.exports.go = () => {
 
 
   app.get('/', function (req, res) {
-      requestData.go()
+      requestData.parse()
       .then(function (data) {
           res.setHeader('Content-Type', 'text/plain');
           res.end(data);
