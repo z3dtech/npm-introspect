@@ -20,18 +20,18 @@ module.exports.go = () => {
   app.get('/', function (req, res) {
       res.sendFile(path.join(__dirname + '/../client/index.html'))
       //app.use('/js', express.static(path.join(__dirname + '/client/index.js')))
-      requestData.parse()
-      .then(function (data) {
-          res.json(data)
-          res.setHeader('Content-Type', 'text/plain');
-
-          //res.render(path.join(__dirname + '/../client/index.html'))
-
-          res.end(data);
-      })
-      .catch(function (e) {
-          res.status(500, {
-              error: e
+      // requestData.parse()
+      // .then(function (data) {
+      //     res.json(data)
+      //     res.setHeader('Content-Type', 'text/plain');
+      //
+      //     //res.render(path.join(__dirname + '/../client/index.html'))
+      //
+      //     res.end(data);
+      // })
+      // .catch(function (e) {
+      //     res.status(500, {
+      //         error: e
           });
       });
   });
