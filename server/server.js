@@ -16,9 +16,17 @@ module.exports.go = () => {
 
 
   //app.use(express.static('../client/index.html'))
-
+  app.get('/index.js', function(req, res){
+    res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/index.js')
+  })
+  app.get('/data.json', function(req, res){
+    res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/data.json')
+  })
   app.get('/', function (req, res) {
-      res.sendFile(path.join(__dirname + '/../client/index.html'))
+      const indexPath = '/home/nicholas/code/javascipt/npm-landscape/client/index.html'
+      console.log(indexPath)
+      res.sendFile(indexPath)
+
       //app.use('/js', express.static(path.join(__dirname + '/client/index.js')))
       // requestData.parse()
       // .then(function (data) {
@@ -32,10 +40,13 @@ module.exports.go = () => {
       // .catch(function (e) {
       //     res.status(500, {
       //         error: e
-          });
-      });
-  });
+          //});
+      //});
+  })  //);
 
+app.get('*', function(req, res){
+  res.send('hello ass')
+})
 
 
 

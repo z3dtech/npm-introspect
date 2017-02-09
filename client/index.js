@@ -1,36 +1,39 @@
-
-
-// d3.json('http://localhost:8080/', function(err, json){
-//   if (err) console.log(err)
-
 window.onload = function (){
 
-const d3 = require('d3')
-  console.log('loaded')
-const height = window.innerHeight;
-const width = window.innerWidth;
+  d3.json('/data.json', function(err, json) {
+      if (err) console.log(err)
 
-const svg = d3.select("body").append("svg")
-  .attrs({
-    width: width,
-    height: height
-  });
 
-const nodes = svg.selectAll('nodes')
-  .data(json)
-  .enter()
-  .append('circle')
-  .attrs({
-    cx: (width/2),
-    cy: (height/2),
-    r: 20
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+
+
+      const svg = d3.select("body").append("svg")
+          .attrs({
+              width: width,
+              height: height
+          });
+
+      const nodes = svg.selectAll('nodes')
+          .data(json)
+          .enter()
+          .append('circle')
+          .attrs({
+              cx: (width / 2),
+              cy: (height / 2),
+              r: 20
+          })
+
+      const axis = d3.axisLeft() //scale
+
+      svg.append('g')
+          .attr('class', 'axis')
+          .each((d) => {})
+
   })
 
-const axis = d3.axisLeft() //scale
 
-svg.append('g')
- .attr('class', 'axis')
- .each((d) => {})
+
 
 }
 /*
@@ -52,4 +55,3 @@ g.append("g")
 
 });
 */
-}
