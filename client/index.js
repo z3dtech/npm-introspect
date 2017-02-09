@@ -1,5 +1,8 @@
 window.onload = function (){
 
+  const line = d3.line(),
+    axis = d3.axisLeft()
+
   d3.json('/data.json', function(err, json) {
       if (err) console.log(err)
 
@@ -14,21 +17,17 @@ window.onload = function (){
               height: height
           });
 
-      const nodes = svg.selectAll('nodes')
-          .data(json)
-          .enter()
-          .append('circle')
-          .attrs({
-              cx: (width / 2),
-              cy: (height / 2),
-              r: 20
-          })
+      const g = svg.selectAll('.nodes')
+        .data(json)
+        .enter().append('g')
 
-      const axis = d3.axisLeft() //scale
+      g.append('g')
+        .attr('class', 'axis')
+        .each(function(d) { //axis })
 
-      svg.append('g')
-          .attr('class', 'axis')
-          .each((d) => {})
+
+
+
 
   })
 
