@@ -21,17 +21,37 @@ window.onload = function (){
         .data(json)
         .enter().append('g')
 
-      g.append('g')
-        .attr('class', 'axis')
-        .each(function(d) { //axis })
 
+      const nodes = g.append('circle')
+          .attrs({
+            cy: (height/2),
+            cx: function(d){
+              //return scoreScale(d.score.detail.popularity)
+              console.log(d.score.detail.popularity)
+              return (d.score.detail.popularity * width)
+            },
+            r: function(d){
+              return scoreScale()
+            }
+          })
 
+      // g.append('g')
+      //   .attr('class', 'axis')
+      //   .each(function(d) { //axis })
+
+    var scoreScale = d3.scaleLinear()
+      .domain([0, function(d){
+        return d.score.final
+      }])
+      .range([0, 30]);
 
 
 
   })
 
-
+  // .on('click', console.log(function(d){
+  //    return d.score.final
+  //  }))
 
 
 }
