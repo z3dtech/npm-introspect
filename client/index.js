@@ -10,7 +10,16 @@ window.onload = function (){
       const height = window.innerHeight;
       const width = window.innerWidth;
 
+      const scoreScale = d3.scaleLinear() //maybe should not be max for each array,
+        .domain([0, d3.max(json, function(d){ //but rather an apcolute 0-1
+            return d.score.final;
+          })
+        ])
+        .range([0, 30]);
 
+
+
+        
       const svg = d3.select("body").append("svg")
           .attrs({
               width: width,
@@ -22,36 +31,30 @@ window.onload = function (){
         .enter().append('g')
 
 
+      g.append('g')
+        .attr('class', 'axis')
+        .each(function(d){
+          d3.select(this).call(axis.scale())//set up three scales for popularity
+        })
+
+
+
       const nodes = g.append('circle')
           .attrs({
             cy: (height/2),
             cx: function(d){
-              //return scoreScale(d.score.detail.popularity)
-              console.log(d.score.detail.popularity)
-              return (d.score.detail.popularity * width)
+              return scoreScale(d.score.final)
             },
             r: function(d){
-              return scoreScale()
+              console.log(d.score.final)
+              return scoreScale(d.score.final)
             }
           })
-
-      // g.append('g')
-      //   .attr('class', 'axis')
-      //   .each(function(d) { //axis })
-
-    var scoreScale = d3.scaleLinear()
-      .domain([0, function(d){
-        return d.score.final
-      }])
-      .range([0, 30]);
 
 
 
   })
 
-  // .on('click', console.log(function(d){
-  //    return d.score.final
-  //  }))
 
 
 }
