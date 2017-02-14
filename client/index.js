@@ -14,43 +14,54 @@ window.onload = function (){
   ]
   const height = window.innerHeight,
         width = window.innerWidth
-        // line = d3.line(),
-        // axis = d3.axisLeft()
-        // x = d3.scaleOrdinal().range([0, width], 1)
+        line = d3.line(),
+        axis = d3.axisLeft()
+        x = d3.scaleOrdinal().range([0, width], 5)
 
 
-  // d3.json('/data.json', function(err, json) {
-  //     if (err) console.log(err)
+  d3.json('/data.json', function(err, json) {
+      if (err) console.log(err)
 
- // function (range, value ){
- //   const gluf =  d3.scaleLinear(value){
- //           .domain([0, 1])SS
- //           .range([range[0], range[1]])
- //         }value
- //         return gluf()
- // }
+  var i = []
+  json.forEach(function(d){
+    i.push({
+      name: d.name,
+      quality: d.score.detail.quality,
+      popularity: d.score.detail.popularity,
+      maintenance: d.score.detail.maintenance,
+      final: d.score.final
+    })
+  })
+
       const svg = d3.select("body").append("svg")
           .attrs({
               width: width,
               height: height
           });
 
+      const g = svg.append('g')
+          .attr('transform', 'translate(' + [10, 10] + ')' )
 
-      path = d3.line()
+
+      const path = d3.line()
           .x(function(d) {
-            return d.x; })
+            console.log(x(d.final))
+            return d.final * 20; })
           .y(function(d) {
-            return d.y; });
+            return d.maintenance * 20; });
 
-      svg.append('g')
-      .attr('class', 'score')
-      .selectAll('path')
-      .data(coors)
-      .enter().append('path')
-      .attr('d', path(coors))
-        //path should return ordinal x value for axis
-        //the y value should be the simple range
+      const paths = g.append('g')
+        .attr('class', 'score')
+        .selectAll('path')
+        .data(i)
+        .enter().append('path')
+        .attr('d', path(i))
 
+    // g.append(g)
+    //   .attr('class', 'axis')
+    //   .each(function(d){
+    //     d3.select(this).call(axis.scale(x))
+    //   })
 
 
 
@@ -63,16 +74,7 @@ window.onload = function (){
       //     i.final = d.score.final;
       //   })
 
-        // var i = []
-        // json.forEach(function(d){
-        //   i.push({
-        //     name: d.name,
-        //     quality: d.score.detail.quality,
-        //     popularity: d.score.detail.popularity,
-        //     maintenance: d.score.detail.maintenance,
-        //     final: d.score.final
-        //   })
-        // })
+
         // console.log(i)
         // var i = []
         // json.forEach(function(d){
@@ -84,5 +86,5 @@ window.onload = function (){
 
 
 
-//})
+})
 }
