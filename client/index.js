@@ -1,79 +1,88 @@
 window.onload = function (){
 
-  const line = d3.line(),
-    axis = d3.axisLeft()
+  const data =[
+  //  {name: ['async', 'bluebird', 'webpack', 'request']},
+    {final: [.84071299, .964345, .9622, .85729]},
+    {maintenance: [.66663, .75394, .96475, .4392]},
+    {popularity: [.96706, .85683, .89832, .8952]}
+  ]
 
-  d3.json('/data.json', function(err, json) {
-      if (err) console.log(err)
+  const coors = [
+    {x: 45, y: 120},
+    {x: 60, y: 120},
+    {x: 25, y: 23}
+  ]
+  const height = window.innerHeight,
+        width = window.innerWidth
+        // line = d3.line(),
+        // axis = d3.axisLeft()
+        // x = d3.scaleOrdinal().range([0, width], 1)
 
 
-      const height = window.innerHeight;
-      const width = window.innerWidth;
+  // d3.json('/data.json', function(err, json) {
+  //     if (err) console.log(err)
 
-      const scoreScale = d3.scaleLinear() //maybe should not be max for each array,
-        .domain([0, d3.max(json, function(d){ //but rather an apcolute 0-1
-            return d.score.final;
-          })
-        ])
-        .range([0, 30]);
-
-
-
-        
+ // function (range, value ){
+ //   const gluf =  d3.scaleLinear(value){
+ //           .domain([0, 1])SS
+ //           .range([range[0], range[1]])
+ //         }value
+ //         return gluf()
+ // }
       const svg = d3.select("body").append("svg")
           .attrs({
               width: width,
               height: height
           });
 
-      const g = svg.selectAll('.nodes')
-        .data(json)
-        .enter().append('g')
 
+      path = d3.line()
+          .x(function(d) {
+            return d.x; })
+          .y(function(d) {
+            return d.y; });
 
-      g.append('g')
-        .attr('class', 'axis')
-        .each(function(d){
-          d3.select(this).call(axis.scale())//set up three scales for popularity
-        })
-
-
-
-      const nodes = g.append('circle')
-          .attrs({
-            cy: (height/2),
-            cx: function(d){
-              return scoreScale(d.score.final)
-            },
-            r: function(d){
-              console.log(d.score.final)
-              return scoreScale(d.score.final)
-            }
-          })
+      svg.append('g')
+      .attr('class', 'score')
+      .selectAll('path')
+      .data(coors)
+      .enter().append('path')
+      .attr('d', path(coors))
+        //path should return ordinal x value for axis
+        //the y value should be the simple range
 
 
 
-  })
+
+      // var i = {}
+      // json.forEach(function(d){
+      //     i.name = d.name;
+      //     i.quality =  d.score.detail.quality;
+      //     i.popularity = d.score.detail.popularity;
+      //     i.maintenance = d.score.detail.maintenance;
+      //     i.final = d.score.final;
+      //   })
+
+        // var i = []
+        // json.forEach(function(d){
+        //   i.push({
+        //     name: d.name,
+        //     quality: d.score.detail.quality,
+        //     popularity: d.score.detail.popularity,
+        //     maintenance: d.score.detail.maintenance,
+        //     final: d.score.final
+        //   })
+        // })
+        // console.log(i)
+        // var i = []
+        // json.forEach(function(d){
+        //   i.push(d.score.detail.quality)
+        // })
 
 
 
+
+
+
+//})
 }
-/*
-// Add an axis and title.
-g.append("g")
-  .attr("class", "axis")
-  .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
-.append("text")
-  .style("text-anchor", "middle")
-  .attr("y", -9)
-  .text(function(d) { return d; });
-
-  // Extract the list of dimensions and create a scale for each.
-    x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
-      return d != "name" && (y[d] = d3.scale.linear()
-          .domain(d3.extent(cars, function(p) { return +p[d]; }))
-          .range([height, 0]));
-    }));
-
-});
-*/
