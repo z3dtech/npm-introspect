@@ -27,7 +27,7 @@ window.onload = function (){
           .domain([0, 1])
           .range([0, height])
 
-
+//var axis = d3.axisLeft()
 
 
 
@@ -45,6 +45,7 @@ window.onload = function (){
     })
   })
 
+  console.log(i)
       const svg = d3.select("body").append("svg")
           .attrs({
               width: width,
@@ -54,16 +55,13 @@ window.onload = function (){
       //console.log( x.domain(['async', 'bluebird', 'webpack', 'request']))
 
       const g = svg.append('g')
-          .attr('transform', 'translate(' + [10, 10] + ')' )
+          .attr('transform', 'translate(' + [100, 10] + ')' )
 
 
       const path = d3.line()
           .x(function(d) {
-
-
             return d.final * 200; })
           .y(function(d) {
-            console.log(d.maintenance)
             return y(d.maintenance); });
 
       const paths = g.append('g')
@@ -71,24 +69,31 @@ window.onload = function (){
         .selectAll('path')
         .data(i)
         .enter().append('path')
+        .attr('transform', 'translate(' + [0, 0] + ')')
         .attr('d', path(i))
-
+ /////////////start here
         g.append("g")
-              .attr("class", "axis")
+              .attr("class", "axisOrdinal")
               .each(function(d) { d3.select(this).call(axis.scale(x.domain(d3.extent(i, function(d){ return d.name})))); })
 
 
-                //so each axis has the linear scale for scores
-                //but I need an axis created for each datum
-                //look up rangepoints for spacing axes
 
-
-
-    // g.append(g)
-    //   .attr('class', 'axis')
-    //   .each(function(d){
-    //     d3.select(this).call(axis.scale(x))
-    //   })
+        const verticalAxis = g.append('g')
+          .attr('class', 'axis')
+          .selectAll('axis')
+          .data(i)
+          .enter()
+          //.call(d3.axisLeft(y))
+          .each(function(d, i){
+            console.log(this)
+            console.log(i)
+            d3.select(this)
+              .append('g')
+              .attr('transform', 'translate(' + [(20 * i), 30] + ')')
+              //.call(d3.axisLeft(y))
+              .call(d3.axisLeft(y))
+            console.log('yo')
+          })
 
 
 
