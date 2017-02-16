@@ -2,6 +2,8 @@ window.onload = function (){
 
   //lets check request data and see what we should get rid of
   //then transform the data and finish the visuals
+  //when transform use two different objects to store
+  //one for the score and one for the
 
   // const data =[
   // //  {name: ['async', 'bluebird', 'webpack', 'request']},
@@ -30,14 +32,18 @@ var datum
 url = '/datam.json'
 d3.request(url)
   .mimeType('application/json')
-  .response(function(xhr) { return JSON.parse(xhr.responseText); })
+  .response(function(xhr){ datum = JSON.parse(xhr.responseText)})
+  //.response(function(xhr) { return JSON.parse(xhr.responseText); })
   .get(processData)
  //check on error in d3 system
 
-  function processData(data, err){
-    if (err) console.log(err)
 
-    console.log(data)
+  function processData(err, rawData){
+  //  if (err) console.log(err)
+
+    //console.log(datum)
+    //console.log(data)
+    //console.log(rawData.responseText)
 
 
 
@@ -55,6 +61,25 @@ d3.request(url)
   //   })
   // })
 
+      let primary = []
+      let secondary = []
+
+      const transposeData = function(data){
+        data.forEach(function(d) {
+          console.log(d)
+          console.log('----------------------------')
+          primary.push({
+            name: d.name,
+            quality: d.score.detail.quality,
+            popularity: d.score.detail.popularity,
+            maintenance: d.score.detail.maintenance,
+            final: d.score.final
+          })
+        })
+      }
+      transposeData(JSON.parse(datum))
+      // console.log(datum)
+      // console.log(primary)
 
       const svg = d3.select("body").append("svg")
           .attrs({
@@ -77,10 +102,10 @@ d3.request(url)
       const paths = g.append('g')
         .attr('class', 'score')
         .selectAll('path')
-        .data(i)
+        .data(primary)
         .enter().append('path')
         .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('d', path(i))
+        .attr('d', path(primary))
  /////////////start here
         // g.append("g")
         //       .attr("class", "axisOrdinal")
@@ -90,7 +115,7 @@ d3.request(url)
         const verticalAxis = g.append('g')
           .attr('class', 'axis')
           .selectAll('axis')
-          .data(i)
+          .data(primary)
           .enter()
 
           .each(function(d, i){

@@ -31,7 +31,7 @@ module.exports.go = () => {
     .then(function (data) {
         res.json(data)
         res.setHeader('Content-Type', 'application/json');
-        console.log(data)
+        //console.log(data)
         //res.render(path.join(__dirname + '/../client/index.html'))
         res.send(data);
       })
