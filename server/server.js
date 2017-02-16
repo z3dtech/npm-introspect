@@ -12,7 +12,7 @@ module.exports.go = () => {
 
   //app.set('views', path.join(__dirname, 'v'));
 
-  app.use(morgan('combined'))
+  //app.use(morgan('combined'))
 
 
   //app.use(express.static('../client/index.html'))
@@ -22,27 +22,33 @@ module.exports.go = () => {
   app.get('/data.json', function(req, res){
     res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/data.json')
   })
+
+
+
+  app.get('/datam.json', function(req, res){
+    console.log('servingDatam')
+    requestData.parse()
+    .then(function (data) {
+        res.json(data)
+        res.setHeader('Content-Type', 'application/json');
+        console.log(data)
+        //res.render(path.join(__dirname + '/../client/index.html'))
+        res.send(data);
+      })
+      .catch(function (e) {
+          res.status(500, {
+              error: e
+          });
+  })
+})
+
+
+
   app.get('/', function (req, res) {
       const indexPath = '/home/nicholas/code/javascipt/npm-landscape/client/index.html'
       console.log(indexPath)
       res.sendFile(indexPath)
-
-      //app.use('/js', express.static(path.join(__dirname + '/client/index.js')))
-      // requestData.parse()
-      // .then(function (data) {
-      //     res.json(data)
-      //     res.setHeader('Content-Type', 'text/plain');
-      //
-      //     //res.render(path.join(__dirname + '/../client/index.html'))
-      //
-      //     res.end(data);
-      // })
-      // .catch(function (e) {
-      //     res.status(500, {
-      //         error: e
-          //});
-      //});
-  })  //);
+  })
 
 app.get('*', function(req, res){
   res.send('hello ass')

@@ -1,11 +1,14 @@
 window.onload = function (){
 
-  const data =[
-  //  {name: ['async', 'bluebird', 'webpack', 'request']},
-    {final: [.84071299, .964345, .9622, .85729]},
-    {maintenance: [.66663, .75394, .96475, .4392]},
-    {popularity: [.96706, .85683, .89832, .8952]}
-  ]
+  //lets check request data and see what we should get rid of
+  //then transform the data and finish the visuals
+
+  // const data =[
+  // //  {name: ['async', 'bluebird', 'webpack', 'request']},
+  //   {final: [.84071299, .964345, .9622, .85729]},
+  //   {maintenance: [.66663, .75394, .96475, .4392]},
+  //   {popularity: [.96706, .85683, .89832, .8952]}
+  // ]
 
   const coors = [
     {x: 45, y: 120},
@@ -13,39 +16,46 @@ window.onload = function (){
     {x: 25, y: 23}
   ]
 
-  const height = window.innerHeight,
-        width = window.innerWidth
+  const margin = {top: 100, right: 10, bottom: 100, left: 10},
+        width = window.innerHeight - margin.left - margin.right,
+        height = window.innerWidth - margin.top - margin.bottom,
         line = d3.line(),
         axis = d3.axisLeft(),
-        x = d3.scaleBand().range([0, width])
-        //.domain(['async', 'bluebird', 'webpack', 'request'])
-        // .round([0.1])
-        .paddingInner([0.1])
-  	    .paddingOuter([0.3])
-  	    .align([0.5])
         y = d3.scaleLinear()
-          .domain([0, 1])
-          .range([0, height])
+          .domain([1, 0])
+          .range([0, height]);
 
-//var axis = d3.axisLeft()
+var datum
+
+url = '/datam.json'
+d3.request(url)
+  .mimeType('application/json')
+  .response(function(xhr) { return JSON.parse(xhr.responseText); })
+  .get(processData)
+ //check on error in d3 system
+
+  function processData(data, err){
+    if (err) console.log(err)
+
+    console.log(data)
 
 
 
-  d3.json('/data.json', function(err, json) {
-      if (err) console.log(err)
+  // d3.json('/data.json', function(err, json) {
 
-  var i = []
-  json.forEach(function(d){
-    i.push({
-      name: d.name,
-      quality: d.score.detail.quality,
-      popularity: d.score.detail.popularity,
-      maintenance: d.score.detail.maintenance,
-      final: d.score.final
-    })
-  })
 
-  console.log(i)
+  // var i = []
+  // json.forEach(function(d){
+  //   i.push({
+  //     name: d.name,
+  //     quality: d.score.detail.quality,
+  //     popularity: d.score.detail.popularity,
+  //     maintenance: d.score.detail.maintenance,
+  //     final: d.score.final
+  //   })
+  // })
+
+
       const svg = d3.select("body").append("svg")
           .attrs({
               width: width,
@@ -72,10 +82,9 @@ window.onload = function (){
         .attr('transform', 'translate(' + [0, 0] + ')')
         .attr('d', path(i))
  /////////////start here
-        g.append("g")
-              .attr("class", "axisOrdinal")
-              .each(function(d) { d3.select(this).call(axis.scale(x.domain(d3.extent(i, function(d){ return d.name})))); })
-
+        // g.append("g")
+        //       .attr("class", "axisOrdinal")
+        //       .each(function(d) { d3.select(this).call(axis.scale(x.domain(d3.extent(i, function(d){ return d.name})))); })
 
 
         const verticalAxis = g.append('g')
@@ -83,19 +92,13 @@ window.onload = function (){
           .selectAll('axis')
           .data(i)
           .enter()
-          //.call(d3.axisLeft(y))
+
           .each(function(d, i){
-            console.log(this)
-            console.log(i)
             d3.select(this)
               .append('g')
-              .attr('transform', 'translate(' + [(20 * i), 30] + ')')
-              //.call(d3.axisLeft(y))
-              .call(d3.axisLeft(y))
-            console.log('yo')
+              .attr('transform', 'translate(' + [(100 * i), 0] + ')')
+              .call(axis.scale(y))
           })
-
-
 
       // var i = {}
       // json.forEach(function(d){
@@ -106,17 +109,5 @@ window.onload = function (){
       //     i.final = d.score.final;
       //   })
 
-
-        // console.log(i)
-        // var i = []
-        // json.forEach(function(d){
-        //   i.push(d.score.detail.quality)
-        // })
-
-
-
-
-
-
-})
+}
 }

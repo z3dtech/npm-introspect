@@ -39,7 +39,7 @@ var pkgInfoParse = function(pkgInfo){
     }
     /*
     lets refactor this so that we are using a loop and try/catch and setting to
-    0/undefined any thing that isn't very good 
+    0/undefined any thing that isn't very good
 
     */
     filteredPkg['name'] = parsedPkg.collected.metadata.name;
