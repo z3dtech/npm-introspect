@@ -19,6 +19,9 @@ module.exports.go = () => {
   app.get('/index.js', function(req, res){
     res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/index.js')
   })
+  app.get('/style.css', function(req, res){
+    res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/style.css')
+  })
   app.get('/data.json', function(req, res){
     res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/data.json')
   })

@@ -27,28 +27,17 @@ window.onload = function (){
           .domain([1, 0])
           .range([0, height]);
 
-var datum
-
 url = '/datam.json'
 d3.request(url)
   .mimeType('application/json')
-  .response(function(xhr){ datum = JSON.parse(xhr.responseText)})
-  //.response(function(xhr) { return JSON.parse(xhr.responseText); })
+  .response(function(xhr) { return JSON.parse(xhr.responseText); })
   .get(processData)
- //check on error in d3 system
-
 
   function processData(err, rawData){
-  //  if (err) console.log(err)
+    if (err) console.log(err)
 
-    //console.log(datum)
-    //console.log(data)
-    //console.log(rawData.responseText)
-
-
-
-  // d3.json('/data.json', function(err, json) {
-
+    const data = JSON.parse(rawData)
+    console.log(data)
 
   // var i = []
   // json.forEach(function(d){
@@ -61,25 +50,22 @@ d3.request(url)
   //   })
   // })
 
-      let primary = []
-      let secondary = []
 
-      const transposeData = function(data){
-        data.forEach(function(d) {
-          console.log(d)
-          console.log('----------------------------')
-          primary.push({
-            name: d.name,
-            quality: d.score.detail.quality,
-            popularity: d.score.detail.popularity,
-            maintenance: d.score.detail.maintenance,
-            final: d.score.final
-          })
-        })
-      }
-      transposeData(JSON.parse(datum))
-      // console.log(datum)
-      // console.log(primary)
+      // const transposeData = function(data){
+      //   data.forEach(function(d) {
+      //     console.log(d)
+      //     console.log('----------------------------')
+      //     primary.push({
+      //       name: d.name,
+      //       quality: d.score.detail.quality,
+      //       popularity: d.score.detail.popularity,
+      //       maintenance: d.score.detail.maintenance,
+      //       final: d.score.final
+      //     })
+      //   })
+      // }
+
+      // transposeData(data)
 
       const svg = d3.select("body").append("svg")
           .attrs({
@@ -87,25 +73,37 @@ d3.request(url)
               height: height
           });
 
-      //console.log( x.domain(['async', 'bluebird', 'webpack', 'request']))
-
       const g = svg.append('g')
           .attr('transform', 'translate(' + [100, 10] + ')' )
 
 
-      const path = d3.line()
-          .x(function(d) {
-            return d.final * 200; })
-          .y(function(d) {
-            return y(d.maintenance); });
+      const createPaths(d){
+        const keys = [d.score.detail.maintenance, d.score.detail.popularity, d.score.detail.quality, d.score.final]
+        //the part where this is called four times
+        return d3.line()
+          .x(function(d, i) {
+            return 100 * i; })
+          .y(function(d, i) {
+            return y(keys[i])
+          });
+        }
 
       const paths = g.append('g')
         .attr('class', 'score')
         .selectAll('path')
-        .data(primary)
+        .data(data)
         .enter().append('path')
         .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('d', path(primary))
+        .attr('d', createPaths(data));   //path(data));
+
+
+
+        // .attrs({
+        //   'transform': 'translate(' + [0,0] + ')',
+        //   fill: none,
+        //   stroke: steelblue,
+        //   'stroke-width': '3px',
+        // })
  /////////////start here
         // g.append("g")
         //       .attr("class", "axisOrdinal")
@@ -115,7 +113,7 @@ d3.request(url)
         const verticalAxis = g.append('g')
           .attr('class', 'axis')
           .selectAll('axis')
-          .data(primary)
+          .data(data)
           .enter()
 
           .each(function(d, i){
