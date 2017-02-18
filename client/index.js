@@ -76,17 +76,30 @@ d3.request(url)
       const g = svg.append('g')
           .attr('transform', 'translate(' + [100, 10] + ')' )
 
+          //this guy has to seperate the paths functio better
+          //its all getting fucked up by the return statements
 
-      const createPaths(d){
-        const keys = [d.score.detail.maintenance, d.score.detail.popularity, d.score.detail.quality, d.score.final]
+      const createPaths = function(d){
+        //console.log(d)
+        let i = 0
+        const keys = ['d.score.detail.maintenance', 'd.score.detail.popularity', 'd.score.detail.quality', 'd.score.final']
         //the part where this is called four times
-        return d3.line()
-          .x(function(d, i) {
-            return 100 * i; })
-          .y(function(d, i) {
-            return y(keys[i])
-          });
+        //for (let i = 0; i < keys.length; i++){
+
+
+              //return y(keys[value])
+            //}).call()
         }
+
+      const path = function(d){
+        d3.line()
+         .x(function(d, i) {
+           return 100 * i; })
+         .y(function(d, i) {
+           console.log(keys[i])
+           return y(.5)
+         })
+      }
 
       const paths = g.append('g')
         .attr('class', 'score')
@@ -94,7 +107,7 @@ d3.request(url)
         .data(data)
         .enter().append('path')
         .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('d', createPaths(data));   //path(data));
+        .attr('d', path(data));   //path(data));
 
 
 
