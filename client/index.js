@@ -79,41 +79,55 @@ d3.request(url)
           //this guy has to seperate the paths functio better
           //its all getting fucked up by the return statements
 
-      const createPaths = function(d){
+      //const createPaths = function(d){
         //console.log(d)
-        let i = 0
-        const keys = ['d.score.detail.maintenance', 'd.score.detail.popularity', 'd.score.detail.quality', 'd.score.final']
+
         //the part where this is called four times
         //for (let i = 0; i < keys.length; i++){
 
 
               //return y(keys[value])
             //}).call()
-        }
+      //  }
 
-      const path = function(d){
-        d3.line()
+      const path = function(data, value){
+        const gh = d3.line()
          .x(function(d, i) {
            return 100 * i; })
          .y(function(d, i) {
-           console.log(keys[i])
-           return y(.5)
+           //console.log(keys[i])
+           return y(d.value)
          })
+         return gh(data)
+
       }
+
+
+      // const path = d3.line()
+      //     .x(function(d) {
+      //       return d.final * 200; })
+      //     .y(function(d) {
+      //       return y(d.maintenanc); });
 
       const paths = g.append('g')
         .attr('class', 'score')
         .selectAll('path')
         .data(data)
-        .enter().append('path')
-        .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('d', path(data));   //path(data));
+        .enter()
+        .attr('d', ()=> {
+          let keys = ['score.detail.maintenance', 'score.detail.popularity', 'score.detail.quality', 'score.final']
+          for(let i = 0; i < keys.length; i++){
+              path(data, keys[i]);
+          }
+        })
+
+
 
 
 
         // .attrs({
         //   'transform': 'translate(' + [0,0] + ')',
-        //   fill: none,
+        //   fill: none,,
         //   stroke: steelblue,
         //   'stroke-width': '3px',
         // })
