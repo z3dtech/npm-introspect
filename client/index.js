@@ -1,3 +1,5 @@
+'use strict'
+
 window.onload = function (){
 
   //lets check request data and see what we should get rid of
@@ -6,14 +8,11 @@ window.onload = function (){
   //one for the score and one for the
 
   const datum =[
-  //{name: ['async', 'bluebird', 'webpack', 'request']},
-    .8888, .46464, .66663, .96706, .84071299, .86868, .63636, .96969
-  ]
-
-  const coors = [
-    {x: 45, y: 120},
-    {x: 60, y: 120},
-    {x: 25, y: 23}
+  // key is equivalent to y coordinate and value is equivalent to x
+    {final: [.8888, .46464, .66663, .96706, .84071299, .86868, .63636, .96969]},
+    {popularity: [.6888, .66464, .66663, .66706, .64071299, .66868, .63636, .96669]},
+    {maintenance: [.8888, .46464, .26663, .96706, .24071299, .86868, .93636, .96969]},
+    {quality: [.3888, .36464, .36663, .36706, .34071299, .83868, .33636, .93969]}
   ]
 
 
@@ -22,10 +21,6 @@ window.onload = function (){
 3 by 4 = 9 calls
 4 by 5 = 16 calls
 1 by 5 = 25 calls
-
-
-
-
 
 
   */
@@ -39,7 +34,7 @@ window.onload = function (){
           .domain([1, 0])
           .range([0, height]);
 
-url = '/datam.json'
+const url = '/datam.json'
 d3.request(url)
   .mimeType('application/json')
   .response(function(xhr) { return JSON.parse(xhr.responseText); })
@@ -89,21 +84,6 @@ d3.request(url)
           .attr('transform', 'translate(' + [100, 10] + ')' )
 
 
-
-          //this guy has to seperate the paths functio better
-          //its all getting fucked up by the return statements
-
-      //const createPaths = function(d){
-        //console.log(d)
-
-        //the part where this is called four times
-        //for (let i = 0; i < keys.length; i++){
-
-
-              //return y(keys[value])
-            //}).call()
-      //  }
-
       // const path = function(data, value){
       //   const gh = d3.line()
       //   .x(function(d, i) {
@@ -116,116 +96,50 @@ d3.request(url)
       //
       // }
 
-      console.log('no error so far')
-
-
       const path = d3.line()
         .x(function(d, i) {
-           return 100 * i; })
+           return 100 * d[0]; })
         .y(function(d, i) {
-           //console.log(keys[i])
-           console.log(i)
-           console.log(d)
-           return y(.5)    //here is
+          console.log(d)
+           return y(d[1])
          })
 
-
-      //  const path2 = d3.line()
-      //    .x(function(d, i) {
-      //       return 100 * i; })
-      //    .y(function(d, i) {
-      //       //console.log(keys[i])
-      //       return y(d.popularity)
-      //     })
-
-      // const path = d3.line()
-      //     .x(function(d) {
-      //       return d.final * 200; })
-      //     .y(function(d) {
-      //       return y(d.maintenanc); });
-
-      //this should be wraqpped and called more itmes
+      //stubbed version
+      //  const createPaths = g.append('g')
+      //    .attr('class', 'lineGraph')
+      //    .selectAll('paths')
+      //    .data(datum)
+      //    .enter()
+      //    .append('g')
+      //    .attr('transform', 'translate(' + [0, 0] + ')')
+      //    .attr('d', (d) => {
+      //      console.log(d)
+      //      return path(d)
+      //      })
 
 
-      const paths = g.append('g')
-        .attr('class', 'score')
-        .selectAll('paths')
-        .data(data)
-        .attr('d', data.map((d) => {
-             d.score.detail['final'] = d.score.final
-        }))
+      const createPaths = g.append('g')
+        .attr('class', 'lineGraph')
+        .selectAll('path')
+        .data(data) //array of array
         .enter()
-        // .each((d, i) => {
-        //   console.log(d.score.detail)
-        //   console.log(i + ' ---------')
-        // })
-        .append('g')
-        .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('d', (d) => {
-            d.score.detail.each(d, i){
-              console.log(i)
-            }
-          //return path()
+        .append('path')
 
+        .attr('transform', 'translate(' + [0, 0] + ')')
+        //.attr('d', path(d.score.final))
+        .attr('d', (d) => {
+              console.log(d.score.detail)
+             var g  = ['maintenance', 'popularity', 'quality'].map((s, i) =>{
+                return [i, d.score.detail[s]]
+              }
+            )
+              return path(g)
         })
 
 
 
-        // const paths = g.selectAll('paths')
-        //
-        //   .attr('class', 'lines')
-        //   .data(data)
-        //   .enter()
 
 
-          //.append('g')
-          //.attr('transform', 'translate(' + [10, 10] + ')')
-
-          //.selectAll('paths')
-
-
-
-        //   .selectAll('path')
-        //   .attr('d', data.map((d) => {
-        //     d.score.detail['final'] = d.score.final
-        //   })
-        // )
-        //   .data(function(d){
-        //     console.log(d.score.detail)
-        //     return d.score.detail
-        //   })
-        //   //.enter()
-        //   .append('g')
-        //   .attr('d', (d) =>{
-        //     console.log(d)
-        //   })
-        //   .append('path')
-        //   .attr('d', () =>{
-        //     console.log('here')
-        //     console.log(d)
-        //     return path(d)
-        //   })
-          // .selectAll('paths')
-          // .data(function(d){
-          //   return d.score.detail
-          // })
-          // .attr(function(d){
-          //   console.log(d)
-          // })
-
-
-
-        // ()=> {
-        //   let keys = ['score.detail.maintenance', 'score.detail.popularity', 'score.detail.quality', 'score.final']
-        //   for(let i = 0; i < keys.length; i++){
-        //       path(data, keys[i]);
-        //   }
-        // .attrs({
-        //
-        //   fill: none,,
-        //   stroke: steelblue,
-        //   'stroke-width': '3px',
-        // })
  /////////////start here
         // g.append("g")
         //       .attr("class", "axisOrdinal")
