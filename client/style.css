@@ -2,7 +2,7 @@ svg {
   font: 10px sans-serif;
 }
 
-.score path {
+.lineGraph path {
   fill: none;
   stroke: steelblue;
   stroke-width: 3px;
