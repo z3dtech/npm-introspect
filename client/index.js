@@ -2,11 +2,6 @@
 
 window.onload = function (){
 
-  //lets check request data and see what we should get rid of
-  //then transform the data and finish the visuals
-  //when transform use two different objects to store
-  //one for the score and one for the
-
   const datum =[
   // key is equivalent to y coordinate and value is equivalent to x
     {final: [.8888, .46464, .66663, .96706, .84071299, .86868, .63636, .96969]},
@@ -16,14 +11,6 @@ window.onload = function (){
   ]
 
 
-  /*
-6 by 4 = 36 calls
-3 by 4 = 9 calls
-4 by 5 = 16 calls
-1 by 5 = 25 calls
-
-
-  */
 
   const margin = {top: 100, right: 10, bottom: 100, left: 10},
         width = window.innerHeight - margin.left - margin.right,
@@ -38,13 +25,23 @@ const url = '/datam.json'
 d3.request(url)
   .mimeType('application/json')
   .response(function(xhr) { return JSON.parse(xhr.responseText); })
-  .get(processData)
+  .get(processData);
 
   function processData(err, rawData){
-    if (err) console.log(err)
+    if (err) console.log(err);
 
-    const data = JSON.parse(rawData)
-    //console.log(data)
+    const data = JSON.parse(rawData);
+
+
+
+    const lineData = data.map((d) => {['final', 'detail[maintenance]', 'detail.popularity', 'detail.quality'].map((p, i) =>{
+                    console.log(d.score[p])
+                    return [i, d.score[p]];
+
+                  })
+                })
+
+    console.log(lineData)
 
   // var i = []
   // json.forEach(function(d){
@@ -84,38 +81,14 @@ d3.request(url)
           .attr('transform', 'translate(' + [100, 10] + ')' )
 
 
-      // const path = function(data, value){
-      //   const gh = d3.line()
-      //   .x(function(d, i) {
-      //     return 100 * i; })
-      //   .y(function(d, i) {
-      //     //console.log(keys[i])
-      //     return y(d.value)
-      //   })
-      //    return gh(data)
-      //
-      // }
-
       const path = d3.line()
         .x(function(d, i) {
            return 100 * d[0]; })
         .y(function(d, i) {
-          console.log(d)
            return y(d[1])
          })
 
-      //stubbed version
-      //  const createPaths = g.append('g')
-      //    .attr('class', 'lineGraph')
-      //    .selectAll('paths')
-      //    .data(datum)
-      //    .enter()
-      //    .append('g')
-      //    .attr('transform', 'translate(' + [0, 0] + ')')
-      //    .attr('d', (d) => {
-      //      console.log(d)
-      //      return path(d)
-      //      })
+
 
 
       const createPaths = g.append('g')
@@ -128,7 +101,6 @@ d3.request(url)
         .attr('transform', 'translate(' + [0, 0] + ')')
         //.attr('d', path(d.score.final))
         .attr('d', (d) => {
-              console.log(d.score.detail)
              var g  = ['maintenance', 'popularity', 'quality'].map((s, i) =>{
                 return [i, d.score.detail[s]]
               }
@@ -158,15 +130,6 @@ d3.request(url)
               .attr('transform', 'translate(' + [(100 * i), 0] + ')')
               .call(axis.scale(y))
           })
-
-      // var i = {}
-      // json.forEach(function(d){
-      //     i.name = d.name;
-      //     i.quality =  d.score.detail.quality;
-      //     i.popularity = d.score.detail.popularity;
-      //     i.maintenance = d.score.detail.maintenance;
-      //     i.final = d.score.final;
-      //   })
 
 }
 }
