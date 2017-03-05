@@ -2,16 +2,6 @@
 
 window.onload = function (){
 
-  const datum =[
-  // key is equivalent to y coordinate and value is equivalent to x
-    {final: [.8888, .46464, .66663, .96706, .84071299, .86868, .63636, .96969]},
-    {popularity: [.6888, .66464, .66663, .66706, .64071299, .66868, .63636, .96669]},
-    {maintenance: [.8888, .46464, .26663, .96706, .24071299, .86868, .93636, .96969]},
-    {quality: [.3888, .36464, .36663, .36706, .34071299, .83868, .33636, .93969]}
-  ]
-
-
-
   const margin = {top: 100, right: 10, bottom: 100, left: 10},
         width = window.innerHeight - margin.left - margin.right,
         height = window.innerWidth - margin.top - margin.bottom,
@@ -31,45 +21,30 @@ d3.request(url)
     if (err) console.log(err);
 
     const data = JSON.parse(rawData);
+    console.log(data)
 
 
+    const scoreData = data.map((d) => {
+      return ['final', 'maintenance', 'popularity', 'quality']
+          .map((p, i) =>{
+              return [i, d[p]]
+            })
+          })
 
-    const lineData = data.map((d) => {['final', 'detail[maintenance]', 'detail.popularity', 'detail.quality'].map((p, i) =>{
-                    console.log(d.score[p])
-                    return [i, d.score[p]];
+    const usageData = data.map((d) => {
+      return d.downloadsAcceleration.map((a) =>{
+        const dateTo = new Date(a.to)
+        const dateFrom = new Date(a.from)
 
-                  })
-                })
+        return [dateFrom, a.count]
+      })
+    })
 
-    console.log(lineData)
-
-  // var i = []
-  // json.forEach(function(d){
-  //   i.push({
-  //     name: d.name,
-  //     quality: d.score.detail.quality,
-  //     popularity: d.score.detail.popularity,
-  //     maintenance: d.score.detail.maintenance,
-  //     final: d.score.final
-  //   })
-  // })
+console.log(usageData)
 
 
-      // const transposeData = function(data){
-      //   data.forEach(function(d) {
-      //     console.log(d)
-      //     console.log('----------------------------')
-      //     primary.push({
-      //       name: d.name,
-      //       quality: d.score.detail.quality,
-      //       popularity: d.score.detail.popularity,
-      //       maintenance: d.score.detail.maintenance,
-      //       final: d.score.final
-      //     })
-      //   })
-      // }
+    //bar chart, appenfd data with a fillwd and scaled bar chart
 
-      // transposeData(data)
 
       const svg = d3.select("body").append("svg")
           .attrs({
@@ -88,40 +63,41 @@ d3.request(url)
            return y(d[1])
          })
 
+      const barGraph = g.append('g')
+        .attr('class', 'downloadsBar')
+        .selectAll('bar')
+        .data(usageData)
+        .enter()
+        .append('rect')
+        .attr('transform', 'translate(' + [0, 0] + ')')
+        .attr('x', (d) => {
 
+        })
+        .attr('y', (d) => {
+
+        })
 
 
       const createPaths = g.append('g')
         .attr('class', 'lineGraph')
         .selectAll('path')
-        .data(data) //array of array
+        .data(scoreData) //array of array
         .enter()
         .append('path')
-
         .attr('transform', 'translate(' + [0, 0] + ')')
         //.attr('d', path(d.score.final))
         .attr('d', (d) => {
-             var g  = ['maintenance', 'popularity', 'quality'].map((s, i) =>{
-                return [i, d.score.detail[s]]
-              }
-            )
-              return path(g)
+              return path(d)
         })
 
-
-
-
-
- /////////////start here
-        // g.append("g")
-        //       .attr("class", "axisOrdinal")
-        //       .each(function(d) { d3.select(this).call(axis.scale(x.domain(d3.extent(i, function(d){ return d.name})))); })
-
+        const dateDifference = function(date1, date2){
+          console.log(date1 - date2);
+        }
 
         const verticalAxis = g.append('g')
           .attr('class', 'axis')
           .selectAll('axis')
-          .data(data)
+          .data(scoreData)
           .enter()
 
           .each(function(d, i){

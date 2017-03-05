@@ -42,8 +42,9 @@ var pkgInfoParse = function(pkgInfo){
     0/undefined any thing that isn't very good
 
     */
-    filteredPkg['name'] = parsedPkg.collected.metadata.name;
-    filteredPkg['version'] = parsedPkg.collected.metadata.version;
+
+    filteredPkg.name = parsedPkg.collected.metadata.name;
+    filteredPkg.version = parsedPkg.collected.metadata.version;
     filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
     filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies;
     filteredPkg['peerDependencies'] = parsedPkg.collected.metadata.peerDependencies;
@@ -52,12 +53,18 @@ var pkgInfoParse = function(pkgInfo){
     //filteredPkg['github.forksCount']= parsedPkg.collected.github.forksCount;
     filteredPkg['outdatedDependencies']= parsedPkg.collected.source.outdatedDependencies;
     filteredPkg['vulnerabilities']= parsedPkg.collected.source.vulnerabilities;
-    filteredPkg['score'] = parsedPkg.score;
-    filteredPkg['evaluation'] = parsedPkg.evaluation;
+    filteredPkg.maintenance = parsedPkg.score.detail.maintenance;
+    filteredPkg.popularity = parsedPkg.score.detail.popularity;
+    filteredPkg.quality = parsedPkg.score.detail.quality;
+    filteredPkg.final = parsedPkg.score.final;
+
+    // filteredPkg['evaluation'] = parsedPkg.evaluation;
 
     filteredInfo.push(filteredPkg)
+
     //filteredInfo.push(parsedPkg)
   })
+
   return JSON.stringify(filteredInfo)
 }
 
@@ -70,11 +77,13 @@ exports.parse =  function(){
     })
       npmSearchQuery(packageUrls)
       .then(function(result) {
+
         resolve(result)
     }).catch(function(error) {reject(error)})
     })
   })
 }
+
 
 
 // exports.parse = function(){
