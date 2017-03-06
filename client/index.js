@@ -24,6 +24,8 @@ d3.request(url)
     console.log(data)
 
 
+
+
     const scoreData = data.map((d) => {
       return ['final', 'maintenance', 'popularity', 'quality']
           .map((p, i) =>{
@@ -36,12 +38,18 @@ d3.request(url)
         const dateTo = new Date(a.to)
         const dateFrom = new Date(a.from)
 
-        return [dateFrom, a.count]
+        const timeSpan = dateTo - dateFrom
+        return {'time': timeSpan, 'count': a.count}
       })
     })
 
 console.log(usageData)
 
+// const usageScale = d3.scaleLinear().
+//   .domain([0, d3.max(usageData), function(d){
+//     return d[1]
+//   }])
+//   .range(1, 100)
 
     //bar chart, appenfd data with a fillwd and scaled bar chart
 
@@ -64,18 +72,22 @@ console.log(usageData)
          })
 
       const barGraph = g.append('g')
-        .attr('class', 'downloadsBar')
+        .attr('class', 'usageGraph')
         .selectAll('bar')
         .data(usageData)
         .enter()
         .append('rect')
-        .attr('transform', 'translate(' + [0, 0] + ')')
-        .attr('x', (d) => {
-
-        })
-        .attr('y', (d) => {
-
-        })
+        .attrs({
+          transform: 'translate(' + [500, 10] + ')',
+          width: 100,
+          height: 100,
+          x: (d, i) => {
+            return i * 150
+          },
+          y: (d, i) => {
+            return i * 0
+          }
+        });
 
 
       const createPaths = g.append('g')
@@ -97,7 +109,7 @@ console.log(usageData)
         const verticalAxis = g.append('g')
           .attr('class', 'axis')
           .selectAll('axis')
-          .data(scoreData)
+          .data(scoreData[0])
           .enter()
 
           .each(function(d, i){
