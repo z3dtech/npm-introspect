@@ -11,48 +11,82 @@ window.onload = function (){
           .domain([1, 0])
           .range([0, height]);
 
-const url = '/datam.json'
-d3.request(url)
-  .mimeType('application/json')
-  .response(function(xhr) { return JSON.parse(xhr.responseText); })
-  .get(processData);
+  const url = '/datam.json'
+  d3.request(url)
+    .mimeType('application/json')
+    .response(function(xhr) { return JSON.parse(xhr.responseText); })
+    .get(processData);
 
-  function processData(err, rawData){
-    if (err) console.log(err);
+    function processData(err, rawData){
+      if (err) console.log(err);
 
-    const data = JSON.parse(rawData);
-    console.log(data)
+      const data = JSON.parse(rawData);
+      console.log(data)
 
+      const timeDiffernce = function(dateTo, dateFrom){
+          let diff = dateTo - dateFrom;
 
+          const days = Math.floor(diff / 1000 / 60 / 60 /24);
+          diff -= days * 1000 * 60 * 60 * 24;
 
+          return days
+      }
 
     const scoreData = data.map((d) => {
-      return ['final', 'maintenance', 'popularity', 'quality']
+      let data = {'name': d.name, 'score' : []};
+       ['final', 'maintenance', 'popularity', 'quality']
           .map((p, i) =>{
-              return [i, d[p]]
+              data.score.push([i, d[p]])
             })
+        return data
           })
 
-    const usageData = data.map((d) => {
-      return d.downloadsAcceleration.map((a) =>{
-        const dateTo = new Date(a.to)
-        const dateFrom = new Date(a.from)
+console.log(scoreData)
+          /////here we need 14 arrays of three objects of six item array
 
-        const timeSpan = dateTo - dateFrom
-        return {'time': timeSpan, 'count': a.count}
+    const usageData = data.map((d) => {
+      let data = {[d.name]: { 'time': [], 'count': [], 'rate':[]}}
+
+      d.downloadsAcceleration.map((a, i) =>{
+        const dateTo = i === 0? new Date(a.to) : new Date(d.downloadsAcceleration[(i-1)].from)
+        const count  = i!== 0? a.count - d.downloadsAcceleration[(i-1)].count : a.count;
+        const dateFrom = new Date(a.from);
+        const timeSpan = timeDiffernce(dateTo, dateFrom)
+
+        data[d.name].time.push(timeSpan)
+        data[d.name].count.push(count)
+        data[d.name].rate.push(Math.floor(count/timeSpan))
       })
+      return data
     })
 
-console.log(usageData)
+    console.log(usageData)
 
-// const usageScale = d3.scaleLinear().
-//   .domain([0, d3.max(usageData), function(d){
-//     return d[1]
-//   }])
-//   .range(1, 100)
+    const usageScale = function(value){
+      return d3.scaleLinear()
+      .domain(d3.extent(value))
+      .range(1, 200)
+    }
+
+
+    // const widthScale = function(d, i){
+    //   console.log(d3.extent(usageData[i].time))
+    //   const scale = function (){
+    //   return d3.scaleLinear()
+    //   .domain(d3.extent(usageData[i].time))
+    //   .range(0, 75)
+    // }
+    // return scale(d)
+    // }
+
+    const heightScale = d3.scaleLinear()
+      .range(0, 200)
 
     //bar chart, appenfd data with a fillwd and scaled bar chart
 
+
+            //create the average downloads per week for x weeeks
+            //divide
 
       const svg = d3.select("body").append("svg")
           .attrs({
@@ -71,23 +105,42 @@ console.log(usageData)
            return y(d[1])
          })
 
-      const barGraph = g.append('g')
+      const barGraph = function(name){
+        console.log(usageData)
+        console.log(usageData[name])
+        console.log(usageData.async)
+        g.append('g')
         .attr('class', 'usageGraph')
         .selectAll('bar')
-        .data(usageData)
+        .data(usageData[name])
         .enter()
         .append('rect')
         .attrs({
-          transform: 'translate(' + [500, 10] + ')',
-          width: 100,
-          height: 100,
+          transform: 'translate(' + [300, 10] + ')',
+          width: (d, i) => {
+            console.log(d)
+            console.log(usageScale(d.count))
+
+            return 100 * i//widthScale(d, i)
+          },
+          height: (d, i) => {
+            return 100 * i//heightScale(d.rate)
+          },
           x: (d, i) => {
-            return i * 150
+            return 100 * i //widthScale(d.time)
           },
           y: (d, i) => {
-            return i * 0
+            return 100 * i //heightScale(d.rate)
           }
         });
+      }
+
+
+      const displayData = function(pkgName){
+        console.log(pkgName)
+        barGraph(pkgName)
+
+      }
 
 
       const createPaths = g.append('g')
@@ -96,20 +149,24 @@ console.log(usageData)
         .data(scoreData) //array of array
         .enter()
         .append('path')
+        .on('click', (d) => {
+          //toggle class visible, invisible
+          displayData(d.name)
+        })
         .attr('transform', 'translate(' + [0, 0] + ')')
-        //.attr('d', path(d.score.final))
+        .attr('class', (d) => {
+          return d.name
+        })
         .attr('d', (d) => {
-              return path(d)
+              return path(d.score)
         })
 
-        const dateDifference = function(date1, date2){
-          console.log(date1 - date2);
-        }
+
 
         const verticalAxis = g.append('g')
           .attr('class', 'axis')
           .selectAll('axis')
-          .data(scoreData[0])
+          .data(scoreData[0].score)
           .enter()
 
           .each(function(d, i){
