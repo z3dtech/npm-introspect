@@ -105,27 +105,45 @@ window.onload = function (){
            return y(d[1])
          })
 
+         const barGraph = g.append('g')
+           .attr('class', 'usageGraph')
+           .selectAll('bar')
+           .data(usageData.async.count)
+           .enter()
+           .append('rect')
+           .attrs({
+             transform: 'translate(' + [500, 10] + ')',
+             width: 100,
+             height: 100,
+             x: (d, i) => {
+               return i * 150
+             },
+             y: (d, i) => {
+               return i * 0
+             }
+           });
 
-      const barGraph = g.append('g')
-        .attr('class', 'usageGraph')
-        .selectAll('bar')
-        .data(usageData)
-        .enter()
-        .append('rect')
-        .attr('transform', 'translate(' + [300, 10] + ')')
-        .attrs({'width':  (d, i) => {
-            return 100 * i//widthScale(d, i)
-          },
-          'height': (d, i) => {
-            return 100 * i//heightScale(d.rate)
-          },
-          x: (d, i) => {
-            return 100 * i //widthScale(d.time)
-          },
-          y: (d, i) => {
-            return 100 * i //heightScale(d.rate)
-          }
-        });
+
+      // const barGraph = g.append('g')
+      //   .attr('class', 'usageGraph')
+      //   .selectAll('bar')
+      //   .data(usageData)
+      //   .enter()
+      //   .append('rect')
+      //   .attr('transform', 'translate(' + [300, 10] + ')')
+      //   .attrs({'width':  (d, i) => {
+      //       return 100 * i//widthScale(d, i)
+      //     },
+      //     'height': (d, i) => {
+      //       return 100 * i//heightScale(d.rate)
+      //     },
+      //     x: (d, i) => {
+      //       return 100 * i //widthScale(d.time)
+      //     },
+      //     y: (d, i) => {
+      //       return 100 * i //heightScale(d.rate)
+      //     }
+      //   });
 
 
 
