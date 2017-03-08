@@ -25,7 +25,6 @@ window.onload = function (){
 
       const timeDiffernce = function(dateTo, dateFrom){
           let diff = dateTo - dateFrom;
-
           const days = Math.floor(diff / 1000 / 60 / 60 /24);
           diff -= days * 1000 * 60 * 60 * 24;
 
@@ -41,28 +40,28 @@ window.onload = function (){
         return data
           })
 
-console.log(scoreData)
-          /////here we need 14 arrays of three objects of six item array
+    console.log(scoreData)
 
-    const usageData = data.map((d) => {
-      let data = {[d.name]: { 'time': [], 'count': [], 'rate':[]}}
-
-      d.downloadsAcceleration.map((a, i) =>{
+    let usageData = {}
+    const downloads = data.forEach((d) => {
+      d.downloadsAcceleration.forEach((a, i) =>{
+        usageData[d.name] = { 'time': [], 'count': [], 'rate':[]}
         const dateTo = i === 0? new Date(a.to) : new Date(d.downloadsAcceleration[(i-1)].from)
         const count  = i!== 0? a.count - d.downloadsAcceleration[(i-1)].count : a.count;
         const dateFrom = new Date(a.from);
         const timeSpan = timeDiffernce(dateTo, dateFrom)
 
-        data[d.name].time.push(timeSpan)
-        data[d.name].count.push(count)
-        data[d.name].rate.push(Math.floor(count/timeSpan))
+        usageData[d.name].time.push(timeSpan)
+        usageData[d.name].count.push(count)
+        usageData[d.name].rate.push(Math.floor(count/timeSpan))
       })
-      return data
     })
 
     console.log(usageData)
 
+
     const usageScale = function(value){
+      console.log(value)
       return d3.scaleLinear()
       .domain(d3.extent(value))
       .range(1, 200)
@@ -79,8 +78,9 @@ console.log(scoreData)
     // return scale(d)
     // }
 
-    const heightScale = d3.scaleLinear()
-      .range(0, 200)
+    // const heightScale = d3.scaleLinear()
+    //   .domain(d3.extent())
+    //   .range(0, 200)
 
     //bar chart, appenfd data with a fillwd and scaled bar chart
 
@@ -105,25 +105,18 @@ console.log(scoreData)
            return y(d[1])
          })
 
-      const barGraph = function(name){
-        console.log(usageData)
-        console.log(usageData[name])
-        console.log(usageData.async)
-        g.append('g')
+
+      const barGraph = g.append('g')
         .attr('class', 'usageGraph')
         .selectAll('bar')
-        .data(usageData[name])
+        .data(usageData)
         .enter()
         .append('rect')
-        .attrs({
-          transform: 'translate(' + [300, 10] + ')',
-          width: (d, i) => {
-            console.log(d)
-            console.log(usageScale(d.count))
-
+        .attr('transform', 'translate(' + [300, 10] + ')')
+        .attrs({'width':  (d, i) => {
             return 100 * i//widthScale(d, i)
           },
-          height: (d, i) => {
+          'height': (d, i) => {
             return 100 * i//heightScale(d.rate)
           },
           x: (d, i) => {
@@ -133,7 +126,7 @@ console.log(scoreData)
             return 100 * i //heightScale(d.rate)
           }
         });
-      }
+
 
 
       const displayData = function(pkgName){
@@ -178,3 +171,24 @@ console.log(scoreData)
 
 }
 }
+
+
+
+/*
+In the end, we went with standing up Node processes behind an Nginx proxy
+layer and architected the interface in such a way that each network request
+would be a stateless render. This allowed us to farm requests out to the
+process group and scale the number of processes as needed.
+
+look at better ways to deal with serializing and deserailizing data quickly
+
+
+Avoid unnecessary data serialization. There were several hotspots in our
+\template rendering where we were simply embedding large amounts of data
+in the markup in order to send to the browser. These were located mainly in
+the static head and around the body end tags, and were consistent for every
+web request. A big slowdown was the serialization and deserialization of these
+ huge JSON blobs of data to our workers. Avoiding this helped us gain another performance edge that finally got us to parity.
+
+
+*/
