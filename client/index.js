@@ -21,7 +21,7 @@ window.onload = function (){
       if (err) console.log(err);
 
       const data = JSON.parse(rawData);
-      console.log(data)
+
 
       const timeDiffernce = function(dateTo, dateFrom){
           let diff = dateTo - dateFrom;
@@ -41,11 +41,11 @@ window.onload = function (){
         return data
           })
 
-console.log(scoreData)
+
           /////here we need 14 arrays of three objects of six item array
 
     const usageData = data.map((d) => {
-      let data = {[d.name]: { 'time': [], 'count': [], 'rate':[]}}
+      let data = { 'name': d.name, 'rate': [], 'time': [], 'coordinates': []}
 
       d.downloadsAcceleration.map((a, i) =>{
         const dateTo = i === 0? new Date(a.to) : new Date(d.downloadsAcceleration[(i-1)].from)
@@ -53,34 +53,40 @@ console.log(scoreData)
         const dateFrom = new Date(a.from);
         const timeSpan = timeDiffernce(dateTo, dateFrom)
 
-        data[d.name].time.push(timeSpan)
-        data[d.name].count.push(count)
-        data[d.name].rate.push(Math.floor(count/timeSpan))
+        data.coordinates.push({'time' : timeSpan, 'count': count, 'rate' : Math.floor(count/timeSpan)})
+        data.time.push(timeSpan)
+        data.rate.push(Math.floor(count/timeSpan))
       })
       return data
     })
 
     console.log(usageData)
 
-    const usageScale = function(value){
-      return d3.scaleLinear()
-      .domain(d3.extent(value))
-      .range(1, 200)
+      // const usageScale = function(value){
+      //   return d3.scaleLinear()
+      //   .domain(d3.extent(value))
+      //   .range(1, 200)
+      // }
+
+
+    const widthScale = function(arr, d){
+      console.log('here' + d)
+      console.log(arr)
+      const wScale = d3.scaleLinear()
+      .domain(d3.extent(arr))
+      .range([0, 75]);
+
+      console.log(wScale(d))
+      return wScale(d)
     }
 
+    const heightScale = function(arr, d){
 
-    // const widthScale = function(d, i){
-    //   console.log(d3.extent(usageData[i].time))
-    //   const scale = function (){
-    //   return d3.scaleLinear()
-    //   .domain(d3.extent(usageData[i].time))
-    //   .range(0, 75)
-    // }
-    // return scale(d)
-    // }
-
-    const heightScale = d3.scaleLinear()
-      .range(0, 200)
+      const hScale = d3.scaleLinear()
+      .domain(d3.extent(arr))
+      .range([0, 200]);
+      return hScale(d)
+    }
 
     //bar chart, appenfd data with a fillwd and scaled bar chart
 
@@ -105,26 +111,47 @@ console.log(scoreData)
            return y(d[1])
          })
 
-      const barGraph = function(name){
+
+         //build out the axis and the scale and then call an initial value
+         //to build the graph reandomly from the list, on mouseover then re build
+         //the width and length with new data
+         //set default to function execution
+         // I have to retrieve
+
+        const nameToIndex = function(pkgName){
+          let result;
+          usageData.forEach((pkg, i) => {
+            if(pkg.name === pkgName) result = i
+          })
+          return result;
+        }
+
+
+      const barGraph = function(name= usageData[0]){
+
         console.log(usageData)
-        console.log(usageData[name])
-        console.log(usageData.async)
+
+        const idx = nameToIndex(name)
+
+
+
         g.append('g')
         .attr('class', 'usageGraph')
         .selectAll('bar')
-        .data(usageData[name])
+        .data(usageData[idx].coordinates)
         .enter()
         .append('rect')
         .attrs({
           transform: 'translate(' + [300, 10] + ')',
+
           width: (d, i) => {
             console.log(d)
-            console.log(usageScale(d.count))
-
-            return 100 * i//widthScale(d, i)
+            console.log(widthScale(usageData[idx]['time'], d.time))
+            return widthScale(usageData[idx]['time'], d.time)
           },
           height: (d, i) => {
-            return 100 * i//heightScale(d.rate)
+
+            return heightScale(usageData[idx]['rate'], d.rate)
           },
           x: (d, i) => {
             return 100 * i //widthScale(d.time)
