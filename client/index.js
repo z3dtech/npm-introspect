@@ -1,4 +1,4 @@
-'use strict'
+j'use strict'
 
 window.onload = function (){
 
@@ -25,7 +25,6 @@ window.onload = function (){
 
       const timeDiffernce = function(dateTo, dateFrom){
           let diff = dateTo - dateFrom;
-
           const days = Math.floor(diff / 1000 / 60 / 60 /24);
           diff -= days * 1000 * 60 * 60 * 24;
 
@@ -47,7 +46,10 @@ window.onload = function (){
     const usageData = data.map((d) => {
       let data = { 'name': d.name, 'rate': [], 'time': [], 'coordinates': []}
 
-      d.downloadsAcceleration.map((a, i) =>{
+    let usageData = {}
+    const downloads = data.forEach((d) => {
+      d.downloadsAcceleration.forEach((a, i) =>{
+        usageData[d.name] = { 'time': [], 'count': [], 'rate':[]}
         const dateTo = i === 0? new Date(a.to) : new Date(d.downloadsAcceleration[(i-1)].from)
         const count  = i!== 0? a.count - d.downloadsAcceleration[(i-1)].count : a.count;
         const dateFrom = new Date(a.from);
@@ -57,7 +59,6 @@ window.onload = function (){
         data.time.push(timeSpan)
         data.rate.push(Math.floor(count/timeSpan))
       })
-      return data
     })
 
     console.log(usageData)
@@ -205,3 +206,24 @@ window.onload = function (){
 
 }
 }
+
+
+
+/*
+In the end, we went with standing up Node processes behind an Nginx proxy
+layer and architected the interface in such a way that each network request
+would be a stateless render. This allowed us to farm requests out to the
+process group and scale the number of processes as needed.
+
+look at better ways to deal with serializing and deserailizing data quickly
+
+
+Avoid unnecessary data serialization. There were several hotspots in our
+\template rendering where we were simply embedding large amounts of data
+in the markup in order to send to the browser. These were located mainly in
+the static head and around the body end tags, and were consistent for every
+web request. A big slowdown was the serialization and deserialization of these
+ huge JSON blobs of data to our workers. Avoiding this helped us gain another performance edge that finally got us to parity.
+
+
+*/
