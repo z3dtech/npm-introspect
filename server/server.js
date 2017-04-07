@@ -24,6 +24,9 @@ module.exports.go = () => {
     app.get('/data.json', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/data.json')
     })
+    app.get('/data1.json', function(req, res) {
+        res.sendFile('/home/nicholas/code/javascipt/npm-landscape/data1.json')
+    })
 
     app.get('/datam.json', function(req, res) {
         console.log('servingDatam')
