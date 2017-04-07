@@ -180,23 +180,33 @@ window.onload = function() {
         //     });
         // }
 
-        const moduleInfo = g.append('g').attr('class', 'moduleInformation').attr('transform', 'translate(' + [0, 0] + ')').append('text')
+        const moduleInfo = g.append('g').attr('class', 'moduleInformation').attr('transform', 'translate(' + [0, 0] + ')')
 
-        const displayData = function(pkgData) {
-            console.log(pkgData.name)
-            //console.log(pkgData.dependencies)
-            moduleInfo.text(formatText(pkgData))
-            //barGraph(pkgName)
+        const handleMouseOver = function(d) {
+            d3.select(this).attr('d', (d) => {
+                console.log(d)
+            })
+            formatText(d)
 
         }
 
+        const handleMouseOut = function(d) {
+            //remove the text contents of changes
+            //find the best way to have an area dynamically change
+            //and deal with generation and deletion of html tags
+            d3.select(this).style('fill', 'lightBlue')
+        }
         const formatText = function(module) {
-            let text = ''
+          //try diffent x values for the text box or multiple text boxes
+            console.log(module)
+            const a = moduleInfo.append('text') // .append('tspan').text('line 1 and only 1').attr('dy', 20).append('tspan').text('line 2 and maybe I need moreinfor').attr('dy', 30).append('tspan').text('fucj this again')
             for (let key in module.dependencies) {
-                text = text + key + ' <br> ';
-            }
-            console.log(text)
-            return text;
+                a.append('tspan')
+                .attr('dy', 20)
+                .text(key + ' : ')
+
+              }
+
         }
 
         const createPaths = g.append('g').attr('class', 'lineGraph').selectAll('path').data(data). //array of array
@@ -204,9 +214,13 @@ window.onload = function() {
             return d.name
         }).attr('d', (d) => {
             return path(d.pathCoordinates)
-        }).on('mouseover', (d) => {
-            displayData(d)
-        })
+        }).on('mouseover', (d) => handleMouseOver(d))
+        .on('mouseout', (d) => handleMouseOut(d));
+
+        // (d) => {
+        //
+        //     displayData(d)
+        // })
 
         // .data(data).enter().on('mouseover', (d) => {
         //     //toggle class visible, invisible
@@ -220,6 +234,31 @@ window.onload = function() {
                 0
             ] + ')').call(axis.scale(y))
         })
+
+        function wrap(text, width) {
+            text.each(function() {
+                var text = d3.select(this),
+                    words = "Foo is not a long word".split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    x = text.attr("x"),
+                    y = text.attr("y"),
+                    dy = 0, //parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    }
+                }
+            });
+        }
 
         //})
     })
