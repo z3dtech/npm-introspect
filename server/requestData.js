@@ -10,6 +10,7 @@ var parsePkgJSON = () => {
         fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
             if (error)
                 reject(error)
+            console.log('error in parse' + data)
             let contents = JSON.parse(data); //try and catch all the JSON parse, reject(new Error('OH SHiT'))
             let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
             console.log(packages)
@@ -19,7 +20,7 @@ var parsePkgJSON = () => {
 }
 
 var npmSearchQuery = function(requests) {
-    console.log(requests)
+    console.log('made it to query' + requests)
     var url = ['https://api.npms.io/v2/package/got', 'https://api.npms.io/v2/package/http']
     return Promise.map(requests, request.get, {concurrency: 1}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
@@ -57,9 +58,15 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
 
-        //filteredPkg['starsCount'] = parsedPkg.collected.github.starsCount;
-        //filteredPkg['forksCount'] = parsedPkg.collected.github.forksCount;
-        //filteredPkg['statuses'] = parsedPkg.collected.github.statuses;
+        filteredPkg['starsCount'] = parsedPkg.collected.github.starsCount
+            ? parsedPkg.collected.github.starsCount
+            : null;
+        filteredPkg['forksCount'] = parsedPkg.collected.github.forksCount
+            ? parsedPkg.collected.github.forksCount
+            : null;
+        filteredPkg['statuses'] = parsedPkg.collected.github.statuses
+            ? parsedPkg.collected.github.statuses
+            : null;
 
         filteredPkg['outdatedDependencies'] = parsedPkg.collected.source.outdatedDependencies;
         filteredPkg['vulnerabilities'] = parsedPkg.collected.source.vulnerabilities;
