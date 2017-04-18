@@ -1,3 +1,14 @@
+/*
+I should look at rewriting this with respect to https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+and see if instead of returning new promises if I should just be returning the promise
+- returning the promise should allow me to chain it where the follwoing then is
+invoke upon resolve, If I don't return the function then the next then would recience undefined
+
+Always return or throw inside a .then, you can also return synchronous or asynchronous
+and the second function won't care
+*/
+
+
 'use strict'
 
 const fs = require('fs');
@@ -35,6 +46,7 @@ var pkgInfoParse = function(pkgInfo) {
     console.log('pkgInfo' + pkgInfo)
 
     pkgInfo.forEach((pkg) => {
+      //  if (!pkg) continue; // I need to know what end up here in the case of bad module
         let parsedPkg = {}
         let filteredPkg = {}
 
@@ -60,13 +72,13 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg['starsCount'] = parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
-            : null;
+            : -1;
         filteredPkg['forksCount'] = parsedPkg.collected.github.forksCount
             ? parsedPkg.collected.github.forksCount
-            : null;
+            : -1; //think I can just delete this
         filteredPkg['statuses'] = parsedPkg.collected.github.statuses
             ? parsedPkg.collected.github.statuses
-            : null;
+            : -1;
 
         filteredPkg['outdatedDependencies'] = parsedPkg.collected.source.outdatedDependencies;
         filteredPkg['vulnerabilities'] = parsedPkg.collected.source.vulnerabilities;

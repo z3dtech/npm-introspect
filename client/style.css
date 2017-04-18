@@ -21,3 +21,14 @@ svg {
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
   cursor: move;
 }
+
+table {
+     border-collapse: collapse;
+     border: 2px black solid;
+     font: 12px sans-serif;
+ }
+
+ td {
+     border: 1px black solid;
+     padding: 5px;
+ }

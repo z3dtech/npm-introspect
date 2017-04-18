@@ -1,7 +1,5 @@
 'use strict'
-
 window.onload = function() {
-
     const margin = {
             top: 100,
             right: 10,
@@ -12,13 +10,13 @@ window.onload = function() {
         height = window.innerWidth - margin.top - margin.bottom,
         line = d3.line(),
         axis = d3.axisLeft(),
-        y = d3.scaleLinear().domain([1, 0]).range([0, height]);
-
+        y = d3.scaleLinear()
+        .domain([1, 0])
+        .range([0, height]);
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
     //     return JSON.parse(xhr.responseText);
     // }).get(processData);
-
     // function processData(err, rawData) {
     //     if (err)
     //         console.log(err);
@@ -26,10 +24,8 @@ window.onload = function() {
         if (err) {
             console.log(err)
         };
-
         console.log(data)
         //const data = JSON.parse(rawData);
-
         // const timeDiffernce = function(dateTo, dateFrom) {
         //     let diff = dateTo - dateFrom;
         //     const days = Math.floor(diff / 1000 / 60 / 60 / 24);
@@ -37,7 +33,6 @@ window.onload = function() {
         //
         //     return days
         // }
-
         // const scoreData = data.map((d) => {
         //     let data = {
         //         'name': d.name,
@@ -49,22 +44,17 @@ window.onload = function() {
         //     })
         //     return data
         // })
-
         data.forEach((d) => {
             console.log(d)
             d['pathCoordinates'] = [];
-            ['final', 'maintenance', 'popularity', 'quality'].map((p, i) => {
+      ['final', 'maintenance', 'popularity', 'quality'].map((p, i) => {
                 d.pathCoordinates.push([i, d[p]])
             })
             return data
         })
-
         console.log(data)
-
         //console.log(scoreData)
-
         /////here we need 14 arrays of three objects of six item array
-
         // const usageData = data.map((d) => {
         //     let data = {
         //         'name': d.name,
@@ -72,7 +62,6 @@ window.onload = function() {
         //         'time': [],
         //         'coordinates': []
         //     }
-
         // let usageData = {}
         // const downloads = data.forEach((d) => {
         //     d.downloadsAcceleration.forEach((a, i) => {
@@ -99,51 +88,54 @@ window.onload = function() {
         //         data.rate.push(Math.floor(count / timeSpan))
         //     })
         // })
-
         //console.log(usageData)
-
         // const usageScale = function(value){
         //   return d3.scaleLinear()
         //   .domain(d3.extent(value))
         //   .range(1, 200)
         // }
-
         const widthScale = function(arr, d) {
             console.log('here' + d)
             console.log(arr)
-            const wScale = d3.scaleLinear().domain(d3.extent(arr)).range([0, 75]);
-
+            const wScale = d3.scaleLinear()
+                .domain(d3.extent(arr))
+                .range([0, 75]);
             console.log(wScale(d))
             return wScale(d)
         }
-
         const heightScale = function(arr, d) {
-
-            const hScale = d3.scaleLinear().domain(d3.extent(arr)).range([0, 200]);
+            const hScale = d3.scaleLinear()
+                .domain(d3.extent(arr))
+                .range([0, 200]);
             return hScale(d)
         }
-
         //bar chart, appenfd data with a fillwd and scaled bar chart
-
         //create the average downloads per week for x weeeks
         //divide
 
-        const svg = d3.select("body").append("svg").attrs({width: width, height: height});
 
-        const g = svg.append('g').attr('transform', 'translate(' + [100, 10] + ')')
 
-        const path = d3.line().x(function(d, i) {
-            return 100 * d[0];
-        }).y(function(d, i) {
-            return y(d[1])
-        })
 
+        const svg = d3.select("body")
+            .append("svg")
+            .attrs({
+                width: width,
+                height: height
+            });
+        const g = svg.append('g')
+            .attr('transform', 'translate(' + [100, 10] + ')')
+        const path = d3.line()
+            .x(function(d, i) {
+                return 100 * d[0];
+            })
+            .y(function(d, i) {
+                return y(d[1])
+            })
         //build out the axis and the scale and then call an initial value
         //to build the graph reandomly from the list, on mouseover then re build
         //the width and length with new data
         //set default to function execution
         // I have to retrieve
-
         // const nameToIndex = function(pkgName) {
         //     let result;
         //     usageData.forEach((pkg, i) => {
@@ -152,7 +144,6 @@ window.onload = function() {
         //     })
         //     return result;
         // }
-
         // const barGraph = function(name = usageData[0]) {
         //
         //     console.log(usageData)
@@ -180,90 +171,105 @@ window.onload = function() {
         //     });
         // }
 
-        const moduleInfo = g.append('g').attr('class', 'moduleInformation').attr('transform', 'translate(' + [0, 0] + ')')
-
+        // const moduleInfo = g.append('g')
+        //     .attr('class', 'moduleInformation')
+        //     .attr('transform', 'translate(' + [0, 0] + ')')
         const handleMouseOver = function(d) {
-            d3.select(this).attr('d', (d) => {
-                console.log(d)
-            })
+            d3.select(this)
+                .attr('d', (d) => {
+                    console.log(d)
+                })
             formatText(d)
-
         }
-
         const handleMouseOut = function(d) {
             //remove the text contents of changes
             //find the best way to have an area dynamically change
             //and deal with generation and deletion of html tags
-            d3.select(this).style('fill', 'lightBlue')
-        }
-        const formatText = function(module) {
-          //try diffent x values for the text box or multiple text boxes
-            console.log(module)
-            const a = moduleInfo.append('text') // .append('tspan').text('line 1 and only 1').attr('dy', 20).append('tspan').text('line 2 and maybe I need moreinfor').attr('dy', 30).append('tspan').text('fucj this again')
-            for (let key in module.dependencies) {
-                a.append('tspan')
-                .attr('dy', 20)
-                .text(key + ' : ')
-
-              }
-
+            d3.select(this)
+                .style('fill', 'lightBlue')
         }
 
-        const createPaths = g.append('g').attr('class', 'lineGraph').selectAll('path').data(data). //array of array
-        enter().append('path').attr('transform', 'translate(' + [0, 0] + ')').attr('class', (d) => {
-            return d.name
-        }).attr('d', (d) => {
-            return path(d.pathCoordinates)
-        }).on('mouseover', (d) => handleMouseOver(d))
-        .on('mouseout', (d) => handleMouseOut(d));
+        const formatText = function(module){
+          console.log('in da table')
+          let table = d3.select('.infoTable')
+                        .append('table').attr('width', 30).attr('height', '30').append('tr')
 
+          table.selectAll('td').data(module.pathCoordinates).enter()
+                        .append('td')
+                        .text(function(d){return d[1]}) //.html
+                        .merge(table)
+                        // .selectAll('td')
+                        // .data(function(d) {return d)}.enter()
+                        // .append('td')
+                        // .text(function(d){return d})
+                        // .data(module)
+                        // .enter()
+                        // .append('tr')
+                        //
+                        // .append('th').text('quality score: ')// th for heading and td for data points
+                        // .append('td').text(module.quality).enter()
+        }
+        // const formatText = function(module) {
+        //     //try diffent x values for the text box or multiple text boxes
+        //     console.log(module)
+        //     let table = d3.select(moduleInfo)
+        //         .append('table')
+        //     let thead = table.append('thead')
+        //     let tbody = table.append('tbody')
+        //     thead.append('tr')
+        //         .data(module)
+        //         .enter()
+        //         .append('th')
+        //         .text('Dependencies : ')
+        //     // const a = moduleInfo.append('text')
+        //     //     .text('Dependencies : ')
+        //     //
+        //     // for (let key in module.dependencies) {
+        //     //     a.append('tspan')
+        //     //         .style('alignment-baseline', 'middle')
+        //     //         .attr('dy', 20)
+        //     //         .text(key + ' : ')
+        //     // }
+        // }
+        const createPaths = g.append('g')
+            .attr('class', 'lineGraph')
+            .selectAll('path')
+            .data(data)
+            .enter()
+            .append('path')
+            .attr('transform', 'translate(' + [0, 0] + ')')
+            .attr('class', (d) => {
+                return d.name
+            })
+            .attr('d', (d) => {
+                return path(d.pathCoordinates)
+            })
+            .on('mouseover', (d) => handleMouseOver(d))
+            .on('mouseout', (d) => handleMouseOut(d));
         // (d) => {
         //
         //     displayData(d)
         // })
-
         // .data(data).enter().on('mouseover', (d) => {
         //     //toggle class visible, invisible
         //     console.log(d)
         //     displayData()
         // })
-
-        const verticalAxis = g.append('g').attr('class', 'axis').selectAll('axis').data(data[0].pathCoordinates).enter().each(function(d, i) {
-            d3.select(this).append('g').attr('transform', 'translate(' + [
-                (100 * i),
-                0
-            ] + ')').call(axis.scale(y))
-        })
-
-        function wrap(text, width) {
-            text.each(function() {
-                var text = d3.select(this),
-                    words = "Foo is not a long word".split(/\s+/).reverse(),
-                    word,
-                    line = [],
-                    lineNumber = 0,
-                    lineHeight = 1.1, // ems
-                    x = text.attr("x"),
-                    y = text.attr("y"),
-                    dy = 0, //parseFloat(text.attr("dy")),
-                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-                while (word = words.pop()) {
-                    line.push(word);
-                    tspan.text(line.join(" "));
-                    if (tspan.node().getComputedTextLength() > width) {
-                        line.pop();
-                        tspan.text(line.join(" "));
-                        line = [word];
-                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                    }
-                }
-            });
-        }
-
+        const verticalAxis = g.append('g')
+            .attr('class', 'axis')
+            .selectAll('axis')
+            .data(data[0].pathCoordinates)
+            .enter()
+            .each(function(d, i) {
+                d3.select(this)
+                    .append('g')
+                    .attr('transform', 'translate(' + [
+                        (100 * i), 0] + ')')
+                    .call(axis.scale(y))
+            })
         //})
     })
 }
-
 /*
 In the end, we went with standing up Node processes behind an Nginx proxy
 layer and architected the interface in such a way that each network request
