@@ -76,33 +76,25 @@ var pkgInfoParse = function(pkgInfo) {
 
     */
 
-        filteredPkg.name = parsedPkg.collected.metadata.name;
-        filteredPkg.version = parsedPkg.collected.metadata.version;
-        filteredPkg['dependencies'] = parsedPkg.collected.metadata.dependencies;
-        filteredPkg['devDependencies'] = parsedPkg.collected.metadata.devDependencies;
-        filteredPkg['peerDependencies'] = parsedPkg.collected.metadata.peerDependencies;
-        filteredPkg['hasTestScript'] = parsedPkg.collected.metadata.hasTestScript;
+        filteredPkg.information = [['name', parsedPkg.collected.metadata.name], ['version', parsedPkg.collected.metadata.version], ['stars', parsedPkg.collected.github.starsCount
+            ? parsedPkg.collected.github.starsCount
+            : -1], ['forks', parsedPkg.collected.github.forksCount
+            ? parsedPkg.collected.github.forksCount
+            : -1]]
+
+        filteredPkg.dependencies = [['dependencies', parsedPkg.collected.metadata.dependencies], ['devDependencies', parsedPkg.collected.metadata.devDependencies], ['peerDependencies', parsedPkg.collected.metadata.peerDependencies]]
 
         filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
 
-        filteredPkg['starsCount'] = parsedPkg.collected.github.starsCount
-            ? parsedPkg.collected.github.starsCount
-            : -1;
-        filteredPkg['forksCount'] = parsedPkg.collected.github.forksCount
-            ? parsedPkg.collected.github.forksCount
-            : -1; //think I can just delete this
-        filteredPkg['statuses'] = parsedPkg.collected.github.statuses
+        filteredPkg.status = parsedPkg.collected.github.statuses
             ? parsedPkg.collected.github.statuses
             : -1;
 
-        filteredPkg['outdatedDependencies'] = parsedPkg.collected.source.outdatedDependencies;
-        filteredPkg['vulnerabilities'] = parsedPkg.collected.source.vulnerabilities;
-        filteredPkg.maintenance = parsedPkg.score.detail.maintenance;
-        filteredPkg.popularity = parsedPkg.score.detail.popularity;
-        filteredPkg.quality = parsedPkg.score.detail.quality;
-        filteredPkg.finals = [parsedPkg.score.final, 10, 7]
-        filteredPkg.scores = [{'final': [parsedPkg.score.final]}, parsedPkg.score.detail.quality, parsedPkg.score.popularity]
-        filteredPkg['evaluation'] = parsedPkg.evaluation;
+        filteredPkg['hasTestScript'] = parsedPkg.collected.metadata.hasTestScript;
+
+        filteredPkg.warnings = [['outdatedDependencies', parsedPkg.collected.source.outdatedDependencies], ['vulnerabilities', parsedPkg.collected.source.vulnerabilities]];
+        filteredPkg.scores = [['quality', parsedPkg.score.detail.quality, 0], ['popularity', parsedPkg.score.detail.popularity, 1], ['maintenance', parsedPkg.score.detail.maintenance, 2], ['final', parsedPkg.score.final, 3]];
+        filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
 
         filteredInfo.push(filteredPkg)
 
