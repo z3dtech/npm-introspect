@@ -189,15 +189,22 @@ window.onload = function() {
                 .style('fill', 'lightBlue')
         }
 
-        const formatText = function(module){
-          console.log('in da table')
-          let table = d3.select('.infoTable')
-                        .append('table').attr('width', 30).attr('height', '30').append('tr')
+        console.log('in da table')
+        let table = d3.select('.infoTable')
+                      .append('table').attr('width', 30).attr('height', '30').append('tr')
 
-          table.selectAll('td').data(module.pathCoordinates).enter()
+        const formatText = function(module){
+
+
+          let texter = table.selectAll('td').data(module.pathCoordinates)
+                        texter
+                        .enter()
+                        
                         .append('td')
-                        .text(function(d){return d[1]}) //.html
-                        .merge(table)
+                        .merge(texter)
+                        .text(function(d){return d[1]})
+
+
                         // .selectAll('td')
                         // .data(function(d) {return d)}.enter()
                         // .append('td')

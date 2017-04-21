@@ -6,6 +6,21 @@ invoke upon resolve, If I don't return the function then the next then would rec
 
 Always return or throw inside a .then, you can also return synchronous or asynchronous
 and the second function won't care
+
+use Promise.resolve instead of doing new Promise(funciton(reject, resolve)...)
+for synchronous code I can def use this somewhere
+
+Then has to be passed a function, not a promise- which will evaluate to null, what you should do
+is wrap that returned promise in a function
+
+
+doSomething().then(function () {
+  return doSomethingElse();
+}).then(finalHandler);
+
+
+doSomething().then(doSomethingElse)
+  .then(finalHandler);
 */
 
 
@@ -85,13 +100,14 @@ var pkgInfoParse = function(pkgInfo) {
         filteredPkg.maintenance = parsedPkg.score.detail.maintenance;
         filteredPkg.popularity = parsedPkg.score.detail.popularity;
         filteredPkg.quality = parsedPkg.score.detail.quality;
-        filteredPkg.final = parsedPkg.score.final;
-
+        filteredPkg.finals = [parsedPkg.score.final, 10, 7]
+        filteredPkg.scores = [{'final': [parsedPkg.score.final]}, parsedPkg.score.detail.quality, parsedPkg.score.popularity]
         filteredPkg['evaluation'] = parsedPkg.evaluation;
 
         filteredInfo.push(filteredPkg)
 
     })
+
 
     return JSON.stringify(filteredInfo)
 }
@@ -104,6 +120,7 @@ const temp = function() {
                 return "https://api.npms.io/v2/package/" + name
             })
             npmSearchQuery(packageUrls).then(function(result) {
+
                 fs.writeFile('data1.json', result, (err) => {
                     if (err) {
                         throw err;
