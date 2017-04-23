@@ -6,13 +6,24 @@ window.onload = function() {
             bottom: 100,
             left: 10
         },
-        width = window.innerHeight - margin.left - margin.right,
-        height = window.innerWidth - margin.top - margin.bottom,
+        width = window.innerHeight,
+        height = window.innerWidth,
         line = d3.line(),
         axis = d3.axisLeft(),
         y = d3.scaleLinear()
         .domain([1, 0])
         .range([0, height]);
+
+
+
+///////////////////////////////
+
+//delete parallel coordiantes
+//something with circles or a thing
+
+
+
+/////////////////////////////////////
 
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
@@ -36,11 +47,11 @@ window.onload = function() {
             });
 
         const g = svg.append('g')
-            .attr('transform', 'translate(' + [100, 10] + ')')
+            // .attr('transform', 'translate(' + [100, 10] + ')')
 
         const title = d3.select('.title').append('ul').attr('class', 'header');
         const github = d3.select('.github').append('ul');
-        const outdated = d3.select('.outdated').append('ul');
+        const outdated = d3.select('.outdated').append('ul').text('Outdated Packages').style('font-size', '25px');
         const vulnerable = d3.select('.vulnerable');
 
 
@@ -132,7 +143,6 @@ window.onload = function() {
             .data(data)
             .enter()
             .append('path')
-            .attr('transform', 'translate(' + [0, 0] + ')')
             .attr('class', 'line')
             .attr('d', (d) => {
                 return path(d.scores)
@@ -156,29 +166,28 @@ window.onload = function() {
             })
 
 
-        const widthScale = function(arr, d) {
-            console.log('here' + d)
-            console.log(arr)
-            const wScale = d3.scaleLinear()
-                .domain(d3.extent(arr))
-                .range([0, 75]);
-            console.log(wScale(d))
-            return wScale(d)
-        }
-
-        const heightScale = function(arr, d) {
-            const hScale = d3.scaleLinear()
-                .domain(d3.extent(arr))
-                .range([0, 200]);
-            return hScale(d)
-        }
+        // const widthScale = function(arr, d) {
+        //     console.log('here' + d)
+        //     console.log(arr)
+        //     const wScale = d3.scaleLinear()
+        //         .domain(d3.extent(arr))
+        //         .range([0, 75]);
+        //     console.log(wScale(d))
+        //     return wScale(d)
+        // }
+        //
+        // const heightScale = function(arr, d) {
+        //     const hScale = d3.scaleLinear()
+        //         .domain(d3.extent(arr))
+        //         .range([0, 200]);
+        //     return hScale(d)
+        // }
 
        const bubbleChart = d3.select('.bubbleChart')
-
-       .attrs({
-           width: width,
-           height: height
-       });
+         .attrs({
+             width: width,
+             height: height
+         });
 
        const buildBubbleChart = function(d){
         //build chromatic scale

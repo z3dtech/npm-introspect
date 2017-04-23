@@ -68,7 +68,7 @@ var pkgInfoParse = function(pkgInfo) {
             console.log(error)
         }
 
-        filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', parsedPkg.collected.metadata.version]]
+        filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
         filteredPkg.github = [['stars', parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
             : 'N/A'], ['forks', parsedPkg.collected.github.forksCount
