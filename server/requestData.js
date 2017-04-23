@@ -52,12 +52,10 @@ var npmSearchQuery = function(requests) {
     }).catch(function(error) {
         return 'npmSearch: ' + error
     })
-
 }
 
 var pkgInfoParse = function(pkgInfo) {
     let filteredInfo = []
-    //console.log('pkgInfo' + pkgInfo)
 
     pkgInfo.forEach((pkg) => {
       //  if (!pkg) continue; // I need to know what end up here in the case of bad module
@@ -70,28 +68,15 @@ var pkgInfoParse = function(pkgInfo) {
             console.log(error)
         }
 
-        filteredPkg.information = [['name', parsedPkg.collected.metadata.name], ['version', parsedPkg.collected.metadata.version], ['stars', parsedPkg.collected.github.starsCount
+        filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', parsedPkg.collected.metadata.version]]
+        filteredPkg.github = [['stars', parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
             : 'N/A'], ['forks', parsedPkg.collected.github.forksCount
             ? parsedPkg.collected.github.forksCount
             : 'N/A']]
 
-
-
         filteredPkg.vulnerabilities = [parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
         filteredPkg.outdatedDependencies = [parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
-
-        //change dependencies to complex array of arrays
-
-        //filteredPkg.dependencies = parsedPkg.collected.metadata.dependencies
-        //filteredPkg.devDependencies = parsedPkg.collected.metadata.devDependencies
-        //filteredPkg.peerDependencies = parsedPkg.collected.metadata.peerDependencies
-
-        // let dependencies = parsedPkg.collected.metadata.dependencies? parsedPkg.collected.metadata.dependencies : [];
-        // let devDependencies = parsedPkg.collected.metadata.devDependencies? parsedPkg.collected.metadata.devDependencies : [];
-        //let peerDependencies = parsedPkg.collected.metadata.peerDependencies? parsedPkg.collected.metadata.peerDependencies: [];
-
-
 
         let dependencies = []
         if (parsedPkg.collected.metadata.dependencies){
@@ -112,21 +97,14 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg.dependencies = dependencies
 
-
-
-        // console.log('-----------------------------------------------------')
-        // console.log(dependencies)
-        // console.log('------------------------------------------------------')
-
-
-
-        filteredPkg.status = [['status', parsedPkg.collected.github.statuses
+        filteredPkg.vulnerable = ['vulnerable', parsedPkg.collected.github.statuses
             ? parsedPkg.collected.github.statuses
-            : -1 ],['hasTestScript', parsedPkg.collected.metadata.hasTestScript]]
+            : -1 ]
+
+        filteredPkg.test = ['testScript', parsedPkg.collected.metadata.hasTestScript]
 
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality, 0], ['popularity', parsedPkg.score.detail.popularity, 1], ['maintenance', parsedPkg.score.detail.maintenance, 2], ['final', parsedPkg.score.final, 3]];
         filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
-
 
         filteredInfo.push(filteredPkg)
 

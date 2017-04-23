@@ -1,7 +1,9 @@
 [{
-    "information": [
+    "title": [
         ["name", "bluebird"],
-        ["version", "3.5.0"],
+        ["version", "3.5.0"]
+    ],
+    "github": [
         ["stars", 14397],
         ["forks", 1765]
     ],
@@ -33,18 +35,16 @@
         ["devDependencies", "uglify-js"],
         ["devDependencies", "kefir"]
     ],
-    "status": [
-        ["status", [{
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.8777351079069933, 0],
-        ["popularity", 0.9270246672933815, 1],
-        ["maintenance", 0.9984313561731339, 2],
-        ["final", 0.9372301405853785, 3]
+        ["quality", 0.8777108459731848, 0],
+        ["popularity", 0.9259258439929228, 1],
+        ["maintenance", 0.998418538231076, 2],
+        ["final", 0.936833787570355, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -67,9 +67,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "chalk"],
-        ["version", "1.1.3"],
+        ["version", "1.1.3"]
+    ],
+    "github": [
         ["stars", 5155],
         ["forks", 173]
     ],
@@ -92,18 +94,16 @@
         ["devDependencies", "semver"],
         ["devDependencies", "xo"]
     ],
-    "status": [
-        ["status", [{
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.926403684413319, 0],
-        ["popularity", 0.8897637868051254, 1],
-        ["maintenance", 0.9998033353492695, 2],
-        ["final", 0.9392695980780338, 3]
+        ["quality", 0.926156425165642, 0],
+        ["popularity", 0.8893165060213005, 1],
+        ["maintenance", 0.9998020609716545, 2],
+        ["final", 0.9390384259972269, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -126,9 +126,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "d3"],
-        ["version", "4.8.0"],
+        ["version", "4.8.0"]
+    ],
+    "github": [
         ["stars", 63256],
         ["forks", 16667]
     ],
@@ -174,15 +176,13 @@
         ["devDependencies", "tape"],
         ["devDependencies", "uglify-js"]
     ],
-    "status": [
-        ["status", -1],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", -1],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9194183987852487, 0],
-        ["popularity", 0.725665197223777, 1],
-        ["maintenance", 0.999907798776001, 2],
-        ["final", 0.8797760682354969, 3]
+        ["quality", 0.9193185425674207, 0],
+        ["popularity", 0.7264874392931828, 1],
+        ["maintenance", 0.9999072515937444, 2],
+        ["final", 0.8800337045806506, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -205,9 +205,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "d3-selection-multi"],
-        ["version", "1.0.1"],
+        ["version", "1.0.1"]
+    ],
+    "github": [
         ["stars", 28],
         ["forks", 8]
     ],
@@ -223,15 +225,13 @@
         ["devDependencies", "tape"],
         ["devDependencies", "uglify-js"]
     ],
-    "status": [
-        ["status", -1],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", -1],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.8282631117494331, 0],
-        ["popularity", 0.17125728612464855, 1],
-        ["maintenance", 0.9998955365732685, 2],
-        ["final", 0.6583824214691008, 3]
+        ["quality", 0.8281779868069739, 0],
+        ["popularity", 0.17127119869260393, 1],
+        ["maintenance", 0.9998948093779101, 2],
+        ["final", 0.6583614988667721, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -254,9 +254,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "express"],
-        ["version", "4.15.2"],
+        ["version", "4.15.2"]
+    ],
+    "github": [
         ["stars", 31296],
         ["forks", 5675]
     ],
@@ -312,24 +314,22 @@
         ["devDependencies", "jade"],
         ["devDependencies", "vhost"]
     ],
-    "status": [
-        ["status", [{
-            "context": "continuous-integration/appveyor/branch",
-            "state": "success"
-        }, {
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "continuous-integration/appveyor/branch",
+        "state": "success"
+    }, {
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9713410403627878, 0],
-        ["popularity", 0.9521715384170127, 1],
-        ["maintenance", 0.9738410553732736, 2],
-        ["final", 0.9655067199354366, 3]
+        ["quality", 0.9711917198542724, 0],
+        ["popularity", 0.9522156789624905, 1],
+        ["maintenance", 0.9736674398134124, 2],
+        ["final", 0.9654166075278476, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -352,9 +352,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "got"],
-        ["version", "6.7.1"],
+        ["version", "6.7.1"]
+    ],
+    "github": [
         ["stars", 1584],
         ["forks", 91]
     ],
@@ -385,21 +387,19 @@
         ["devDependencies", "tempfile"],
         ["devDependencies", "xo"]
     ],
-    "status": [
-        ["status", [{
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9856755549977947, 0],
-        ["popularity", 0.6924169032402467, 1],
-        ["maintenance", 0.9995708522025499, 2],
-        ["final", 0.8878983809043172, 3]
+        ["quality", 0.9856236316977943, 0],
+        ["popularity", 0.6929079531657085, 1],
+        ["maintenance", 0.9995682727287571, 2],
+        ["final", 0.8880537685724013, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -422,9 +422,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "moment"],
-        ["version", "2.18.1"],
+        ["version", "2.18.1"]
+    ],
+    "github": [
         ["stars", 30957],
         ["forks", 4483]
     ],
@@ -463,18 +465,16 @@
         ["devDependencies", "coveralls"],
         ["devDependencies", "nyc"]
     ],
-    "status": [
-        ["status", [{
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9982258617606586, 0],
-        ["popularity", 0.9292079250824801, 1],
-        ["maintenance", 0.9832289790600506, 2],
-        ["final", 0.9688206749780832, 3]
+        ["quality", 0.9982239399746625, 0],
+        ["popularity", 0.9294868604081332, 1],
+        ["maintenance", 0.9831137582513927, 2],
+        ["final", 0.9688773985232328, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -497,9 +497,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "morgan"],
-        ["version", "1.8.1"],
+        ["version", "1.8.1"]
+    ],
+    "github": [
         ["stars", 2286],
         ["forks", 193]
     ],
@@ -523,21 +525,19 @@
         ["devDependencies", "split"],
         ["devDependencies", "supertest"]
     ],
-    "status": [
-        ["status", [{
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9914399732496872, 0],
-        ["popularity", 0.7162087350248572, 1],
-        ["maintenance", 0.9998462577743297, 2],
-        ["final", 0.8980512394546215, 3]
+        ["quality", 0.991345315359172, 0],
+        ["popularity", 0.717002351115714, 1],
+        ["maintenance", 0.9998452415131192, 2],
+        ["final", 0.8983002520278431, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -560,15 +560,17 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "request"],
-        ["version", "2.81.0"],
-        ["stars", 15123],
-        ["forks", 1860]
+        ["version", "2.81.0"]
+    ],
+    "github": [
+        ["stars", 15129],
+        ["forks", 1859]
     ],
     "vulnerabilities": [null],
     "outdatedDependencies": [
-        ["hawk", "performance-now", "qs", "har-validator", "aws-sign2"]
+        ["aws-sign2", "har-validator", "qs", "hawk", "performance-now"]
     ],
     "dependencies": [
         ["dependencies", "aws-sign2"],
@@ -614,28 +616,26 @@
         ["devDependencies", "tape"],
         ["devDependencies", "taper"]
     ],
-    "status": [
-        ["status", -1],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", -1],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9135448369051079, 0],
-        ["popularity", 0.9511058127440215, 1],
-        ["maintenance", 0.6666650528019779, 2],
-        ["final", 0.8402832540126322, 3]
+        ["quality", 0.9132793948923684, 0],
+        ["popularity", 0.9516081543727781, 1],
+        ["maintenance", 0.6666645205399726, 2],
+        ["final", 0.8403792546871733, 3]
     ],
     "subScores": [
         ["maintenance", {
             "releasesFrequency": 0.9761986301369863,
-            "commitsFrequency": 0.9666506849315069,
+            "commitsFrequency": 0.9591506849315069,
             "openIssues": 1,
             "issuesDistribution": 0
         }],
         ["popularity", {
-            "communityInterest": 18600,
-            "downloadsCount": 22376621,
-            "downloadsAcceleration": 69986.0427891933,
-            "dependentsCount": 20175
+            "communityInterest": 18606,
+            "downloadsCount": 22584635.333333332,
+            "downloadsAcceleration": 69367.88106925419,
+            "dependentsCount": 20185
         }],
         ["quality", {
             "carefulness": 0.9999999999999999,
@@ -645,9 +645,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "request-promise"],
-        ["version", "4.2.0"],
+        ["version", "4.2.0"]
+    ],
+    "github": [
         ["stars", 1585],
         ["forks", 116]
     ],
@@ -672,21 +674,19 @@
         ["devDependencies", "run-sequence"],
         ["peerDependencies", "request"]
     ],
-    "status": [
-        ["status", [{
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9883404135383582, 0],
-        ["popularity", 0.663294355051802, 1],
-        ["maintenance", 0.9870877567780867, 2],
-        ["final", 0.8741358632019685, 3]
+        ["quality", 0.9883238036185493, 0],
+        ["popularity", 0.6617472619248751, 1],
+        ["maintenance", 0.987008144395302, 2],
+        ["final", 0.8735615332976268, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -709,9 +709,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "update-notifier"],
-        ["version", "2.1.0"],
+        ["version", "2.1.0"]
+    ],
+    "github": [
         ["stars", 646],
         ["forks", 46]
     ],
@@ -732,15 +734,13 @@
         ["devDependencies", "strip-ansi"],
         ["devDependencies", "xo"]
     ],
-    "status": [
-        ["status", -1],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", -1],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9113910088812842, 0],
-        ["popularity", 0.6676272817127518, 1],
-        ["maintenance", 0.9998033353492695, 2],
-        ["final", 0.8570180186360926, 3]
+        ["quality", 0.9112423161808081, 0],
+        ["popularity", 0.6676028599153818, 1],
+        ["maintenance", 0.9998020609716545, 2],
+        ["final", 0.8569644171647051, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -763,9 +763,11 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "yargs"],
-        ["version", "7.1.0"],
+        ["version", "7.1.0"]
+    ],
+    "github": [
         ["stars", 2841],
         ["forks", 216]
     ],
@@ -801,24 +803,22 @@
         ["devDependencies", "standard-version"],
         ["devDependencies", "which"]
     ],
-    "status": [
-        ["status", [{
-            "context": "continuous-integration/appveyor/branch",
-            "state": "success"
-        }, {
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "continuous-integration/appveyor/branch",
+        "state": "success"
+    }, {
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.9416034280559396, 0],
-        ["popularity", 0.8543408266234884, 1],
-        ["maintenance", 0.9953046626211663, 2],
-        ["final", 0.929856949652411, 3]
+        ["quality", 0.9413840320753198, 0],
+        ["popularity", 0.8543465004053643, 1],
+        ["maintenance", 0.995272852695609, 2],
+        ["final", 0.9297819832079366, 3]
     ],
     "subScores": [
         ["maintenance", {
@@ -841,15 +841,17 @@
         }]
     ]
 }, {
-    "information": [
+    "title": [
         ["name", "webpack"],
-        ["version", "2.4.1"],
-        ["stars", 26773],
-        ["forks", 3278]
+        ["version", "2.4.1"]
+    ],
+    "github": [
+        ["stars", 26856],
+        ["forks", 3289]
     ],
     "vulnerabilities": [null],
     "outdatedDependencies": [
-        ["ajv-keywords", "ajv", "node-libs-browser", "loader-utils", "yargs"]
+        ["loader-utils", "ajv", "ajv-keywords", "node-libs-browser", "yargs"]
     ],
     "dependencies": [
         ["dependencies", "acorn"],
@@ -913,49 +915,47 @@
         ["devDependencies", "webpack-dev-middleware"],
         ["devDependencies", "worker-loader"]
     ],
-    "status": [
-        ["status", [{
-            "context": "codecov/changes",
-            "state": "success"
-        }, {
-            "context": "codecov/project",
-            "state": "success"
-        }, {
-            "context": "codecov/patch",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/appveyor/branch",
-            "state": "success"
-        }, {
-            "context": "coverage/coveralls",
-            "state": "success"
-        }, {
-            "context": "continuous-integration/travis-ci/push",
-            "state": "success"
-        }, {
-            "context": "ci/circleci",
-            "state": "success"
-        }]],
-        ["hasTestScript", true]
-    ],
+    "vulnerable": ["vulnerable", [{
+        "context": "codecov/changes",
+        "state": "success"
+    }, {
+        "context": "codecov/project",
+        "state": "success"
+    }, {
+        "context": "codecov/patch",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/appveyor/branch",
+        "state": "success"
+    }, {
+        "context": "coverage/coveralls",
+        "state": "success"
+    }, {
+        "context": "continuous-integration/travis-ci/push",
+        "state": "success"
+    }, {
+        "context": "ci/circleci",
+        "state": "success"
+    }]],
+    "test": ["testScript", true],
     "scores": [
-        ["quality", 0.936219572600712, 0],
-        ["popularity", 0.8714891717030633, 1],
-        ["maintenance", 0.7927529691555613, 2],
-        ["final", 0.8633506210807322, 3]
+        ["quality", 0.9359839625459215, 0],
+        ["popularity", 0.8711132840998347, 1],
+        ["maintenance", 0.7910649694485928, 2],
+        ["final", 0.8625575775057259, 3]
     ],
     "subScores": [
         ["maintenance", {
             "releasesFrequency": 1,
             "commitsFrequency": 1,
             "openIssues": 1,
-            "issuesDistribution": 0.17354473431673734
+            "issuesDistribution": 0.1715380773166273
         }],
         ["popularity", {
-            "communityInterest": 31551,
-            "downloadsCount": 5016829.666666667,
-            "downloadsAcceleration": 32538.373116438357,
-            "dependentsCount": 2880
+            "communityInterest": 31649,
+            "downloadsCount": 5085805.666666667,
+            "downloadsAcceleration": 30791.88449391171,
+            "dependentsCount": 2900
         }],
         ["quality", {
             "carefulness": 0.9199999999999999,

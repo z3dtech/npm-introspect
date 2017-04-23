@@ -1,66 +1,102 @@
-svg {
-  font: 10px sans-serif;
+.container{
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  border: 5px solid black;
+
 }
-ul{
-  list-style-type: none;
+
+.title{
+  width: 700px;
+  height: 100px;
+}
+
+.header{
+    display: inline-flex;
 }
 
 .name{
   font-family: "Impact";
-  font-size: 25px;
+  font-size: 45px;
   color: #c41578;
-
 }
-
 .version{
-  font-size: 18px;
+  font-size: 10px;
+  font-weight: bold;
   color: #193160;
 }
-
 .github{
+    display: inline-flex;
+    padding-left: 5px;
+    padding-right: 5px;
   /*add emoticons for stars and forks*/
   /*small font*/
 }
+.outdated{
+  min-height: 85px;
+  display: inline-flex;
+}
+.test{
 
-.lineGraph path {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 3px;
+}
+.vulnerable{
+
+}
+.outdated{
+  display: inline-flex;
 }
 
-.axis line,
-.axis path {
+
+
+
+
+ul{
+  list-style-type: none;
+  display: inline-flex;
+
+}
+
+.line{
   fill: none;
-  stroke: #000;
+  stroke: #6B4C5C;
+  stroke-width: 2px;
+  pointer-events: all
+
+}
+.line :hover{
+  stroke: red;
+  stroke-width: 10px;
+}
+
+
+
+
+.lineGraph path {
+
+}
+
+.axis{
+  fill: none;
+  stroke: #9B5977;
   shape-rendering: crispEdges;
 }
 
+
+
 .axis text {
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  text-shadow: 0 1px 0 #fff;
   cursor: move;
 }
 
-table {
-     border-collapse: collapse;
-     border: 2px black solid;
-     font: 12px sans-serif;
- }
 
- td {
-     border: 1px black solid;
-     padding: 5px;
- }
-.information{
-  width: 700px;
-  height: 700px;
 
-}
 .lineChart{
-  width: 700px;
-  height: 700px;
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
 
 }
 .bubbleChart{
-  width: 700px;
-  height: 700px;
+
 }

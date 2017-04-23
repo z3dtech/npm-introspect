@@ -38,48 +38,43 @@ window.onload = function() {
         const g = svg.append('g')
             .attr('transform', 'translate(' + [100, 10] + ')')
 
+        const title = d3.select('.title').append('ul').attr('class', 'header');
+        const github = d3.select('.github').append('ul');
+        const outdated = d3.select('.outdated').append('ul');
+        const vulnerable = d3.select('.vulnerable');
 
 
-        const information = d3.select('.information').append('ul')
-        const status = d3.select('.status').append('ul')
-        //const warnings = d3.select('.')
+        const formatText = function(pkg) {
 
-
-        const table = d3.select('.table')
-            .append('table')
-            .attr('width', 30)
-            .attr('height', '30')
-            .append('tr')
-
-
-        const formatText = function(module) {
-
-          //add status
-
-            // let dependencyTable = table.selectAll('td')
-            // .data(module.dependencies)
-            //
-            // dependencyTable
-            //     .enter()
-            //     .append('td')
-            //     .merge(dependencyTable)
-            //     .text(function(d) {
-            //         return d[1] //list of objects
-            //     })
-
-            let header = information.selectAll('li')
-            .data(module.information)
+            let header = title.selectAll('li')
+            .data(pkg.title)
 
             header
             .enter()
-            .append('li')
+            .append('li') //add class
             .attr('class', function(d){
               return d[0]
             })
             .merge(header)
             .text(function(d){
-              return d[0] + ' : ' + d[1]
+              return  d[1]
             })
+
+
+            let gitStats = github.selectAll('li')
+            .data(pkg.github)
+
+            gitStats
+            .enter()
+            .append('li')
+            .attr('class', function(d){
+              return d[0]
+            })
+            .merge(gitStats)
+            .text(function(d){
+              return d[1]
+            })
+
             //let vulnerabilities= status.selectAll('li')
             //.data(module.vulnerabilities)
 
@@ -93,19 +88,19 @@ window.onload = function() {
               //return 'Vulnerability: ' + d;
             //})
 
-            let outdatedDependencies = status.selectAll('li')
-            .data(module.outdatedDependencies[0] || [])
+            let outdatedDependencies = outdated.selectAll('li')
+            .data(pkg.outdatedDependencies[0] || [])
 
             outdatedDependencies
-            .remove()
             .enter()
             .append('li')
             .merge(outdatedDependencies)
             .text(
               function(d){
-                console.log(d)
                 return d;
               })
+
+            outdatedDependencies.exit().remove()
           }
 
 
@@ -133,15 +128,12 @@ window.onload = function() {
             })
 
         const createPaths = g.append('g')
-            .attr('class', 'lineGraph')
             .selectAll('path')
             .data(data)
             .enter()
             .append('path')
             .attr('transform', 'translate(' + [0, 0] + ')')
-            .attr('class', (d) => {
-                return d.name
-            })
+            .attr('class', 'line')
             .attr('d', (d) => {
                 return path(d.scores)
             })
@@ -182,18 +174,16 @@ window.onload = function() {
         }
 
        const bubbleChart = d3.select('.bubbleChart')
+
        .attrs({
-         height: 400,
-         width: 400
-       })
+           width: width,
+           height: height
+       });
+
        const buildBubbleChart = function(d){
         //build chromatic scale
-
-
-
-
          let dependencies = bubbleChart.selectAll('.node') //change to circles
-         .data(d.dependencies)
+         .data(d.dependencies);
 
          dependencies
          .remove()
@@ -204,28 +194,10 @@ window.onload = function() {
            cx: Math.random() * 400,
            cy: Math.random() * 400,
          })
-         .merge(dependencies)
+         .merge(dependencies);
 
-
-
-
-        //  let header = information.selectAll('li')
-        //  .data(module.information)
-         //
-        //  header
-        //  .enter()
-        //  .append('li')
-        //  .merge(header)
-        //  .text(function(d){
-        //    return d[0] + ' : ' + d[1]
-        //  })
-
-
+         dependencies.exit().remove()
        }
-
-
-
-
     })
 
 }
