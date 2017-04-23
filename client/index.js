@@ -39,7 +39,11 @@ window.onload = function() {
             .attr('transform', 'translate(' + [100, 10] + ')')
 
 
+
         const information = d3.select('.information').append('ul')
+        const status = d3.select('.status').append('ul')
+        //const warnings = d3.select('.')
+
 
         const table = d3.select('.table')
             .append('table')
@@ -51,16 +55,17 @@ window.onload = function() {
         const formatText = function(module) {
 
           //add status
-            let dependencyTable = table.selectAll('td')
-            .data(module.dependencies)
 
-            dependencyTable
-                .enter()
-                .append('td')
-                .merge(dependencyTable)
-                .text(function(d) {
-                    return d[1] //list of objects
-                })
+            // let dependencyTable = table.selectAll('td')
+            // .data(module.dependencies)
+            //
+            // dependencyTable
+            //     .enter()
+            //     .append('td')
+            //     .merge(dependencyTable)
+            //     .text(function(d) {
+            //         return d[1] //list of objects
+            //     })
 
             let header = information.selectAll('li')
             .data(module.information)
@@ -68,13 +73,42 @@ window.onload = function() {
             header
             .enter()
             .append('li')
+            .attr('class', function(d){
+              return d[0]
+            })
             .merge(header)
             .text(function(d){
               return d[0] + ' : ' + d[1]
             })
+            //let vulnerabilities= status.selectAll('li')
+            //.data(module.vulnerabilities)
+
+            //vulnerabilities
+            //.enter()
+            //.append('li')
+
+            //.merge(vulnerabilities)
+            //.text(function(d){
+              //console.log(d)
+              //return 'Vulnerability: ' + d;
+            //})
+
+            let outdatedDependencies = status.selectAll('li')
+            .data(module.outdatedDependencies[0] || [])
+
+            outdatedDependencies
+            .remove()
+            .enter()
+            .append('li')
+            .merge(outdatedDependencies)
+            .text(
+              function(d){
+                console.log(d)
+                return d;
+              })
+          }
 
 
-        }
 
         const handleMouseOver = function(d) {
             d3.select(this)
@@ -82,6 +116,7 @@ window.onload = function() {
                     console.log(d)
                 })
             formatText(d)
+            buildBubbleChart(d)
         }
 
         const handleMouseOut = function(d) {
@@ -146,175 +181,51 @@ window.onload = function() {
             return hScale(d)
         }
 
+       const bubbleChart = d3.select('.bubbleChart')
+       .attrs({
+         height: 400,
+         width: 400
+       })
+       const buildBubbleChart = function(d){
+        //build chromatic scale
+
+
+
+
+         let dependencies = bubbleChart.selectAll('.node') //change to circles
+         .data(d.dependencies)
+
+         dependencies
+         .remove()
+         .enter()
+         .append('circle')
+         .attrs({
+           r: Math.random() * 25,
+           cx: Math.random() * 400,
+           cy: Math.random() * 400,
+         })
+         .merge(dependencies)
+
+
+
+
+        //  let header = information.selectAll('li')
+        //  .data(module.information)
+         //
+        //  header
+        //  .enter()
+        //  .append('li')
+        //  .merge(header)
+        //  .text(function(d){
+        //    return d[0] + ' : ' + d[1]
+        //  })
+
+
+       }
+
+
+
+
     })
 
 }
-
-
-//const data = JSON.parse(rawData);
-// const timeDiffernce = function(dateTo, dateFrom) {
-//     let diff = dateTo - dateFrom;
-//     const days = Math.floor(diff / 1000 / 60 / 60 / 24);
-//     diff -= days * 1000 * 60 * 60 * 24;
-//
-//     return days
-// }
-// const scoreData = data.map((d) => {
-//     let data = {
-//         'name': d.name,
-//         'score': []
-//     };
-//     ['final', 'maintenance', 'popularity', 'quality'].map((p, i) => {
-//         console.log()
-//         data.score.push([i, d[p]])
-//     })
-//     return data
-// })
-
-
-//build out the axis and the scale and then call an initial value
-//to build the graph reandomly from the list, on mouseover then re build
-//the width and length with new data
-//set default to function execution
-// I have to retrieve
-// const nameToIndex = function(pkgName) {
-//     let result;
-//     usageData.forEach((pkg, i) => {
-//         if (pkg.name === pkgName)
-//             result = i
-//     })
-//     return result;
-// }
-// const barGraph = function(name = usageData[0]) {
-//
-//     console.log(usageData)
-//
-//     const idx = nameToIndex(name)
-//
-//     g.append('g').attr('class', 'usageGraph').selectAll('bar').data(usageData[idx].coordinates).enter().append('rect').attrs({
-//         transform: 'translate(' + [300, 10] + ')',
-//
-//         width: (d, i) => {
-//             console.log(d)
-//             console.log(widthScale(usageData[idx]['time'], d.time))
-//             return widthScale(usageData[idx]['time'], d.time)
-//         },
-//         height: (d, i) => {
-//
-//             return heightScale(usageData[idx]['rate'], d.rate)
-//         },
-//         x: (d, i) => {
-//             return 100 * i //widthScale(d.time)
-//         },
-//         y: (d, i) => {
-//             return 100 * i //heightScale(d.rate)
-//         }
-//     });
-// }
-
-// const moduleInfo = g.append('g')
-//     .attr('class', 'moduleInformation')
-//     .attr('transform', 'translate(' + [0, 0] + ')')
-
-// .selectAll('td')
-// .data(function(d) {return d)}.enter()
-// .append('td')
-// .text(function(d){return d})
-// .data(module)
-// .enter()
-// .append('tr')
-//
-// .append('th').text('quality score: ')// th for heading and td for data points
-// .append('td').text(module.quality).enter()
-
-// (d) => {
-//
-//     displayData(d)
-// })
-// .data(data).enter().on('mouseover', (d) => {
-//     //toggle class visible, invisible
-//     console.log(d)
-//     displayData()
-// })
-
-// const formatText = function(module) {
-//     //try diffent x values for the text box or multiple text boxes
-//     console.log(module)
-//     let table = d3.select(moduleInfo)
-//         .append('table')
-//     let thead = table.append('thead')
-//     let tbody = table.append('tbody')
-//     thead.append('tr')
-//         .data(module)
-//         .enter()
-//         .append('th')
-//         .text('Dependencies : ')
-//     // const a = moduleInfo.append('text')
-//     //     .text('Dependencies : ')
-//     //
-//     // for (let key in module.dependencies) {
-//     //     a.append('tspan')
-//     //         .style('alignment-baseline', 'middle')
-//     //         .attr('dy', 20)
-//     //         .text(key + ' : ')
-//     // }
-// }
-/////here we need 14 arrays of three objects of six item array
-// const usageData = data.map((d) => {
-//     let data = {
-//         'name': d.name,
-//         'rate': [],
-//         'time': [],
-//         'coordinates': []
-//     }
-// let usageData = {}
-// const downloads = data.forEach((d) => {
-//     d.downloadsAcceleration.forEach((a, i) => {
-//         usageData[d.name] = {
-//             'time': [],
-//             'count': [],
-//             'rate': []
-//         }
-//         const dateTo = i === 0
-//             ? new Date(a.to)
-//             : new Date(d.downloadsAcceleration[(i - 1)].from)
-//         const count = i !== 0
-//             ? a.count - d.downloadsAcceleration[(i - 1)].count
-//             : a.count;
-//         const dateFrom = new Date(a.from);
-//         const timeSpan = timeDiffernce(dateTo, dateFrom)
-//
-//         data.coordinates.push({
-//             'time': timeSpan,
-//             'count': count,
-//             'rate': Math.floor(count / timeSpan)
-//         })
-//         data.time.push(timeSpan)
-//         data.rate.push(Math.floor(count / timeSpan))
-//     })
-// })
-//console.log(usageData)
-// const usageScale = function(value){
-//   return d3.scaleLinear()
-//   .domain(d3.extent(value))
-//   .range(1, 200)
-// }
-
-/*
-In the end, we went with standing up Node processes behind an Nginx proxy
-layer and architected the interface in such a way that each network request
-would be a stateless render. This allowed us to farm requests out to the
-process group and scale the number of processes as needed.
-
-look at better ways to deal with serializing and deserailizing data quickly
-
-
-Avoid unnecessary data serialization. There were several hotspots in our
-\template rendering where we were simply embedding large amounts of data
-in the markup in order to send to the browser. These were located mainly in
-the static head and around the body end tags, and were consistent for every
-web request. A big slowdown was the serialization and deserialization of these
- huge JSON blobs of data to our workers. Avoiding this helped us gain another performance edge that finally got us to parity.
-
-
-*/

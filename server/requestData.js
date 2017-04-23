@@ -23,7 +23,6 @@ doSomething().then(doSomethingElse)
   .then(finalHandler);
 */
 
-
 'use strict'
 
 const fs = require('fs');
@@ -32,14 +31,14 @@ const Promise = require("bluebird");
 const request = require('request-promise');
 
 var parsePkgJSON = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { //the package.json address needs to be changed for root
         fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
             if (error)
                 reject(error)
             console.log('error in parse' + data)
             let contents = JSON.parse(data); //try and catch all the JSON parse, reject(new Error('OH SHiT'))
             let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
-            console.log(packages)
+            //console.log(packages)
             resolve(packages)
         });
     });
@@ -58,7 +57,7 @@ var npmSearchQuery = function(requests) {
 
 var pkgInfoParse = function(pkgInfo) {
     let filteredInfo = []
-    console.log('pkgInfo' + pkgInfo)
+    //console.log('pkgInfo' + pkgInfo)
 
     pkgInfo.forEach((pkg) => {
       //  if (!pkg) continue; // I need to know what end up here in the case of bad module
@@ -70,31 +69,64 @@ var pkgInfoParse = function(pkgInfo) {
         } catch (error) {
             console.log(error)
         }
-        /*
-    lets refactor this so that we are using a loop and try/catch and setting to
-    0/undefined any thing that isn't very good
-
-    */
 
         filteredPkg.information = [['name', parsedPkg.collected.metadata.name], ['version', parsedPkg.collected.metadata.version], ['stars', parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
-            : -1], ['forks', parsedPkg.collected.github.forksCount
+            : 'N/A'], ['forks', parsedPkg.collected.github.forksCount
             ? parsedPkg.collected.github.forksCount
-            : -1]]
+            : 'N/A']]
 
-        filteredPkg.dependencies = [['dependencies', parsedPkg.collected.metadata.dependencies], ['devDependencies', parsedPkg.collected.metadata.devDependencies], ['peerDependencies', parsedPkg.collected.metadata.peerDependencies]]
 
-        filteredPkg['downloadsAcceleration'] = parsedPkg.collected.npm.downloads;
 
-        filteredPkg.status = parsedPkg.collected.github.statuses
+        filteredPkg.vulnerabilities = [parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
+        filteredPkg.outdatedDependencies = [parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
+
+        //change dependencies to complex array of arrays
+
+        //filteredPkg.dependencies = parsedPkg.collected.metadata.dependencies
+        //filteredPkg.devDependencies = parsedPkg.collected.metadata.devDependencies
+        //filteredPkg.peerDependencies = parsedPkg.collected.metadata.peerDependencies
+
+        // let dependencies = parsedPkg.collected.metadata.dependencies? parsedPkg.collected.metadata.dependencies : [];
+        // let devDependencies = parsedPkg.collected.metadata.devDependencies? parsedPkg.collected.metadata.devDependencies : [];
+        //let peerDependencies = parsedPkg.collected.metadata.peerDependencies? parsedPkg.collected.metadata.peerDependencies: [];
+
+
+
+        let dependencies = []
+        if (parsedPkg.collected.metadata.dependencies){
+          Object.keys(parsedPkg.collected.metadata.dependencies).forEach((name) => {
+            dependencies.push(['dependencies', name]);
+          })
+        }
+        if (parsedPkg.collected.metadata.devDependencies){
+        Object.keys(parsedPkg.collected.metadata.devDependencies).forEach((name) => {
+            dependencies.push(['devDependencies', name]);
+          })
+        }
+        if (parsedPkg.collected.metadata.peerDependencies){
+        Object.keys(parsedPkg.collected.metadata.peerDependencies).forEach((name) => {
+            dependencies.push(['peerDependencies', name]);
+          })
+        }
+
+        filteredPkg.dependencies = dependencies
+
+
+
+        // console.log('-----------------------------------------------------')
+        // console.log(dependencies)
+        // console.log('------------------------------------------------------')
+
+
+
+        filteredPkg.status = [['status', parsedPkg.collected.github.statuses
             ? parsedPkg.collected.github.statuses
-            : -1;
+            : -1 ],['hasTestScript', parsedPkg.collected.metadata.hasTestScript]]
 
-        filteredPkg['hasTestScript'] = parsedPkg.collected.metadata.hasTestScript;
-
-        filteredPkg.warnings = [['outdatedDependencies', parsedPkg.collected.source.outdatedDependencies], ['vulnerabilities', parsedPkg.collected.source.vulnerabilities]];
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality, 0], ['popularity', parsedPkg.score.detail.popularity, 1], ['maintenance', parsedPkg.score.detail.maintenance, 2], ['final', parsedPkg.score.final, 3]];
         filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
+
 
         filteredInfo.push(filteredPkg)
 
@@ -117,7 +149,7 @@ const temp = function() {
                     if (err) {
                         throw err;
                     }
-                    console.log('data logged')
+                    //console.log('data logged')
                 })
 
                 resolve(result)

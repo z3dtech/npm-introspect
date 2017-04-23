@@ -1,14 +1,32 @@
 svg {
   font: 10px sans-serif;
 }
+ul{
+  list-style-type: none;
+}
+
+.name{
+  font-family: "Impact";
+  font-size: 25px;
+  color: #c41578;
+
+}
+
+.version{
+  font-size: 18px;
+  color: #193160;
+}
+
+.github{
+  /*add emoticons for stars and forks*/
+  /*small font*/
+}
 
 .lineGraph path {
   fill: none;
   stroke: steelblue;
   stroke-width: 3px;
 }
-
-
 
 .axis line,
 .axis path {
@@ -33,14 +51,16 @@ table {
      padding: 5px;
  }
 .information{
+  width: 700px;
+  height: 700px;
 
 }
 .lineChart{
+  width: 700px;
+  height: 700px;
 
 }
-.barChart{
-
-}
-.table{
-
+.bubbleChart{
+  width: 700px;
+  height: 700px;
 }
