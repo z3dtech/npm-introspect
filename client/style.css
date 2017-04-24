@@ -65,6 +65,22 @@ ul{
   stroke-width: 2px;
   pointer-events: all
 
+
+}
+.foreground{
+  fill: none;
+  stroke: blue;
+  stroke-width: 10px;
+  pointer-events: all
+
+}
+
+.background{
+  fill: none;
+  stroke: red;
+  stroke-width: 2px;
+  pointer-events: all
+
 }
 .line :hover{
   stroke: red;

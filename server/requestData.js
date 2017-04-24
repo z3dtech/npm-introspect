@@ -77,6 +77,8 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg.vulnerabilities = [parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
         filteredPkg.outdatedDependencies = [parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
+        //if no outdated dependencies add a message that says "No outdated deprednecies"
+
 
         let dependencies = []
         if (parsedPkg.collected.metadata.dependencies){

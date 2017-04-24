@@ -51,7 +51,7 @@ window.onload = function() {
 
         const title = d3.select('.title').append('ul').attr('class', 'header');
         const github = d3.select('.github').append('ul');
-        const outdated = d3.select('.outdated').append('ul').text('Outdated Packages').style('font-size', '25px');
+        const outdated = d3.select('.outdated').append('th').text('Outdated Dependencies')
         const vulnerable = d3.select('.vulnerable');
 
 
@@ -99,12 +99,12 @@ window.onload = function() {
               //return 'Vulnerability: ' + d;
             //})
 
-            let outdatedDependencies = outdated.selectAll('li')
+            let outdatedDependencies = outdated.selectAll('td')
             .data(pkg.outdatedDependencies[0] || [])
 
             outdatedDependencies
             .enter()
-            .append('li')
+            .append('td')
             .merge(outdatedDependencies)
             .text(
               function(d){
@@ -116,18 +116,20 @@ window.onload = function() {
 
 
 
-        const handleMouseOver = function(d) {
+        const handleMouseOver = function(e, that) {
+          d3.select(that).classed('foreground', true)
+          d3.select(that).classed('background', false)
             d3.select(this)
-                .attr('d', (d) => {
-                    console.log(d)
+                .attr('d', (e) => {
+                    console.log(e)
                 })
-            formatText(d)
-            buildBubbleChart(d)
+            formatText(e)
+            //buildBubbleChart(e)
         }
 
-        const handleMouseOut = function(d) {
-            d3.select(this)
-                .style('fill', 'lightBlue')
+        const handleMouseOut = function(d, that) {
+          d3.select(that).classed('foreground', true)
+          d3.select(that).classed('background', false)
         }
 
         const path = d3.line()
@@ -138,17 +140,42 @@ window.onload = function() {
                 return y(d[1])
             })
 
+
         const createPaths = g.append('g')
             .selectAll('path')
             .data(data)
             .enter()
             .append('path')
-            .attr('class', 'line')
+            .attr('class', 'background')
             .attr('d', (d) => {
                 return path(d.scores)
             })
-            .on('mouseover', (d) => handleMouseOver(d))
-            .on('mouseout', (d) => handleMouseOut(d));
+            .on('mouseover', function(e){
+              handleMouseOver(e, this)})
+            .on('mouseout', function(e){
+              handleMouseOut(e, this)})
+
+        const createNodes = g.append('g')
+          .selectAll('.nodes')
+          .data(data)
+          .enter()
+          .each(function(d){
+              d3.select(this).append('circle')
+              .attr('d', function(d){
+                console.log(d[2])
+              })
+              // .each(function(d))
+              // d.scores.each((p ,i) => (console.log(p[2] + '  :  ' +  i)))
+            })
+
+          // .append('circle')
+          // .attr('d', function(d){
+
+          // .attr('cx', function(d){return d.scores[2]})
+          // .attr('cy', function(d){return d.scores[1]})
+          // .attr('r', '25px')
+
+
 
 
         const verticalAxis = g.append('g')
@@ -195,15 +222,14 @@ window.onload = function() {
          .data(d.dependencies);
 
          dependencies
-         .remove()
          .enter()
          .append('circle')
+         .merge(dependencies)
          .attrs({
            r: Math.random() * 25,
            cx: Math.random() * 400,
            cy: Math.random() * 400,
-         })
-         .merge(dependencies);
+         });
 
          dependencies.exit().remove()
        }
