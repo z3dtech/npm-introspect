@@ -114,6 +114,29 @@ window.onload = function() {
             outdatedDependencies.exit().remove()
           }
 
+          const bubbleChart = d3.select('.bubbleChart')
+            .attrs({
+                width: width,
+                height: height
+            });
+
+          const buildBubbleChart = function(d){
+           //build chromatic scale
+            let dependencies = bubbleChart.selectAll('.node') //change to circles
+            .data(d.dependencies);
+
+            dependencies
+            .enter()
+            .append('circle')
+            .merge(dependencies)
+            .attrs({
+              r: Math.random() * 25,
+              cx: Math.random() * 400,
+              cy: Math.random() * 400,
+            });
+
+            dependencies.exit().remove()
+          }
 
 
         const handleMouseOver = function(e, that) {
@@ -124,7 +147,7 @@ window.onload = function() {
                     console.log(e)
                 })
             formatText(e)
-            //buildBubbleChart(e)
+            buildBubbleChart(e)
         }
 
         const handleMouseOut = function(d, that) {
@@ -155,25 +178,45 @@ window.onload = function() {
             .on('mouseout', function(e){
               handleMouseOut(e, this)})
 
-        const createNodes = g.append('g')
-          .selectAll('.nodes')
+        const createNodes = g.selectAll('path-to-circle')
           .data(data)
           .enter()
-          .each(function(d){
-              d3.select(this).append('circle')
-              .attr('d', function(d){
-                console.log(d[2])
-              })
+          .append('g')
+          .attr('foo', function(d){
+            //console.log(d)
+          })
+          .selectAll('circle')
+          .data(function(d){
+            console.log(d.scores)
+            return d.scores
+          })
+          .enter()
+          .append('circle')
+          .attr('gg', function(d){
+            console.log(d)
+          } )
+          .attr('cx', function(d){return d[2]})
+          .attr('cy', function(d){return d[1]}) //pass through sclaing function
+          .attr('r', '25px')
+
+
+
+
+
+
+          // .each(function(d){
+          //     d3.select(this).append('circle')
+          //     .attr('d', function(d){
+          //       console.log(d)
+          //     })
               // .each(function(d))
               // d.scores.each((p ,i) => (console.log(p[2] + '  :  ' +  i)))
-            })
+            //})
 
           // .append('circle')
-          // .attr('d', function(d){
+          // // .attr('d', function(d){})
+          //
 
-          // .attr('cx', function(d){return d.scores[2]})
-          // .attr('cy', function(d){return d.scores[1]})
-          // .attr('r', '25px')
 
 
 
@@ -210,29 +253,7 @@ window.onload = function() {
         //     return hScale(d)
         // }
 
-       const bubbleChart = d3.select('.bubbleChart')
-         .attrs({
-             width: width,
-             height: height
-         });
 
-       const buildBubbleChart = function(d){
-        //build chromatic scale
-         let dependencies = bubbleChart.selectAll('.node') //change to circles
-         .data(d.dependencies);
-
-         dependencies
-         .enter()
-         .append('circle')
-         .merge(dependencies)
-         .attrs({
-           r: Math.random() * 25,
-           cx: Math.random() * 400,
-           cy: Math.random() * 400,
-         });
-
-         dependencies.exit().remove()
-       }
     })
 
 }
