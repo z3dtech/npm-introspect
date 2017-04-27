@@ -15,11 +15,7 @@ window.onload = function() {
           .range([0, height]);
 
 
-//////
-//tooltip and generate subscores properly in bar chart
-//check if bar chart makes the most sense
-//then dependency chart
-/////
+
 
 
     // const url = '/datam.json'
@@ -37,25 +33,59 @@ window.onload = function() {
         };
         console.log(data)
 
-        const svg = d3.select('.lineChart') //change name from svg
-            .attrs({
-                width: width,
-                height: height
-            });
-
-        const g = svg.append('g')
+        // const svg = d3.select('.lineChart') //change name from svg
+        //     .attrs({
+        //         width: width,
+        //         height: height
+        //     });
+        //
+        // const g = svg.append('g')
             // .attr('transform', 'translate(' + [100, 10] + ')')
 
-        const title = d3.select('.title').append('ul').attr('class', 'header');
-        const github = d3.select('.github').append('ul');
-        const outdated = d3.select('.outdated').append('th').text('Outdated Dependencies')
-        const vulnerable = d3.select('.vulnerable');
+        // const title = d3.select('.title').append('ul').attr('class', 'header');
+        // const github = d3.select('.github').append('ul');
+        // const outdated = d3.select('.outdated').append('th').text('Outdated Dependencies')
+        // const vulnerable = d3.select('.vulnerable');
 
+
+
+
+        const scoreBar = d3.select('.scoreBar')
+          .attr('width', width)
+          .attr('height', height)
+
+        const buildBarChart = scoreBar.append('g')
+          .selectAll('g')
+          .data(data)
+          .enter()
+          .append('g')
+
+          .attr('transform', (d) => {
+            console.log(d)
+            return 'translate(' + [10, 10] + ')';
+          })
+          .selectAll('rect')
+          .data(function(d) {
+            console.log(d)
+            return d.scores})
+          .enter().append('rect')
+            .attrs({
+              x: (d, i) => {return 50* i},
+              y: (d, i) => {return 50 * i},
+              width: (d) => {return 50},
+              height: (d) => {return height - y(d[1])},
+              fill: (d) => {return '#8a89a6'}
+            })
+
+
+
+
+/*
 
         const pathScales = (function(){
           let scale = [[], [], [], []];
           for (let pkg in data){
-            console.log(data[pkg].scores[1][1])
+            //console.log(data[pkg].scores[1][1])
             data[pkg].scores.forEach((cat, i) => {
               scale[i].push(data[pkg].scores[i][1])
               })
@@ -187,40 +217,40 @@ window.onload = function() {
             })
 
 
-        const createPaths = g.append('g')
-            .selectAll('path')
-            .data(data)
-            .enter()
-            .append('path')
-            .attr('class', 'background')
-            .attr('d', (d) => {
-              console.log('inside createpaths ' + d)
-                return path(d.scores)
-            })
-            .on('mouseover', function(e){
-              handleMouseOver(e, this)})
-            .on('mouseout', function(e){
-              handleMouseOut(e, this)})
-
-        const createNodes = g.selectAll('path-to-circle')
-          .data(data)
-          .enter()
-          .append('g')
-          .attr('foo', function(d){
-            //console.log(d)
-          })
-          .selectAll('circle')
-          .data(function(d){
-            return d.scores
-          })
-          .enter()
-          .append('circle')
-          .attr('gg', function(d){
-          } )
-          .attr('cx', function(d){return d[2]})
-          .attr('cy', function(d){return d[1]}) //pass through sclaing function
-          .attr('r', '25px')
-
+        // const createPaths = g.append('g')
+        //     .selectAll('path')
+        //     .data(data)
+        //     .enter()
+        //     .append('path')
+        //     .attr('class', 'background')
+        //     .attr('d', (d) => {
+        //       console.log('inside createpaths ' + d)
+        //         return path(d.scores)
+        //     })
+        //     .on('mouseover', function(e){
+        //       handleMouseOver(e, this)})
+        //     .on('mouseout', function(e){
+        //       handleMouseOut(e, this)})
+        //
+        // const createNodes = g.selectAll('path-to-circle')
+        //   .data(data)
+        //   .enter()
+        //   .append('g')
+        //   .attr('foo', function(d){
+        //     //console.log(d)
+        //   })
+        //   .selectAll('circle')
+        //   .data(function(d){
+        //     return d.scores
+        //   })
+        //   .enter()
+        //   .append('circle')
+        //   .attr('gg', function(d){
+        //   } )
+        //   .attr('cx', function(d){return d[2]})
+        //   .attr('cy', function(d){return d[1]}) //pass through sclaing function
+        //   .attr('r', '25px')
+        //
 
 
 
@@ -243,19 +273,19 @@ window.onload = function() {
 
 
 
-        const verticalAxis = g.append('g')
-            .attr('class', 'axis')
-            .selectAll('axis')
-            .data(data[0].scores)
-            .enter()
-            .each(function(d, i) {
-                d3.select(this)
-                    .append('g')
-                    .attr('transform', 'translate(' + [
-                        (100 * i), 0
-                    ] + ')')
-                    .call(axis.scale(y)) //change scale 
-            })
+        // const verticalAxis = g.append('g')
+        //     .attr('class', 'axis')
+        //     .selectAll('axis')
+        //     .data(data[0].scores)
+        //     .enter()
+        //     .each(function(d, i) {
+        //         d3.select(this)
+        //             .append('g')
+        //             .attr('transform', 'translate(' + [
+        //                 (100 * i), 0
+        //             ] + ')')
+        //             .call(axis.scale(y)) //change scale
+        //     })
 
 
         // const widthScale = function(arr, d) {
@@ -275,7 +305,7 @@ window.onload = function() {
         //     return hScale(d)
         // }
 
-
+*/
     })
 
 }
