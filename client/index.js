@@ -10,20 +10,17 @@ window.onload = function() {
         height = window.innerWidth,
         line = d3.line(),
         axis = d3.axisLeft(),
-        y = d3.scaleLinear()
-        .domain([1, 0])
-        .range([0, height]);
+        y= d3.scaleLinear()
+          .domain([1, 0])
+          .range([0, height]);
 
 
+//////
+//tooltip and generate subscores properly in bar chart
+//check if bar chart makes the most sense
+//then dependency chart
+/////
 
-///////////////////////////////
-
-//delete parallel coordiantes
-//something with circles or a thing
-
-
-
-/////////////////////////////////////
 
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
@@ -53,6 +50,28 @@ window.onload = function() {
         const github = d3.select('.github').append('ul');
         const outdated = d3.select('.outdated').append('th').text('Outdated Dependencies')
         const vulnerable = d3.select('.vulnerable');
+
+
+        const pathScales = (function(){
+          let scale = [[], [], [], []];
+          for (let pkg in data){
+            console.log(data[pkg].scores[1][1])
+            data[pkg].scores.forEach((cat, i) => {
+              scale[i].push(data[pkg].scores[i][1])
+              })
+            }
+            return scale
+          })()
+
+          const scale = function(coordinates){
+            const domain = d3.extent(coordinates)
+            return d3.scaleLinear()
+              .domain([domain[1], domain[0]])
+              .range([0, height]);
+          }
+
+
+
 
 
         const formatText = function(pkg) {
@@ -160,7 +179,11 @@ window.onload = function() {
                 return 100 * d[2];
             })
             .y(function(d, i) {
-                return y(d[1])
+                const tempScale= scale(pathScales[i])
+                return tempScale(d[1])
+                //console.log(pathScales[i])
+                // console.log()
+                // return y(d[1])
             })
 
 
@@ -171,6 +194,7 @@ window.onload = function() {
             .append('path')
             .attr('class', 'background')
             .attr('d', (d) => {
+              console.log('inside createpaths ' + d)
                 return path(d.scores)
             })
             .on('mouseover', function(e){
@@ -187,13 +211,11 @@ window.onload = function() {
           })
           .selectAll('circle')
           .data(function(d){
-            console.log(d.scores)
             return d.scores
           })
           .enter()
           .append('circle')
           .attr('gg', function(d){
-            console.log(d)
           } )
           .attr('cx', function(d){return d[2]})
           .attr('cy', function(d){return d[1]}) //pass through sclaing function
@@ -232,7 +254,7 @@ window.onload = function() {
                     .attr('transform', 'translate(' + [
                         (100 * i), 0
                     ] + ')')
-                    .call(axis.scale(y))
+                    .call(axis.scale(y)) //change scale 
             })
 
 
