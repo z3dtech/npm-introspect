@@ -105,11 +105,22 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg.test = ['testScript', parsedPkg.collected.metadata.hasTestScript]
 
-        filteredPkg.scores = [['quality', parsedPkg.score.detail.quality, 0], ['popularity', parsedPkg.score.detail.popularity, 1], ['maintenance', parsedPkg.score.detail.maintenance, 2], ['final', parsedPkg.score.final, 3]];
-        filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
+        filteredPkg.scores = [['quality', parsedPkg.score.detail.quality], ['popularity', parsedPkg.score.detail.popularity], ['maintenance', parsedPkg.score.detail.maintenance], ['final', parsedPkg.score.final]];
+
+        //filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
+        let category = ['quality', 'popularity', 'maintenance']; //
+        let subScores = [];
+        for (let s in category){
+          let subS = [];
+          for (let c in parsedPkg.evaluation[category[s]]){
+              subS.push([c, parsedPkg.evaluation[category[s]][c]])
+          }
+          subScores.push(subS)
+        }
+        filteredPkg.subScores = subScores;
+
 
         filteredInfo.push(filteredPkg)
-
     })
 
 
