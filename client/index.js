@@ -11,6 +11,14 @@ red flag bad packages
 allow ability to search
 
 link back to npms.io
+use viewport to change dynamiclly the window
+.attr('viewBox', '0 0 ' + size + ' ' + size);
+
+use a table for the subscores and show a nice patagraph that represents the
+infor on the module.
+stop messing with sub scores and focus on a few pieces of important information rather
+than everythign
+compute a full set of graphs for popularity and just highlight the one in questions
 
 */
 'use strict'
@@ -75,7 +83,10 @@ window.onload = function() {
         const subScores = d3.select('.subScores')
         .attr('width', width)
         .attr('height', height)
-        // const dependencies = d3.select('.dependencies').append('g')
+
+        const dependencies = d3.select('.dependencies')
+        .attr('width', width)
+        .attr('height', height)
 
 
         const scoreScale = (function(){
@@ -119,10 +130,33 @@ window.onload = function() {
         const handleClick = function(e, that){
           // popY.domain([d3.extent()]) //move
           buildSubScoresChart(e)
+          buildDependencies(e)
         }
 
+        const buildDependencies = function(pkg){
+          let dependenciesGraph = dependencies.append('g')
+          .selectAll('g')
+          .data(pkg.dependencies)
+          .enter();
 
-        const buildSubScoresChart = function(pkg, scale){ //add the remove and merge parts
+          dependenciesGraph.append('g').merge(dependenciesGraph)
+          .selectAll('circle')
+          .data((d) => {
+            return d[1]
+          }).enter().append('circle')
+          .attrs({
+            cx: (d, i) => { return 20 * i},
+            cy: (d, i) => { return 20 * i},
+            r: (d, i) => {return 15}
+          })
+
+
+
+
+
+        }
+
+        const buildSubScoresChart = function(pkg){ //add the remove and merge parts
           let subScoresChart = subScores.append('g')
           .selectAll('g')
           .data(pkg.subScores)
@@ -143,25 +177,31 @@ window.onload = function() {
             x: (d, i) => {return ssX1(d[0])},
             y: (d, i) => {
               if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                const tScale = popY.domain(d3.extent(popularScale[d[0]])).nice()
+                console.log(d3.extent(popularScale[d[0]]))
+                const tScale = popY.domain(d3.extent(popularScale[d[0]]))
                 return tScale(d[1])
               }
               return i * y(d[1])},
             width: (d) => {return ssX1.bandwidth()},
             height: (d) => {
               if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                const tScale = popY.domain(d3.extent(popularScale[d[0]])).nice()
+                console.log(d3.extent(popularScale[d[0]]))
+                const tScale = popY.domain([0, d3.max(popularScale[d[0]])  ])
                 return tScale(d[1])
               }
               return height - y(d[1])},
             fill: (d) => {return color(d[0])}
+          }).on('click', function(e){
+            console.log(e)
           })
 
           subScoresChart.exit().remove();
         }
 
 
-
+        const buildPopularityChart = function(pkg){
+          console.log('here we are')
+        }
         const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
           .selectAll('g')
           .data(data);

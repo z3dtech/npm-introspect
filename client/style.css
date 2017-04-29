@@ -5,116 +5,12 @@
   border: 5px solid black;
   text-align: center;       /*use flex with text align- might sabea lot of probs  */
 
-
 }
 
-.title{
-
-
-}
-
-.header{
-
-
-
-}
-
-.name{
-  font-family: "Impact";
-  font-size: 45px;
-  color: #c41578;
-
-}
-.version{
-  font-size: 10px;
-  font-weight: bold;
-  color: #193160;
-}
-.github{
-
-
-  /*add emoticons for stars and forks*/
-  /*small font*/
-}
-.outdated{
-  min-height: 85px;
-
-}
-.test{
-
-}
-.vulnerable{
-
-}
-.outdated{
-
-}
-
-
-
-
-
-ul{
-  list-style-type: none;
-
-}
-
-.line{
-  fill: none;
-  stroke: #6B4C5C;
-  stroke-width: 2px;
-  pointer-events: all
-
-
-}
-.foreground{
-  fill: none;
-  stroke: blue;
-  stroke-width: 10px;
-  pointer-events: all
-
-}
-
-.background{
-  fill: none;
-  stroke: red;
-  stroke-width: 2px;
-  pointer-events: all
-
-}
-.line :hover{
-  stroke: red;
-  stroke-width: 10px;
-}
-
-
-
-
-.lineGraph path {
-
-}
-
-.axis{
-  fill: none;
-  stroke: #9B5977;
-  shape-rendering: crispEdges;
-}
-
-
-
-.axis text {
-  text-shadow: 0 1px 0 #fff;
-  cursor: move;
-}
-
-
-
-.lineChart{
-  fill: none;
-  stroke: black;
-  stroke-width: 2px;
-
-}
-.bubbleChart{
+.viewport{
+  /*overflow: scroll;*/
+  width: 250px;
+  height: 400px;
+  overflow-x: auto;
 
 }
