@@ -10,7 +10,7 @@ popularity needs to have a computed scale - maybe get neighboring information
 red flag bad packages
 allow ability to search
 
-
+link back to npms.io
 
 */
 'use strict'
@@ -31,10 +31,15 @@ window.onload = function() {
           .range([0, height]),
         popY= d3.scaleLinear()
           .range([0, height]),
-        x0 = d3.scaleBand()  //group spacing
+        sX0 = d3.scaleBand()  //group spacing
           .rangeRound([0, width])
           .paddingInner(0.1),
-        x1 = d3.scaleBand()  //this will compute the x values
+        ssX0 = d3.scaleBand()  //spacing for subscore groups
+          .rangeRound([0, width])
+          .paddingInner(0.1),
+        sX1 = d3.scaleBand()  //this will compute the x values
+          .padding(0.05),
+        ssX1 = d3.scaleBand()  //this will compute the x values
           .padding(0.05),
         color = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"]); //add colors
 
@@ -61,11 +66,15 @@ window.onload = function() {
           return names
         })()
 
-        x0.domain(pkgs)
-        x1.domain(['quality', 'popularity', 'maintenance', 'final']).rangeRound([0, x0.bandwidth()]); //4 number of score types
+        sX0.domain(pkgs)
+        sX1.domain(['quality', 'popularity', 'maintenance', 'final']).rangeRound([0, sX0.bandwidth()]);
 
+        ssX0.domain(['quality', 'popularity', 'maintenance']) //maybe this has to map to the groups better
+        ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
 
         const subScores = d3.select('.subScores')
+        .attr('width', width)
+        .attr('height', height)
         // const dependencies = d3.select('.dependencies').append('g')
 
 
@@ -109,74 +118,83 @@ window.onload = function() {
 
         const handleClick = function(e, that){
           // popY.domain([d3.extent()]) //move
-          buildSubScores(e)
+          buildSubScoresChart(e)
         }
 
-        //okay lets
-        const buildSubScores = function(pkg, scale){
-          subScores.append('g')
+
+        const buildSubScoresChart = function(pkg, scale){ //add the remove and merge parts
+          let subScoresChart = subScores.append('g')
           .selectAll('g')
           .data(pkg.subScores)
-          .enter()
-          .append('g')
+          .enter();
+
+          subScoresChart.append('g').merge(subScoresChart)
           .attr('transform', (d) => {
-            console.log(d)
-            return 'translate(' + [10, 10] + ')';
+            //console.log(d)
+            return 'translate(' + 0 + ',0)'; //change subscores to fix this spacing, so far this is acting on the only bar appearing
           })
           .selectAll('rect')
           .data(function(d){
             console.log(d)
             return d
           }).enter().append('rect')
+
           .attrs({
-            x: (d, i) => {return x1(d[0])},
+            x: (d, i) => {return ssX1(d[0])},
             y: (d, i) => {
               if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                const tScale = popY.domain(d3.extent(popularScale[d[0]]))
+                const tScale = popY.domain(d3.extent(popularScale[d[0]])).nice()
                 return tScale(d[1])
               }
-              return y(d[1])},
-            width: (d) => {return x1.bandwidth()},
+              return i * y(d[1])},
+            width: (d) => {return ssX1.bandwidth()},
             height: (d) => {
               if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                const tScale = popY.domain(d3.extent(popularScale[d[0]]))
+                const tScale = popY.domain(d3.extent(popularScale[d[0]])).nice()
                 return tScale(d[1])
               }
               return height - y(d[1])},
             fill: (d) => {return color(d[0])}
           })
+
+          subScoresChart.exit().remove();
         }
 
 
 
-        const buildScoresChart = scores.append('g')
+        const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
           .selectAll('g')
-          .data(data)
+          .data(data);
+
+          buildScoresChart
           .enter()
           .append('g')
           .on('click', function(e){
             // send data for the entire group, not the individual bar
-            buildSubScores(e)})
+            handleClick(e)})
           .on('mouseover', function(e){
             handleMouseOver(e, this)})
           .on('mouseover', function(e){
             handleMouseOut(e, this)})
           .attr('transform', (d) => {
             //console.log(d)
-            return 'translate(' + x0(d.title[1]) + ',0)';
+            return 'translate(' + sX0(d.title[1]) + ',0)';
           })
           .selectAll('rect')
           .data(function(d) { //pass a loop of data
             //console.log(d)
             return d.scores})
           .enter().append('rect')
+          .merge(buildScoresChart)
             .attrs({
-              x: (d, i) => {return x1(d[0])},
+              x: (d, i) => {return sX1(d[0])},
               y: (d, i) => {return y(d[1])},
-              width: (d) => {return x1.bandwidth()},
+              width: (d) => {return sX1.bandwidth()},
               height: (d) => {return height - y(d[1])},
               fill: (d) => {return color(d[0])}
             })
+
+            buildScoresChart.exit().remove();
 
 
 
