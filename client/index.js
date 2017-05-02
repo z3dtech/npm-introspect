@@ -74,15 +74,16 @@ window.onload = function() {
           return names
         })()
 
+        const subScoreHeading = ['quality', 'popularity', 'maintenance'];
         sX0.domain(pkgs)
-        sX1.domain(['quality', 'popularity', 'maintenance', 'final']).rangeRound([0, sX0.bandwidth()]);
+        sX1.domain(subScoreHeading).rangeRound([0, sX0.bandwidth()]);
 
         ssX0.domain(['quality', 'popularity', 'maintenance']) //maybe this has to map to the groups better
         ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
 
-        const subScores = d3.select('.subScores')
-        .attr('width', width)
-        .attr('height', height)
+
+
+
 
         const dependencies = d3.select('.dependencies')
         .attr('width', width)
@@ -156,47 +157,61 @@ window.onload = function() {
 
         }
 
-        const buildSubScoresChart = function(pkg){ //add the remove and merge parts
-          let subScoresChart = subScores.append('g')
-          .selectAll('g')
-          .data(pkg.subScores)
-          .enter();
 
-          subScoresChart.append('g').merge(subScoresChart)
-          .attr('transform', (d) => {
-            //console.log(d)
-            return 'translate(' + 0 + ',0)'; //change subscores to fix this spacing, so far this is acting on the only bar appearing
-          })
-          .selectAll('rect')
-          .data(function(d){
-            console.log(d)
-            return d
-          }).enter().append('rect')
 
-          .attrs({
-            x: (d, i) => {return ssX1(d[0])},
-            y: (d, i) => {
-              if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                console.log(d3.extent(popularScale[d[0]]))
-                const tScale = popY.domain(d3.extent(popularScale[d[0]]))
-                return tScale(d[1])
-              }
-              return i * y(d[1])},
-            width: (d) => {return ssX1.bandwidth()},
-            height: (d) => {
-              if(d[0] === 'communityInterest' || d[0] === 'downloadsCount'|| d[0] === 'downloadsAcceleration' || d[0] === 'dependentsCount'){
-                console.log(d3.extent(popularScale[d[0]]))
-                const tScale = popY.domain([0, d3.max(popularScale[d[0]])  ])
-                return tScale(d[1])
-              }
-              return height - y(d[1])},
-            fill: (d) => {return color(d[0])}
-          }).on('click', function(e){
-            console.log(e)
-          })
+        // let header = title.selectAll('li')
+        // .data(pkg.title)
+        //
+        // header
+        // .enter()
+        // .append('li') //add class
+        // .attr('class', function(d){
+        //   return d[0]
+        // })
+        // .merge(header)
+        // .text(function(d){
+        //   return  d[1]
+        // })
 
-          subScoresChart.exit().remove();
+
+/*
+I'm having a problem with a enter.merge.exit where I have two data bindings at different
+points in a hierarchy of arrays, could you help? I used the same pattern I've used in the past
+for merging here: https://repl.it/H8My  but three new tables are generated each time it is called
+instead of text being updated. After reading more about the update pattern I decided to rewrite the function
+to explicitly divide enter, update, and exit selections here: https://repl.it/H8oF but this
+just generates group tags. Any thoughts on what to change or how I'm misunderstanding data joins
+would be extremely helpful.
+*/
+
+
+        const subScores = d3.select('.subScores').append('g')
+
+        const buildSubScoresChart = function(pkg){
+          const update = subScores.selectAll('th')
+          .data(pkg.subScores, d => d)
+
+          const enter = update.enter()
+          .append('table').append('tr').append('th')
+
+          const exit = update.exit().remove()
+
+          update.merge(enter).text(function(d, i){
+                      return subScoreHeading[i].toUpperCase()
+                    })
+                    .attr('transform', (d) => {
+                      return 'translate(' + [0,0] + ')';
+                    })
+                    .selectAll('td')
+                    .data(function(d){
+                      return d
+                    }).enter()
+                    .append('tr')
+                    .append('td')
+                    .text(function(d){return d[0] + ' : ' + d[1].toFixed(2)})
+
         }
+
 
 
         const buildPopularityChart = function(pkg){

@@ -108,7 +108,7 @@ var pkgInfoParse = function(pkgInfo) {
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality], ['popularity', parsedPkg.score.detail.popularity], ['maintenance', parsedPkg.score.detail.maintenance], ['final', parsedPkg.score.final]];
 
         //filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
-        let category = ['quality', 'popularity', 'maintenance']; //
+        let category = ['quality', 'popularity', 'maintenance']; 
         let subScores = [];
         for (let s in category){
           let subS = [];
