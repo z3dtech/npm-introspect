@@ -130,6 +130,7 @@ window.onload = function() {
 
         const handleClick = function(e, that){
           // popY.domain([d3.extent()]) //move
+          buildInformation(e)
           buildSubScoresChart(e)
           buildDependencies(e)
         }
@@ -151,42 +152,42 @@ window.onload = function() {
             r: (d, i) => {return 15}
           })
 
-
-
-
-
         }
 
 
+        const title = d3.select('.pkgInformation').append('g').attr('class', 'title').append('ul')
+        const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats').append('ul')
+        const subScores = d3.select('.pkgInformation').append('g').attr('class', 'subScores')
 
-        // let header = title.selectAll('li')
-        // .data(pkg.title)
-        //
-        // header
-        // .enter()
-        // .append('li') //add class
-        // .attr('class', function(d){
-        //   return d[0]
-        // })
-        // .merge(header)
-        // .text(function(d){
-        //   return  d[1]
-        // })
+        const buildInformation = function(pkg){
 
+          function buildTitle() {
+            const update = title.selectAll('li')
+            .data(pkg.title);
+            const enter = update.enter()
+            .append('li').attr('class', function(d){
+                      return d[0]})
 
-/*
-I'm having a problem with a enter.merge.exit where I have two data bindings at different
-points in a hierarchy of arrays, could you help? I used the same pattern I've used in the past
-for merging here: https://repl.it/H8My  but three new tables are generated each time it is called
-instead of text being updated. After reading more about the update pattern I decided to rewrite the function
-to explicitly divide enter, update, and exit selections here: https://repl.it/H8oF but this
-just generates group tags. Any thoughts on what to change or how I'm misunderstanding data joins
-would be extremely helpful.
-*/
+            const exit = update.exit().remove();
+            update.merge(enter).text(function(d){
+              return  d[1]});
+          }
 
+          function buildGitStats() {
+            const update = gitStats.selectAll('li')
+            .data(pkg.github)
+            const enter = update.enter()
+            .append('li').attr('class', function(d){
+                      return d[0]})
+            const exit = update.exit().remove()
 
-        const subScores = d3.select('.pkgInformation').append('g')
+            update.merge(enter).text(function(d){
+              return  d[1]})
+          }
 
+          buildTitle()
+          buildGitStats()
+        }
         const buildSubScoresChart = function(pkg){
           const update = subScores.selectAll('th')
           .data(pkg.subScores, d => d)
@@ -269,34 +270,10 @@ would be extremely helpful.
 
         const formatText = function(pkg) {
 
-            let header = title.selectAll('li')
-            .data(pkg.title)
-
-            header
-            .enter()
-            .append('li') //add class
-            .attr('class', function(d){
-              return d[0]
-            })
-            .merge(header)
-            .text(function(d){
-              return  d[1]
-            })
 
 
-            let gitStats = github.selectAll('li')
-            .data(pkg.github)
 
-            gitStats
-            .enter()
-            .append('li')
-            .attr('class', function(d){
-              return d[0]
-            })
-            .merge(gitStats)
-            .text(function(d){
-              return d[1]
-            })
+
 
             //let vulnerabilities= status.selectAll('li')
             //.data(module.vulnerabilities)

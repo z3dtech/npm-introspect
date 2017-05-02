@@ -107,15 +107,14 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality], ['popularity', parsedPkg.score.detail.popularity], ['maintenance', parsedPkg.score.detail.maintenance], ['final', parsedPkg.score.final]];
 
-        //filteredPkg.subScores = [['maintenance', parsedPkg.evaluation.maintenance], ['popularity', parsedPkg.evaluation.popularity], ['quality', parsedPkg.evaluation.quality]];
-        let category = ['quality', 'popularity', 'maintenance']; 
-        let subScores = [];
+        let category = ['quality', 'popularity', 'maintenance'];
+        let subScores = [[], [], [], []];
         for (let s in category){
-          let subS = [];
+          let idx = 0;
           for (let c in parsedPkg.evaluation[category[s]]){
-              subS.push([c, parsedPkg.evaluation[category[s]][c]])
+              subScores[idx].push([c, parsedPkg.evaluation[category[s]][c]])
+              idx++
           }
-          subScores.push(subS)
         }
         filteredPkg.subScores = subScores;
 
@@ -156,3 +155,13 @@ temp()
 //   return new Promise(resolve, reject){
 //     requestData()
 //)
+// let category = ['quality', 'popularity', 'maintenance'];
+// let subScores = [];
+// for (let s in category){
+//   let subS = [];
+//   for (let c in parsedPkg.evaluation[category[s]]){
+//       subS.push([c, parsedPkg.evaluation[category[s]][c]])
+//   }
+//   subScores.push(subS)
+// }
+// filteredPkg.subScores = subScores;
