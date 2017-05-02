@@ -102,17 +102,17 @@ window.onload = function() {
           })()
         console.log(scoreScale)
 
-        const popularScale = (function(){    //turn into an object with three p
-          let pScale = {'communityInterest':[], 'downloadsCount':[], 'downloadsAcceleration':[], 'dependentsCount':[]}
-          for (let pkg in data){
-            for(let i = 0; i < data[pkg].subScores[1].length; i++){
-              pScale[data[pkg].subScores[1][i][0]].push(data[pkg].subScores[1][i][1])
-            }
-          }
-          return pScale
-        })()
-
-        console.log(popularScale)
+        // const popularScale = (function(){    //turn into an object with three p
+        //   let pScale = {'communityInterest':[], 'downloadsCount':[], 'downloadsAcceleration':[], 'dependentsCount':[]}
+        //   for (let pkg in data){
+        //     for(let i = 0; i < data[pkg].subScores[1].length; i++){
+        //       pScale[data[pkg].subScores[1][i][0]].push(data[pkg].subScores[1][i][1])
+        //     }
+        //   }
+        //   return pScale
+        // })()
+        //
+        // console.log(popularScale)
 
 
 
@@ -157,7 +157,6 @@ window.onload = function() {
 
         const title = d3.select('.pkgInformation').append('g').attr('class', 'title').append('ul')
         const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats').append('ul')
-        const subScores = d3.select('.pkgInformation').append('g').attr('class', 'subScores')
 
         const buildInformation = function(pkg){
 
@@ -188,26 +187,26 @@ window.onload = function() {
           buildTitle()
           buildGitStats()
         }
+
+        const subScores = d3.select('.pkgInformation').append('g')
+        .attr('class', 'subScores').append('table').append('tr')
+        .append('td').text('Quality').append('td').text('Popularity')
+        .append('td').text('Maintenance')
+
+
         const buildSubScoresChart = function(pkg){
           const update = subScores.selectAll('th')
           .data(pkg.subScores, d => d)
 
-          const enter = update.enter()
-          .append('table').append('tr').append('th')
+          const enter = update.enter().append('tr')
 
           const exit = update.exit().remove()
 
-          update.merge(enter).text(function(d, i){
-                      return subScoreHeading[i].toUpperCase()
-                    })
-                    .attr('transform', (d) => {
-                      return 'translate(' + [0,0] + ')';
-                    })
+          update.merge(enter)
                     .selectAll('td')
                     .data(function(d){
                       return d
                     }).enter()
-                    .append('tr')
                     .append('td')
                     .text(function(d){return d[0] + ' : ' + d[1].toFixed(2)})
 

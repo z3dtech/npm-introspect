@@ -41,10 +41,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.8776831122090791],
-    ["popularity", 0.9280627130867526],
-    ["maintenance", 0.9983623091448248],
-    ["final", 0.9375536914437756]
+    ["quality", 0.8776832921841271],
+    ["popularity", 0.9278120168266804],
+    ["maintenance", 0.9983646086002568],
+    ["final", 0.9374668065546661]
   ],
   "subScores": [
     [
@@ -102,10 +102,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9257744782155631],
-    ["popularity", 0.8833634756725557],
-    ["maintenance", 0.9997978969371949],
-    ["final", 0.9368388238780816]
+    ["quality", 0.9257921305159978],
+    ["popularity", 0.8830457853964739],
+    ["maintenance", 0.9997980545238974],
+    ["final", 0.9367329831269293]
   ],
   "subScores": [
     [
@@ -180,13 +180,13 @@
     ["devDependencies", "tape"],
     ["devDependencies", "uglify-js"]
   ],
-  "vulnerable": ["vulnerable", null],
+  "vulnerable": ["vulnerable", -1],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9191015198809415],
-    ["popularity", 0.7296777650014548],
-    ["maintenance", 0.9999060776821275],
-    ["final", 0.8810848009035361]
+    ["quality", 0.9191041267726676],
+    ["popularity", 0.7313528433410982],
+    ["maintenance", 0.9999061050828645],
+    ["final", 0.8816718699801871]
   ],
   "subScores": [
     [
@@ -231,13 +231,13 @@
     ["devDependencies", "tape"],
     ["devDependencies", "uglify-js"]
   ],
-  "vulnerable": ["vulnerable", null],
+  "vulnerable": ["vulnerable", -1],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.828019687981896],
-    ["popularity", 0.17263653199781973],
-    ["maintenance", 0.9998918192550674],
-    ["final", 0.6587908293330793]
+    ["quality", 0.8280214816284055],
+    ["popularity", 0.17236600290147985],
+    ["maintenance", 0.9998919494410328],
+    ["final", 0.658696727808401]
   ],
   "subScores": [
     [
@@ -334,10 +334,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9426683248411128],
-    ["popularity", 0.9541357382594897],
-    ["maintenance", 0.9730056829891911],
-    ["final", 0.957299994889372]
+    ["quality", 0.9426867019815753],
+    ["popularity", 0.953679127890624],
+    ["maintenance", 0.9730144233549782],
+    ["final", 0.9571487535304333]
   ],
   "subScores": [
     [
@@ -376,13 +376,13 @@
     ["dependencies", "caption"],
     ["devDependencies", "imagemagick-native"]
   ],
-  "vulnerable": ["vulnerable", null],
+  "vulnerable": ["vulnerable", -1],
   "test": ["testScript", null],
   "scores": [
-    ["quality", 0.10505247355171965],
-    ["popularity", 0.011651376066751007],
-    ["maintenance", 0.3333042821164958],
-    ["final", 0.15225022242965225]
+    ["quality", 0.10506881292354804],
+    ["popularity", 0.01165099831168805],
+    ["maintenance", 0.3333043207870346],
+    ["final", 0.15225500556161733]
   ],
   "subScores": [
     [
@@ -451,10 +451,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9854955446083306],
-    ["popularity", 0.6974364445371088],
-    ["maintenance", 0.9993295974414669],
-    ["final", 0.8895167780750006]
+    ["quality", 0.9854995171195009],
+    ["popularity", 0.697841315849445],
+    ["maintenance", 0.9993298279751042],
+    ["final", 0.8896597554744423]
   ],
   "subScores": [
     [
@@ -500,10 +500,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9225597224259974],
-    ["popularity", 0.8535049452708765],
-    ["maintenance", 0.1523530275566319],
-    ["final", 0.6288182072174271]
+    ["quality", 0.9225652180945392],
+    ["popularity", 0.8533530506614372],
+    ["maintenance", 0.15235679664921017],
+    ["final", 0.6287680119870883]
   ],
   "subScores": [
     [
@@ -577,10 +577,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9982217432127843],
-    ["popularity", 0.9307089005208611],
-    ["maintenance", 0.9826588065389639],
-    ["final", 0.9691452204347739]
+    ["quality", 0.9982217574683238],
+    ["popularity", 0.931105836919528],
+    ["maintenance", 0.9826646599732547],
+    ["final", 0.969286201152971]
   ],
   "subScores": [
     [
@@ -642,10 +642,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9912208910601545],
-    ["popularity", 0.7215059409224587],
-    ["maintenance", 0.9998453931117928],
-    ["final", 0.8998392342300343]
+    ["quality", 0.9912280328946984],
+    ["popularity", 0.7210422824636987],
+    ["maintenance", 0.9998455366677446],
+    ["final", 0.8996791465644147]
   ],
   "subScores": [
     [
@@ -694,10 +694,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.7252820423883232],
-    ["popularity", 0.8056638852317537],
-    ["maintenance", 0.4982874857016677],
-    ["final", 0.6739675925431944]
+    ["quality", 0.725322805806446],
+    ["popularity", 0.8068745950166738],
+    ["maintenance", 0.49829003237816794],
+    ["final", 0.6744044613301283]
   ],
   "subScores": [
     [
@@ -727,12 +727,12 @@
     ["version", "v2.81.0"]
   ],
   "github": [
-    ["stars", 15237],
-    ["forks", 1874]
+    ["stars", 15209],
+    ["forks", 1869]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["aws-sign2", "hawk", "har-validator", "performance-now", "qs"]
+    ["aws-sign2", "hawk", "performance-now", "qs", "har-validator"]
   ],
   "dependencies": [
     ["dependencies", "aws-sign2"],
@@ -778,33 +778,33 @@
     ["devDependencies", "tape"],
     ["devDependencies", "taper"]
   ],
-  "vulnerable": ["vulnerable", null],
+  "vulnerable": ["vulnerable", -1],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9129420361481523],
-    ["popularity", 0.9512229334155191],
-    ["maintenance", 0.6666174678462544],
-    ["final", 0.8401267512860663]
+    ["quality", 0.912958893127046],
+    ["popularity", 0.9516615716924847],
+    ["maintenance", 0.6666178294348177],
+    ["final", 0.8402854583326697]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 18740],
+      ["communityInterest", 18705],
       ["releasesFrequency", 0.9199486301369864]
     ],
     [
       ["tests", 0.7395],
-      ["downloadsCount", 23043661],
-      ["commitsFrequency", 0.9343356164383562]
+      ["downloadsCount", 23158970.666666668],
+      ["commitsFrequency", 0.9356506849315068]
     ],
     [
       ["health", 0.5454545454545454],
-      ["downloadsAcceleration", 60788.361054033536],
+      ["downloadsAcceleration", 64174.58472222224],
       ["openIssues", 1]
     ],
     [
       ["branding", 0.6],
-      ["dependentsCount", 20395],
+      ["dependentsCount", 20362],
       ["issuesDistribution", 0]
     ]
   ]
@@ -847,10 +847,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.988242304205532],
-    ["popularity", 0.6689255244712448],
-    ["maintenance", 0.9686686084399794],
-    ["final", 0.869630637780588]
+    ["quality", 0.9882435564030463],
+    ["popularity", 0.6686249260137231],
+    ["maintenance", 0.9687036606230267],
+    ["final", 0.8695380722437763]
   ],
   "subScores": [
     [
@@ -900,13 +900,13 @@
     ["devDependencies", "strip-ansi"],
     ["devDependencies", "xo"]
   ],
-  "vulnerable": ["vulnerable", null],
+  "vulnerable": ["vulnerable", -1],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9109898585953933],
-    ["popularity", 0.6695826902759855],
-    ["maintenance", 0.9997978969371949],
-    ["final", 0.8575801631032312]
+    ["quality", 0.9109916657506836],
+    ["popularity", 0.6691619873333011],
+    ["maintenance", 0.9997980545238974],
+    ["final", 0.8574335143752245]
   ],
   "subScores": [
     [
@@ -983,10 +983,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9411002474496256],
-    ["popularity", 0.855872029100186],
-    ["maintenance", 0.9951623695060794],
-    ["final", 0.9301921137470804]
+    ["quality", 0.9411166451624448],
+    ["popularity", 0.8553092853421138],
+    ["maintenance", 0.9951639796972169],
+    ["final", 0.9300006363124991]
   ],
   "subScores": [
     [
@@ -1109,10 +1109,10 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9356198517502835],
-    ["popularity", 0.8737492222073273],
-    ["maintenance", 0.7851469895310281],
-    ["final", 0.8612996296335094]
+    ["quality", 0.9356376562602585],
+    ["popularity", 0.8748363780954905],
+    ["maintenance", 0.7851593616588964],
+    ["final", 0.861689805792113]
   ],
   "subScores": [
     [
