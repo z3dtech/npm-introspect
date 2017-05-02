@@ -12,10 +12,21 @@
 
 <body>
 
-  <div class="subScores"></div>
-  <div class="viewport">
-      <svg class="scores"></svg>
+  <div class="pkgInformation"></div>
+  <div class="pkgList">
+    <div class="scoreChart">
+        <svg class="scores"></svg>
+    </div>
+    <div class="relatedPkg">
+      <div class="relatedList">
+      </div>
+      <form class="relatedSearch" action="/">
+        Search for Package:
+        <input type="text" name="package" value="Package name"
+      </form>
+    </div>
   </div>
+
 
   <svg class ="dependencies"></svg>
 

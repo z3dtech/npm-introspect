@@ -185,7 +185,7 @@ would be extremely helpful.
 */
 
 
-        const subScores = d3.select('.subScores').append('g')
+        const subScores = d3.select('.pkgInformation').append('g')
 
         const buildSubScoresChart = function(pkg){
           const update = subScores.selectAll('th')

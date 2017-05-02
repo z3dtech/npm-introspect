@@ -1,3 +1,13 @@
+/*@media (min-width:320px) {}
+
+@media (min-width:801px)*/
+
+
+/*can also use max-width and have the rules to apply in this brackets
+
+@media screen and (max-width: 90px)
+*/
+
 .container{
 
   height: 100vh;
@@ -7,7 +17,7 @@
 
 }
 
-.viewport{
+.scoreChart{
   /*overflow: scroll;*/
   width: 250px;
   height: 400px;
