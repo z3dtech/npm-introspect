@@ -4,8 +4,8 @@
     ["version", "v3.5.0"]
   ],
   "github": [
-    ["stars", 14447],
-    ["forks", 1781]
+    ["stars", 14471],
+    ["forks", 1783]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
@@ -41,31 +41,29 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.8776831122090791],
-    ["popularity", 0.9280627130867526],
-    ["maintenance", 0.9983623091448248],
-    ["final", 0.9375536914437756]
+    ["quality", 0.8776874827507879],
+    ["popularity", 0.926280193443551],
+    ["maintenance", 0.9983656583830622],
+    ["final", 0.9369322929645508]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 17140],
-      ["releasesFrequency", 0.7666095890410959]
-    ],
-    [
       ["tests", 0.85],
-      ["downloadsCount", 13998296.333333334],
-      ["commitsFrequency", 0.9094246575342466]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 38417.79434931505],
-      ["openIssues", 1]
+      ["branding", 0]
     ],
     [
-      ["branding", 0],
-      ["dependentsCount", 11735],
-      ["issuesDistribution", 0.9002382548347622]
+      ["communityInterest", 17165],
+      ["downloadsCount", 14056353],
+      ["downloadsAcceleration", 33571.7818302892],
+      ["dependentsCount", 11813]
+    ],
+    [
+      ["releasesFrequency", 0.7666095890410959],
+      ["commitsFrequency", 0.912109589041096],
+      ["openIssues", 1],
+      ["issuesDistribution", 0.9003461436853241]
     ]
   ]
 }, {
@@ -74,7 +72,7 @@
     ["version", "v1.1.3"]
   ],
   "github": [
-    ["stars", 5219],
+    ["stars", 5231],
     ["forks", 175]
   ],
   "vulnerabilities": [null],
@@ -102,30 +100,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9257744782155631],
-    ["popularity", 0.8833634756725557],
-    ["maintenance", 0.9997978969371949],
-    ["final", 0.9368388238780816]
+    ["quality", 0.9258206159476032],
+    ["popularity", 0.8851504264334851],
+    ["maintenance", 0.9997980862683575],
+    ["final", 0.9374781642299258]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 6105],
-      ["releasesFrequency", 0.9]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 20364062.333333332],
-      ["commitsFrequency", 0.9]
-    ],
-    [
       ["health", 0.5],
-      ["downloadsAcceleration", 19398.756944444467],
-      ["openIssues", 1]
+      ["branding", 0.3]
     ],
     [
-      ["branding", 0.3],
-      ["dependentsCount", 14972],
+      ["communityInterest", 6117],
+      ["downloadsCount", 20297667],
+      ["downloadsAcceleration", 21325.069482496183],
+      ["dependentsCount", 15013]
+    ],
+    [
+      ["releasesFrequency", 0.9],
+      ["commitsFrequency", 0.9],
+      ["openIssues", 1],
       ["issuesDistribution", 0.9]
     ]
   ]
@@ -183,30 +179,28 @@
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9191015198809415],
-    ["popularity", 0.7296777650014548],
-    ["maintenance", 0.9999060776821275],
-    ["final", 0.8810848009035361]
+    ["quality", 0.9191194028610128],
+    ["popularity", 0.7295695369073341],
+    ["maintenance", 0.9999061784463309],
+    ["final", 0.8810523212320864]
   ],
   "subScores": [
     [
       ["carefulness", 0.8699999999999999],
-      ["communityInterest", 83719],
-      ["releasesFrequency", 1]
-    ],
-    [
       ["tests", 0.6],
-      ["downloadsCount", 753983],
-      ["commitsFrequency", 1]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 3347.6786149162863],
-      ["openIssues", 1]
+      ["branding", 0.4]
     ],
     [
-      ["branding", 0.4],
-      ["dependentsCount", 1154],
+      ["communityInterest", 83719],
+      ["downloadsCount", 753983],
+      ["downloadsAcceleration", 3347.6786149162863],
+      ["dependentsCount", 1154]
+    ],
+    [
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 1],
+      ["openIssues", 1],
       ["issuesDistribution", 0.9]
     ]
   ]
@@ -234,30 +228,28 @@
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.828019687981896],
-    ["popularity", 0.17263653199781973],
-    ["maintenance", 0.9998918192550674],
-    ["final", 0.6587908293330793]
+    ["quality", 0.8280355999850997],
+    ["popularity", 0.17199823333254288],
+    ["maintenance", 0.9998919078220265],
+    ["final", 0.6585722293996292]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 46],
-      ["releasesFrequency", 0.9]
-    ],
-    [
       ["tests", 0.6],
-      ["downloadsCount", 4850.333333333333],
-      ["commitsFrequency", 0.9]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 52.23713850837139],
-      ["openIssues", 1]
+      ["branding", 0]
     ],
     [
-      ["branding", 0],
-      ["dependentsCount", 13],
+      ["communityInterest", 46],
+      ["downloadsCount", 4850.333333333333],
+      ["downloadsAcceleration", 52.23713850837139],
+      ["dependentsCount", 13]
+    ],
+    [
+      ["releasesFrequency", 0.9],
+      ["commitsFrequency", 0.9],
+      ["openIssues", 1],
       ["issuesDistribution", 1]
     ]
   ]
@@ -267,12 +259,12 @@
     ["version", "v4.15.2"]
   ],
   "github": [
-    ["stars", 31477],
-    ["forks", 5694]
+    ["stars", 31535],
+    ["forks", 5697]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["array-flatten", "debug", "serve-static", "qs", "path-to-regexp", "send"]
+    ["debug", "array-flatten", "qs", "path-to-regexp", "serve-static", "send"]
   ],
   "dependencies": [
     ["dependencies", "accepts"],
@@ -334,31 +326,29 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9426683248411128],
-    ["popularity", 0.9541357382594897],
-    ["maintenance", 0.9730056829891911],
-    ["final", 0.957299994889372]
+    ["quality", 0.9427155750794461],
+    ["popularity", 0.9517840184248079],
+    ["maintenance", 0.9724252810582352],
+    ["final", 0.9562879273428988]
   ],
   "subScores": [
     [
       ["carefulness", 0.8699999999999999],
-      ["communityInterest", 40990],
-      ["releasesFrequency", 1]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 11067806.333333334],
-      ["commitsFrequency", 0.9999109589041096]
-    ],
-    [
       ["health", 0.5714285714285714],
-      ["downloadsAcceleration", 39127.6147260274],
-      ["openIssues", 1]
+      ["branding", 1]
     ],
     [
-      ["branding", 1],
-      ["dependentsCount", 14245],
-      ["issuesDistribution", 0.5194598425932639]
+      ["communityInterest", 41048],
+      ["downloadsCount", 10968965],
+      ["downloadsAcceleration", 35323.26442161338],
+      ["dependentsCount", 14291]
+    ],
+    [
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 0.999582191780822],
+      ["openIssues", 1],
+      ["issuesDistribution", 0.5169245638699225]
     ]
   ]
 }, {
@@ -379,30 +369,28 @@
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", null],
   "scores": [
-    ["quality", 0.10505247355171965],
-    ["popularity", 0.011651376066751007],
-    ["maintenance", 0.3333042821164958],
-    ["final", 0.15225022242965225]
+    ["quality", 0.10508826648805028],
+    ["popularity", 0.011654036373584854],
+    ["maintenance", 0.3333043114173237],
+    ["final", 0.15226190167323306]
   ],
   "subScores": [
     [
       ["carefulness", 0.165],
-      ["communityInterest", 0],
-      ["releasesFrequency", 0.9299657534246576]
-    ],
-    [
       ["tests", 0],
-      ["downloadsCount", 43],
-      ["commitsFrequency", 0]
-    ],
-    [
       ["health", 0],
-      ["downloadsAcceleration", 0.4040525114155251],
-      ["openIssues", 0]
+      ["branding", 0]
     ],
     [
-      ["branding", 0],
-      ["dependentsCount", 0],
+      ["communityInterest", 0],
+      ["downloadsCount", 43],
+      ["downloadsAcceleration", 0.4040525114155251],
+      ["dependentsCount", 0]
+    ],
+    [
+      ["releasesFrequency", 0.9299657534246576],
+      ["commitsFrequency", 0],
+      ["openIssues", 0],
       ["issuesDistribution", 0]
     ]
   ]
@@ -451,30 +439,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9854955446083306],
-    ["popularity", 0.6974364445371088],
-    ["maintenance", 0.9993295974414669],
-    ["final", 0.8895167780750006]
+    ["quality", 0.9855055311070362],
+    ["popularity", 0.6974111735679352],
+    ["maintenance", 0.9993301472848967],
+    ["final", 0.889511121630602]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 1826],
-      ["releasesFrequency", 1]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 5080297],
-      ["commitsFrequency", 0.8077054794520548]
-    ],
-    [
       ["health", 0.8181818181818181],
-      ["downloadsAcceleration", 20691.012366818868],
-      ["openIssues", 1]
+      ["branding", 0.44999999999999996]
     ],
     [
-      ["branding", 0.44999999999999996],
-      ["dependentsCount", 785],
+      ["communityInterest", 1826],
+      ["downloadsCount", 5080297],
+      ["downloadsAcceleration", 20691.012366818868],
+      ["dependentsCount", 785]
+    ],
+    [
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 0.8077054794520548],
+      ["openIssues", 1],
       ["issuesDistribution", 0.8316553794435086]
     ]
   ]
@@ -484,8 +470,8 @@
     ["version", "v1.2.0"]
   ],
   "github": [
-    ["stars", 2186],
-    ["forks", 122]
+    ["stars", 2197],
+    ["forks", 124]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
@@ -500,30 +486,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9225597224259974],
-    ["popularity", 0.8535049452708765],
-    ["maintenance", 0.1523530275566319],
-    ["final", 0.6288182072174271]
+    ["quality", 0.9225774798214964],
+    ["popularity", 0.8509035042974868],
+    ["maintenance", 0.15564433338665118],
+    ["final", 0.6290649871358972]
   ],
   "subScores": [
     [
       ["carefulness", 0.71],
-      ["communityInterest", 2707],
-      ["releasesFrequency", 0]
-    ],
-    [
       ["tests", 0.85],
-      ["downloadsCount", 36339849],
-      ["commitsFrequency", 0]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 73209.32652207004],
-      ["openIssues", 0.5490196078431373]
+      ["branding", 0.15]
     ],
     [
-      ["branding", 0.15],
-      ["dependentsCount", 6277],
+      ["communityInterest", 2720],
+      ["downloadsCount", 36329382.666666664],
+      ["downloadsAcceleration", 59237.05711567728],
+      ["dependentsCount", 6304]
+    ],
+    [
+      ["releasesFrequency", 0],
+      ["commitsFrequency", 0],
+      ["openIssues", 0.5770308123249299],
       ["issuesDistribution", 0]
     ]
   ]
@@ -533,8 +517,8 @@
     ["version", "v2.18.1"]
   ],
   "github": [
-    ["stars", 31074],
-    ["forks", 4511]
+    ["stars", 31138],
+    ["forks", 4518]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
@@ -577,31 +561,29 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9982217432127843],
-    ["popularity", 0.9307089005208611],
-    ["maintenance", 0.9826588065389639],
-    ["final", 0.9691452204347739]
+    ["quality", 0.9982220893967862],
+    ["popularity", 0.9280953324416202],
+    ["maintenance", 0.9825634574985314],
+    ["final", 0.9681972032980888]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 37287],
-      ["releasesFrequency", 0.935359589041096]
-    ],
-    [
       ["tests", 0.988],
-      ["downloadsCount", 8465558.666666666],
-      ["commitsFrequency", 1]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 30550.58947869102],
-      ["openIssues", 1]
+      ["branding", 1]
     ],
     [
-      ["branding", 1],
-      ["dependentsCount", 8622],
-      ["issuesDistribution", 0.5672964693178767]
+      ["communityInterest", 37358],
+      ["downloadsCount", 8545959],
+      ["downloadsAcceleration", 26699.33377092846],
+      ["dependentsCount", 8684]
+    ],
+    [
+      ["releasesFrequency", 0.935359589041096],
+      ["commitsFrequency", 1],
+      ["openIssues", 1],
+      ["issuesDistribution", 0.5666008100837823]
     ]
   ]
 }, {
@@ -642,30 +624,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9912208910601545],
-    ["popularity", 0.7215059409224587],
-    ["maintenance", 0.9998453931117928],
-    ["final", 0.8998392342300343]
+    ["quality", 0.9912396184615794],
+    ["popularity", 0.7204602677966023],
+    ["maintenance", 0.9998455308462033],
+    ["final", 0.8994789150634557]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 2889],
-      ["releasesFrequency", 0.9]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 3259210.3333333335],
-      ["commitsFrequency", 0.9]
-    ],
-    [
       ["health", 0.75],
-      ["downloadsAcceleration", 7639.774181887369],
-      ["openIssues", 1]
+      ["branding", 0.6]
     ],
     [
-      ["branding", 0.6],
-      ["dependentsCount", 2132],
+      ["communityInterest", 2889],
+      ["downloadsCount", 3259210.3333333335],
+      ["downloadsAcceleration", 7639.774181887369],
+      ["dependentsCount", 2132]
+    ],
+    [
+      ["releasesFrequency", 0.9],
+      ["commitsFrequency", 0.9],
+      ["openIssues", 1],
       ["issuesDistribution", 0.9198581186101132]
     ]
   ]
@@ -694,30 +674,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.7252820423883232],
-    ["popularity", 0.8056638852317537],
-    ["maintenance", 0.4982874857016677],
-    ["final", 0.6739675925431944]
+    ["quality", 0.725392095132832],
+    ["popularity", 0.8061307275700083],
+    ["maintenance", 0.4982894153684975],
+    ["final", 0.6741646785683265]
   ],
   "subScores": [
     [
       ["carefulness", 0.355],
-      ["communityInterest", 2720],
-      ["releasesFrequency", 0.7591609589041095]
-    ],
-    [
       ["tests", 0.6],
-      ["downloadsCount", 12313813.333333334],
-      ["commitsFrequency", 0]
-    ],
-    [
       ["health", 0.5],
-      ["downloadsAcceleration", 24601.53046042619],
-      ["openIssues", 1]
+      ["branding", 0.15]
     ],
     [
-      ["branding", 0.15],
-      ["dependentsCount", 3524],
+      ["communityInterest", 2720],
+      ["downloadsCount", 12313813.333333334],
+      ["downloadsAcceleration", 24601.53046042619],
+      ["dependentsCount", 3524]
+    ],
+    [
+      ["releasesFrequency", 0.7591609589041095],
+      ["commitsFrequency", 0],
+      ["openIssues", 1],
       ["issuesDistribution", 0]
     ]
   ]
@@ -727,12 +705,12 @@
     ["version", "v2.81.0"]
   ],
   "github": [
-    ["stars", 15237],
+    ["stars", 15246],
     ["forks", 1874]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["aws-sign2", "hawk", "har-validator", "performance-now", "qs"]
+    ["aws-sign2", "hawk", "performance-now", "qs", "har-validator"]
   ],
   "dependencies": [
     ["dependencies", "aws-sign2"],
@@ -781,30 +759,28 @@
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9129420361481523],
-    ["popularity", 0.9512229334155191],
-    ["maintenance", 0.6666174678462544],
-    ["final", 0.8401267512860663]
+    ["quality", 0.9129931974657453],
+    ["popularity", 0.9512311091184258],
+    ["maintenance", 0.6666175117712712],
+    ["final", 0.8401449765511174]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 18740],
-      ["releasesFrequency", 0.9199486301369864]
-    ],
-    [
       ["tests", 0.7395],
-      ["downloadsCount", 23043661],
-      ["commitsFrequency", 0.9343356164383562]
-    ],
-    [
       ["health", 0.5454545454545454],
-      ["downloadsAcceleration", 60788.361054033536],
-      ["openIssues", 1]
+      ["branding", 0.6]
     ],
     [
-      ["branding", 0.6],
-      ["dependentsCount", 20395],
+      ["communityInterest", 18749],
+      ["downloadsCount", 23043661],
+      ["downloadsAcceleration", 60788.361054033536],
+      ["dependentsCount", 20399]
+    ],
+    [
+      ["releasesFrequency", 0.9199486301369864],
+      ["commitsFrequency", 0.9343356164383562],
+      ["openIssues", 1],
       ["issuesDistribution", 0]
     ]
   ]
@@ -814,7 +790,7 @@
     ["version", "v4.2.0"]
   ],
   "github": [
-    ["stars", 1632],
+    ["stars", 1647],
     ["forks", 116]
   ],
   "vulnerabilities": [null],
@@ -847,31 +823,29 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.988242304205532],
-    ["popularity", 0.6689255244712448],
-    ["maintenance", 0.9686686084399794],
-    ["final", 0.869630637780588]
+    ["quality", 0.9882451719530903],
+    ["popularity", 0.6688185600667109],
+    ["maintenance", 0.9689489278499697],
+    ["final", 0.8696921723567652]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 1951],
-      ["releasesFrequency", 0.5474315068493152]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 1519813.6666666667],
-      ["commitsFrequency", 0.7491952054794521]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 9904.006430745814],
-      ["openIssues", 1]
+      ["branding", 0.44999999999999996]
     ],
     [
-      ["branding", 0.44999999999999996],
-      ["dependentsCount", 1661],
-      ["issuesDistribution", 0.6115784387473526]
+      ["communityInterest", 1967],
+      ["downloadsCount", 1564444],
+      ["downloadsAcceleration", 9685.24497716895],
+      ["dependentsCount", 1675]
+    ],
+    [
+      ["releasesFrequency", 0.5474315068493152],
+      ["commitsFrequency", 0.7483732876712329],
+      ["openIssues", 1],
+      ["issuesDistribution", 0.6137305900752174]
     ]
   ]
 }, {
@@ -903,30 +877,28 @@
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9109898585953933],
-    ["popularity", 0.6695826902759855],
-    ["maintenance", 0.9997978969371949],
-    ["final", 0.8575801631032312]
+    ["quality", 0.9110075464927662],
+    ["popularity", 0.6681112652619106],
+    ["maintenance", 0.9997980862683575],
+    ["final", 0.8570705369834236]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 807],
-      ["releasesFrequency", 0.9]
-    ],
-    [
       ["tests", 0.6],
-      ["downloadsCount", 3821768.6666666665],
-      ["commitsFrequency", 0.9]
-    ],
-    [
       ["health", 1],
-      ["downloadsAcceleration", 14291.857857686453],
-      ["openIssues", 1]
+      ["branding", 0.15]
     ],
     [
-      ["branding", 0.15],
-      ["dependentsCount", 1232],
+      ["communityInterest", 807],
+      ["downloadsCount", 3821768.6666666665],
+      ["downloadsAcceleration", 14291.857857686453],
+      ["dependentsCount", 1232]
+    ],
+    [
+      ["releasesFrequency", 0.9],
+      ["commitsFrequency", 0.9],
+      ["openIssues", 1],
       ["issuesDistribution", 0.9]
     ]
   ]
@@ -983,30 +955,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9411002474496256],
-    ["popularity", 0.855872029100186],
-    ["maintenance", 0.9951623695060794],
-    ["final", 0.9301921137470804]
+    ["quality", 0.9411432032247126],
+    ["popularity", 0.854349376146869],
+    ["maintenance", 0.9951682906120225],
+    ["final", 0.9296741443330256]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
-      ["communityInterest", 3589],
-      ["releasesFrequency", 1]
-    ],
-    [
       ["tests", 1],
-      ["downloadsCount", 22952348.666666668],
-      ["commitsFrequency", 1]
-    ],
-    [
       ["health", 0.5],
-      ["downloadsAcceleration", 83811.2288622527],
-      ["openIssues", 1]
+      ["branding", 1]
     ],
     [
-      ["branding", 1],
-      ["dependentsCount", 4816],
+      ["communityInterest", 3589],
+      ["downloadsCount", 22952348.666666668],
+      ["downloadsAcceleration", 83811.2288622527],
+      ["dependentsCount", 4816]
+    ],
+    [
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 1],
+      ["openIssues", 1],
       ["issuesDistribution", 0.6852873662531999]
     ]
   ]
@@ -1109,30 +1079,28 @@
   }]],
   "test": ["testScript", true],
   "scores": [
-    ["quality", 0.9356198517502835],
-    ["popularity", 0.8737492222073273],
-    ["maintenance", 0.7851469895310281],
-    ["final", 0.8612996296335094]
+    ["quality", 0.9356661797130716],
+    ["popularity", 0.8740570580122605],
+    ["maintenance", 0.7851925228040777],
+    ["final", 0.8614372071996399]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["communityInterest", 32054],
-      ["releasesFrequency", 1]
-    ],
-    [
       ["tests", 0.9924999999999998],
-      ["downloadsCount", 5194975],
-      ["commitsFrequency", 1]
-    ],
-    [
       ["health", 0.5238095238095238],
-      ["downloadsAcceleration", 29856.946936834094],
-      ["openIssues", 1]
+      ["branding", 0.6]
     ],
     [
-      ["branding", 0.6],
-      ["dependentsCount", 2984],
+      ["communityInterest", 32054],
+      ["downloadsCount", 5194975],
+      ["downloadsAcceleration", 29856.946936834094],
+      ["dependentsCount", 2984]
+    ],
+    [
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 1],
+      ["openIssues", 1],
       ["issuesDistribution", 0.16395291699476255]
     ]
   ]

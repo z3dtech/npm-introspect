@@ -19,8 +19,13 @@
 
 .scoreChart{
   /*overflow: scroll;*/
-  width: 250px;
+  width: 100vw;
   height: 400px;
   overflow-x: auto;
 
+}
+
+ul{
+  list-style: none;
+  display: inline-block;
 }

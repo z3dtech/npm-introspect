@@ -131,7 +131,6 @@ window.onload = function() {
         const handleClick = function(e, that){
           // popY.domain([d3.extent()]) //move
           buildInformation(e)
-          buildSubScoresChart(e)
           buildDependencies(e)
         }
 
@@ -159,6 +158,16 @@ window.onload = function() {
         const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats').append('ul')
 
         const buildInformation = function(pkg){
+          function capitalize(str){
+            return str.charAt(0).toUpperCase() + str.slice(1)
+          }
+
+          //don't bind the data, just use
+          // for loops to bind the data
+          //to span elements and change the inner html
+          //hardcode all inside the html and focus on the arts that matter
+
+
 
           function buildTitle() {
             const update = title.selectAll('li')
@@ -184,39 +193,54 @@ window.onload = function() {
               return  d[1]})
           }
 
+          function buildSS(){
+            for (let i = 0; i < subScoreHeading.length; i++){
+              for(let j = 0; j < 4; j++){
+                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1]  //set up pretty print
+              }
+            }
+          }
+
+          buildSS()
           buildTitle()
           buildGitStats()
         }
 
-        const subScores = d3.select('.pkgInformation').append('g')
-        .attr('class', 'subScores').append('table').append('tr')
-        .append('td').text('Quality').append('td').text('Popularity')
-        .append('td').text('Maintenance')
 
 
-        const buildSubScoresChart = function(pkg){
-          const update = subScores.selectAll('th')
-          .data(pkg.subScores, d => d)
-
-          const enter = update.enter().append('tr')
-
-          const exit = update.exit().remove()
-
-          update.merge(enter)
-                    .selectAll('td')
-                    .data(function(d){
-                      return d
-                    }).enter()
-                    .append('td')
-                    .text(function(d){return d[0] + ' : ' + d[1].toFixed(2)})
-
-        }
+        // const subScores = d3.select('.pkgInformation').append('g')
+        // .attr('class', 'subScores').append('table')
+        //
+        // subScores.append('td').text('Quality')
+        // subScores.append('td').text('Popularity')
+        // subScores.append('td').text('Maintenance')
 
 
+        // const buildSubScoresChart = function(pkg){
+        //
+        //   const update = subScores.selectAll('td')
+        //   .data(pkg.subScores, d => d)
+        //
+        //   const enter = update.enter()
+        //
+        //   const exit = update.exit().remove()
+        //
+        //   update.merge(enter).append('tr')
+        //             .selectAll(' tr td')
+        //             .data(function(d){
+        //               return d
+        //             }).enter()
+        //             .append('td')
+        //             .text(function(d){return d[0] + ' : ' + d[1].toFixed(2)})
+        //
+        //
+        // }
 
-        const buildPopularityChart = function(pkg){
-          console.log('here we are')
-        }
+
+
+        // const buildPopularityChart = function(pkg){
+        //   console.log('here we are')
+        // }
         const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
           .selectAll('g')
           .data(data);

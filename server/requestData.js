@@ -108,13 +108,13 @@ var pkgInfoParse = function(pkgInfo) {
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality], ['popularity', parsedPkg.score.detail.popularity], ['maintenance', parsedPkg.score.detail.maintenance], ['final', parsedPkg.score.final]];
 
         let category = ['quality', 'popularity', 'maintenance'];
-        let subScores = [[], [], [], []];
+        let subScores = [];
         for (let s in category){
-          let idx = 0;
+          let sScores = []
           for (let c in parsedPkg.evaluation[category[s]]){
-              subScores[idx].push([c, parsedPkg.evaluation[category[s]][c]])
-              idx++
+              sScores.push([c, parsedPkg.evaluation[category[s]][c]])
           }
+          subScores.push(sScores)
         }
         filteredPkg.subScores = subScores;
 
