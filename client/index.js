@@ -153,53 +153,55 @@ window.onload = function() {
         //dependencyLinks
 
         const simulation = d3.forceSimulation()
-        .force('center', d3.forceCenter(width/2, height/2));
+        .force("collide",d3.forceCollide( function(d){return d.r + 8 }).iterations(16))
+        .force('center', d3.forceCenter(width/2, height/2))
+        .force("charge", d3.forceManyBody())
+        .force("y", d3.forceY(0))
+        .force("x", d3.forceX(0));
 
         const buildDependencies = function(pkg){
 
-          const node = dependencies.append('g')
-          .attr('class', 'node')
-          .selectAll('node')
-          .data(pkg.dependencies)
-          .enter().append('circle')
-          .attr('r', 5)
+
+          /////////////////////////////////////////////////////
+          const update = dependencies.selectAll('g.circles')
+          .data(pkg.dependencies, d => d)
+
+          const enter = update.enter().append('g')
+          .attr('transform', (d) => {
+            return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
+          })
+          .attr('class', 'circles');
+
+          enter.append('circle')
           .attr('fill', function(d){
             return '#43985E'
+          });
+
+          enter.append('text')
+          .text(function(d){
+            return d[1]
+          });
+
+          const exit = update.exit().remove();
+
+          update.merge(enter).selectAll('circle').attrs({
+              r: 5
+            })
+          .attr('class', function(d){
+            d[0]
           })
 
-          node.append('title')        //error here
-            .text(function(d){
-              return 'ahhhhhhhfuck'
-            })
 
           simulation
             .nodes(pkg.dependencies)
             .on('tick', ticked)
 
           function ticked(){
-            node
+            enter
               .attr("cx", function(d) { return d.x; })
               .attr("cy", function(d) { return d.y; });
             }
           }
-
-          // let dependenciesGraph = dependencies.append('g')
-          // .selectAll('g')
-          // .data(pkg.dependencies)
-          // .enter();
-          //
-          // dependenciesGraph.append('g').merge(dependenciesGraph)
-          // .selectAll('circle')
-          // .data((d) => {
-          //   return d[1]
-          // }).enter().append('circle')
-          // .attrs({
-          //   cx: (d, i) => { return 20 * i},
-          //   cy: (d, i) => { return 20 * i},
-          //   r: (d, i) => {return 15}
-          // })
-
-
 
 
         const title = d3.select('.pkgInformation').append('g').attr('class', 'title')
@@ -225,6 +227,8 @@ window.onload = function() {
                       return d[0]})
 
             const exit = update.exit().remove();
+
+
             update.merge(enter).text(function(d){
               return  d[1]});
           }
@@ -481,21 +485,6 @@ window.onload = function() {
         //
 
 
-
-
-
-          // .each(function(d){
-          //     d3.select(this).append('circle')
-          //     .attr('d', function(d){
-          //       console.log(d)
-          //     })
-              // .each(function(d))
-              // d.scores.each((p ,i) => (console.log(p[2] + '  :  ' +  i)))
-            //})
-
-          // .append('circle')
-          // // .attr('d', function(d){})
-          //
 
 
 
