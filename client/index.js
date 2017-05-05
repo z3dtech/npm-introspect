@@ -42,6 +42,9 @@ window.onload = function() {
         sX0 = d3.scaleBand()  //group spacing
           .rangeRound([0, width])
           .paddingInner(0.1),
+        axisScale = d3.scaleBand()  //group spacing
+          .rangeRound([0, width])
+          .paddingInner(0.1),
         ssX0 = d3.scaleBand()  //spacing for subscore groups
           .rangeRound([0, width])
           .paddingInner(0.1),
@@ -74,6 +77,16 @@ window.onload = function() {
           return names
         })()
 
+        const pkgNames = (function(){
+          let names = []
+          for(let pkg in data){
+          names.push(data[pkg].title[0][1])
+          }
+          return names
+        })()
+
+        console.log(pkgs)
+
         const subScoreHeading = ['quality', 'popularity', 'maintenance'];
         sX0.domain(pkgs)
         sX1.domain(subScoreHeading).rangeRound([0, sX0.bandwidth()]);
@@ -82,7 +95,7 @@ window.onload = function() {
         ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
 
 
-
+        const star = '\u2605';   //U+2606 for other star
 
 
         const dependencies = d3.select('.dependencies')
@@ -155,7 +168,7 @@ window.onload = function() {
 
 
         const title = d3.select('.pkgInformation').append('g').attr('class', 'title').append('ul')
-        const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats').append('ul')
+        const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats')
 
         const buildInformation = function(pkg){
           function capitalize(str){
@@ -170,10 +183,10 @@ window.onload = function() {
 
 
           function buildTitle() {
-            const update = title.selectAll('li')
+            const update = title.selectAll('span')
             .data(pkg.title);
             const enter = update.enter()
-            .append('li').attr('class', function(d){
+            .append('span').attr('class', function(d){
                       return d[0]})
 
             const exit = update.exit().remove();
@@ -205,6 +218,7 @@ window.onload = function() {
           buildTitle()
           buildGitStats()
         }
+
 
 
 
@@ -275,6 +289,13 @@ window.onload = function() {
 
             buildScoresChart.exit().remove();
 
+
+        scores.append('g')
+        .attr('class', 'axis')
+        .attr("transform", "translate(0," + 450 + ")")
+        .call(d3.axisBottom(axisScale.domain(pkgNames)))
+        .selectAll('text')
+        .attr('transform', 'rotate(90)')  //they neeed to be shifted down to fit
 
 
 

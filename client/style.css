@@ -8,24 +8,87 @@
 @media screen and (max-width: 90px)
 */
 
-.container{
-
-  height: 100vh;
-  width: 100vw;
-  border: 5px solid black;
-  text-align: center;       /*use flex with text align- might sabea lot of probs  */
-
-}
-
-.scoreChart{
-  /*overflow: scroll;*/
-  width: 100vw;
-  height: 400px;
-  overflow-x: auto;
-
-}
-
 ul{
   list-style: none;
   display: inline-block;
+}
+
+.pkgInformation{
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+order: 1;
+
+align-self: center;
+text-align: center;
+}
+.name{
+  font-size: 40px;
+}
+.version{
+  font-size: 12px;
+}
+
+.gitStats{
+  order: 2;
+  align-self: center;
+
+}
+.subScores{
+  flex-direction: row;
+  order: 3;
+
+}
+
+.qualityScore{
+  font-size: 7px;
+  order: 1;
+}
+.popularityScore{
+  font-size: 7px;
+  order: 2;
+}
+.maintenanceScore{
+  font-size: 7px;
+  order: 3;
+}
+
+
+
+
+
+
+
+
+
+
+.mainContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.relatedPkg{
+  width: 30%;
+  order: 2;
+  flex-direction: column;
+}
+.relatedList{
+  order: 1;
+
+}
+.relatedSearch{
+  order: 2;
+}
+
+
+.scoreChart{
+  /*overflow: scroll;*/
+  width: 30%;
+  height: 400px;
+  overflow-x: auto;
+  order: 1;
 }
