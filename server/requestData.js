@@ -104,7 +104,7 @@ var pkgInfoParse = function(pkgInfo) {
             : null ]
 
         filteredPkg.test = ['testScript', parsedPkg.collected.metadata.hasTestScript]
-
+        filteredPkg.description = parsedPkg.collected.metadata.description
         filteredPkg.scores = [['quality', parsedPkg.score.detail.quality], ['popularity', parsedPkg.score.detail.popularity], ['maintenance', parsedPkg.score.detail.maintenance], ['final', parsedPkg.score.final]];
 
         let category = ['quality', 'popularity', 'maintenance'];

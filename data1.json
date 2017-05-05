@@ -4,8 +4,8 @@
     ["version", "v3.5.0"]
   ],
   "github": [
-    ["stars", 14471],
-    ["forks", 1783]
+    ["stars", 14492],
+    ["forks", 1786]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
@@ -40,11 +40,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "Full featured Promises/A+ implementation with exceptionally good performance",
   "scores": [
-    ["quality", 0.8776874827507879],
-    ["popularity", 0.926280193443551],
-    ["maintenance", 0.9983656583830622],
-    ["final", 0.9369322929645508]
+    ["quality", 0.8776896179920783],
+    ["popularity", 0.9254933456829441],
+    ["maintenance", 0.9983691337760251],
+    ["final", 0.9366587532082626]
   ],
   "subScores": [
     [
@@ -54,16 +55,16 @@
       ["branding", 0]
     ],
     [
-      ["communityInterest", 17165],
-      ["downloadsCount", 14056353],
-      ["downloadsAcceleration", 33571.7818302892],
-      ["dependentsCount", 11813]
+      ["communityInterest", 17194],
+      ["downloadsCount", 14122289.333333334],
+      ["downloadsAcceleration", 36808.72840563167],
+      ["dependentsCount", 11852]
     ],
     [
       ["releasesFrequency", 0.7666095890410959],
       ["commitsFrequency", 0.912109589041096],
       ["openIssues", 1],
-      ["issuesDistribution", 0.9003461436853241]
+      ["issuesDistribution", 0.9003546758603072]
     ]
   ]
 }, {
@@ -72,7 +73,7 @@
     ["version", "v1.1.3"]
   ],
   "github": [
-    ["stars", 5231],
+    ["stars", 5247],
     ["forks", 175]
   ],
   "vulnerabilities": [null],
@@ -99,11 +100,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "Terminal string styling done right. Much color.",
   "scores": [
-    ["quality", 0.9258206159476032],
-    ["popularity", 0.8851504264334851],
-    ["maintenance", 0.9997980862683575],
-    ["final", 0.9374781642299258]
+    ["quality", 0.9258378390955229],
+    ["popularity", 0.8880357092726828],
+    ["maintenance", 0.9997984212873177],
+    ["final", 0.9384932974246569]
   ],
   "subScores": [
     [
@@ -113,10 +115,10 @@
       ["branding", 0.3]
     ],
     [
-      ["communityInterest", 6117],
-      ["downloadsCount", 20297667],
-      ["downloadsAcceleration", 21325.069482496183],
-      ["dependentsCount", 15013]
+      ["communityInterest", 6136],
+      ["downloadsCount", 20425100],
+      ["downloadsAcceleration", 28012.745224505343],
+      ["dependentsCount", 15071]
     ],
     [
       ["releasesFrequency", 0.9],
@@ -178,11 +180,12 @@
   ],
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
+  "description": "Data-Driven Documents",
   "scores": [
-    ["quality", 0.9191194028610128],
-    ["popularity", 0.7295695369073341],
-    ["maintenance", 0.9999061784463309],
-    ["final", 0.8810523212320864]
+    ["quality", 0.9191267422980742],
+    ["popularity", 0.7288626790994495],
+    ["maintenance", 0.999906324283597],
+    ["final", 0.8808071738734885]
   ],
   "subScores": [
     [
@@ -227,11 +230,12 @@
   ],
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
+  "description": "Multi-value map syntax for D3 selections.",
   "scores": [
-    ["quality", 0.8280355999850997],
-    ["popularity", 0.17199823333254288],
-    ["maintenance", 0.9998919078220265],
-    ["final", 0.6585722293996292]
+    ["quality", 0.8280422995126087],
+    ["popularity", 0.1707221058337994],
+    ["maintenance", 0.9998920970037206],
+    ["final", 0.6581276608469147]
   ],
   "subScores": [
     [
@@ -259,12 +263,12 @@
     ["version", "v4.15.2"]
   ],
   "github": [
-    ["stars", 31535],
-    ["forks", 5697]
+    ["stars", 31582],
+    ["forks", 5711]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["debug", "array-flatten", "qs", "path-to-regexp", "serve-static", "send"]
+    ["array-flatten", "debug", "path-to-regexp", "qs", "send", "serve-static"]
   ],
   "dependencies": [
     ["dependencies", "accepts"],
@@ -325,11 +329,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "Fast, unopinionated, minimalist web framework",
   "scores": [
-    ["quality", 0.9427155750794461],
-    ["popularity", 0.9517840184248079],
-    ["maintenance", 0.9724252810582352],
-    ["final", 0.9562879273428988]
+    ["quality", 0.9427318130753691],
+    ["popularity", 0.951495649001177],
+    ["maintenance", 0.9719041542300024],
+    ["final", 0.9560094750535234]
   ],
   "subScores": [
     [
@@ -339,59 +344,61 @@
       ["branding", 1]
     ],
     [
-      ["communityInterest", 41048],
-      ["downloadsCount", 10968965],
-      ["downloadsAcceleration", 35323.26442161338],
-      ["dependentsCount", 14291]
+      ["communityInterest", 41113],
+      ["downloadsCount", 11000499.666666666],
+      ["downloadsAcceleration", 37537.54988584475],
+      ["dependentsCount", 14330]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 0.999582191780822],
       ["openIssues", 1],
-      ["issuesDistribution", 0.5169245638699225]
+      ["issuesDistribution", 0.5146071910259815]
     ]
   ]
 }, {
   "title": [
     ["name", "flaschenode"],
-    ["version", "v0.0.4"]
+    ["version", "v0.0.5"]
   ],
   "github": [
-    ["stars", "N/A"],
+    ["stars", 3],
     ["forks", "N/A"]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": [
     ["dependencies", "caption"],
-    ["devDependencies", "imagemagick-native"]
+    ["devDependencies", "imagemagick-native"],
+    ["devDependencies", "mocha"]
   ],
   "vulnerable": ["vulnerable", null],
-  "test": ["testScript", null],
+  "test": ["testScript", true],
+  "description": "Makes it easy for people who like js to interact with the flaschen-taschen",
   "scores": [
-    ["quality", 0.10508826648805028],
-    ["popularity", 0.011654036373584854],
-    ["maintenance", 0.3333043114173237],
-    ["final", 0.15226190167323306]
+    ["quality", 0.7012884165473152],
+    ["popularity", 0.03376909094568565],
+    ["maintenance", 0.9928315427042194],
+    ["final", 0.5696967467416613]
   ],
   "subScores": [
     [
-      ["carefulness", 0.165],
-      ["tests", 0],
-      ["health", 0],
+      ["carefulness", 0.355],
+      ["tests", 0.6],
+      ["health", 1],
       ["branding", 0]
     ],
     [
-      ["communityInterest", 0],
-      ["downloadsCount", 43],
-      ["downloadsAcceleration", 0.4040525114155251],
+      ["communityInterest", 5],
+      ["downloadsCount", 46.333333333333336],
+      ["downloadsAcceleration", 0.2543759512937595],
       ["dependentsCount", 0]
     ],
     [
-      ["releasesFrequency", 0.9299657534246576],
-      ["commitsFrequency", 0],
-      ["openIssues", 0],
-      ["issuesDistribution", 0]
+      ["releasesFrequency", 0.858304794520548],
+      ["commitsFrequency", 0.8700856164383561],
+      ["openIssues", 0.7],
+      ["issuesDistribution", 0.7]
     ]
   ]
 }, {
@@ -438,11 +445,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "Simplified HTTP requests",
   "scores": [
-    ["quality", 0.9855055311070362],
-    ["popularity", 0.6974111735679352],
-    ["maintenance", 0.9993301472848967],
-    ["final", 0.889511121630602]
+    ["quality", 0.9855087319443802],
+    ["popularity", 0.6948604322604665],
+    ["maintenance", 0.9993310925566037],
+    ["final", 0.8886196532692885]
   ],
   "subScores": [
     [
@@ -470,7 +478,7 @@
     ["version", "v1.2.0"]
   ],
   "github": [
-    ["stars", 2197],
+    ["stars", 2202],
     ["forks", 124]
   ],
   "vulnerabilities": [null],
@@ -485,11 +493,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "parse argument options",
   "scores": [
-    ["quality", 0.9225774798214964],
-    ["popularity", 0.8509035042974868],
-    ["maintenance", 0.15564433338665118],
-    ["final", 0.6290649871358972]
+    ["quality", 0.9225850383530593],
+    ["popularity", 0.8517532952648488],
+    ["maintenance", 0.15566791348286474],
+    ["final", 0.6293729345676176]
   ],
   "subScores": [
     [
@@ -499,10 +508,10 @@
       ["branding", 0.15]
     ],
     [
-      ["communityInterest", 2720],
-      ["downloadsCount", 36329382.666666664],
-      ["downloadsAcceleration", 59237.05711567728],
-      ["dependentsCount", 6304]
+      ["communityInterest", 2726],
+      ["downloadsCount", 36538352.666666664],
+      ["downloadsAcceleration", 69615.0595890411],
+      ["dependentsCount", 6320]
     ],
     [
       ["releasesFrequency", 0],
@@ -560,11 +569,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "Parse, validate, manipulate, and display dates",
   "scores": [
-    ["quality", 0.9982220893967862],
-    ["popularity", 0.9280953324416202],
-    ["maintenance", 0.9825634574985314],
-    ["final", 0.9681972032980888]
+    ["quality", 0.9982222585262853],
+    ["popularity", 0.9266250750566747],
+    ["maintenance", 0.982594699356045],
+    ["final", 0.9676935986023374]
   ],
   "subScores": [
     [
@@ -592,7 +602,7 @@
     ["version", "v1.8.1"]
   ],
   "github": [
-    ["stars", 2309],
+    ["stars", 2331],
     ["forks", 193]
   ],
   "vulnerabilities": [null],
@@ -623,11 +633,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "HTTP request logger middleware for node.js",
   "scores": [
-    ["quality", 0.9912396184615794],
-    ["popularity", 0.7204602677966023],
-    ["maintenance", 0.9998455308462033],
-    ["final", 0.8994789150634557]
+    ["quality", 0.9912466020933428],
+    ["popularity", 0.7169525848264213],
+    ["maintenance", 0.9998455363098855],
+    ["final", 0.8982533230257101]
   ],
   "subScores": [
     [
@@ -637,16 +648,16 @@
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 2889],
-      ["downloadsCount", 3259210.3333333335],
-      ["downloadsAcceleration", 7639.774181887369],
-      ["dependentsCount", 2132]
+      ["communityInterest", 2913],
+      ["downloadsCount", 3246097],
+      ["downloadsAcceleration", 7077.302796803655],
+      ["dependentsCount", 2146]
     ],
     [
       ["releasesFrequency", 0.9],
       ["commitsFrequency", 0.9],
       ["openIssues", 1],
-      ["issuesDistribution", 0.9198581186101132]
+      ["issuesDistribution", 0.9197188536197844]
     ]
   ]
 }, {
@@ -673,11 +684,12 @@
     "state": "failure"
   }]],
   "test": ["testScript", true],
+  "description": "Light-weight option parsing with an argv hash. No optstrings attached.",
   "scores": [
-    ["quality", 0.725392095132832],
-    ["popularity", 0.8061307275700083],
-    ["maintenance", 0.4982894153684975],
-    ["final", 0.6741646785683265]
+    ["quality", 0.725423756675219],
+    ["popularity", 0.8030456302889784],
+    ["maintenance", 0.4982931214745725],
+    ["final", 0.6730956901198084]
   ],
   "subScores": [
     [
@@ -705,12 +717,12 @@
     ["version", "v2.81.0"]
   ],
   "github": [
-    ["stars", 15246],
-    ["forks", 1874]
+    ["stars", 15268],
+    ["forks", 1873]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["aws-sign2", "hawk", "performance-now", "qs", "har-validator"]
+    ["aws-sign2", "hawk", "qs", "har-validator", "performance-now"]
   ],
   "dependencies": [
     ["dependencies", "aws-sign2"],
@@ -758,11 +770,12 @@
   ],
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
+  "description": "Simplified HTTP request client.",
   "scores": [
-    ["quality", 0.9129931974657453],
-    ["popularity", 0.9512311091184258],
-    ["maintenance", 0.6666175117712712],
-    ["final", 0.8401449765511174]
+    ["quality", 0.9130131145455825],
+    ["popularity", 0.9504239730530706],
+    ["maintenance", 0.6658822449285988],
+    ["final", 0.8396111106572591]
   ],
   "subScores": [
     [
@@ -772,13 +785,13 @@
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 18749],
-      ["downloadsCount", 23043661],
-      ["downloadsAcceleration", 60788.361054033536],
-      ["dependentsCount", 20399]
+      ["communityInterest", 18774],
+      ["downloadsCount", 23173081.333333332],
+      ["downloadsAcceleration", 65462.214592846256],
+      ["dependentsCount", 20456]
     ],
     [
-      ["releasesFrequency", 0.9199486301369864],
+      ["releasesFrequency", 0.8074486301369863],
       ["commitsFrequency", 0.9343356164383562],
       ["openIssues", 1],
       ["issuesDistribution", 0]
@@ -790,7 +803,7 @@
     ["version", "v4.2.0"]
   ],
   "github": [
-    ["stars", 1647],
+    ["stars", 1656],
     ["forks", 116]
   ],
   "vulnerabilities": [null],
@@ -822,11 +835,12 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.",
   "scores": [
-    ["quality", 0.9882451719530903],
-    ["popularity", 0.6688185600667109],
-    ["maintenance", 0.9689489278499697],
-    ["final", 0.8696921723567652]
+    ["quality", 0.9882457458747109],
+    ["popularity", 0.6684473670388619],
+    ["maintenance", 0.9690096972518869],
+    ["final", 0.8695836962641752]
   ],
   "subScores": [
     [
@@ -836,16 +850,16 @@
       ["branding", 0.44999999999999996]
     ],
     [
-      ["communityInterest", 1967],
-      ["downloadsCount", 1564444],
-      ["downloadsAcceleration", 9685.24497716895],
-      ["dependentsCount", 1675]
+      ["communityInterest", 1977],
+      ["downloadsCount", 1584097],
+      ["downloadsAcceleration", 9896.416438356166],
+      ["dependentsCount", 1683]
     ],
     [
       ["releasesFrequency", 0.5474315068493152],
       ["commitsFrequency", 0.7483732876712329],
       ["openIssues", 1],
-      ["issuesDistribution", 0.6137305900752174]
+      ["issuesDistribution", 0.6136923061666126]
     ]
   ]
 }, {
@@ -876,11 +890,12 @@
   ],
   "vulnerable": ["vulnerable", null],
   "test": ["testScript", true],
+  "description": "Update notifications for your CLI app",
   "scores": [
-    ["quality", 0.9110075464927662],
-    ["popularity", 0.6681112652619106],
-    ["maintenance", 0.9997980862683575],
-    ["final", 0.8570705369834236]
+    ["quality", 0.9110185484250272],
+    ["popularity", 0.6674556303444993],
+    ["maintenance", 0.9997984212873177],
+    ["final", 0.8568444825986441]
   ],
   "subScores": [
     [
@@ -905,16 +920,14 @@
 }, {
   "title": [
     ["name", "yargs"],
-    ["version", "v7.1.0"]
+    ["version", "v8.0.1"]
   ],
   "github": [
-    ["stars", 2874],
-    ["forks", 214]
+    ["stars", 2884],
+    ["forks", 213]
   ],
   "vulnerabilities": [null],
-  "outdatedDependencies": [
-    ["camelcase", "string-width", "read-pkg-up", "os-locale", "which-module", "yargs-parser"]
-  ],
+  "outdatedDependencies": [null],
   "dependencies": [
     ["dependencies", "camelcase"],
     ["dependencies", "cliui"],
@@ -941,7 +954,8 @@
     ["devDependencies", "rimraf"],
     ["devDependencies", "standard"],
     ["devDependencies", "standard-version"],
-    ["devDependencies", "which"]
+    ["devDependencies", "which"],
+    ["devDependencies", "yargs-test-extends"]
   ],
   "vulnerable": ["vulnerable", [{
     "context": "continuous-integration/appveyor/branch",
@@ -954,44 +968,45 @@
     "state": "success"
   }]],
   "test": ["testScript", true],
+  "description": "yargs the modern, pirate-themed, successor to optimist.",
   "scores": [
-    ["quality", 0.9411432032247126],
-    ["popularity", 0.854349376146869],
-    ["maintenance", 0.9951682906120225],
-    ["final", 0.9296741443330256]
+    ["quality", 0.9999999999999994],
+    ["popularity", 0.8550770877432761],
+    ["maintenance", 0.995200090703647],
+    ["final", 0.9475970124564228]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
       ["tests", 1],
-      ["health", 0.5],
+      ["health", 1],
       ["branding", 1]
     ],
     [
-      ["communityInterest", 3589],
-      ["downloadsCount", 22952348.666666668],
-      ["downloadsAcceleration", 83811.2288622527],
-      ["dependentsCount", 4816]
+      ["communityInterest", 3600],
+      ["downloadsCount", 23101982.666666668],
+      ["downloadsAcceleration", 90439.01999619481],
+      ["dependentsCount", 4845]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.6852873662531999]
+      ["issuesDistribution", 0.6856845835665504]
     ]
   ]
 }, {
   "title": [
     ["name", "webpack"],
-    ["version", "v2.4.1"]
+    ["version", "v2.5.0"]
   ],
   "github": [
-    ["stars", 27196],
-    ["forks", 3336]
+    ["stars", 27263],
+    ["forks", 3349]
   ],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["yargs", "ajv", "node-libs-browser", "loader-utils", "ajv-keywords"]
+    ["loader-utils", "ajv-keywords", "node-libs-browser", "yargs", "ajv"]
   ],
   "dependencies": [
     ["dependencies", "acorn"],
@@ -1056,52 +1071,41 @@
     ["devDependencies", "worker-loader"]
   ],
   "vulnerable": ["vulnerable", [{
-    "context": "codecov/changes",
-    "state": "success"
-  }, {
-    "context": "codecov/project",
-    "state": "success"
-  }, {
-    "context": "codecov/patch",
-    "state": "success"
-  }, {
     "context": "continuous-integration/appveyor/branch",
-    "state": "success"
-  }, {
-    "context": "coverage/coveralls",
-    "state": "success"
+    "state": "pending"
   }, {
     "context": "continuous-integration/travis-ci/push",
-    "state": "success"
+    "state": "pending"
   }, {
     "context": "ci/circleci",
-    "state": "success"
+    "state": "pending"
   }]],
   "test": ["testScript", true],
+  "description": "Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.",
   "scores": [
-    ["quality", 0.9356661797130716],
-    ["popularity", 0.8740570580122605],
-    ["maintenance", 0.7851925228040777],
-    ["final", 0.8614372071996399]
+    ["quality", 0.9095883667417558],
+    ["popularity", 0.8741837325050756],
+    ["maintenance", 0.7832466273103117],
+    ["final", 0.8529771359579122]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["tests", 0.9924999999999998],
+      ["tests", 0.8174999999999999],
       ["health", 0.5238095238095238],
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 32054],
-      ["downloadsCount", 5194975],
-      ["downloadsAcceleration", 29856.946936834094],
-      ["dependentsCount", 2984]
+      ["communityInterest", 32138],
+      ["downloadsCount", 5250756.333333333],
+      ["downloadsAcceleration", 31622.50131278539],
+      ["dependentsCount", 3011]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.16395291699476255]
+      ["issuesDistribution", 0.1611148949998581]
     ]
   ]
 }]

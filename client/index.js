@@ -20,6 +20,9 @@ stop messing with sub scores and focus on a few pieces of important information 
 than everythign
 compute a full set of graphs for popularity and just highlight the one in questions
 
+
+Anticipate vulnerabilities in the packages you rely on- have an opening div that is replaced
+once someone clicks
 */
 'use strict'
 window.onload = function() {
@@ -147,27 +150,59 @@ window.onload = function() {
           buildDependencies(e)
         }
 
-        const buildDependencies = function(pkg){
-          let dependenciesGraph = dependencies.append('g')
-          .selectAll('g')
-          .data(pkg.dependencies)
-          .enter();
+        //dependencyLinks
 
-          dependenciesGraph.append('g').merge(dependenciesGraph)
-          .selectAll('circle')
-          .data((d) => {
-            return d[1]
-          }).enter().append('circle')
-          .attrs({
-            cx: (d, i) => { return 20 * i},
-            cy: (d, i) => { return 20 * i},
-            r: (d, i) => {return 15}
+        const simulation = d3.forceSimulation()
+        .force('center', d3.forceCenter(width/2, height/2));
+
+        const buildDependencies = function(pkg){
+
+          const node = dependencies.append('g')
+          .attr('class', 'node')
+          .selectAll('node')
+          .data(pkg.dependencies)
+          .enter().append('circle')
+          .attr('r', 5)
+          .attr('fill', function(d){
+            return '#43985E'
           })
 
-        }
+          node.append('title')        //error here
+            .text(function(d){
+              return 'ahhhhhhhfuck'
+            })
+
+          simulation
+            .nodes(pkg.dependencies)
+            .on('tick', ticked)
+
+          function ticked(){
+            node
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; });
+            }
+          }
+
+          // let dependenciesGraph = dependencies.append('g')
+          // .selectAll('g')
+          // .data(pkg.dependencies)
+          // .enter();
+          //
+          // dependenciesGraph.append('g').merge(dependenciesGraph)
+          // .selectAll('circle')
+          // .data((d) => {
+          //   return d[1]
+          // }).enter().append('circle')
+          // .attrs({
+          //   cx: (d, i) => { return 20 * i},
+          //   cy: (d, i) => { return 20 * i},
+          //   r: (d, i) => {return 15}
+          // })
 
 
-        const title = d3.select('.pkgInformation').append('g').attr('class', 'title').append('ul')
+
+
+        const title = d3.select('.pkgInformation').append('g').attr('class', 'title')
         const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats')
 
         const buildInformation = function(pkg){
@@ -195,10 +230,19 @@ window.onload = function() {
           }
 
           function buildGitStats() {
-            const update = gitStats.selectAll('li')
+            const update = gitStats.selectAll('span')
             .data(pkg.github)
-            const enter = update.enter()
-            .append('li').attr('class', function(d){
+             const enter = update.enter()//.attr('d', function(d){
+              // if (d[0] === 'forks'){
+              //   return .append('svg:image').attr('xlink:href', '../assets/fork.png')
+              // }
+              // else {
+
+
+              //           const star = '\u2605';   //U+2606 for other star
+              // }
+            // })
+            .append('span').attr('class', function(d){
                       return d[0]})
             const exit = update.exit().remove()
 

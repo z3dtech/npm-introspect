@@ -39,19 +39,20 @@ text-align: center;
 .subScores{
   flex-direction: row;
   order: 3;
+  font-size: 13px;
 
 }
 
 .qualityScore{
-  font-size: 7px;
+
   order: 1;
 }
 .popularityScore{
-  font-size: 7px;
+
   order: 2;
 }
 .maintenanceScore{
-  font-size: 7px;
+
   order: 3;
 }
 
