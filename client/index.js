@@ -91,10 +91,12 @@ window.onload = function() {
         console.log(pkgs)
 
         const subScoreHeading = ['quality', 'popularity', 'maintenance'];
-        sX0.domain(pkgs)
-        sX1.domain(subScoreHeading).rangeRound([0, sX0.bandwidth()]);
+        const scoreHeading = ['quality', 'popularity', 'maintenance', 'final']
 
-        ssX0.domain(['quality', 'popularity', 'maintenance']) //maybe this has to map to the groups better
+        sX0.domain(pkgs)
+        sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth()]);
+
+        ssX0.domain(subScoreHeading) //maybe this has to map to the groups better
         ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
 
 
@@ -152,12 +154,10 @@ window.onload = function() {
 
         //dependencyLinks
 
-        const simulation = d3.forceSimulation()
-        .force("collide",d3.forceCollide( function(d){return d.r + 8 }).iterations(16))
-        .force('center', d3.forceCenter(width/2, height/2))
-        .force("charge", d3.forceManyBody())
-        .force("y", d3.forceY(0))
-        .force("x", d3.forceX(0));
+
+
+
+
 
         const buildDependencies = function(pkg){
 
@@ -192,16 +192,34 @@ window.onload = function() {
           })
 
 
+          const simulation = d3.forceSimulation(enter)
+          .velocityDecay(0.2)
+          .force('center', d3.forceCenter(200, 200))
+          .force('charge', d3.forceManyBody().strength(-50))
+          .force("y", d3.forceY(0))
+          .force("x", d3.forceX(0))
+          .alpha(1).restart();
+
+          simulation.stop();
+
+
           simulation
             .nodes(pkg.dependencies)
             .on('tick', ticked)
+            .alpha(1).restart();
 
-          function ticked(){
+          function ticked(){         //maybe add a transition here to ease the animation
             enter
-              .attr("cx", function(d) { return d.x; })
-              .attr("cy", function(d) { return d.y; });
-            }
+            .attr('x', (d) => {
+              console.log(d.x)
+              return d.x})
+            .attr('y', (d) => { return d.y}) //refer to labels
+            // .attr('transform', (d) => {
+            //   return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
+            // })
           }
+        }
+
 
 
         const title = d3.select('.pkgInformation').append('g').attr('class', 'title')
@@ -303,6 +321,28 @@ window.onload = function() {
         // const buildPopularityChart = function(pkg){
         //   console.log('here we are')
         // }
+
+        const legend = scores.append('g')
+          .attr('class', 'legend')
+          .attr('text-anchor', 'end')
+          .selectAll('g')
+          .data(scoreHeading)
+          .enter().append('g')
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+          legend.append('rect')
+          .attr("x", width - 19)
+          .attr("width", 19)
+          .attr("height", 19)
+          .attr("fill", color);
+
+          legend.append('text')
+          .attr("x", width - 24)
+          .attr("y", 9.5)
+          .attr("dy", "0.32em")
+          .text(function(d) { return d; });
+
+
         const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
           .selectAll('g')
           .data(data);
