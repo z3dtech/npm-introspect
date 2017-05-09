@@ -195,7 +195,6 @@ window.onload = function() {
           const simulation = d3.forceSimulation(enter)
           .velocityDecay(0.2)
           .force('center', d3.forceCenter(200, 200))
-          .force('charge', d3.forceManyBody().strength(-50))
           .force("y", d3.forceY(0))
           .force("x", d3.forceX(0))
           .alpha(1).restart();
@@ -208,15 +207,15 @@ window.onload = function() {
             .on('tick', ticked)
             .alpha(1).restart();
 
-          function ticked(){         //maybe add a transition here to ease the animation
+          function ticked(){
             enter
             .attr('x', (d) => {
               console.log(d.x)
               return d.x})
             .attr('y', (d) => { return d.y}) //refer to labels
-            // .attr('transform', (d) => {
-            //   return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
-            // })
+            .attr('transform', function(d) {
+              return 'translate('  + d.x + ',' + d.y + ')'
+            })
           }
         }
 
