@@ -120,19 +120,6 @@ window.onload = function() {
           })()
         console.log(scoreScale)
 
-        // const popularScale = (function(){    //turn into an object with three p
-        //   let pScale = {'communityInterest':[], 'downloadsCount':[], 'downloadsAcceleration':[], 'dependentsCount':[]}
-        //   for (let pkg in data){
-        //     for(let i = 0; i < data[pkg].subScores[1].length; i++){
-        //       pScale[data[pkg].subScores[1][i][0]].push(data[pkg].subScores[1][i][1])
-        //     }
-        //   }
-        //   return pScale
-        // })()
-        //
-        // console.log(popularScale)
-
-
 
         const scores = d3.select('.scores')
           .attr('width', width)
@@ -152,72 +139,145 @@ window.onload = function() {
           buildDependencies(e)
         }
 
-        //dependencyLinks
-
-
-
-
-
 
         const buildDependencies = function(pkg){
 
 
+
+          const thing = dependencies.append('svg')
+            .attr('width', 800)
+            .attr('height', 896)
+
+
+
+          const margin = {top: 20, right: 90, bottom: 30, left: 90},
+          width = 660 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+          const treemap = d3.tree()
+          .size([height, width]);
+          //.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth;});
+          //next is understanding what is happening here with seperation
+
+
+          const stratify = d3.stratify()
+            .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+
+          let nodes = d3.hierarchy(pkg.dependencies, function(d) {
+          return d.children;
+          });
+
+          nodes = treemap((nodes ));  //here is where stratify is called
+          //two issues here is what is stratify doing
+
+
+
+          const w = +thing.attr("width"),
+          h = +thing.attr("height"),
+          g = thing.append("g").attr("transform", "translate(" + (w / 6) + "," + 				(h / 6) + ")");
+
+
+            const link = g.selectAll(".link")
+          .data(nodes.descendants().slice(1))
+          .enter().append("path")
+            .attr("class", "link")
+            .attr("d", function(d) {
+               return "M" + d.y + "," + d.x
+                 + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                 + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                 + " " + d.parent.y + "," + d.parent.x;
+               });
+
+          const node = g.selectAll(".node")
+          .data(nodes.descendants())
+          .enter().append("g")
+          .attr("class", function(d) {
+            return "node" +
+              (d.children ? " node--internal" : " node--leaf"); })
+          .attr("transform", function(d) {
+            return "translate(" + d.y + "," + d.x + ")"; });
+
+
+          node.append("circle")
+          .attr("r", function(d) { return 15; })
+          .style("stroke", function(d) { return 'yellow'; })
+          .style("fill", function(d) { return 'green'; });
+
+
+          node.append("text")
+          .attr("dy", ".35em")
+          .attr("x", function(d) {
+          console.log(d)
+          return 25 })
+          .style("text-anchor", function(d) {
+          return d.children ? "end" : "start"; })
+          .text(function(d) { return d.data.name; });
+}
+          // function project(x, y) {
+          //   var angle = (x - 90) / 180 * Math.PI, radius = y;
+          //   return [radius * Math.cos(angle), radius * Math.sin(angle)];
+          // }
+
+
+
+
+          ////////////////////////////
           /////////////////////////////////////////////////////
-          const update = dependencies.selectAll('g.circles')
-          .data(pkg.dependencies, d => d)
-
-          const enter = update.enter().append('g')
-          .attr('transform', (d) => {
-            return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
-          })
-          .attr('class', 'circles');
-
-          enter.append('circle')
-          .attr('fill', function(d){
-            return '#43985E'
-          });
-
-          enter.append('text')
-          .text(function(d){
-            return d[1]
-          });
-
-          const exit = update.exit().remove();
-
-          update.merge(enter).selectAll('circle').attrs({
-              r: 5
-            })
-          .attr('class', function(d){
-            d[0]
-          })
-
-
-          const simulation = d3.forceSimulation(enter)
-          .velocityDecay(0.2)
-          .force('center', d3.forceCenter(200, 200))
-          .force("y", d3.forceY(0))
-          .force("x", d3.forceX(0))
-          .alpha(1).restart();
-
-          simulation.stop();
-
-
-          simulation
-            .nodes(pkg.dependencies)
-            .on('tick', ticked)
-            .alpha(1).restart();
-
-          function ticked(){
-            enter
-            .attr('x', (d) => {
-              console.log(d.x)
-              return d.x})
-            .attr('y', (d) => { return d.y}) //refer to labels
-            .attr('transform', function(d) {
-              return 'translate('  + d.x + ',' + d.y + ')'
-            })
-          }
-        }
+        //   const update = dependencies.selectAll('g.circles')
+        //   .data(pkg.dependencies, d => d)
+        //
+        //   const enter = update.enter().append('g')
+        //   .attr('transform', (d) => {
+        //     return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
+        //   })
+        //   .attr('class', 'circles');
+        //
+        //   enter.append('circle')
+        //   .attr('fill', function(d){
+        //     return '#43985E'
+        //   });
+        //
+        //   enter.append('text')
+        //   .text(function(d){
+        //     return d[1]
+        //   });
+        //
+        //   const exit = update.exit().remove();
+        //
+        //   update.merge(enter).selectAll('circle').attrs({
+        //       r: 5
+        //     })
+        //   .attr('class', function(d){
+        //     d[0]
+        //   })
+        //
+        //
+        //   const simulation = d3.forceSimulation(enter)
+        //   .velocityDecay(0.2)
+        //   .force('center', d3.forceCenter(200, 200))
+        //   .force("y", d3.forceY(0))
+        //   .force("x", d3.forceX(0))
+        //   .alpha(1).restart();
+        //
+        //   simulation.stop();
+        //
+        //
+        //   simulation
+        //     .nodes(pkg.dependencies)
+        //     .on('tick', ticked)
+        //     .alpha(1).restart();
+        //
+        //   function ticked(){
+        //     enter
+        //     .attr('x', (d) => {
+        //       console.log(d.x)
+        //       return d.x})
+        //     .attr('y', (d) => { return d.y}) //refer to labels
+        //     .attr('transform', function(d) {
+        //       return 'translate('  + d.x + ',' + d.y + ')'
+        //     })
+        //   }
+        // }
 
 
 

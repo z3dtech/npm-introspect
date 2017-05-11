@@ -10,3 +10,8 @@ then click and dynamically create the sub graphs inside a tooltip or bubble that
 //encode and decode images to text with d3
 
 //Checkout tufte.css
+
+
+
+//Make it obvious what i am in the d3 resume, look at other tech resume
+and the stories and info they make immediately obvious 
