@@ -80,26 +80,35 @@ var pkgInfoParse = function(pkgInfo) {
         //if no outdated dependencies add a message that says "No outdated deprednecies"
 
 
-        let dependencies = []
+        let dependencies = {"name": parsedPkg.collected.metadata.name,
+                          "children": []};
+
         if (parsedPkg.collected.metadata.dependencies){
+            let depChildren = [];
           Object.keys(parsedPkg.collected.metadata.dependencies).forEach((name) => {
-            dependencies.push(['dependencies', name]);
+            depChildren.push({'name': name});
           })
+          dependencies.children.push({"name": "dependency", "children": depChildren})
         }
         if (parsedPkg.collected.metadata.devDependencies){
+          let devDepChildren = [];
         Object.keys(parsedPkg.collected.metadata.devDependencies).forEach((name) => {
-            dependencies.push(['devDependencies', name]);
+            devDepChildren.push({'name': name});
           })
+          dependencies.children.push({"name": "devDependency", "children": devDepChildren})
         }
         if (parsedPkg.collected.metadata.peerDependencies){
+          let peerDepChildren = [];
         Object.keys(parsedPkg.collected.metadata.peerDependencies).forEach((name) => {
-            dependencies.push(['peerDependencies', name]);
+            peerDepChildren.push({'name': name});
           })
+          dependencies.children.push({"name": "peerDependency", "children": peerDepChildren})
         }
 
-        filteredPkg.dependencies = dependencies
+        filteredPkg.dependencies = dependencies;
 
-        filteredPkg.vulnerable = ['vulnerable', parsedPkg.collected.github && parsedPkg.collected.github.statuses
+
+        filteredPkg.statuses = ['vulnerable', parsedPkg.collected.github && parsedPkg.collected.github.statuses
             ? parsedPkg.collected.github.statuses
             : null ]
 

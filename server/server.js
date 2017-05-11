@@ -15,6 +15,9 @@ module.exports.go = () => {
     //app.use(morgan('combined'))
 
     //app.use(express.static('../client/index.html'))
+    app.get('/fork.png', function(req, res){
+      res.sendFile('/home/nicholas/code/javascipt/npm-landscape/assets/fork.png')
+    })
     app.get('/index.js', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/index.js')
     })
