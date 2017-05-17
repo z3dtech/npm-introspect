@@ -103,9 +103,7 @@ window.onload = function() {
         const star = '\u2605';   //U+2606 for other star
 
 
-        const dependencies = d3.select('.dependencies')
-        .attr('width', width)
-        .attr('height', height)
+
 
 
         const scoreScale = (function(){
@@ -140,78 +138,87 @@ window.onload = function() {
         }
 
 
+
+
+
+
+
+
+
+        const dependencies = d3.select('.dependencies')
+        .attr('width', width)
+        .attr('height', height)
+
         const buildDependencies = function(pkg){
 
 
-
-          const thing = dependencies.append('svg')
-            .attr('width', 800)
-            .attr('height', 896)
-
-
-
-          const margin = {top: 20, right: 90, bottom: 30, left: 90},
-          width = 660 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
-
           const treemap = d3.tree()
           .size([height, width]);
-          //.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth;});
-          //next is understanding what is happening here with seperation
-
 
           const stratify = d3.stratify()
             .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
-
           let nodes = d3.hierarchy(pkg.dependencies, function(d) {
           return d.children;
           });
-
-          nodes = treemap((nodes ));  //here is where stratify is called
-          //two issues here is what is stratify doing
+          nodes = treemap((nodes));  //here is where stratify is called
 
 
 
-          const w = +thing.attr("width"),
-          h = +thing.attr("height"),
-          g = thing.append("g").attr("transform", "translate(" + (w / 6) + "," + 				(h / 6) + ")");
 
-
-            const link = g.selectAll(".link")
+          const updateLinks = dependencies.selectAll(".link")
           .data(nodes.descendants().slice(1))
-          .enter().append("path")
+
+          const enterLinks = updateLinks.enter().append("path")
             .attr("class", "link")
-            .attr("d", function(d) {
-               return "M" + d.y + "," + d.x
-                 + "C" + (d.y + d.parent.y) / 2 + "," + d.x
-                 + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
-                 + " " + d.parent.y + "," + d.parent.x;
-               });
 
-          const node = g.selectAll(".node")
-          .data(nodes.descendants())
-          .enter().append("g")
+          const exitLink = updateLinks.exit().remove();
+
+           updateLinks.merge(enterLinks).attr("d", function(d) {
+                      return "M" + d.y + "," + d.x
+                        + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                        + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                        + " " + d.parent.y + "," + d.parent.x;
+                      });
+
+
+
+          const updateNodes = dependencies.selectAll("g.nodes")
+          .data(nodes.descendants(), d => d)
+
+
+          const enterNodes = updateNodes.enter().append("g")
           .attr("class", function(d) {
-            return "node" +
-              (d.children ? " node--internal" : " node--leaf"); })
+                return "node" +
+          (d.children ? " node--internal" : " node--leaf"); })
           .attr("transform", function(d) {
-            return "translate(" + d.y + "," + d.x + ")"; });
+          return "translate(" + d.y + "," + d.x + ")"; })
 
 
-          node.append("circle")
+
+          enterNodes.append("circle")
           .attr("r", function(d) { return 15; })
           .style("stroke", function(d) { return 'yellow'; })
           .style("fill", function(d) { return 'green'; });
 
-
-          node.append("text")
+          enterNodes.append("text")
           .attr("dy", ".35em")
           .attr("x", function(d) {
-          console.log(d)
           return 25 })
           .style("text-anchor", function(d) {
           return d.children ? "end" : "start"; })
           .text(function(d) { return d.data.name; });
+
+          updateNodes.merge(enterNodes)
+
+          const exitNode = updateNodes.exit().remove();
+
+
+
+
+
+
+
+
 }
           // function project(x, y) {
           //   var angle = (x - 90) / 180 * Math.PI, radius = y;
@@ -584,7 +591,8 @@ window.onload = function() {
         //
 
 
-
+//cognitive stability
+//deltas matter- i only care about the changes- a sparse matrix
 
 
 
