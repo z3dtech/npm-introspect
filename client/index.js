@@ -155,12 +155,14 @@ window.onload = function() {
           const treemap = d3.tree()
           .size([height, width]);
 
+          d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
+
           const stratify = d3.stratify()
             .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
           let nodes = d3.hierarchy(pkg.dependencies, function(d) {
           return d.children;
           });
-          nodes = treemap((nodes));  //here is where stratify is called
+          nodes = treemap(nodes);
 
 
 
@@ -182,7 +184,7 @@ window.onload = function() {
 
 
 
-          const updateNodes = dependencies.selectAll("g.nodes")
+          const updateNodes = dependencies.selectAll("g.node")
           .data(nodes.descendants(), d => d)
 
 
@@ -194,11 +196,8 @@ window.onload = function() {
           return "translate(" + d.y + "," + d.x + ")"; })
 
 
-
           enterNodes.append("circle")
-          .attr("r", function(d) { return 15; })
-          .style("stroke", function(d) { return 'yellow'; })
-          .style("fill", function(d) { return 'green'; });
+          .attr("r", function(d) { return 15; });
 
           enterNodes.append("text")
           .attr("dy", ".35em")
