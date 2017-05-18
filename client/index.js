@@ -66,7 +66,7 @@ window.onload = function() {
     //         console.log(err);
 
 
-    d3.json('data1.json', function(err, data) {
+    d3.json('../data1.json', function(err, data) {
         if (err) {
             console.log(err)
         };
