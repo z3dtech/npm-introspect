@@ -33,12 +33,16 @@ text-align: center;
 
 .gitStats{
   order: 2;
-  align-self: center;
-
 }
-.subScores{
+
+.pkgGraphs{
   flex-direction: row;
   order: 3;
+}
+
+.subScores{
+  flex-direction: row;
+  order: 1;
   font-size: 13px;
 
 }
@@ -61,6 +65,9 @@ img{
   width: 15px;
 }
 
+.dependencies{
+  order: 2
+}
 .node circle {
 fill: #999;
 }

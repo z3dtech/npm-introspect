@@ -287,8 +287,7 @@ window.onload = function() {
 
 
 
-        const title = d3.select('.pkgInformation').append('g').attr('class', 'title')
-        const gitStats = d3.select('.pkgInformation').append('g').attr('class', 'gitStats')
+        const title = d3.select('.title').append('g')
 
         const buildInformation = function(pkg){
           function capitalize(str){
@@ -316,25 +315,14 @@ window.onload = function() {
               return  d[1]});
           }
 
-          function buildGitStats() {
-            const update = gitStats.selectAll('span')
-            .data(pkg.github)
-             const enter = update.enter()//.attr('d', function(d){
-              // if (d[0] === 'forks'){
-              //   return .append('svg:image').attr('xlink:href', '../assets/fork.png')
-              // }
-              // else {
 
+          function buildForks() {
+            document.getElementById('forks').innerText = pkg.forks[1];
+          }
 
-              //           const star = '\u2605';   //U+2606 for other star
-              // }
-            // })
-            .append('span').attr('class', function(d){
-                      return d[0]})
-            const exit = update.exit().remove()
-
-            update.merge(enter).text(function(d){
-              return  d[1]})
+          function buildStars(){
+            const star = '\u2605'; //U+2606 for other star
+            document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
           }
 
           function buildSS(){
@@ -347,45 +335,11 @@ window.onload = function() {
 
           buildSS()
           buildTitle()
-          buildGitStats()
+          buildForks()
+          buildStars()
         }
 
 
-
-
-        // const subScores = d3.select('.pkgInformation').append('g')
-        // .attr('class', 'subScores').append('table')
-        //
-        // subScores.append('td').text('Quality')
-        // subScores.append('td').text('Popularity')
-        // subScores.append('td').text('Maintenance')
-
-
-        // const buildSubScoresChart = function(pkg){
-        //
-        //   const update = subScores.selectAll('td')
-        //   .data(pkg.subScores, d => d)
-        //
-        //   const enter = update.enter()
-        //
-        //   const exit = update.exit().remove()
-        //
-        //   update.merge(enter).append('tr')
-        //             .selectAll(' tr td')
-        //             .data(function(d){
-        //               return d
-        //             }).enter()
-        //             .append('td')
-        //             .text(function(d){return d[0] + ' : ' + d[1].toFixed(2)})
-        //
-        //
-        // }
-
-
-
-        // const buildPopularityChart = function(pkg){
-        //   console.log('here we are')
-        // }
 
         const legend = scores.append('g')
           .attr('class', 'legend')
@@ -464,12 +418,6 @@ window.onload = function() {
 
 
 /*
-
-        const formatText = function(pkg) {
-
-
-
-
 
 
             //let vulnerabilities= status.selectAll('li')

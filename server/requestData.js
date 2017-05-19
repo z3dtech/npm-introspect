@@ -69,11 +69,13 @@ var pkgInfoParse = function(pkgInfo) {
         }
 
         filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
-        filteredPkg.github = [['stars',  parsedPkg.collected.github && parsedPkg.collected.github.starsCount
+        filteredPkg.stars = ['stars',  parsedPkg.collected.github && parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
-            : 'N/A'], ['forks', parsedPkg.collected.github && parsedPkg.collected.github.forksCount
+            : 'N/A']
+
+        filteredPkg.forks = ['forks', parsedPkg.collected.github && parsedPkg.collected.github.forksCount
             ? parsedPkg.collected.github.forksCount
-            : 'N/A']]
+            : 'N/A']
 
         filteredPkg.vulnerabilities = [parsedPkg.collected.source && parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
         filteredPkg.outdatedDependencies = [parsedPkg.collected.source && parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
