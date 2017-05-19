@@ -95,27 +95,22 @@ stroke-width: 1.5px;
 .mainContainer{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
 
 }
 
-.relatedPkg{
-  width: 30%;
+.legend{
+  width: 20%;
   order: 2;
-  flex-direction: column;
-}
-.relatedList{
-  order: 1;
+  height: 400px;
 
-}
-.relatedSearch{
-  order: 2;
+
 }
 
 
 .scoreChart{
   /*overflow: scroll;*/
-  width: 30%;
+  width: 80%;
   height: 400px;
   overflow-x: auto;
   order: 1;

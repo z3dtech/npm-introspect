@@ -244,8 +244,7 @@ window.onload = function() {
 
 
 
-        const legend = scores.append('g')
-          .attr('class', 'legend')
+        const legend = d3.select('.legend').append('g')
           .attr('text-anchor', 'end')
           .selectAll('g')
           .data(scoreHeading)
@@ -253,13 +252,13 @@ window.onload = function() {
           .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
           legend.append('rect')
-          .attr("x", width - 19)
+          .attr("x",  50)  //here had width
           .attr("width", 19)
           .attr("height", 19)
           .attr("fill", color);
 
           legend.append('text')
-          .attr("x", width - 24)
+          .attr("x", 40)
           .attr("y", 9.5)
           .attr("dy", "0.32em")
           .text(function(d) { return d; });
