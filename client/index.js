@@ -16,9 +16,6 @@ use viewport to change dynamiclly the window
 
 use a table for the subscores and show a nice patagraph that represents the
 infor on the module.
-stop messing with sub scores and focus on a few pieces of important information rather
-than everythign
-compute a full set of graphs for popularity and just highlight the one in questions
 
 
 Anticipate vulnerabilities in the packages you rely on- have an opening div that is replaced
@@ -134,14 +131,14 @@ window.onload = function() {
 
 
         const dependencies = d3.select('.dependencies')
-        .attr('width', width)
-        .attr('height', height)
+        //add margins for tex spacing
+        .attr('width', width / 5)
+        .attr('height', height )
 
-        const buildDependencies = function(pkg){
-
+      const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
-          .size([height, width]);
+          .size([height , width / 6]);
 
           d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
 

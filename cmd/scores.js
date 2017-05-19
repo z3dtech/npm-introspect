@@ -22,6 +22,7 @@ exports.builder = (yargs) =>
     });
 
     exports.handler = (argv) => {
-      server.go()
+      server.go(argv)
+
       //return if logged stuff
     }

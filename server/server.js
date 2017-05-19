@@ -8,7 +8,7 @@ const app = express()
 const path = require('path')
 const morgan = require('morgan')
 
-module.exports.go = () => {
+module.exports.go = (temp) => {
 
     //app.set('views', path.join(__dirname, 'v'));
 
@@ -33,6 +33,10 @@ module.exports.go = () => {
 
     app.get('/datam.json', function(req, res) {
         console.log('servingDatam')
+
+        //temp._.slice(1)     //the user passed modules
+        //sanatize userURL- look for bad characters maybe change underscore to dash ??
+
         //   requestData.parse()
         //   .then(function (data) {
         //       res.json(data)
@@ -59,6 +63,8 @@ module.exports.go = () => {
     })
 
     app.listen(8080, function() {
+
+        console.log(temp._.slice(1))
         console.log('Example app listening on port 8080!')
 
     })
