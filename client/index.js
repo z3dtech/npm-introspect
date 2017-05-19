@@ -100,11 +100,6 @@ window.onload = function() {
         ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
 
 
-        const star = '\u2605';   //U+2606 for other star
-
-
-
-
 
         const scoreScale = (function(){
           let scale = [[], [], [], []];
@@ -136,13 +131,6 @@ window.onload = function() {
           buildInformation(e)
           buildDependencies(e)
         }
-
-
-
-
-
-
-
 
 
         const dependencies = d3.select('.dependencies')
@@ -212,94 +200,12 @@ window.onload = function() {
           const exitNode = updateNodes.exit().remove();
 
 
-
-
-
-
-
-
 }
-          // function project(x, y) {
-          //   var angle = (x - 90) / 180 * Math.PI, radius = y;
-          //   return [radius * Math.cos(angle), radius * Math.sin(angle)];
-          // }
-
-
-
-
-          ////////////////////////////
-          /////////////////////////////////////////////////////
-        //   const update = dependencies.selectAll('g.circles')
-        //   .data(pkg.dependencies, d => d)
-        //
-        //   const enter = update.enter().append('g')
-        //   .attr('transform', (d) => {
-        //     return 'translate(' + ~~(Math.random() * 300) + ',' + ~~(Math.random() * 300) + ')'
-        //   })
-        //   .attr('class', 'circles');
-        //
-        //   enter.append('circle')
-        //   .attr('fill', function(d){
-        //     return '#43985E'
-        //   });
-        //
-        //   enter.append('text')
-        //   .text(function(d){
-        //     return d[1]
-        //   });
-        //
-        //   const exit = update.exit().remove();
-        //
-        //   update.merge(enter).selectAll('circle').attrs({
-        //       r: 5
-        //     })
-        //   .attr('class', function(d){
-        //     d[0]
-        //   })
-        //
-        //
-        //   const simulation = d3.forceSimulation(enter)
-        //   .velocityDecay(0.2)
-        //   .force('center', d3.forceCenter(200, 200))
-        //   .force("y", d3.forceY(0))
-        //   .force("x", d3.forceX(0))
-        //   .alpha(1).restart();
-        //
-        //   simulation.stop();
-        //
-        //
-        //   simulation
-        //     .nodes(pkg.dependencies)
-        //     .on('tick', ticked)
-        //     .alpha(1).restart();
-        //
-        //   function ticked(){
-        //     enter
-        //     .attr('x', (d) => {
-        //       console.log(d.x)
-        //       return d.x})
-        //     .attr('y', (d) => { return d.y}) //refer to labels
-        //     .attr('transform', function(d) {
-        //       return 'translate('  + d.x + ',' + d.y + ')'
-        //     })
-        //   }
-        // }
-
 
 
         const title = d3.select('.title').append('g')
 
         const buildInformation = function(pkg){
-          function capitalize(str){
-            return str.charAt(0).toUpperCase() + str.slice(1)
-          }
-
-          //don't bind the data, just use
-          // for loops to bind the data
-          //to span elements and change the inner html
-          //hardcode all inside the html and focus on the arts that matter
-
-
 
           function buildTitle() {
             const update = title.selectAll('span')
@@ -408,15 +314,6 @@ window.onload = function() {
 
 
 
-
-
-
-
-
-
-
-
-
 /*
 
 
@@ -448,133 +345,7 @@ window.onload = function() {
             outdatedDependencies.exit().remove()
           }
 
-          const bubbleChart = d3.select('.bubbleChart')
-            .attrs({
-                width: width,
-                height: height
-            });
 
-          const buildBubbleChart = function(d){
-           //build chromatic scale
-            let dependencies = bubbleChart.selectAll('.node') //change to circles
-            .data(d.dependencies);
-
-            dependencies
-            .enter()
-            .append('circle')
-            .merge(dependencies)
-            .attrs({
-              r: Math.random() * 25,
-              cx: Math.random() * 400,
-              cy: Math.random() * 400,
-            });
-
-            dependencies.exit().remove()
-          }
-
-
-        const handleMouseOver = function(e, that) {
-          d3.select(that).classed('foreground', true)
-          d3.select(that).classed('background', false)
-            d3.select(this)
-                .attr('d', (e) => {
-                    console.log(e)
-                })
-            formatText(e)
-            buildBubbleChart(e)
-        }
-
-        const handleMouseOut = function(d, that) {
-          d3.select(that).classed('foreground', true)
-          d3.select(that).classed('background', false)
-        }
-
-        const path = d3.line()
-            .x(function(d, i) {
-                return 100 * d[2];
-            })
-            .y(function(d, i) {
-                const tempScale= scale(pathscoreScale[i])
-                return tempScale(d[1])
-                //console.log(pathscoreScale[i])
-                // console.log()
-                // return y(d[1])
-            })
-
-
-        // const createPaths = g.append('g')
-        //     .selectAll('path')
-        //     .data(data)
-        //     .enter()
-        //     .append('path')
-        //     .attr('class', 'background')
-        //     .attr('d', (d) => {
-        //       console.log('inside createpaths ' + d)
-        //         return path(d.scores)
-        //     })
-        //     .on('mouseover', function(e){
-        //       handleMouseOver(e, this)})
-        //     .on('mouseout', function(e){
-        //       handleMouseOut(e, this)})
-        //
-        // const createNodes = g.selectAll('path-to-circle')
-        //   .data(data)
-        //   .enter()
-        //   .append('g')
-        //   .attr('foo', function(d){
-        //     //console.log(d)
-        //   })
-        //   .selectAll('circle')
-        //   .data(function(d){
-        //     return d.scores
-        //   })
-        //   .enter()
-        //   .append('circle')
-        //   .attr('gg', function(d){
-        //   } )
-        //   .attr('cx', function(d){return d[2]})
-        //   .attr('cy', function(d){return d[1]}) //pass through sclaing function
-        //   .attr('r', '25px')
-        //
-
-
-//cognitive stability
-//deltas matter- i only care about the changes- a sparse matrix
-
-
-
-
-        // const verticalAxis = g.append('g')
-        //     .attr('class', 'axis')
-        //     .selectAll('axis')
-        //     .data(data[0].scores)
-        //     .enter()
-        //     .each(function(d, i) {
-        //         d3.select(this)
-        //             .append('g')
-        //             .attr('transform', 'translate(' + [
-        //                 (100 * i), 0
-        //             ] + ')')
-        //             .call(axis.scale(y)) //change scale
-        //     })
-
-
-        // const widthScale = function(arr, d) {
-        //     console.log('here' + d)
-        //     console.log(arr)
-        //     const wScale = d3.scaleLinear()
-        //         .domain(d3.extent(arr))
-        //         .range([0, 75]);
-        //     console.log(wScale(d))
-        //     return wScale(d)
-        // }
-        //
-        // const heightScale = function(arr, d) {
-        //     const hScale = d3.scaleLinear()
-        //         .domain(d3.extent(arr))
-        //         .range([0, 200]);
-        //     return hScale(d)
-        // }
 
 */
     })
