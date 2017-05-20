@@ -18,6 +18,10 @@ ul{
   flex-direction: column;
 }
 
+.header{
+  display: flex;
+  flex-direction: column;
+}
 .title{
 order: 1;
 
@@ -33,6 +37,21 @@ text-align: center;
 
 .gitStats{
   order: 2;
+  flex-direction: row;
+}
+#stars{
+  order: 1;
+}
+.forks{
+  order: 2;
+}
+#description{
+  order: 3;
+  width: 30%
+}
+
+.outdatedDependencies{
+  order: 4;
 }
 
 .pkgGraphs{
@@ -66,7 +85,10 @@ img{
 }
 
 .dependencies{
-  order: 2
+  order: 2;
+
+
+
 }
 .node circle {
 fill: #999;

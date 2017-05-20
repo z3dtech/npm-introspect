@@ -130,31 +130,38 @@ window.onload = function() {
         }
 
 
+        const h = window.innerHeight / 2,
+        w = window.innerWidth / 2,
+        margin = {top: 50, right: 500, bottom: 50, left: 100};
+
         const dependencies = d3.select('.dependencies')
-        //add margins for tex spacing
-        .attr('width', width / 5)
-        .attr('height', height )
+        .attr('width', w + margin.right + margin.left)
+        .attr('height', h + margin.top + margin.bottom)
+        .append('g')
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        // .attr("width", w + margin.right + margin.left)
+        // .attr("height", h + margin.top + margin.bottom)
 
         const outdated = d3.select('.outdatedDependencies').append('ul');
-
-
 
 
       const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
-          .size([height , width / 6]);
+          .size([h, w/2]);
+
 
           d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
 
           const stratify = d3.stratify()
             .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+
           let nodes = d3.hierarchy(pkg.dependencies, function(d) {
           return d.children;
           });
           nodes = treemap(nodes);
-
-
 
 
           const updateLinks = dependencies.selectAll(".link")
@@ -177,7 +184,6 @@ window.onload = function() {
           const updateNodes = dependencies.selectAll("g.node")
           .data(nodes.descendants(), d => d)
 
-
           const enterNodes = updateNodes.enter().append("g")
           .attr("class", function(d) {
                 return "node" +
@@ -192,9 +198,9 @@ window.onload = function() {
           enterNodes.append("text")
           .attr("dy", ".35em")
           .attr("x", function(d) {
-          return 25 })
+          return 30 })
           .style("text-anchor", function(d) {
-          return d.children ? "end" : "start"; })
+          return d.children ? "start" : "start"; })
           .text(function(d) { return d.data.name; });
 
           updateNodes.merge(enterNodes)
@@ -233,14 +239,8 @@ window.onload = function() {
             document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
           }
 
-          function buildSS(){
-
-            for (let i = 0; i < subScoreHeading.length; i++){
-              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1]
-              for(let j = 0; j < 4; j++){
-                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1]  //set up pretty print
-              }
-            }
+          function buildDescription(){
+            document.getElementById('description').innerText = pkg.description;
           }
 
           function buildOutdated(){
@@ -253,12 +253,24 @@ window.onload = function() {
             .merge(outdatedDependencies)
             .text(
               function(d){
-                console.log(d)
-                return d;
+
+                return 'Outdated Dependency: ' + d;
               })
 
             outdatedDependencies.exit().remove()
           }
+
+          function buildSS(){
+
+            for (let i = 0; i < subScoreHeading.length; i++){
+              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1]
+              for(let j = 0; j < 4; j++){
+                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1]  //set up pretty print
+              }
+            }
+          }
+
+
 
 
 
@@ -268,6 +280,7 @@ window.onload = function() {
           buildForks()
           buildStars()
           buildOutdated()
+          buildDescription()
         }
 
 

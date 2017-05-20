@@ -14,6 +14,8 @@ Then has to be passed a function, not a promise- which will evaluate to null, wh
 is wrap that returned promise in a function
 
 
+/////Chnage N/A stars to 0 and forks 0
+
 doSomething().then(function () {
   return doSomethingElse();
 }).then(finalHandler);
@@ -56,11 +58,11 @@ var pkgInfoParse = function(pkgInfo) {
         filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
         filteredPkg.stars = ['stars',  parsedPkg.collected.github && parsedPkg.collected.github.starsCount
             ? parsedPkg.collected.github.starsCount
-            : 'N/A']
+            : 0]
 
         filteredPkg.forks = ['forks', parsedPkg.collected.github && parsedPkg.collected.github.forksCount
             ? parsedPkg.collected.github.forksCount
-            : 'N/A']
+            : 0]
 
         filteredPkg.vulnerabilities = [parsedPkg.collected.source && parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
         filteredPkg.outdatedDependencies = [parsedPkg.collected.source && parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
@@ -94,10 +96,6 @@ var pkgInfoParse = function(pkgInfo) {
 
         filteredPkg.dependencies = dependencies;
 
-
-        filteredPkg.statuses = ['vulnerable', parsedPkg.collected.github && parsedPkg.collected.github.statuses
-            ? parsedPkg.collected.github.statuses
-            : null ]
 
         filteredPkg.test = ['testScript', parsedPkg.collected.metadata.hasTestScript]
         filteredPkg.description = parsedPkg.collected.metadata.description

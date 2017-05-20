@@ -2,35 +2,37 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
-    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
-    <link rel= "stylesheet" href = "style.css">
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+  <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <div class="pkgInformation">
-    <div class = 'title'>
+    <div class= 'header'>
 
-    </div>
-    <div class = 'gitStats'>
-
-
-    <span id="stars">
-
-    </span>
-    <span>
-      <img src="../assets/fork.png" alt="forks">
-      <span id="forks"></span>
-
-    </span>
+    <div class='title'></div>
+    <div class='gitStats'>
+      <span id="stars"></span>
+      <div class = 'forks'>
+        <img src="fork.png" alt="forks">
+        <span id="forks"></span>
       </div>
-      <div class = 'pkgGraphs'>
+    </div>
 
-      <svg class ="dependencies"></svg>
+    <p id='description'></p>
+
+    <div class="outdatedDependencies"></div>
+  </div>
+
+
+    <div class='pkgGraphs'>
+
+      <svg class="dependencies"></svg>
       <div class="subScores">
         <ul class="qualityScore">
           <li>
@@ -54,16 +56,16 @@
             Popularity : <span id="popularityH"></span>
           </li>
           <li>
-           Community Interest: <span id="popularity0"></span>
+            Community Interest: <span id="popularity0"></span>
           </li>
           <li>
-           Downloads Count: <span id="popularity1"></span>
+            Downloads Count: <span id="popularity1"></span>
           </li>
           <li>
-           Downloads Acceleration: <span id="popularity2"></span>
+            Downloads Acceleration: <span id="popularity2"></span>
           </li>
           <li>
-           Dependets Count: <span id="popularity3"></span>
+            Dependets Count: <span id="popularity3"></span>
           </li>
         </ul>
         <ul class="maintenanceScore">
@@ -71,30 +73,28 @@
             Maintenance : <span id="maintenanceH"></span>
           </li>
           <li>
-           Release Frequency: <span id="maintenance0"></span>
+            Release Frequency: <span id="maintenance0"></span>
           </li>
           <li>
-           Commit Frequency: <span id="maintenance1"></span>
+            Commit Frequency: <span id="maintenance1"></span>
           </li>
           <li>
-           Open Issues: <span id="maintenance2"></span>
-         </li>
-         <li>
-           Issues Distribution: <span id="maintenance3"></span>
-         </li>
+            Open Issues: <span id="maintenance2"></span>
+          </li>
+          <li>
+            Issues Distribution: <span id="maintenance3"></span>
+          </li>
         </ul>
 
       </div>
-      <div class="outdatedDependencies">
 
-      </div>
 
     </div>
-    </div>
+  </div>
 
   <div class="mainContainer">
     <div class="scoreChart">
-        <svg class="scores"></svg>
+      <svg class="scores"></svg>
 
     </div>
     <svg class="legend"></svg>
