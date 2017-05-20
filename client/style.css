@@ -8,6 +8,7 @@
 @media screen and (max-width: 90px)
 */
 
+
 ul{
   list-style: none;
   display: inline-block;
@@ -15,20 +16,33 @@ ul{
 
 .pkgInformation{
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
+
+  -webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: center;
+justify-content: center;
 }
 
 .header{
   display: flex;
   flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 .title{
-order: 1;
 
-align-self: center;
-text-align: center;
+  align-self: center;
+  order: 1;
+
+
 }
 .name{
+
+
   font-size: 40px;
 }
 .version{
@@ -37,26 +51,31 @@ text-align: center;
 
 .gitStats{
   order: 2;
+  -webkit-flex-direction: row;
   flex-direction: row;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
 }
+
 #stars{
   order: 1;
+
 }
+
 .forks{
   order: 2;
 }
+
 #description{
   order: 3;
-  width: 30%
+  text-align: center;
+  width: 75%
 }
 
 .outdatedDependencies{
-  order: 4;
-}
 
-.pkgGraphs{
-  flex-direction: row;
-  order: 3;
+  order: 4;
+
 }
 
 .subScores{
@@ -122,18 +141,15 @@ stroke-width: 1.5px;
 }
 
 .legend{
-  width: 20%;
   order: 2;
   height: 400px;
-
-
 }
 
 
 .scoreChart{
   /*overflow: scroll;*/
   width: 80%;
-  height: 400px;
+  height: 300px;
   overflow-x: auto;
   order: 1;
 }
