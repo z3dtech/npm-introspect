@@ -135,6 +135,11 @@ window.onload = function() {
         .attr('width', width / 5)
         .attr('height', height )
 
+        const outdated = d3.select('.outdatedDependencies').append('ul');
+
+
+
+
       const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
@@ -229,19 +234,44 @@ window.onload = function() {
           }
 
           function buildSS(){
+
             for (let i = 0; i < subScoreHeading.length; i++){
+              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1]
               for(let j = 0; j < 4; j++){
                 document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1]  //set up pretty print
               }
             }
           }
 
+          function buildOutdated(){
+            let outdatedDependencies = outdated.selectAll('li')
+            .data(pkg.outdatedDependencies[0] || [])
+
+            outdatedDependencies
+            .enter()
+            .append('li')
+            .merge(outdatedDependencies)
+            .text(
+              function(d){
+                console.log(d)
+                return d;
+              })
+
+            outdatedDependencies.exit().remove()
+          }
+
+
+
+
           buildSS()
           buildTitle()
           buildForks()
           buildStars()
+          buildOutdated()
         }
 
+
+        console.log(d3.select('.legend')._groups[0][0].clientWidth);
 
 
         const legend = d3.select('.legend').append('g')
@@ -261,7 +291,9 @@ window.onload = function() {
           .attr("x", 40)
           .attr("y", 9.5)
           .attr("dy", "0.32em")
-          .text(function(d) { return d; });
+          .text(function(d) {
+
+            return d; });
 
 
         const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
