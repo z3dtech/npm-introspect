@@ -47,12 +47,12 @@ window.onload = function() {
           .paddingInner(0.3),
         sX1 = d3.scaleBand()  //this will compute the x values
           .padding(0.05),
-        color = d3.scaleOrdinal().range(["#BB7F74","#ffffb3", "#bebada","#fb8072"]); //add colors
+        color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
     //     return JSON.parse(xhr.responseText);
-    // }).get(processData);
+    // }).get(processData);#5D796A
     // function processData(err, rawData) {
     //     if (err)
     //         console.log(err);
@@ -152,7 +152,7 @@ window.onload = function() {
       const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
-          .size([h, w/2]);
+          .size([h, w]);
 
 
           d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
