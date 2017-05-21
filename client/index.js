@@ -49,6 +49,8 @@ window.onload = function() {
           .padding(0.05),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
+// #2C2F32,#485C58,#6D8D74,#A7BD88,#F6EA9C
+
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
     //     return JSON.parse(xhr.responseText);
@@ -90,6 +92,8 @@ window.onload = function() {
 
         console.log(sX0.bandwidth())
 
+        //onlaod {grab random pkg and run functions}
+
 
 
         const scoreScale = (function(){
@@ -114,11 +118,18 @@ window.onload = function() {
           .attr('height', scoreHeight)
 
         const handleMouseOver = function(e, that) {
-          // d3.select(that).classed('foreground', true)
-          // change the hue of the column being hovered over
+
+
         }
         const handleMouseOut = function(e, that){
-          // turn off highlight
+
+          console.log('mouseOut')
+          console.log(e)//pkg info
+          console.log(that)//color
+          const t = d3.select()
+          console.log(t)
+     //.attr('fill', '#2171b5')
+
         }
 
         const handleClick = function(e, that){
@@ -130,6 +141,7 @@ window.onload = function() {
 ////////////////////////
 
 //clean up these variables  in regards to width and height
+//and connect them to the other width height variables
 /////////////////////
 
         const h = window.innerHeight / 2,
@@ -254,7 +266,6 @@ window.onload = function() {
             .merge(outdatedDependencies)
             .text(
               function(d){
-
                 return 'Outdated Dependency: ' + d;
               })
 
@@ -264,9 +275,9 @@ window.onload = function() {
           function buildSS(){
 
             for (let i = 0; i < subScoreHeading.length; i++){
-              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1]
+              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1].toFixed(2)
               for(let j = 0; j < 4; j++){
-                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1]  //set up pretty print
+                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1].toFixed(2)  //set up pretty print
               }
             }
           }
@@ -312,15 +323,21 @@ window.onload = function() {
           buildScoresChart
           .enter()
           .append('g')
+
+
           .on('click', function(e){
-            // send data for the entire group, not the individual bar
             handleClick(e)})
-          .on('mouseover', function(e){
-            handleMouseOver(e, this)})
-          .on('mouseover', function(e){
-            handleMouseOut(e, this)})
+          // .on('mouseover', function(e){
+          //   const u = d3.selectAll(this)
+          //   u.attr('fill', '#2171b5')
+          //   //u._groups[0].childNodes[0].outerHTML =   50     //'<circle x = '1' y = '1' radius = '50'></circle>'
+          //   handleMouseOver(e, this)})
+          // .on('mouseout', function(e){
+          //   handleMouseOut(e, this)})
+
+
+
           .attr('transform', (d) => {
-            //console.log(d)
             return 'translate(' + sX0(d.title[1]) + ',0)';
           })
           .selectAll('rect')
@@ -336,6 +353,11 @@ window.onload = function() {
               height: (d) => {return height - y(d[1])},
               fill: (d) => {return color(d[0])}
             })
+            .on('mouseover', (e) =>{
+              const y = d3.select(this)
+              console.log(this)
+              y.attr('fill', 'red')
+            })
 
             buildScoresChart.exit().remove();
 
@@ -349,42 +371,6 @@ window.onload = function() {
 
 
 
-
-
-/*
-
-
-            //let vulnerabilities= status.selectAll('li')
-            //.data(module.vulnerabilities)
-
-            //vulnerabilities
-            //.enter()
-            //.append('li')
-
-            //.merge(vulnerabilities)
-            //.text(function(d){
-              //console.log(d)
-              //return 'Vulnerability: ' + d;
-            //})
-
-            let outdatedDependencies = outdated.selectAll('td')
-            .data(pkg.outdatedDependencies[0] || [])
-
-            outdatedDependencies
-            .enter()
-            .append('td')
-            .merge(outdatedDependencies)
-            .text(
-              function(d){
-                return d;
-              })
-
-            outdatedDependencies.exit().remove()
-          }
-
-
-
-*/
     })
 
 }
