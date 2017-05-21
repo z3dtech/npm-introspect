@@ -162,6 +162,10 @@ window.onload = function() {
 
 
       const buildDependencies = function(pkg){
+        //look at the translate and transform
+        //maybe compute that dynam micallyu
+        //look at how the size of dependecies is computed and
+        // decide if it needs all that spavce, find a way without clipping
 
           const treemap = d3.tree()
           .size([h, w]);
@@ -178,6 +182,9 @@ window.onload = function() {
           nodes = treemap(nodes);
 
 
+          //some of these animations have to be added on the enterLinks
+          //rather than merge
+
           const updateLinks = dependencies.selectAll(".link")
           .data(nodes.descendants().slice(1))
 
@@ -186,7 +193,11 @@ window.onload = function() {
 
           const exitLink = updateLinks.exit().remove();
 
-           updateLinks.merge(enterLinks).attr("d", function(d) {
+           updateLinks.merge(enterLinks)
+           .transition()
+              .duration(1000)
+              .ease(d3.easeLinear)
+              .attr("d", function(d) {
                       return "M" + d.y + "," + d.x
                         + "C" + (d.y + d.parent.y) / 2 + "," + d.x
                         + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
@@ -346,6 +357,14 @@ window.onload = function() {
             return d.scores})
           .enter().append('rect')
           .merge(buildScoresChart)
+          .on('mouse', (e) =>{
+            const y = d3.select(this)
+            console.log(this)
+            y.attr('fill', 'red')
+          })
+          .transition()
+            .duration(1000)
+            .ease(d3.easeLinear)
             .attrs({
               x: (d, i) => {return sX1(d[0])},
               y: (d, i) => {return y(d[1])},
@@ -353,11 +372,7 @@ window.onload = function() {
               height: (d) => {return height - y(d[1])},
               fill: (d) => {return color(d[0])}
             })
-            .on('mouseover', (e) =>{
-              const y = d3.select(this)
-              console.log(this)
-              y.attr('fill', 'red')
-            })
+
 
             buildScoresChart.exit().remove();
 
