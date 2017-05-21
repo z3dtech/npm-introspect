@@ -31,28 +31,23 @@ window.onload = function() {
         },
         width = window.innerHeight,
         height = window.innerWidth,
+        scoreWidth = width * 0.8,
+        scoreHeight = height * 0.3,
         line = d3.line(),
         axis = d3.axisLeft(),
 
         y = d3.scaleLinear()
           .domain([1, 0])
-          .range([0, height]),
-        popY= d3.scaleLinear()
-          .range([0, height]),
+          .range([0, scoreHeight]),
         sX0 = d3.scaleBand()  //group spacing
           .rangeRound([0, width])
-          .paddingInner(0.1),
+          .paddingInner(0.3),
         axisScale = d3.scaleBand()  //group spacing
           .rangeRound([0, width])
-          .paddingInner(0.1),
-        ssX0 = d3.scaleBand()  //spacing for subscore groups
-          .rangeRound([0, width])
-          .paddingInner(0.1),
+          .paddingInner(0.3),
         sX1 = d3.scaleBand()  //this will compute the x values
           .padding(0.05),
-        ssX1 = d3.scaleBand()  //this will compute the x values
-          .padding(0.05),
-        color = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"]); //add colors
+        color = d3.scaleOrdinal().range(["#BB7F74","#ffffb3", "#bebada","#fb8072"]); //add colors
 
     // const url = '/datam.json'
     // d3.request(url).mimeType('application/json').response(function(xhr) {
@@ -91,10 +86,9 @@ window.onload = function() {
         const scoreHeading = ['quality', 'popularity', 'maintenance', 'final']
 
         sX0.domain(pkgs)
-        sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth()]);
+        sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth() ]);
 
-        ssX0.domain(subScoreHeading) //maybe this has to map to the groups better
-        ssX1.domain(['carefulness', 'tests', 'health', 'branding', 'communityInterest', 'downloadsCount', 'downloadsAcceleration', 'dependentsCount', 'releasesFrequency', 'commitsFrequency', 'openIssues', 'issuesDistribution']).rangeRound([0, ssX0.bandwidth()]); //subScore names
+        console.log(sX0.bandwidth())
 
 
 
@@ -111,9 +105,13 @@ window.onload = function() {
         console.log(scoreScale)
 
 
+        const scoresContainer = d3.select('.scoreChart')
+          .attr('width', scoreWidth - 200)
+          .attr('height', scoreHeight)
+
         const scores = d3.select('.scores')
-          .attr('width', width)
-          .attr('height', height)
+          .attr('width', scoreWidth)
+          .attr('height', scoreHeight)
 
         const handleMouseOver = function(e, that) {
           // d3.select(that).classed('foreground', true)
@@ -129,6 +127,10 @@ window.onload = function() {
           buildDependencies(e)
         }
 
+////////////////////////
+
+//clean up these variables  in regards to width and height
+/////////////////////
 
         const h = window.innerHeight / 2,
         w = window.innerWidth / 2,
@@ -197,8 +199,7 @@ window.onload = function() {
 
           enterNodes.append("text")
           .attr("dy", ".35em")
-          .attr("x", function(d) {
-          return 30 })
+          .attr("x", 25)
           .style("text-anchor", function(d) {
           return d.children ? "start" : "start"; })
           .text(function(d) { return d.data.name; });
@@ -270,11 +271,6 @@ window.onload = function() {
             }
           }
 
-
-
-
-
-
           buildSS()
           buildTitle()
           buildForks()
@@ -288,24 +284,24 @@ window.onload = function() {
 
 
         const legend = d3.select('.legend').append('g')
-          .attr('text-anchor', 'end')
+          .attr("transform", () => { return "translate(0," + 20 + ")"; })
+          .attr('text-anchor', 'start')
           .selectAll('g')
           .data(scoreHeading)
           .enter().append('g')
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+          .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
 
           legend.append('rect')
-          .attr("x",  50)  //here had width
-          .attr("width", 19)
-          .attr("height", 19)
+          .attr("x",  20)  //here had width
+          .attr("width", 15)
+          .attr("height", 15)
           .attr("fill", color);
 
           legend.append('text')
-          .attr("x", 40)
-          .attr("y", 9.5)
-          .attr("dy", "0.32em")
-          .text(function(d) {
+          .attr("x", 45)
+          .attr("y", 12)
 
+          .text(function(d) {
             return d; });
 
 

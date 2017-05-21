@@ -9,6 +9,9 @@
 */
 
 
+body{
+  background-color: #CBDB94;
+}
 ul{
   list-style: none;
   display: inline-block;
@@ -104,6 +107,9 @@ img{
 }
 
 .dependencies{
+
+  margin: 0 auto;
+
   order: 2;
 
 
@@ -136,20 +142,33 @@ stroke-width: 1.5px;
 .mainContainer{
   display: flex;
   flex-direction: row;
-  /*justify-content: space-between;*/
+
+    -webkit-align-items: center;
+    align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+
 
 }
 
-.legend{
-  order: 2;
-  height: 400px;
-}
+
 
 
 .scoreChart{
-  /*overflow: scroll;*/
-  width: 80%;
-  height: 300px;
+  /*margin-left: 100px;*/
+  margin: 0 auto;
   overflow-x: auto;
-  order: 1;
+
+
+}
+.scores{
+
+}
+.legend{
+
+  width: 150px;
+  /*flex: 1;*/
+
+  /*height: 400px;*/
+
 }
