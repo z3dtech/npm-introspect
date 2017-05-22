@@ -62,17 +62,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Full featured Promises/A+ implementation with exceptionally good performance",
   "scores": [
-    ["quality", 0.8777153763072025],
-    ["popularity", 0.9232131941432893],
-    ["maintenance", 0.9984477208195154],
-    ["final", 0.9358959331291423]
+    ["quality", 0.8777186330849831],
+    ["popularity", 0.9226920409053507],
+    ["maintenance", 0.9984944891260348],
+    ["final", 0.9357308754364797]
   ],
   "subScores": [
     [
@@ -99,8 +95,8 @@
     ["name", "chalk"],
     ["version", "v1.1.3"]
   ],
-  "stars": ["stars", 5313],
-  "forks": ["forks", 178],
+  "stars": ["stars", 5331],
+  "forks": ["forks", 179],
   "vulnerabilities": [null],
   "outdatedDependencies": [
     ["ansi-styles", "supports-color"]
@@ -141,17 +137,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Terminal string styling done right. Much color.",
   "scores": [
-    ["quality", 0.9260849954579646],
-    ["popularity", 0.8875599963406566],
-    ["maintenance", 0.9998054523667554],
-    ["final", 0.9384034056849836]
+    ["quality", 0.9261985633198007],
+    ["popularity", 0.8812385949856026],
+    ["maintenance", 0.9998086934081742],
+    ["final", 0.936226119933762]
   ],
   "subScores": [
     [
@@ -161,16 +153,16 @@
       ["branding", 0.3]
     ],
     [
-      ["communityInterest", 6213],
-      ["downloadsCount", 20581804],
-      ["downloadsAcceleration", 31395.73808980215],
-      ["dependentsCount", 15323]
+      ["communityInterest", 6233],
+      ["downloadsCount", 20686025.333333332],
+      ["downloadsAcceleration", 22463.498839421634],
+      ["dependentsCount", 15390]
     ],
     [
       ["releasesFrequency", 0.9],
       ["commitsFrequency", 0.9],
       ["openIssues", 1],
-      ["issuesDistribution", 0.9]
+      ["issuesDistribution", 0.9000007609577922]
     ]
   ]
 }, {
@@ -268,14 +260,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", null],
   "test": ["testScript", true],
   "description": "Data-Driven Documents",
   "scores": [
-    ["quality", 0.9191930721590411],
-    ["popularity", 0.7279622989554246],
-    ["maintenance", 0.9999077119104414],
-    ["final", 0.8805124254507655]
+    ["quality", 0.9191999844242884],
+    ["popularity", 0.7280198731249231],
+    ["maintenance", 0.9999081115017803],
+    ["final", 0.8805347899466327]
   ],
   "subScores": [
     [
@@ -332,14 +323,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", null],
   "test": ["testScript", true],
   "description": "Multi-value map syntax for D3 selections.",
   "scores": [
-    ["quality", 0.8281102176731103],
-    ["popularity", 0.17125618899160008],
-    ["maintenance", 0.999897740456314],
-    ["final", 0.658336940608703]
+    ["quality", 0.8281176528523662],
+    ["popularity", 0.17114752394738744],
+    ["maintenance", 0.9999005796655047],
+    ["final", 0.658302132120222]
   ],
   "subScores": [
     [
@@ -366,11 +356,11 @@
     ["name", "express"],
     ["version", "v4.15.3"]
   ],
-  "stars": ["stars", 31842],
-  "forks": ["forks", 5757],
+  "stars": ["stars", 31902],
+  "forks": ["forks", 5759],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["array-flatten", "path-to-regexp", "qs"]
+    ["array-flatten", "debug", "path-to-regexp", "qs"]
   ],
   "dependencies": {
     "name": "express",
@@ -474,42 +464,32 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/appveyor/branch",
-    "state": "success"
-  }, {
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Fast, unopinionated, minimalist web framework",
   "scores": [
-    ["quality", 0.9952167765155917],
-    ["popularity", 0.9513174992134161],
-    ["maintenance", 0.9696263319688232],
-    ["final", 0.9708953738684613]
+    ["quality", 0.9874172722393348],
+    ["popularity", 0.9505395005790129],
+    ["maintenance", 0.9698545551383315],
+    ["final", 0.968363101172871]
   ],
   "subScores": [
     [
       ["carefulness", 0.9999999999999999],
       ["tests", 1],
-      ["health", 0.7857142857142857],
+      ["health", 0.7142857142857143],
       ["branding", 1]
     ],
     [
-      ["communityInterest", 41446],
-      ["downloadsCount", 11360248.666666666],
-      ["downloadsAcceleration", 41150.3335806697],
-      ["dependentsCount", 14572]
+      ["communityInterest", 41504],
+      ["downloadsCount", 11450485.666666666],
+      ["downloadsAcceleration", 38578.864402587526],
+      ["dependentsCount", 14630]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.503789259606491]
+      ["issuesDistribution", 0.5041108814473639]
     ]
   ]
 }, {
@@ -518,7 +498,7 @@
     ["version", "v0.0.5"]
   ],
   "stars": ["stars", 3],
-  "forks": ["forks", "N/A"],
+  "forks": ["forks", 0],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
@@ -537,14 +517,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", null],
   "test": ["testScript", true],
   "description": "Makes it easy for people who like js to interact with the flaschen-taschen",
   "scores": [
-    ["quality", 0.701181555543408],
-    ["popularity", 0.03259499283121354],
-    ["maintenance", 0.9929663393864028],
-    ["final", 0.569300932939188]
+    ["quality", 0.7011462156528345],
+    ["popularity", 0.0382247388130397],
+    ["maintenance", 0.9932776740115241],
+    ["final", 0.5713697091844476]
   ],
   "subScores": [
     [
@@ -555,13 +534,13 @@
     ],
     [
       ["communityInterest", 5],
-      ["downloadsCount", 46.333333333333336],
-      ["downloadsAcceleration", 0.2543759512937595],
+      ["downloadsCount", 84.66666666666667],
+      ["downloadsAcceleration", 1.2569063926940638],
       ["dependentsCount", 0]
     ],
     [
-      ["releasesFrequency", 0.858304794520548],
-      ["commitsFrequency", 0.8700856164383561],
+      ["releasesFrequency", 1],
+      ["commitsFrequency", 0.8921575342465753],
       ["openIssues", 0.7],
       ["issuesDistribution", 0.7]
     ]
@@ -571,7 +550,7 @@
     ["name", "got"],
     ["version", "v6.7.1"]
   ],
-  "stars": ["stars", 1642],
+  "stars": ["stars", 1645],
   "forks": ["forks", 95],
   "vulnerabilities": [null],
   "outdatedDependencies": [
@@ -629,39 +608,32 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Simplified HTTP requests",
   "scores": [
-    ["quality", 0.98554241519951],
-    ["popularity", 0.6966568611248503],
-    ["maintenance", 0.9975700443005686],
-    ["final", 0.8886421414587495]
+    ["quality", 0.9853371182132461],
+    ["popularity", 0.6995491328936472],
+    ["maintenance", 0.9976673540525675],
+    ["final", 0.8896269058951489]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
-      ["tests", 1],
+      ["tests", 0.9984999999999999],
       ["health", 0.8181818181818181],
       ["branding", 0.44999999999999996]
     ],
     [
-      ["communityInterest", 1874],
-      ["downloadsCount", 5297059.666666667],
-      ["downloadsAcceleration", 23270.66054033486],
-      ["dependentsCount", 811]
+      ["communityInterest", 1877],
+      ["downloadsCount", 5350390.666666667],
+      ["downloadsAcceleration", 24582.861130136982],
+      ["dependentsCount", 813]
     ],
     [
       ["releasesFrequency", 0.7511986301369863],
-      ["commitsFrequency", 0.9828561643835616],
+      ["commitsFrequency", 0.9916849315068493],
       ["openIssues", 1],
-      ["issuesDistribution", 0.819796412972207]
+      ["issuesDistribution", 0.8228449244686182]
     ]
   ]
 }, {
@@ -669,8 +641,8 @@
     ["name", "minimist"],
     ["version", "v1.2.0"]
   ],
-  "stars": ["stars", 2214],
-  "forks": ["forks", 124],
+  "stars": ["stars", 2224],
+  "forks": ["forks", 125],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
@@ -686,17 +658,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "parse argument options",
   "scores": [
-    ["quality", 0.9226129027887365],
-    ["popularity", 0.8489711600077452],
-    ["maintenance", 0.15585156304283748],
-    ["final", 0.6284718239043249]
+    ["quality", 0.9226154438557916],
+    ["popularity", 0.8502346287574182],
+    ["maintenance", 0.1558984130119718],
+    ["final", 0.6289311977760239]
   ],
   "subScores": [
     [
@@ -706,10 +674,10 @@
       ["branding", 0.15]
     ],
     [
-      ["communityInterest", 2742],
-      ["downloadsCount", 36737220.666666664],
-      ["downloadsAcceleration", 66370.53000380518],
-      ["dependentsCount", 6359]
+      ["communityInterest", 2754],
+      ["downloadsCount", 37200068],
+      ["downloadsAcceleration", 70260.79425418563],
+      ["dependentsCount", 6412]
     ],
     [
       ["releasesFrequency", 0],
@@ -723,8 +691,8 @@
     ["name", "moment"],
     ["version", "v2.18.1"]
   ],
-  "stars": ["stars", 31396],
-  "forks": ["forks", 4571],
+  "stars": ["stars", 31452],
+  "forks": ["forks", 4585],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
@@ -796,17 +764,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Parse, validate, manipulate, and display dates",
   "scores": [
-    ["quality", 0.998224298820379],
-    ["popularity", 0.9247076438267545],
-    ["maintenance", 0.9816996078423409],
-    ["final", 0.966709827730297]
+    ["quality", 0.9982245567887645],
+    ["popularity", 0.9254846565803723],
+    ["maintenance", 0.9817959672470749],
+    ["final", 0.9670155853762358]
   ],
   "subScores": [
     [
@@ -816,16 +780,16 @@
       ["branding", 1]
     ],
     [
-      ["communityInterest", 37684],
-      ["downloadsCount", 8784148.666666666],
-      ["downloadsAcceleration", 29158.08430365297],
-      ["dependentsCount", 8886]
+      ["communityInterest", 37759],
+      ["downloadsCount", 8916053.666666666],
+      ["downloadsAcceleration", 28023.2326674277],
+      ["dependentsCount", 8932]
     ],
     [
       ["releasesFrequency", 0.8791095890410959],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.5603467133315209]
+      ["issuesDistribution", 0.5603528405530124]
     ]
   ]
 }, {
@@ -833,7 +797,7 @@
     ["name", "morgan"],
     ["version", "v1.8.1"]
   ],
-  "stars": ["stars", 2378],
+  "stars": ["stars", 2385],
   "forks": ["forks", 199],
   "vulnerabilities": [null],
   "outdatedDependencies": [
@@ -877,20 +841,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "HTTP request logger middleware for node.js",
   "scores": [
-    ["quality", 0.9913535349685282],
-    ["popularity", 0.7150967626929127],
-    ["maintenance", 0.9998512477121942],
-    ["final", 0.8976378641323459]
+    ["quality", 0.9914021974288105],
+    ["popularity", 0.7162478559609561],
+    ["maintenance", 0.9998542857146231],
+    ["final", 0.8980564088150959]
   ],
   "subScores": [
     [
@@ -900,10 +857,10 @@
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 2971],
-      ["downloadsCount", 3265861.6666666665],
-      ["downloadsAcceleration", 7794.182210806699],
-      ["dependentsCount", 2189]
+      ["communityInterest", 2976],
+      ["downloadsCount", 3272854],
+      ["downloadsAcceleration", 7920.163641552506],
+      ["dependentsCount", 2191]
     ],
     [
       ["releasesFrequency", 0.9],
@@ -917,8 +874,8 @@
     ["name", "optimist"],
     ["version", "v0.6.1"]
   ],
-  "stars": ["stars", 2391],
-  "forks": ["forks", 140],
+  "stars": ["stars", 2396],
+  "forks": ["forks", 139],
   "vulnerabilities": [null],
   "outdatedDependencies": [
     ["wordwrap", "minimist"]
@@ -941,17 +898,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "default",
-    "state": "failure"
-  }]],
   "test": ["testScript", true],
   "description": "Light-weight option parsing with an argv hash. No optstrings attached.",
   "scores": [
-    ["quality", 0.7256062089742901],
-    ["popularity", 0.7953283704085785],
-    ["maintenance", 0.16666666666666666],
-    ["final", 0.5543801256686228]
+    ["quality", 0.7256938440671404],
+    ["popularity", 0.7953755855852833],
+    ["maintenance", 0.49845992644914794],
+    ["final", 0.670550582432193]
   ],
   "subScores": [
     [
@@ -961,13 +914,13 @@
       ["branding", 0.15]
     ],
     [
-      ["communityInterest", 2731],
-      ["downloadsCount", 12852241],
-      ["downloadsAcceleration", 18582.413432267887],
-      ["dependentsCount", 3539]
+      ["communityInterest", 2734],
+      ["downloadsCount", 12875955.333333334],
+      ["downloadsAcceleration", 18677.964250380523],
+      ["dependentsCount", 3544]
     ],
     [
-      ["releasesFrequency", 0],
+      ["releasesFrequency", 0.7591609589041095],
       ["commitsFrequency", 0],
       ["openIssues", 1],
       ["issuesDistribution", 0]
@@ -978,11 +931,11 @@
     ["name", "request"],
     ["version", "v2.81.0"]
   ],
-  "stars": ["stars", 15450],
-  "forks": ["forks", 1887],
+  "stars": ["stars", 15465],
+  "forks": ["forks", 1888],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["aws-sign2", "har-validator", "performance-now", "hawk", "qs"]
+    ["aws-sign2", "har-validator", "hawk", "qs", "performance-now"]
   ],
   "dependencies": {
     "name": "request",
@@ -1078,14 +1031,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", null],
   "test": ["testScript", true],
   "description": "Simplified HTTP request client.",
   "scores": [
-    ["quality", 0.9133079604170782],
-    ["popularity", 0.949166108532252],
-    ["maintenance", 0.6648480897997073],
-    ["final", 0.8388973575413092]
+    ["quality", 0.913428349878963],
+    ["popularity", 0.9485200624194419],
+    ["maintenance", 0.6649069696602856],
+    ["final", 0.8387279661915936]
   ],
   "subScores": [
     [
@@ -1095,10 +1047,10 @@
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 18978],
-      ["downloadsCount", 23893109],
-      ["downloadsAcceleration", 64339.86385083711],
-      ["dependentsCount", 20708]
+      ["communityInterest", 18997],
+      ["downloadsCount", 24170799.333333332],
+      ["downloadsAcceleration", 63639.019406392676],
+      ["dependentsCount", 20738]
     ],
     [
       ["releasesFrequency", 0.7511986301369863],
@@ -1165,20 +1117,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.",
   "scores": [
-    ["quality", 0.9296443470071531],
-    ["popularity", 0.6678440510797998],
-    ["maintenance", 0.9849938040201829],
-    ["final", 0.8573865533871399]
+    ["quality", 0.9297562584155404],
+    ["popularity", 0.6677644842724425],
+    ["maintenance", 0.9850740173049597],
+    ["final", 0.8574203530767528]
   ],
   "subScores": [
     [
@@ -1205,7 +1150,7 @@
     ["name", "update-notifier"],
     ["version", "v2.1.0"]
   ],
-  "stars": ["stars", 655],
+  "stars": ["stars", 661],
   "forks": ["forks", 49],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
@@ -1245,14 +1190,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", null],
   "test": ["testScript", true],
   "description": "Update notifications for your CLI app",
   "scores": [
-    ["quality", 0.9111296788317004],
-    ["popularity", 0.6647823165020424],
-    ["maintenance", 0.9998054523667554],
-    ["final", 0.8559446227535893]
+    ["quality", 0.9111464740185136],
+    ["popularity", 0.6677255803545565],
+    ["maintenance", 0.9998086911672852],
+    ["final", 0.8569809372381987]
   ],
   "subScores": [
     [
@@ -1262,10 +1206,10 @@
       ["branding", 0.15]
     ],
     [
-      ["communityInterest", 818],
-      ["downloadsCount", 3956408.6666666665],
-      ["downloadsAcceleration", 14433.444254185688],
-      ["dependentsCount", 1255]
+      ["communityInterest", 826],
+      ["downloadsCount", 4043641.6666666665],
+      ["downloadsAcceleration", 15807.438622526635],
+      ["dependentsCount", 1275]
     ],
     [
       ["releasesFrequency", 0.9],
@@ -1279,8 +1223,8 @@
     ["name", "yargs"],
     ["version", "v8.0.1"]
   ],
-  "stars": ["stars", 2944],
-  "forks": ["forks", 216],
+  "stars": ["stars", 2957],
+  "forks": ["forks", 217],
   "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
@@ -1347,23 +1291,13 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "continuous-integration/appveyor/branch",
-    "state": "success"
-  }, {
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "yargs the modern, pirate-themed, successor to optimist.",
   "scores": [
-    ["quality", 0.9999999999999992],
-    ["popularity", 0.8546151662334758],
-    ["maintenance", 0.9946574269071848],
-    ["final", 0.9472454075992309]
+    ["quality", 0.9999999999999999],
+    ["popularity", 0.8548375954796915],
+    ["maintenance", 0.9946197942092101],
+    ["final", 0.9473100863911155]
   ],
   "subScores": [
     [
@@ -1373,16 +1307,16 @@
       ["branding", 1]
     ],
     [
-      ["communityInterest", 3668],
-      ["downloadsCount", 23629019],
-      ["downloadsAcceleration", 85274.37543759512],
-      ["dependentsCount", 4941]
+      ["communityInterest", 3684],
+      ["downloadsCount", 23917754.333333332],
+      ["downloadsAcceleration", 98262.55502283107],
+      ["dependentsCount", 4964]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.6753498984115557]
+      ["issuesDistribution", 0.6743384138023621]
     ]
   ]
 }, {
@@ -1390,11 +1324,11 @@
     ["name", "webpack"],
     ["version", "v2.5.1"]
   ],
-  "stars": ["stars", 27615],
-  "forks": ["forks", 3394],
+  "stars": ["stars", 27900],
+  "forks": ["forks", 3432],
   "vulnerabilities": [null],
   "outdatedDependencies": [
-    ["ajv", "ajv-keywords", "loader-utils", "node-libs-browser", "yargs"]
+    ["ajv-keywords", "ajv", "loader-utils", "node-libs-browser", "uglify-js", "yargs"]
   ],
   "dependencies": {
     "name": "webpack",
@@ -1526,54 +1460,32 @@
       }]
     }]
   },
-  "statuses": ["vulnerable", [{
-    "context": "codecov/changes",
-    "state": "success"
-  }, {
-    "context": "codecov/project",
-    "state": "success"
-  }, {
-    "context": "codecov/patch",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/appveyor/branch",
-    "state": "success"
-  }, {
-    "context": "coverage/coveralls",
-    "state": "success"
-  }, {
-    "context": "continuous-integration/travis-ci/push",
-    "state": "success"
-  }, {
-    "context": "ci/circleci",
-    "state": "success"
-  }]],
   "test": ["testScript", true],
   "description": "Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.",
   "scores": [
-    ["quality", 0.9359232585363689],
-    ["popularity", 0.8724192771370531],
-    ["maintenance", 0.7807699502457484],
-    ["final", 0.8593932071448912]
+    ["quality", 0.9299191072295725],
+    ["popularity", 0.873955370226368],
+    ["maintenance", 0.7777511871933211],
+    ["final", 0.8570730272657628]
   ],
   "subScores": [
     [
       ["carefulness", 0.9199999999999999],
       ["tests", 0.9924999999999998],
-      ["health", 0.5238095238095238],
+      ["health", 0.5],
       ["branding", 0.6]
     ],
     [
-      ["communityInterest", 32543],
-      ["downloadsCount", 5495572.666666667],
-      ["downloadsAcceleration", 31613.43778538813],
-      ["dependentsCount", 3088]
+      ["communityInterest", 32868],
+      ["downloadsCount", 5569646.333333333],
+      ["downloadsAcceleration", 30727.825114155254],
+      ["dependentsCount", 3151]
     ],
     [
       ["releasesFrequency", 1],
       ["commitsFrequency", 1],
       ["openIssues", 1],
-      ["issuesDistribution", 0.15676208535267855]
+      ["issuesDistribution", 0.15229400239152702]
     ]
   ]
 }]

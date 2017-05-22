@@ -9,7 +9,7 @@ window.onload = function() {
         width = window.innerHeight,
         height = window.innerWidth,
         scoreWidth = width * 0.8,
-        scoreHeight = height * 0.3,
+        scoreHeight = height * 0.20,
         line = d3.line(),
         axis = d3.axisLeft(),
 
@@ -31,19 +31,22 @@ window.onload = function() {
 
 // #2C2F32,#485C58,#6D8D74,#A7BD88,#F6EA9C
 
-    // const url = '/datam.json'
-    // d3.request(url).mimeType('application/json').response(function(xhr) {
-    //     return JSON.parse(xhr.responseText);
-    // }).get(processData);#5D796A
-    // function processData(err, rawData) {
-    //     if (err)
-    //         console.log(err);
+    const url = '/datam.json'
+    d3.request(url).mimeType('application/json').response(function(xhr) {
+        return JSON.parse(xhr.responseText);
+    }).get(processData)
+    function processData(err, rawData) {
+        if (err)
+            console.log(err);
 
 
-    d3.json('../data1.json', function(err, data) {
-        if (err) {
-            console.log(err)
-        };
+//check on this processData function
+
+
+    // d3.json('../data1.json', function(err, data) {
+    //     if (err) {
+    //         console.log(err)
+    //     };
         console.log(data)
 
         const pkgs = (function(){
@@ -98,8 +101,8 @@ window.onload = function() {
 
 
         const margin = {top: 50, right: 500, bottom: 50, left: 100},
-        depWidth = width / 2,
-        depHeight = height / 2;
+        depWidth = width * .6,
+        depHeight = height * .45;
 
         const dependencies = d3.select('.dependencies')
         .attr('width', depWidth + margin.right + margin.left)
@@ -303,5 +306,5 @@ window.onload = function() {
         // .attr("transform", "translate(" + [25, 0]  + ")")
         // .call(d3.axisLeft(vertAxis)) //no right s
 
-    })
+    }
 }

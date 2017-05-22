@@ -34,22 +34,22 @@ module.exports.go = (temp) => {
     app.get('/datam.json', function(req, res) {
         console.log('servingDatam')
 
-        //temp._.slice(1)     //the user passed modules
+        const userURL = temp._.slice(1)     //the user passed modules
         //sanatize userURL- look for bad characters maybe change underscore to dash ??
 
-        //   requestData.parse()
-        //   .then(function (data) {
-        //       res.json(data)
-        //       res.setHeader('Content-Type', 'application/json');
-        //       console.log('Data' + data)
-        //       //res.render(path.join(__dirname + '/../client/index.html'))
-        //       res.send(data);
-        //     })
-        //     .catch(function (e) {
-        //         res.status(500, {
-        //             error: e
-        //         });
-        // })
+          requestData.parse(userURL)
+          .then(function (data) {
+              res.json(data)
+              res.setHeader('Content-Type', 'application/json');
+              console.log('Data' + data)
+              //res.render(path.join(__dirname + '/../client/index.html'))
+              res.send(data);
+            })
+            .catch(function (e) {
+                res.status(500, {
+                    error: e
+                });
+        })
     })
 
     app.get('/', function(req, res) {
@@ -59,12 +59,12 @@ module.exports.go = (temp) => {
     })
 
     app.get('*', function(req, res) {
-        res.send('hello ass')
+        res.send('Something unaccounted for')
     })
 
     app.listen(8080, function() {
 
-        console.log(temp._.slice(1))
+
         console.log('Example app listening on port 8080!')
 
     })
