@@ -11,12 +11,18 @@
 
 body{
   background-color: #FBF1D0;
+   pointer-events: all;
 }
 ul{
   list-style: none;
   display: inline-block;
 }
 
+.active{
+  background-color: red;
+  fill: blue;
+
+}
 .pkgInformation{
   display: flex;
   -webkit-flex-direction: column;
@@ -69,6 +75,7 @@ justify-content: center;
   order: 2;
 }
 
+
 #description{
   order: 3;
   text-align: center;
@@ -78,6 +85,7 @@ justify-content: center;
 .outdatedDependencies{
 
   order: 4;
+
 
 }
 
@@ -144,7 +152,7 @@ stroke-width: 1.5px;
 }
 
 .hovered{
-  fill: black;
+  fill: ;
 }
 
 
@@ -183,4 +191,11 @@ stroke-width: 1.5px;
 
   /*height: 400px;*/
 
+}
+.domain{
+  visibility: hidden;
+}
+.axis{
+  font-weight: bold;
+  font-size: 14px;
 }

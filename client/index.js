@@ -117,23 +117,9 @@ window.onload = function() {
           .attr('width', scoreWidth)
           .attr('height', scoreHeight)
 
-        const handleMouseOver = function(e, that) {
-
-
-        }
-        const handleMouseOut = function(e, that){
-
-          console.log('mouseOut')
-          console.log(e)//pkg info
-          console.log(that)//color
-          const t = d3.select()
-          console.log(t)
-     //.attr('fill', '#2171b5')
-
-        }
-
         const handleClick = function(e, that){
           // popY.domain([d3.extent()]) //move
+          d3.select(that).attr('fill', 'red')
           buildInformation(e)
           buildDependencies(e)
         }
@@ -162,10 +148,6 @@ window.onload = function() {
 
 
       const buildDependencies = function(pkg){
-        //look at the translate and transform
-        //maybe compute that dynam micallyu
-        //look at how the size of dependecies is computed and
-        // decide if it needs all that spavce, find a way without clipping
 
           const treemap = d3.tree()
           .size([h, w]);
@@ -182,19 +164,17 @@ window.onload = function() {
           nodes = treemap(nodes);
 
 
-          //some of these animations have to be added on the enterLinks
-          //rather than merge
-
           const updateLinks = dependencies.selectAll(".link")
           .data(nodes.descendants().slice(1))
 
           const enterLinks = updateLinks.enter().append("path")
             .attr("class", "link")
 
+
           const exitLink = updateLinks.exit().remove();
 
            updateLinks.merge(enterLinks)
-           .transition()
+              .transition()
               .duration(1000)
               .ease(d3.easeLinear)
               .attr("d", function(d) {
@@ -218,7 +198,8 @@ window.onload = function() {
 
 
           enterNodes.append("circle")
-          .attr("r", function(d) { return 15; });
+          .attr("r", function(d) { return 15; })
+
 
           enterNodes.append("text")
           .attr("dy", ".35em")
@@ -230,9 +211,7 @@ window.onload = function() {
           updateNodes.merge(enterNodes)
 
           const exitNode = updateNodes.exit().remove();
-
-
-}
+        }
 
 
         const title = d3.select('.title').append('g')
@@ -279,7 +258,6 @@ window.onload = function() {
               function(d){
                 return 'Outdated Dependency: ' + d;
               })
-
             outdatedDependencies.exit().remove()
           }
 
@@ -301,10 +279,6 @@ window.onload = function() {
           buildDescription()
         }
 
-
-        console.log(d3.select('.legend')._groups[0][0].clientWidth);
-
-
         const legend = d3.select('.legend').append('g')
           .attr("transform", () => { return "translate(0," + 20 + ")"; })
           .attr('text-anchor', 'start')
@@ -314,7 +288,7 @@ window.onload = function() {
           .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
 
           legend.append('rect')
-          .attr("x",  20)  //here had width
+          .attr("x",  20)
           .attr("width", 15)
           .attr("height", 15)
           .attr("fill", color);
@@ -334,44 +308,27 @@ window.onload = function() {
           buildScoresChart
           .enter()
           .append('g')
-
-
           .on('click', function(e){
             handleClick(e)})
-          // .on('mouseover', function(e){
-          //   const u = d3.selectAll(this)
-          //   u.attr('fill', '#2171b5')
-          //   //u._groups[0].childNodes[0].outerHTML =   50     //'<circle x = '1' y = '1' radius = '50'></circle>'
-          //   handleMouseOver(e, this)})
-          // .on('mouseout', function(e){
-          //   handleMouseOut(e, this)})
-
-
-
           .attr('transform', (d) => {
             return 'translate(' + sX0(d.title[1]) + ',0)';
           })
           .selectAll('rect')
-          .data(function(d) { //pass a loop of data
-            //console.log(d)
+          .data(function(d) {
             return d.scores})
           .enter().append('rect')
           .merge(buildScoresChart)
-          .on('mouse', (e) =>{
-            const y = d3.select(this)
-            console.log(this)
-            y.attr('fill', 'red')
-          })
+          .attr('x', (d, i) => {return sX1(d[0])})
+          .attr('width', (d) => {return sX1.bandwidth()})
+          .attr('fill', (d) => {return color(d[0])})
+          // .attr('height', 0) //comment out for vertical drop
+          // .attr('y', height) //comment out for vertical drop
           .transition()
             .duration(1000)
             .ease(d3.easeLinear)
-            .attrs({
-              x: (d, i) => {return sX1(d[0])},
-              y: (d, i) => {return y(d[1])},
-              width: (d) => {return sX1.bandwidth()},
-              height: (d) => {return height - y(d[1])},
-              fill: (d) => {return color(d[0])}
-            })
+            .delay((d, i) => {return i * 400})
+            .attr('height', (d) => {return height - y(d[1])})
+            .attr('y', (d, i) => {return y(d[1])})
 
 
             buildScoresChart.exit().remove();
@@ -379,12 +336,14 @@ window.onload = function() {
 
         scores.append('g')
         .attr('class', 'axis')
-        .attr("transform", "translate(0," + 450 + ")")
+        .attr("transform", "translate(" + [3, 130]  + ")")
         .call(d3.axisBottom(axisScale.domain(pkgNames)))
         .selectAll('text')
+        .attr('text-anchor', 'center')
         .attr('transform', 'rotate(90)')  //they neeed to be shifted down to fit
 
-
+        scores.append('g')
+        .attr('class', 'axis')
 
     })
 
