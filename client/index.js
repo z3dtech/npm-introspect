@@ -1,26 +1,3 @@
-/*
-add a line to show the mean of the scores
-add a way to dynamically add modules and add from command line
-deal with when a borked package is requested
-make sure it is obvious what the scores mean and what we are looking at
-maybe we search for packages or we can add in a form document
-popularity needs to have a computed scale - maybe get neighboring information
-  or averages from other packages
-
-red flag bad packages
-allow ability to search
-
-link back to npms.io
-use viewport to change dynamiclly the window
-.attr('viewBox', '0 0 ' + size + ' ' + size);
-
-use a table for the subscores and show a nice patagraph that represents the
-infor on the module.
-
-
-Anticipate vulnerabilities in the packages you rely on- have an opening div that is replaced
-once someone clicks
-*/
 'use strict'
 window.onload = function() {
     const margin = {
@@ -45,6 +22,9 @@ window.onload = function() {
         axisScale = d3.scaleBand()  //group spacing
           .rangeRound([0, width])
           .paddingInner(0.3),
+        vertAxis = d3.scaleLinear()
+          .domain([1, 0])
+          .range([0, scoreHeight]),
         sX1 = d3.scaleBand()  //this will compute the x values
           .padding(0.05),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
@@ -90,12 +70,6 @@ window.onload = function() {
         sX0.domain(pkgs)
         sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth() ]);
 
-        console.log(sX0.bandwidth())
-
-        //onlaod {grab random pkg and run functions}
-
-
-
         const scoreScale = (function(){
           let scale = [[], [], [], []];
           for (let pkg in data){
@@ -108,7 +82,6 @@ window.onload = function() {
           })()
         console.log(scoreScale)
 
-
         const scoresContainer = d3.select('.scoreChart')
           .attr('width', scoreWidth - 200)
           .attr('height', scoreHeight)
@@ -118,39 +91,30 @@ window.onload = function() {
           .attr('height', scoreHeight)
 
         const handleClick = function(e, that){
-          // popY.domain([d3.extent()]) //move
-          d3.select(that).attr('fill', 'red')
           buildInformation(e)
           buildDependencies(e)
         }
 
-////////////////////////
 
-//clean up these variables  in regards to width and height
-//and connect them to the other width height variables
-/////////////////////
 
-        const h = window.innerHeight / 2,
-        w = window.innerWidth / 2,
-        margin = {top: 50, right: 500, bottom: 50, left: 100};
+        const margin = {top: 50, right: 500, bottom: 50, left: 100},
+        depWidth = width / 2,
+        depHeight = height / 2;
 
         const dependencies = d3.select('.dependencies')
-        .attr('width', w + margin.right + margin.left)
-        .attr('height', h + margin.top + margin.bottom)
+        .attr('width', depWidth + margin.right + margin.left)
+        .attr('height', depHeight + margin.top + margin.bottom)
         .append('g')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-        // .attr("width", w + margin.right + margin.left)
-        // .attr("height", h + margin.top + margin.bottom)
-
         const outdated = d3.select('.outdatedDependencies').append('ul');
 
 
-      const buildDependencies = function(pkg){
+        const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
-          .size([h, w]);
+          .size([depHeight, depWidth]);
 
 
           d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
@@ -184,22 +148,18 @@ window.onload = function() {
                         + " " + d.parent.y + "," + d.parent.x;
                       });
 
-
-
           const updateNodes = dependencies.selectAll("g.node")
-          .data(nodes.descendants(), d => d)
+          .data(nodes.descendants(), d => d);
 
           const enterNodes = updateNodes.enter().append("g")
           .attr("class", function(d) {
                 return "node" +
           (d.children ? " node--internal" : " node--leaf"); })
           .attr("transform", function(d) {
-          return "translate(" + d.y + "," + d.x + ")"; })
-
+          return "translate(" + d.y + "," + d.x + ")"; });
 
           enterNodes.append("circle")
-          .attr("r", function(d) { return 15; })
-
+          .attr("r", function(d) { return 15; });
 
           enterNodes.append("text")
           .attr("dy", ".35em")
@@ -208,14 +168,13 @@ window.onload = function() {
           return d.children ? "start" : "start"; })
           .text(function(d) { return d.data.name; });
 
-          updateNodes.merge(enterNodes)
+          updateNodes.merge(enterNodes);
 
           const exitNode = updateNodes.exit().remove();
         }
 
 
         const title = d3.select('.title').append('g')
-
         const buildInformation = function(pkg){
 
           function buildTitle() {
@@ -223,11 +182,8 @@ window.onload = function() {
             .data(pkg.title);
             const enter = update.enter()
             .append('span').attr('class', function(d){
-                      return d[0]})
-
+                      return d[0]});
             const exit = update.exit().remove();
-
-
             update.merge(enter).text(function(d){
               return  d[1]});
           }
@@ -236,16 +192,13 @@ window.onload = function() {
           function buildForks() {
             document.getElementById('forks').innerText = pkg.forks[1];
           }
-
           function buildStars(){
             const star = '\u2605'; //U+2606 for other star
             document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
           }
-
           function buildDescription(){
             document.getElementById('description').innerText = pkg.description;
           }
-
           function buildOutdated(){
             let outdatedDependencies = outdated.selectAll('li')
             .data(pkg.outdatedDependencies[0] || [])
@@ -262,7 +215,6 @@ window.onload = function() {
           }
 
           function buildSS(){
-
             for (let i = 0; i < subScoreHeading.length; i++){
               document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1].toFixed(2)
               for(let j = 0; j < 4; j++){
@@ -278,6 +230,8 @@ window.onload = function() {
           buildOutdated()
           buildDescription()
         }
+
+
 
         const legend = d3.select('.legend').append('g')
           .attr("transform", () => { return "translate(0," + 20 + ")"; })
@@ -301,7 +255,8 @@ window.onload = function() {
             return d; });
 
 
-        const buildScoresChart = scores.append('g') //maybe refactor into a single function with a let scoresChart at the beginning
+        handleClick(data[0])
+        const buildScoresChart = scores.append('g')
           .selectAll('g')
           .data(data);
 
@@ -342,9 +297,11 @@ window.onload = function() {
         .attr('text-anchor', 'center')
         .attr('transform', 'rotate(90)')  //they neeed to be shifted down to fit
 
-        scores.append('g')
-        .attr('class', 'axis')
+        // vertical axis
+        // scores.append('g')
+        // .attr('class', 'axisVertical')
+        // .attr("transform", "translate(" + [25, 0]  + ")")
+        // .call(d3.axisLeft(vertAxis)) //no right s
 
     })
-
 }

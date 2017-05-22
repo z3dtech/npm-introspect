@@ -1,14 +1,3 @@
-/*@media (min-width:320px) {}
-
-@media (min-width:801px)*/
-
-
-/*can also use max-width and have the rules to apply in this brackets
-
-@media screen and (max-width: 90px)
-*/
-
-
 body{
   background-color: #FBF1D0;
    pointer-events: all;
@@ -18,11 +7,10 @@ ul{
   display: inline-block;
 }
 
-.active{
-  background-color: red;
-  fill: blue;
 
-}
+/*
+                            HEADER
+*/
 .pkgInformation{
   display: flex;
   -webkit-flex-direction: column;
@@ -42,100 +30,84 @@ justify-content: center;
   -webkit-justify-content: center;
   justify-content: center;
 }
-.title{
 
+.title{
   align-self: center;
   order: 1;
-
-
 }
 .name{
-
-
   font-size: 40px;
 }
 .version{
   font-size: 12px;
 }
-
 .gitStats{
   order: 2;
   -webkit-flex-direction: row;
   flex-direction: row;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
+  font-family: monospace;
 }
-
 #stars{
   order: 1;
-
+  font-family: sans-serif;
 }
-
-.forks{
-  order: 2;
-}
-
-
-#description{
-  order: 3;
-  text-align: center;
-  width: 75%
-}
-
-.outdatedDependencies{
-
-  order: 4;
-
-
-}
-
-.subScores{
-  flex-direction: row;
-  order: 1;
-  font-size: 13px;
-
-}
-
-.qualityScore{
-
-  order: 1;
-}
-.popularityScore{
-
-  order: 2;
-}
-.maintenanceScore{
-
-  order: 3;
-}
-
 img{
   height: 15px;
   width: 15px;
 }
-
-.dependencies{
-
-  margin: 0 auto;
-
+.forks{
   order: 2;
+  font-family: sans-serif;
+}
 
-
-
+#description{
+  order: 3;
+  text-align: center;
+  width: 75%;
+  font-family: sans-serif;
 }
 
 /*
-node internal and node leaf
-
-
-
+                                 OUTDATED DEPENDENCIES
 */
+.outdatedDependencies{
+  order: 4;
+  color: #c72210;
+  font-family: monospace;
+}
+/*
+                                SUB-SCORE
+*/
+.subScores{
+  flex-direction: row;
+  order: 1;
+  font-size: 13px;
+  font-family: sans-serif;
+}
+.qualityScore{
+  order: 1;
+}
+.popularityScore{
+  order: 2;
+}
+.maintenanceScore{
+  order: 3;
+}
+/*
+                               DEPENDENCIES
+*/
+.dependencies{
+  margin: 0 auto;
+  order: 2;
+}
 .node circle {
 fill: #425351;
 stroke: #2C2F32;
 }
 .node text {
-font: 12px sans-serif;
+font: 12px monospace;
 }
 .node--internal circle {
 fill: #B5C68B;
@@ -143,20 +115,15 @@ fill: #B5C68B;
 .node--internal text {
 text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 }
-
 .link {
 fill: none;
 stroke: #2C2F32;
 stroke-opacity: 0.4;
 stroke-width: 1.5px;
 }
-
-.hovered{
-  fill: ;
-}
-
-
-
+/*
+                    GROUPED BAR CHART AND LEGEND
+*/
 
 
 .mainContainer{
@@ -167,35 +134,22 @@ stroke-width: 1.5px;
     align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-
-
 }
-
-
-
-
 .scoreChart{
   /*margin-left: 100px;*/
   margin: 0 auto;
   overflow-x: auto;
-
-
-}
-.scores{
-
 }
 .legend{
-
   width: 150px;
-  /*flex: 1;*/
-
-  /*height: 400px;*/
-
+  font-family: monospace;
+  font-weight: lighter;
 }
 .domain{
   visibility: hidden;
 }
+
 .axis{
-  font-weight: bold;
+
   font-size: 14px;
 }
