@@ -21,4 +21,5 @@ exports.builder = (yargs) =>
 
     exports.handler = (args) => {
       console.log('ffffff')
+      console.log('this one doesnt do shit right?')
     }

@@ -1,11 +1,8 @@
 const chalk = require('chalk')
-const handleError = require('./util/handleError');
-
 const server = require('../server/server')
 
-
-exports.command = 'score';
-exports.describe = 'Build landscape of dependencies\' scores from npms.io' ;
+exports.command = '-pkgs';
+exports.describe = 'Add NPM packages to be evaluated' ;
 exports.builder = (yargs) =>
   yargs
     .strict()
@@ -22,7 +19,7 @@ exports.builder = (yargs) =>
     });
 
     exports.handler = (argv) => {
-      server.go(argv)
+      server.run(argv)
 
       //return if logged stuff
     }

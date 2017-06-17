@@ -1,30 +1,3 @@
-/*
-I should look at rewriting this with respect to https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
-and see if instead of returning new promises if I should just be returning the promise
-- returning the promise should allow me to chain it where the follwoing then is
-invoke upon resolve, If I don't return the function then the next then would recience undefined
-
-Always return or throw inside a .then, you can also return synchronous or asynchronous
-and the second function won't care
-
-use Promise.resolve instead of doing new Promise(funciton(reject, resolve)...)
-for synchronous code I can def use this somewhere
-
-Then has to be passed a function, not a promise- which will evaluate to null, what you should do
-is wrap that returned promise in a function
-
-
-/////Chnage N/A stars to 0 and forks 0
-
-doSomething().then(function () {
-  return doSomethingElse();
-}).then(finalHandler);
-
-
-doSomething().then(doSomethingElse)
-  .then(finalHandler);
-*/
-
 'use strict'
 
 const fs = require('fs');
@@ -147,7 +120,7 @@ exports.parse = function(userPkgs) {
               })
               npmSearchQuery(packageUrls).then(function(result) {
 
-                  fs.writeFile('data1.json', result, (err) => {
+                  fs.writeFile('data.json', result, (err) => {
                       if (err) {
                           throw err;
                       }

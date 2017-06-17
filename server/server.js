@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 const requestData = require('../server/requestData');
@@ -8,7 +6,7 @@ const app = express();
 const path = require('path');
 const opn = require('opn');
 
-module.exports.go = (temp) => {
+module.exports.run = (argv) => {
 
     app.get('/fork.png', function(req, res){
       res.sendFile('/home/nicholas/code/javascipt/npm-landscape/assets/fork.png')
@@ -21,15 +19,15 @@ module.exports.go = (temp) => {
     })
     app.get('/backupData.json', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/backupData.json')
-    })
+    })   //delete before production
     app.get('/data1.json', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/data1.json')
-    })
+    })  //delete before production
 
     app.get('/datam.json', function(req, res) {
-        console.log('servingDatam')
+        console.log('Recieving API results...')
 
-        const userURL = temp._.slice(1)     //the user passed modules
+        const userURL = argv._.slice(1)     //the user passed modules
         //sanatize userURL- look for bad characters maybe change underscore to dash ??
 
           requestData.parse(userURL)
@@ -49,7 +47,7 @@ module.exports.go = (temp) => {
 
     app.get('/', function(req, res) {
         const indexPath = '/home/nicholas/code/javascipt/npm-landscape/client/index.html'
-        console.log(indexPath)
+        console.log(indexPath) //this will probably break on publish
         res.sendFile(indexPath)
     })
 
@@ -58,8 +56,6 @@ module.exports.go = (temp) => {
     })
 
     app.listen(8080, function() {
-
-
         console.log('Example app listening on port 8080!')
         opn('http://localhost:8080/');
 

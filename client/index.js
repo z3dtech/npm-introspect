@@ -25,26 +25,29 @@ window.onload = function() {
         vertAxis = d3.scaleLinear()
           .domain([1, 0])
           .range([0, scoreHeight]),
-        sX1 = d3.scaleBand()  //this will compute the x values
+        sX1 = d3.scaleBand()
           .padding(0.05),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
         const options = {
-          lines: 9, // The number of lines to draw
-          length: 9, // The length of each line
-          width: 5, // The line thickness
-          radius: 14, // The radius of the inner circle
-          color: '#EE3124', // #rgb or #rrggbb or array of colors
-          speed: 1.9, // Rounds per second
-          trail: 40, // Afterglow percentage
-          className: 'spinner', // The CSS class to assign to the spinner
+          lines: 17,
+          length: 12,
+          width: 5,
+          radius: 40,
+          color: "#5D796A",
+          scale: 1.75,
+          speed: 1.9,
+          trail: 60,
+          corners: 1.0,
+          opacity: 0,
+          className: 'spinner',
         }
 
-        const chartHide = document.getElementsByClassName('scoreChart')[0].style.visibility='hidden'
-        const spinMount = document.getElementById('spinner')
-        const spinner = new Spinner(options).spin(spinMount)
+    const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+    chartHide.visibility='hidden';
+    const spinMount = document.getElementById('spinner')
+    const spinner = new Spinner(options).spin(spinMount)
 
-// Uncomment ot test with netwoel
     const url = '/datam.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
         return JSON.parse(xhr.responseText);
@@ -56,7 +59,6 @@ window.onload = function() {
 
         spinner.stop();
 
-////comment out here to test w/o network
       // d3.json('../backupData.json', function(err, data) {
       //     if (err) {
       //         console.log(err)
@@ -122,15 +124,12 @@ window.onload = function() {
         .append('g')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
         const outdated = d3.select('.outdatedDependencies').append('ul');
-
 
         const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
           .size([depHeight, depWidth]);
-
 
           d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
 
@@ -142,13 +141,11 @@ window.onload = function() {
           });
           nodes = treemap(nodes);
 
-
           const updateLinks = dependencies.selectAll(".link")
           .data(nodes.descendants().slice(1))
 
           const enterLinks = updateLinks.enter().append("path")
             .attr("class", "link")
-
 
           const exitLink = updateLinks.exit().remove();
 
@@ -188,7 +185,6 @@ window.onload = function() {
           const exitNode = updateNodes.exit().remove();
         }
 
-
         const title = d3.select('.title').append('g')
         const buildInformation = function(pkg){
 
@@ -203,7 +199,6 @@ window.onload = function() {
               return  d[1]});
           }
 
-
           function buildForks() {
             const forkMount = document.getElementsByClassName('forks')[0];
             while (forkMount.hasChildNodes()){
@@ -217,7 +212,6 @@ window.onload = function() {
             forkCount.innerText = pkg.forks[1];
             forkMount.appendChild(fork);
             forkMount.appendChild(forkCount);
-            // document.getElementById('forks').innerText = pkg.forks[1];
           }
           function buildStars(){
             const star = '\u2605'; //U+2606 for other star
@@ -259,8 +253,6 @@ window.onload = function() {
           buildDescription()
         }
 
-
-
         const legend = d3.select('.legend').append('g')
           .attr("transform", () => { return "translate(0," + 20 + ")"; })
           .attr('text-anchor', 'start')
@@ -278,10 +270,8 @@ window.onload = function() {
           legend.append('text')
           .attr("x", 45)
           .attr("y", 12)
-
           .text(function(d) {
             return d; });
-
 
         handleClick(data[0])
         const buildScoresChart = scores.append('g')
@@ -297,15 +287,15 @@ window.onload = function() {
             return 'translate(' + sX0(d.title[1]) + ',0)';
           })
           .on('mouseover', function() {
-
            d3.selectAll(this.childNodes).style('fill', function(d){
-             let a = d3.select(this).style('fill')
-             console.log(a)
-             let c = d3.select(this).attr('d', function(d) {
-               return d.color
-             })
-             console.log(c)
-             return d3.rgb(a).darker(1)
+             let bar = d3.select(this).style('fill')
+             return d3.rgb(bar).darker(2)
+           })
+          })
+          .on('mouseout', function() {
+           d3.selectAll(this.childNodes).style('fill', function(d){
+             let bar = d3.select(this).style('fill')
+             return d3.rgb(bar).brighter(2)
            })
           })
           .selectAll('rect')
@@ -326,7 +316,6 @@ window.onload = function() {
             .attr('y', (d, i) => {return y(d[1])})
 
             buildScoresChart.exit().remove();
-
 
         scores.append('g')
         .attr('class', 'axis')
