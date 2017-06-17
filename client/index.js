@@ -1,15 +1,3 @@
-/*
-still need to sanatize the cmd line inputs and clean up those files
-otherwise all there is is formatting the svg better so that it shouws
-everything
-
-it has a tendency to always cut something even if it doesn't have to for spacejam
-it becomes less space efficient the more pkgs it has
-
-make it launch the app from the cmd line
-
-spacing is all kinds of shit
-*/
 'use strict'
 window.onload = function() {
     const margin = {
@@ -41,7 +29,21 @@ window.onload = function() {
           .padding(0.05),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
-// #2C2F32,#485C58,#6D8D74,#A7BD88,#F6EA9C
+        const options = {
+          lines: 9, // The number of lines to draw
+          length: 9, // The length of each line
+          width: 5, // The line thickness
+          radius: 14, // The radius of the inner circle
+          color: '#EE3124', // #rgb or #rrggbb or array of colors
+          speed: 1.9, // Rounds per second
+          trail: 40, // Afterglow percentage
+          className: 'spinner', // The CSS class to assign to the spinner
+        }
+
+        const chartHide = document.getElementsByClassName('scoreChart')[0].style.visibility='hidden'
+        const spinMount = document.getElementById('spinner')
+        const spinner = new Spinner(options).spin(spinMount)
+
 // Uncomment ot test with netwoel
     const url = '/datam.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
@@ -52,17 +54,16 @@ window.onload = function() {
         if (err) console.log(err);
         const data = JSON.parse(rawData);
 
+        spinner.stop();
+
 ////comment out here to test w/o network
       // d3.json('../backupData.json', function(err, data) {
       //     if (err) {
       //         console.log(err)
       //     };
 
-//comment
+
         console.dir(data)
-
-
-
         const pkgs = (function(){
           let names = []
           for(let pkg in data){
@@ -80,7 +81,7 @@ window.onload = function() {
         })()
 
         const subScoreHeading = ['quality', 'popularity', 'maintenance'];
-        const scoreHeading = ['quality', 'popularity', 'maintenance', 'final']
+        const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
         sX0.domain(pkgs)
         sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth() ]);
@@ -96,14 +97,15 @@ window.onload = function() {
             return scale
           })()
 
+        chartHide.visibility='visible'
 
         const scoresContainer = d3.select('.scoreChart')
-          .attr('width', scoreWidth - 200)
-          .attr('height', scoreHeight)
+          .attr('width', scoreWidth - 100)
+          .attr('height', scoreHeight )
 
         const scores = d3.select('.scores')
           .attr('width', scoreWidth + (scoreWidth*.3))
-          .attr('height', scoreHeight)
+          .attr('height', scoreHeight+ (scoreHeight*.3))
 
         const handleClick = function(e, that){
           buildInformation(e)
@@ -203,11 +205,19 @@ window.onload = function() {
 
 
           function buildForks() {
-            let fork = document.createElement('img');
+            const forkMount = document.getElementsByClassName('forks')[0];
+            while (forkMount.hasChildNodes()){
+              forkMount.removeChild(forkMount.lastChild);
+            }
+            const fork = document.createElement('img');
             fork.src = 'fork.png';
-            fork.alt = 'Fork Count'
-            document.getElementsByClassName('forks')[0].appendChild(fork)
-            document.getElementById('forks').innerText = pkg.forks[1];
+            fork.alt = 'Fork Count';
+            const forkCount = document.createElement('span');
+            forkCount.id = 'forks';
+            forkCount.innerText = pkg.forks[1];
+            forkMount.appendChild(fork);
+            forkMount.appendChild(forkCount);
+            // document.getElementById('forks').innerText = pkg.forks[1];
           }
           function buildStars(){
             const star = '\u2605'; //U+2606 for other star
@@ -286,6 +296,18 @@ window.onload = function() {
           .attr('transform', (d) => {
             return 'translate(' + sX0(d.title[1]) + ',0)';
           })
+          .on('mouseover', function() {
+
+           d3.selectAll(this.childNodes).style('fill', function(d){
+             let a = d3.select(this).style('fill')
+             console.log(a)
+             let c = d3.select(this).attr('d', function(d) {
+               return d.color
+             })
+             console.log(c)
+             return d3.rgb(a).darker(1)
+           })
+          })
           .selectAll('rect')
           .data(function(d) {
             return d.scores})
@@ -308,11 +330,11 @@ window.onload = function() {
 
         scores.append('g')
         .attr('class', 'axis')
-        .attr("transform", "translate(" + [3, 130]  + ")")
+        .attr("transform", "translate(" + [1, 130]  + ")")
         .call(d3.axisBottom(axisScale.domain(pkgNames)))
         .selectAll('text')
         .attr('text-anchor', 'center')
-        .attr('transform', 'rotate(90)')  //they neeed to be shifted down to fit
+        .attr('transform', 'rotate(90)')
 
         // vertical axis
         // scores.append('g')

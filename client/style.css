@@ -152,6 +152,7 @@ stroke-width: 1.5px;
   /*margin-left: 100px;*/
   margin: 0 auto;
   overflow-x: auto;
+  overflow-y: auto;
 }
 .legend{
   width: 150px;
