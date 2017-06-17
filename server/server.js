@@ -2,19 +2,14 @@
 
 'use strict';
 
-//const requestData = require('../server/requestData')
-const express = require('express')
-const app = express()
-const path = require('path')
-const morgan = require('morgan')
+const requestData = require('../server/requestData');
+const express = require('express');
+const app = express();
+const path = require('path');
+const opn = require('opn');
 
 module.exports.go = (temp) => {
 
-    //app.set('views', path.join(__dirname, 'v'));
-
-    //app.use(morgan('combined'))
-
-    //app.use(express.static('../client/index.html'))
     app.get('/fork.png', function(req, res){
       res.sendFile('/home/nicholas/code/javascipt/npm-landscape/assets/fork.png')
     })
@@ -24,8 +19,8 @@ module.exports.go = (temp) => {
     app.get('/style.css', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/style.css')
     })
-    app.get('/data.json', function(req, res) {
-        res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/data.json')
+    app.get('/backupData.json', function(req, res) {
+        res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/backupData.json')
     })
     app.get('/data1.json', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/data1.json')
@@ -66,6 +61,7 @@ module.exports.go = (temp) => {
 
 
         console.log('Example app listening on port 8080!')
+        opn('http://localhost:8080/');
 
     })
 

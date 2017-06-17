@@ -1,3 +1,15 @@
+/*
+still need to sanatize the cmd line inputs and clean up those files
+otherwise all there is is formatting the svg better so that it shouws
+everything
+
+it has a tendency to always cut something even if it doesn't have to for spacejam
+it becomes less space efficient the more pkgs it has
+
+make it launch the app from the cmd line
+
+spacing is all kinds of shit
+*/
 'use strict'
 window.onload = function() {
     const margin = {
@@ -8,7 +20,7 @@ window.onload = function() {
         },
         width = window.innerHeight,
         height = window.innerWidth,
-        scoreWidth = width * 0.8,
+        scoreWidth = width * 0.8 ,
         scoreHeight = height * 0.20,
         line = d3.line(),
         axis = d3.axisLeft(),
@@ -30,24 +42,26 @@ window.onload = function() {
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
 // #2C2F32,#485C58,#6D8D74,#A7BD88,#F6EA9C
-
+// Uncomment ot test with netwoel
     const url = '/datam.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
         return JSON.parse(xhr.responseText);
     }).get(processData)
+
     function processData(err, rawData) {
-        if (err)
-            console.log(err);
+        if (err) console.log(err);
+        const data = JSON.parse(rawData);
+
+////comment out here to test w/o network
+      // d3.json('../backupData.json', function(err, data) {
+      //     if (err) {
+      //         console.log(err)
+      //     };
+
+//comment
+        console.dir(data)
 
 
-//check on this processData function
-
-
-    // d3.json('../data1.json', function(err, data) {
-    //     if (err) {
-    //         console.log(err)
-    //     };
-        console.log(data)
 
         const pkgs = (function(){
           let names = []
@@ -65,8 +79,6 @@ window.onload = function() {
           return names
         })()
 
-        console.log(pkgs)
-
         const subScoreHeading = ['quality', 'popularity', 'maintenance'];
         const scoreHeading = ['quality', 'popularity', 'maintenance', 'final']
 
@@ -76,29 +88,27 @@ window.onload = function() {
         const scoreScale = (function(){
           let scale = [[], [], [], []];
           for (let pkg in data){
-            //console.log(data[pkg].scores[1][1])
+
             data[pkg].scores.forEach((cat, i) => {
               scale[i].push(data[pkg].scores[i][1])
               })
             }
             return scale
           })()
-        console.log(scoreScale)
+
 
         const scoresContainer = d3.select('.scoreChart')
           .attr('width', scoreWidth - 200)
           .attr('height', scoreHeight)
 
         const scores = d3.select('.scores')
-          .attr('width', scoreWidth)
+          .attr('width', scoreWidth + (scoreWidth*.3))
           .attr('height', scoreHeight)
 
         const handleClick = function(e, that){
           buildInformation(e)
           buildDependencies(e)
         }
-
-
 
         const margin = {top: 50, right: 500, bottom: 50, left: 100},
         depWidth = width * .6,
@@ -193,6 +203,10 @@ window.onload = function() {
 
 
           function buildForks() {
+            let fork = document.createElement('img');
+            fork.src = 'fork.png';
+            fork.alt = 'Fork Count'
+            document.getElementsByClassName('forks')[0].appendChild(fork)
             document.getElementById('forks').innerText = pkg.forks[1];
           }
           function buildStars(){
@@ -218,10 +232,11 @@ window.onload = function() {
           }
 
           function buildSS(){
+            document.getElementById('finalScore').innerText = pkg.scores[3][0] + ': ' + pkg.scores[3][1].toFixed(2);
             for (let i = 0; i < subScoreHeading.length; i++){
-              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][1].toFixed(2)
+              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][0] + ': ' + pkg.scores[i][1].toFixed(2)
               for(let j = 0; j < 4; j++){
-                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][1].toFixed(2)  //set up pretty print
+                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][0] + ': ' + pkg.subScores[i][j][1].toFixed(2)  //set up pretty print
               }
             }
           }
@@ -288,7 +303,6 @@ window.onload = function() {
             .attr('height', (d) => {return height - y(d[1])})
             .attr('y', (d, i) => {return y(d[1])})
 
-
             buildScoresChart.exit().remove();
 
 
@@ -305,6 +319,5 @@ window.onload = function() {
         // .attr('class', 'axisVertical')
         // .attr("transform", "translate(" + [25, 0]  + ")")
         // .call(d3.axisLeft(vertAxis)) //no right s
-
+      }
     }
-}

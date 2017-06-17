@@ -69,6 +69,8 @@ img{
   font-family: sans-serif;
 }
 
+
+
 /*
                                  OUTDATED DEPENDENCIES
 */
@@ -80,12 +82,23 @@ img{
 /*
                                 SUB-SCORE
 */
+
+
+
 .subScores{
   flex-direction: row;
   order: 1;
   font-size: 13px;
   font-family: sans-serif;
 }
+
+#finalScore{
+  /*order: ;*/
+  text-align: center;
+  font-size: 15px;
+  font-family: sans-serif;
+}
+
 .qualityScore{
   order: 1;
 }
