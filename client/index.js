@@ -54,9 +54,16 @@ window.onload = function() {
     }).get(processData)
 
     function processData(err, rawData) {
-        if (err) console.log(err);
+        if (err) {
+          console.log(err);
+          console.log(err.currentTarget.status)
+          spinner.stop();
+          const respError = document.createElement('p');
+          respError.className = 'error';
+          respError.innerText = 'request error ' + err.currentTarget.status;
+          spinMount.appendChild(respError);
+        }
         const data = JSON.parse(rawData);
-
         spinner.stop();
 
       // d3.json('../backupData.json', function(err, data) {
@@ -304,6 +311,7 @@ window.onload = function() {
           .enter().append('rect')
           .merge(buildScoresChart)
           .attr('x', (d, i) => {return sX1(d[0])})
+          //try adding a proper y coordinate
           .attr('width', (d) => {return sX1.bandwidth()})
           .attr('fill', (d) => {return color(d[0])})
           // .attr('height', 0) //comment out for vertical drop

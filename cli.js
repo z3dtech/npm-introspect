@@ -4,27 +4,35 @@
 const yargs = require('yargs');
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
+const server = require('./server/server')
 
 updateNotifier({pkg}).notify();
 
-yargs
-  .strict()
-  .wrap(Math.min(80, yargs.terminalWidth()))
-  .alias('version', 'v')
-  .version(pkg.version)
-  .alias('help', 'h')
-  .help('help')
-  .demand(1, 'Please supply a valid command')
-
-  .option('color', {
-      describe: 'Allows disabling or enabling colored output',
-      type: 'boolean',
-      default: true,
-      global: true,
+const args =   yargs
+  .usage('Usage: launch [options]')
+  .command('launch', 'Launches visualization of package.json',
+      (argv) => {
+        console.log('///////////////////////////////////////////')
+        console.log(argv.argv)
+          server.run(argv)
+        })
+  .example('launch -n react -p 5000', 'add additional packages to the visualization')
+  .option('n', {
+    alias: 'names',
+    describe: 'Names of additional packages to visualize',
+    nargs: 1,
+    default: '',
   })
-
-
-  .command(require('./cmd/scores'))
-  .command(require('./cmd/dependencies'))
-
+  .option('p', {
+    alias: 'port',
+    describe: 'Specify port to use',
+    nargs: 1,
+    default: 8080,
+  })
+  .help('h')
+  .alias('h', 'help')
   .argv;
+
+  // exports.handler = (argv) => {
+  //   server.run(argv)
+  // }

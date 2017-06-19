@@ -27,10 +27,14 @@ module.exports.run = (argv) => {
     app.get('/datam.json', function(req, res) {
         console.log('Recieving API results...')
 
-        const userURL = argv._.slice(1)     //the user passed modules
+        console.log(argv)
+        console.dir(argv.parsed)
+
+
+        const userPkgs = argv._.slice(1)     //the user passed modules
         //sanatize userURL- look for bad characters maybe change underscore to dash ??
 
-          requestData.parse(userURL)
+          requestData.parse(userPkgs)
           .then(function (data) {
               res.json(data)
               res.setHeader('Content-Type', 'application/json');

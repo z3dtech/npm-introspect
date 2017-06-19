@@ -155,7 +155,7 @@ stroke-width: 1.5px;
   overflow-y: auto;
 }
 .legend{
-  width: 150px;
+  width: 10em;
   font-family: monospace;
   font-weight: lighter;
 }
@@ -166,4 +166,17 @@ stroke-width: 1.5px;
 .axis{
 
   font-size: 14px;
+}
+
+
+/*
+                            ERROR
+*/
+.error{
+  text-align: center;
+  font-family: monospace;
+  font-weight: lighter;
+  color: #2C2F32;
+  font-size: 40px;
+  margin-top: 30vh;
 }
