@@ -8,21 +8,9 @@ const server = require('./server/server')
 
 updateNotifier({pkg}).notify();
 
-const args =   yargs
-  .usage('Usage: launch [options]')
-  .command('launch', 'Launches visualization of package.json',
-      (argv) => {
-        console.log('///////////////////////////////////////////')
-        console.log(argv.argv)
-          server.run(argv)
-        })
-  .example('launch -n react -p 5000', 'add additional packages to the visualization')
-  .option('n', {
-    alias: 'names',
-    describe: 'Names of additional packages to visualize',
-    nargs: 1,
-    default: '',
-  })
+const args =  yargs
+  .usage("Usage: 'string of additional packages to visualize' -p 8080")
+  .example("'react redux mocha' -p 5000")
   .option('p', {
     alias: 'port',
     describe: 'Specify port to use',
@@ -33,6 +21,4 @@ const args =   yargs
   .alias('h', 'help')
   .argv;
 
-  // exports.handler = (argv) => {
-  //   server.run(argv)
-  // }
+  server.run(args)
