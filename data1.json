@@ -1,1 +1,1527 @@
-[{"title":[["name","bluebird"],["version","v3.5.0"]],"stars":["stars",14789],"forks":["forks",1818],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"bluebird","children":[{"name":"devDependency","children":[{"name":"acorn"},{"name":"baconjs"},{"name":"bluebird"},{"name":"body-parser"},{"name":"browserify"},{"name":"cli-table"},{"name":"co"},{"name":"cross-spawn"},{"name":"glob"},{"name":"grunt-saucelabs"},{"name":"highland"},{"name":"istanbul"},{"name":"jshint"},{"name":"jshint-stylish"},{"name":"mkdirp"},{"name":"mocha"},{"name":"open"},{"name":"optimist"},{"name":"rimraf"},{"name":"rx"},{"name":"serve-static"},{"name":"sinon"},{"name":"uglify-js"},{"name":"kefir"}]}]},"test":["testScript",true],"description":"Full featured Promises/A+ implementation with exceptionally good performance","scores":[["Quality",0.8777700268291548],["Popularity",0.92629482893145],["Maintenance",0.9997513519350345],["Final",0.937447171352016]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",0.85],["Health",1],["Branding",0]],[["Community Interest",17542],["Downloads Count",14936457.333333334],["Downloads Acceleration",44831.655974124806],["Dependents Count",12458]],[["Releases Frequency",1],["Commits Frequency",0.8409417808219178],["Open Issues",1],["Issues Distribution",0.8776704870187599]]]},{"title":[["name","d3"],["version","v4.9.1"]],"stars":["stars",65375],"forks":["forks",17110],"vulnerabilities":[null],"outdatedDependencies":[["d3-axis","d3-timer","d3-shape","d3-zoom"]],"dependencies":{"name":"d3","children":[{"name":"dependency","children":[{"name":"d3-array"},{"name":"d3-axis"},{"name":"d3-brush"},{"name":"d3-chord"},{"name":"d3-collection"},{"name":"d3-color"},{"name":"d3-dispatch"},{"name":"d3-drag"},{"name":"d3-dsv"},{"name":"d3-ease"},{"name":"d3-force"},{"name":"d3-format"},{"name":"d3-geo"},{"name":"d3-hierarchy"},{"name":"d3-interpolate"},{"name":"d3-path"},{"name":"d3-polygon"},{"name":"d3-quadtree"},{"name":"d3-queue"},{"name":"d3-random"},{"name":"d3-request"},{"name":"d3-scale"},{"name":"d3-selection"},{"name":"d3-shape"},{"name":"d3-time"},{"name":"d3-time-format"},{"name":"d3-timer"},{"name":"d3-transition"},{"name":"d3-voronoi"},{"name":"d3-zoom"}]},{"name":"devDependency","children":[{"name":"json2module"},{"name":"package-preamble"},{"name":"rimraf"},{"name":"rollup"},{"name":"rollup-plugin-ascii"},{"name":"rollup-plugin-node-resolve"},{"name":"tape"},{"name":"uglify-js"}]}]},"test":["testScript",true],"description":"Data-Driven Documents","scores":[["Quality",0.9094768010747679],["Popularity",0.7270206212178394],["Maintenance",0.9999064506037582],["Final",0.8772675154599894]],"subScores":[[["Carefulness",0.8699999999999999],["Tests",0.6],["Health",0.7333333333333334],["Branding",0.4]],[["Community Interest",86029],["Downloads Count",826971.3333333334],["Downloads Acceleration",3421.1287480974124],["Dependents Count",1220]],[["Releases Frequency",1],["Commits Frequency",0.9362739726027397],["Open Issues",1],["Issues Distribution",0.9]]]},{"title":[["name","d3-selection-multi"],["version","v1.0.1"]],"stars":["stars",31],"forks":["forks",9],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"d3-selection-multi","children":[{"name":"dependency","children":[{"name":"d3-selection"},{"name":"d3-transition"}]},{"name":"devDependency","children":[{"name":"eslint"},{"name":"jsdom"},{"name":"package-preamble"},{"name":"rollup"},{"name":"tape"},{"name":"uglify-js"}]}]},"test":["testScript",true],"description":"Multi-value map syntax for D3 selections.","scores":[["Quality",0.8282707002333971],["Popularity",0.17238332810326987],["Maintenance",0.9998867345871956],["Final",0.658775732011682]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",0.6],["Health",1],["Branding",0]],[["Community Interest",50],["Downloads Count",6133.666666666667],["Downloads Acceleration",45.48363774733638],["Dependents Count",14]],[["Releases Frequency",0.9],["Commits Frequency",0.9],["Open Issues",1],["Issues Distribution",0.952449510450487]]]},{"title":[["name","express"],["version","v4.15.3"]],"stars":["stars",32394],"forks":["forks",5858],"vulnerabilities":[null],"outdatedDependencies":[["array-flatten","debug","qs","path-to-regexp"]],"dependencies":{"name":"express","children":[{"name":"dependency","children":[{"name":"accepts"},{"name":"array-flatten"},{"name":"content-disposition"},{"name":"content-type"},{"name":"cookie"},{"name":"cookie-signature"},{"name":"debug"},{"name":"depd"},{"name":"encodeurl"},{"name":"escape-html"},{"name":"etag"},{"name":"finalhandler"},{"name":"fresh"},{"name":"merge-descriptors"},{"name":"methods"},{"name":"on-finished"},{"name":"parseurl"},{"name":"path-to-regexp"},{"name":"proxy-addr"},{"name":"qs"},{"name":"range-parser"},{"name":"send"},{"name":"serve-static"},{"name":"setprototypeof"},{"name":"statuses"},{"name":"type-is"},{"name":"utils-merge"},{"name":"vary"}]},{"name":"devDependency","children":[{"name":"after"},{"name":"body-parser"},{"name":"cookie-parser"},{"name":"ejs"},{"name":"express-session"},{"name":"hbs"},{"name":"istanbul"},{"name":"marked"},{"name":"method-override"},{"name":"mocha"},{"name":"morgan"},{"name":"multiparty"},{"name":"pbkdf2-password"},{"name":"should"},{"name":"supertest"},{"name":"connect-redis"},{"name":"cookie-session"},{"name":"vhost"}]}]},"test":["testScript",true],"description":"Fast, unopinionated, minimalist web framework","scores":[["Quality",0.9875902729791323],["Popularity",0.954106077679211],["Maintenance",0.966830997631255],["Final",0.9686050582524028]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",1],["Health",0.7142857142857143],["Branding",1]],[["Community Interest",42175],["Downloads Count",12109320],["Downloads Acceleration",50195.585121765616],["Dependents Count",15132]],[["Releases Frequency",1],["Commits Frequency",0.9855068493150685],["Open Issues",1],["Issues Distribution",0.4891854458549637]]]},{"title":[["name","flaschenode"],["version","v0.0.5"]],"stars":["stars",3],"forks":["forks",0],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"flaschenode","children":[{"name":"dependency","children":[{"name":"caption"}]},{"name":"devDependency","children":[{"name":"imagemagick-native"},{"name":"mocha"}]}]},"test":["testScript",true],"description":"Makes it easy for people who like js to interact with the flaschen-taschen","scores":[["Quality",0.7012676688083928],["Popularity",0.04104408434601072],["Maintenance",0.9933230557990655],["Final",0.5724087996932945]],"subScores":[[["Carefulness",0.355],["Tests",0.6],["Health",1],["Branding",0]],[["Community Interest",6],["Downloads Count",105],["Downloads Acceleration",1.5673896499238964],["Dependents Count",0]],[["Releases Frequency",1],["Commits Frequency",0.7871575342465753],["Open Issues",0.7],["Issues Distribution",0.7]]]},{"title":[["name","got"],["version","v7.0.0"]],"stars":["stars",1742],"forks":["forks",101],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"got","children":[{"name":"dependency","children":[{"name":"decompress-response"},{"name":"duplexer3"},{"name":"get-stream"},{"name":"is-plain-obj"},{"name":"is-retry-allowed"},{"name":"is-stream"},{"name":"isurl"},{"name":"lowercase-keys"},{"name":"p-cancelable"},{"name":"p-timeout"},{"name":"safe-buffer"},{"name":"timed-out"},{"name":"url-parse-lax"}]},{"name":"devDependency","children":[{"name":"ava"},{"name":"coveralls"},{"name":"form-data"},{"name":"get-port"},{"name":"into-stream"},{"name":"nyc"},{"name":"pem"},{"name":"pify"},{"name":"tempfile"},{"name":"tempy"},{"name":"universal-url"},{"name":"xo"}]}]},"test":["testScript",true],"description":"Simplified HTTP requests","scores":[["Quality",0.9880197136915736],["Popularity",0.7060245933700484],["Maintenance",0.9995548321600873],["Final",0.8933587130430196]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",0.9984999999999999],["Health",1],["Branding",0.44999999999999996]],[["Community Interest",1990],["Downloads Count",5860645.333333333],["Downloads Acceleration",29809.779185692532],["Dependents Count",870]],[["Releases Frequency",1],["Commits Frequency",0.9902876712328768],["Open Issues",1],["Issues Distribution",0.836570149437616]]]},{"title":[["name","opn"],["version","v5.1.0"]],"stars":["stars",566],"forks":["forks",31],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"opn","children":[{"name":"dependency","children":[{"name":"is-wsl"}]},{"name":"devDependency","children":[{"name":"ava"},{"name":"xo"}]}]},"test":["testScript",true],"description":"A better node-open. Opens stuff like websites, files, executables. Cross-platform.","scores":[["Quality",0.8282707002333971],["Popularity",0.6380354055802918],["Maintenance",0.999893160196763],["Final",0.8217562080919882]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",0.6],["Health",1],["Branding",0]],[["Community Interest",705],["Downloads Count",3976215.6666666665],["Downloads Acceleration",24124.448154490106],["Dependents Count",652]],[["Releases Frequency",1],["Commits Frequency",0.9],["Open Issues",1],["Issues Distribution",0.9]]]},{"title":[["name","request"],["version","v2.81.0"]],"stars":["stars",15816],"forks":["forks",1910],"vulnerabilities":[null],"outdatedDependencies":[["har-validator","form-data","hawk","aws-sign2","performance-now","qs"]],"dependencies":{"name":"request","children":[{"name":"dependency","children":[{"name":"aws-sign2"},{"name":"aws4"},{"name":"caseless"},{"name":"combined-stream"},{"name":"extend"},{"name":"forever-agent"},{"name":"form-data"},{"name":"har-validator"},{"name":"hawk"},{"name":"http-signature"},{"name":"is-typedarray"},{"name":"isstream"},{"name":"json-stringify-safe"},{"name":"mime-types"},{"name":"oauth-sign"},{"name":"performance-now"},{"name":"qs"},{"name":"safe-buffer"},{"name":"stringstream"},{"name":"tough-cookie"},{"name":"tunnel-agent"},{"name":"uuid"}]},{"name":"devDependency","children":[{"name":"bluebird"},{"name":"browserify"},{"name":"browserify-istanbul"},{"name":"buffer-equal"},{"name":"codecov"},{"name":"coveralls"},{"name":"eslint"},{"name":"function-bind"},{"name":"istanbul"},{"name":"karma"},{"name":"karma-browserify"},{"name":"karma-cli"},{"name":"karma-coverage"},{"name":"karma-phantomjs-launcher"},{"name":"karma-tap"},{"name":"phantomjs-prebuilt"},{"name":"rimraf"},{"name":"server-destroy"},{"name":"tape"},{"name":"taper"}]}]},"test":["testScript",true],"description":"Simplified HTTP request client.","scores":[["Quality",0.9022789481037612],["Popularity",0.9473183987657592],["Maintenance",0.6647580307125657],["Final",0.834910434748542]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",0.7395],["Health",0.5],["Branding",0.6]],[["Community Interest",19402],["Downloads Count",24305846.333333332],["Downloads Acceleration",53814.75079908673],["Dependents Count",21328]],[["Releases Frequency",0.7511986301369863],["Commits Frequency",0.8613356164383562],["Open Issues",1],["Issues Distribution",0]]]},{"title":[["name","request-promise"],["version","v4.2.1"]],"stars":["stars",1825],"forks":["forks",122],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"request-promise","children":[{"name":"dependency","children":[{"name":"request-promise-core"},{"name":"bluebird"},{"name":"stealthy-require"},{"name":"tough-cookie"}]},{"name":"devDependency","children":[{"name":"body-parser"},{"name":"chai"},{"name":"chalk"},{"name":"gulp"},{"name":"gulp-coveralls"},{"name":"gulp-eslint"},{"name":"gulp-istanbul"},{"name":"gulp-mocha"},{"name":"lodash"},{"name":"publish-please"},{"name":"request"},{"name":"rimraf"},{"name":"run-sequence"}]},{"name":"peerDependency","children":[{"name":"request"}]}]},"test":["testScript",true],"description":"The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.","scores":[["Quality",0.9300553237091305],["Popularity",0.6754942914880886],["Maintenance",0.9852895622781355],["Final",0.8602909459309175]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",1],["Health",0.5],["Branding",0.44999999999999996]],[["Community Interest",2161],["Downloads Count",1846228.3333333333],["Downloads Acceleration",10917.196575342467],["Dependents Count",1871]],[["Releases Frequency",0.9795376712328767],["Commits Frequency",0.7017294520547945],["Open Issues",1],["Issues Distribution",0.5824766509314249]]]},{"title":[["name","update-notifier"],["version","v2.2.0"]],"stars":["stars",678],"forks":["forks",49],"vulnerabilities":[null],"outdatedDependencies":[["import-lazy"]],"dependencies":{"name":"update-notifier","children":[{"name":"dependency","children":[{"name":"boxen"},{"name":"chalk"},{"name":"configstore"},{"name":"import-lazy"},{"name":"is-npm"},{"name":"latest-version"},{"name":"semver-diff"},{"name":"xdg-basedir"}]},{"name":"devDependency","children":[{"name":"clear-module"},{"name":"fixture-stdout"},{"name":"mocha"},{"name":"strip-ansi"},{"name":"xo"}]}]},"test":["testScript",true],"description":"Update notifications for your CLI app","scores":[["Quality",0.9429540841190216],["Popularity",0.6736882881888997],["Maintenance",0.999893160196763],["Final",0.8686397321706882]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",0.85],["Health",0.75],["Branding",0.15]],[["Community Interest",847],["Downloads Count",4374649],["Downloads Acceleration",18835.728633942163],["Dependents Count",1357]],[["Releases Frequency",1],["Commits Frequency",0.9],["Open Issues",1],["Issues Distribution",0.9]]]},{"title":[["name","yargs"],["version","v8.0.2"]],"stars":["stars",3051],"forks":["forks",227],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"yargs","children":[{"name":"dependency","children":[{"name":"camelcase"},{"name":"cliui"},{"name":"decamelize"},{"name":"get-caller-file"},{"name":"os-locale"},{"name":"read-pkg-up"},{"name":"require-directory"},{"name":"require-main-filename"},{"name":"set-blocking"},{"name":"string-width"},{"name":"which-module"},{"name":"y18n"},{"name":"yargs-parser"}]},{"name":"devDependency","children":[{"name":"chai"},{"name":"chalk"},{"name":"coveralls"},{"name":"cpr"},{"name":"cross-spawn"},{"name":"es6-promise"},{"name":"hashish"},{"name":"mocha"},{"name":"nyc"},{"name":"rimraf"},{"name":"standard"},{"name":"standard-version"},{"name":"which"},{"name":"yargs-test-extends"}]}]},"test":["testScript",true],"description":"yargs the modern, pirate-themed, successor to optimist.","scores":[["Quality",0.9876854397013927],["Popularity",0.8593110379887503],["Maintenance",0.9933085611376968],["Final",0.9447224916046744]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",0.9166666666666666],["Health",1],["Branding",1]],[["Community Interest",3802],["Downloads Count",26241104],["Downloads Acceleration",120187.01537290716],["Dependents Count",5237]],[["Releases Frequency",1],["Commits Frequency",0.9576027397260274],["Open Issues",1],["Issues Distribution",0.6525723201143808]]]},{"title":[["name","webpack"],["version","v2.6.1"]],"stars":["stars",28924],"forks":["forks",3570],"vulnerabilities":[null],"outdatedDependencies":[["ajv-keywords","loader-utils","ajv","node-libs-browser","acorn","webpack-sources","yargs","uglify-js"]],"dependencies":{"name":"webpack","children":[{"name":"dependency","children":[{"name":"acorn"},{"name":"acorn-dynamic-import"},{"name":"ajv"},{"name":"ajv-keywords"},{"name":"async"},{"name":"enhanced-resolve"},{"name":"interpret"},{"name":"json-loader"},{"name":"json5"},{"name":"loader-runner"},{"name":"loader-utils"},{"name":"memory-fs"},{"name":"mkdirp"},{"name":"node-libs-browser"},{"name":"source-map"},{"name":"supports-color"},{"name":"tapable"},{"name":"uglify-js"},{"name":"watchpack"},{"name":"webpack-sources"},{"name":"yargs"}]},{"name":"devDependency","children":[{"name":"beautify-lint"},{"name":"benchmark"},{"name":"bundle-loader"},{"name":"codacy-coverage"},{"name":"codecov.io"},{"name":"coffee-loader"},{"name":"coffee-script"},{"name":"coveralls"},{"name":"css-loader"},{"name":"es6-promise-polyfill"},{"name":"eslint"},{"name":"eslint-plugin-node"},{"name":"express"},{"name":"extract-text-webpack-plugin"},{"name":"file-loader"},{"name":"i18n-webpack-plugin"},{"name":"istanbul"},{"name":"jade"},{"name":"jade-loader"},{"name":"js-beautify"},{"name":"less"},{"name":"less-loader"},{"name":"lodash"},{"name":"mocha"},{"name":"mocha-lcov-reporter"},{"name":"nsp"},{"name":"raw-loader"},{"name":"react"},{"name":"react-dom"},{"name":"script-loader"},{"name":"should"},{"name":"simple-git"},{"name":"sinon"},{"name":"style-loader"},{"name":"url-loader"},{"name":"val-loader"},{"name":"vm-browserify"},{"name":"webpack-dev-middleware"},{"name":"worker-loader"}]}]},"test":["testScript",true],"description":"Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.","scores":[["Quality",0.9302167043191192],["Popularity",0.8815390958338456],["Maintenance",0.7741197443238315],["Final",0.8585456053509226]],"subScores":[[["Carefulness",0.9199999999999999],["Tests",0.9924999999999999],["Health",0.5],["Branding",0.6]],[["Community Interest",34096],["Downloads Count",6236414],["Downloads Acceleration",37500.58224885845],["Dependents Count",3408]],[["Releases Frequency",1],["Commits Frequency",1],["Open Issues",1],["Issues Distribution",0.14561414265155248]]]},{"title":[["name","react"],["version","v15.6.1"]],"stars":["stars",69123],"forks":["forks",12879],"vulnerabilities":[null],"outdatedDependencies":[["fbjs"]],"dependencies":{"name":"react","children":[{"name":"dependency","children":[{"name":"create-react-class"},{"name":"fbjs"},{"name":"loose-envify"},{"name":"object-assign"},{"name":"prop-types"}]}]},"test":["testScript",null],"description":"React is a JavaScript library for building user interfaces.","scores":[["Quality",0.941765526575332],["Popularity",0.9074162784370767],["Maintenance",0.9533777409932873],["Final",0.9338075647732269]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",0.6685000000000001],["Health",0.75],["Branding",0.85]],[["Community Interest",87219],["Downloads Count",4211078.666666667],["Downloads Acceleration",20103.450304414007],["Dependents Count",9757]],[["Releases Frequency",1],["Commits Frequency",1],["Open Issues",1],["Issues Distribution",0.44721158586887094]]]},{"title":[["name","redux"],["version","v3.7.0"]],"stars":["stars",31757],"forks":["forks",6598],"vulnerabilities":[null],"outdatedDependencies":[null],"dependencies":{"name":"redux","children":[{"name":"dependency","children":[{"name":"lodash"},{"name":"lodash-es"},{"name":"loose-envify"},{"name":"symbol-observable"}]},{"name":"devDependency","children":[{"name":"babel-cli"},{"name":"babel-core"},{"name":"babel-eslint"},{"name":"babel-jest"},{"name":"babel-plugin-check-es2015-constants"},{"name":"babel-plugin-transform-es2015-arrow-functions"},{"name":"babel-plugin-transform-es2015-block-scoped-functions"},{"name":"babel-plugin-transform-es2015-block-scoping"},{"name":"babel-plugin-transform-es2015-classes"},{"name":"babel-plugin-transform-es2015-computed-properties"},{"name":"babel-plugin-transform-es2015-destructuring"},{"name":"babel-plugin-transform-es2015-for-of"},{"name":"babel-plugin-transform-es2015-function-name"},{"name":"babel-plugin-transform-es2015-literals"},{"name":"babel-plugin-transform-es2015-modules-commonjs"},{"name":"babel-plugin-transform-es2015-object-super"},{"name":"babel-plugin-transform-es2015-parameters"},{"name":"babel-plugin-transform-es2015-shorthand-properties"},{"name":"babel-plugin-transform-es2015-spread"},{"name":"babel-plugin-transform-es2015-sticky-regex"},{"name":"babel-plugin-transform-es2015-template-literals"},{"name":"babel-plugin-transform-es2015-unicode-regex"},{"name":"babel-plugin-transform-es3-member-expression-literals"},{"name":"babel-plugin-transform-es3-property-literals"},{"name":"babel-plugin-transform-object-rest-spread"},{"name":"babel-register"},{"name":"cross-env"},{"name":"eslint"},{"name":"eslint-config-react-app"},{"name":"eslint-plugin-flowtype"},{"name":"eslint-plugin-import"},{"name":"eslint-plugin-jsx-a11y"},{"name":"eslint-plugin-react"},{"name":"gitbook-cli"},{"name":"glob"},{"name":"jest"},{"name":"rimraf"},{"name":"rollup"},{"name":"rollup-plugin-babel"},{"name":"rollup-plugin-node-resolve"},{"name":"rollup-plugin-replace"},{"name":"rollup-plugin-uglify"},{"name":"rxjs"},{"name":"typescript"},{"name":"typescript-definition-tester"}]}]},"test":["testScript",true],"description":"Predictable state container for JavaScript apps","scores":[["Quality",0.9777508084791169],["Popularity",0.8054801079436399],["Maintenance",0.7128512246647967],["Final",0.8247412089566879]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",0.85],["Health",1],["Branding",0.85]],[["Community Interest",39879],["Downloads Count",2237983.6666666665],["Downloads Acceleration",11648.33215372907],["Dependents Count",2195]],[["Releases Frequency",0.06164383561643837],["Commits Frequency",1],["Open Issues",1],["Issues Distribution",0.9373310390669689]]]},{"title":[["name","gulp"],["version","v3.9.1"]],"stars":["stars",26582],"forks":["forks",3776],"vulnerabilities":[[{"id":118,"updatedAt":"2016-08-09T14:16:01.000Z","createdAt":"2016-05-25T16:37:20.000Z","publishDate":"2016-06-20T15:52:52.000Z","overview":"Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```","recommendation":"Updated to version 3.0.2 or greater","cvssVector":"CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H","cvssScore":7.5,"module":"minimatch","version":"2.0.10","vulnerableVersions":"<=3.0.1","patchedVersions":">=3.0.2","title":"Regular Expression Denial of Service","path":["gulp@3.9.1","vinyl-fs@0.3.14","glob-stream@3.1.18","minimatch@2.0.10"],"advisory":"https://nodesecurity.io/advisories/118"},{"id":118,"updatedAt":"2016-08-09T14:16:01.000Z","createdAt":"2016-05-25T16:37:20.000Z","publishDate":"2016-06-20T15:52:52.000Z","overview":"Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```","recommendation":"Updated to version 3.0.2 or greater","cvssVector":"CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H","cvssScore":7.5,"module":"minimatch","version":"0.2.14","vulnerableVersions":"<=3.0.1","patchedVersions":">=3.0.2","title":"Regular Expression Denial of Service","path":["gulp@3.9.1","vinyl-fs@0.3.14","glob-watcher@0.0.6","gaze@0.5.2","globule@0.1.0","minimatch@0.2.14"],"advisory":"https://nodesecurity.io/advisories/118"}]],"outdatedDependencies":[["deprecated","semver","vinyl-fs"]],"dependencies":{"name":"gulp","children":[{"name":"dependency","children":[{"name":"archy"},{"name":"chalk"},{"name":"deprecated"},{"name":"gulp-util"},{"name":"interpret"},{"name":"liftoff"},{"name":"minimist"},{"name":"orchestrator"},{"name":"pretty-hrtime"},{"name":"semver"},{"name":"tildify"},{"name":"v8flags"},{"name":"vinyl-fs"}]},{"name":"devDependency","children":[{"name":"coveralls"},{"name":"eslint"},{"name":"eslint-config-gulp"},{"name":"graceful-fs"},{"name":"istanbul"},{"name":"jscs"},{"name":"jscs-preset-gulp"},{"name":"marked-man"},{"name":"mkdirp"},{"name":"mocha"},{"name":"mocha-lcov-reporter"},{"name":"q"},{"name":"rimraf"},{"name":"should"}]}]},"test":["testScript",true],"description":"The streaming build system","scores":[["Quality",0.8668733237291909],["Popularity",0.8267265232014072],["Maintenance",0.9976024193452844],["Final",0.8985771270100993]],"subScores":[[["Carefulness",0.9999999999999999],["Tests",1],["Health",0.23076923076923073],["Branding",1]],[["Community Interest",32963],["Downloads Count",3106355.3333333335],["Downloads Acceleration",6198.945148401828],["Dependents Count",4231]],[["Releases Frequency",0.7591609589041095],["Commits Frequency",0.7160445205479452],["Open Issues",1],["Issues Distribution",0.8724763631298306]]]}]
+[{
+  "title": [
+    ["name", "bluebird"],
+    ["version", "v3.5.0"]
+  ],
+  "stars": ["stars", 14789],
+  "forks": ["forks", 1818],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "bluebird",
+    "children": [{
+      "name": "devDependency",
+      "children": [{
+        "name": "acorn"
+      }, {
+        "name": "baconjs"
+      }, {
+        "name": "bluebird"
+      }, {
+        "name": "body-parser"
+      }, {
+        "name": "browserify"
+      }, {
+        "name": "cli-table"
+      }, {
+        "name": "co"
+      }, {
+        "name": "cross-spawn"
+      }, {
+        "name": "glob"
+      }, {
+        "name": "grunt-saucelabs"
+      }, {
+        "name": "highland"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "jshint"
+      }, {
+        "name": "jshint-stylish"
+      }, {
+        "name": "mkdirp"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "open"
+      }, {
+        "name": "optimist"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "rx"
+      }, {
+        "name": "serve-static"
+      }, {
+        "name": "sinon"
+      }, {
+        "name": "uglify-js"
+      }, {
+        "name": "kefir"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Full featured Promises/A+ implementation with exceptionally good performance",
+  "scores": [
+    ["Quality", 0.8777700268291548],
+    ["Popularity", 0.92629482893145],
+    ["Maintenance", 0.9997513519350345],
+    ["Final", 0.937447171352016]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.85],
+      ["Health", 1],
+      ["Branding", 0]
+    ],
+    [
+      ["Community Interest", 17542],
+      ["Downloads Count", 14936457.333333334],
+      ["Downloads Acceleration", 44831.655974124806],
+      ["Dependents Count", 12458]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.8409417808219178],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.8776704870187599]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "d3"],
+    ["version", "v4.9.1"]
+  ],
+  "stars": ["stars", 65375],
+  "forks": ["forks", 17110],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["d3-axis", "d3-timer", "d3-shape", "d3-zoom"]
+  ],
+  "dependencies": {
+    "name": "d3",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "d3-array"
+      }, {
+        "name": "d3-axis"
+      }, {
+        "name": "d3-brush"
+      }, {
+        "name": "d3-chord"
+      }, {
+        "name": "d3-collection"
+      }, {
+        "name": "d3-color"
+      }, {
+        "name": "d3-dispatch"
+      }, {
+        "name": "d3-drag"
+      }, {
+        "name": "d3-dsv"
+      }, {
+        "name": "d3-ease"
+      }, {
+        "name": "d3-force"
+      }, {
+        "name": "d3-format"
+      }, {
+        "name": "d3-geo"
+      }, {
+        "name": "d3-hierarchy"
+      }, {
+        "name": "d3-interpolate"
+      }, {
+        "name": "d3-path"
+      }, {
+        "name": "d3-polygon"
+      }, {
+        "name": "d3-quadtree"
+      }, {
+        "name": "d3-queue"
+      }, {
+        "name": "d3-random"
+      }, {
+        "name": "d3-request"
+      }, {
+        "name": "d3-scale"
+      }, {
+        "name": "d3-selection"
+      }, {
+        "name": "d3-shape"
+      }, {
+        "name": "d3-time"
+      }, {
+        "name": "d3-time-format"
+      }, {
+        "name": "d3-timer"
+      }, {
+        "name": "d3-transition"
+      }, {
+        "name": "d3-voronoi"
+      }, {
+        "name": "d3-zoom"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "json2module"
+      }, {
+        "name": "package-preamble"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "rollup"
+      }, {
+        "name": "rollup-plugin-ascii"
+      }, {
+        "name": "rollup-plugin-node-resolve"
+      }, {
+        "name": "tape"
+      }, {
+        "name": "uglify-js"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Data-Driven Documents",
+  "scores": [
+    ["Quality", 0.9094768010747679],
+    ["Popularity", 0.7270206212178394],
+    ["Maintenance", 0.9999064506037582],
+    ["Final", 0.8772675154599894]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.8699999999999999],
+      ["Tests", 0.6],
+      ["Health", 0.7333333333333334],
+      ["Branding", 0.4]
+    ],
+    [
+      ["Community Interest", 86029],
+      ["Downloads Count", 826971.3333333334],
+      ["Downloads Acceleration", 3421.1287480974124],
+      ["Dependents Count", 1220]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9362739726027397],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.9]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "d3-selection-multi"],
+    ["version", "v1.0.1"]
+  ],
+  "stars": ["stars", 31],
+  "forks": ["forks", 9],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "d3-selection-multi",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "d3-selection"
+      }, {
+        "name": "d3-transition"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "eslint"
+      }, {
+        "name": "jsdom"
+      }, {
+        "name": "package-preamble"
+      }, {
+        "name": "rollup"
+      }, {
+        "name": "tape"
+      }, {
+        "name": "uglify-js"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Multi-value map syntax for D3 selections.",
+  "scores": [
+    ["Quality", 0.8282707002333971],
+    ["Popularity", 0.17238332810326987],
+    ["Maintenance", 0.9998867345871956],
+    ["Final", 0.658775732011682]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.6],
+      ["Health", 1],
+      ["Branding", 0]
+    ],
+    [
+      ["Community Interest", 50],
+      ["Downloads Count", 6133.666666666667],
+      ["Downloads Acceleration", 45.48363774733638],
+      ["Dependents Count", 14]
+    ],
+    [
+      ["Releases Frequency", 0.9],
+      ["Commits Frequency", 0.9],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.952449510450487]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "express"],
+    ["version", "v4.15.3"]
+  ],
+  "stars": ["stars", 32394],
+  "forks": ["forks", 5858],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["array-flatten", "debug", "qs", "path-to-regexp"]
+  ],
+  "dependencies": {
+    "name": "express",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "accepts"
+      }, {
+        "name": "array-flatten"
+      }, {
+        "name": "content-disposition"
+      }, {
+        "name": "content-type"
+      }, {
+        "name": "cookie"
+      }, {
+        "name": "cookie-signature"
+      }, {
+        "name": "debug"
+      }, {
+        "name": "depd"
+      }, {
+        "name": "encodeurl"
+      }, {
+        "name": "escape-html"
+      }, {
+        "name": "etag"
+      }, {
+        "name": "finalhandler"
+      }, {
+        "name": "fresh"
+      }, {
+        "name": "merge-descriptors"
+      }, {
+        "name": "methods"
+      }, {
+        "name": "on-finished"
+      }, {
+        "name": "parseurl"
+      }, {
+        "name": "path-to-regexp"
+      }, {
+        "name": "proxy-addr"
+      }, {
+        "name": "qs"
+      }, {
+        "name": "range-parser"
+      }, {
+        "name": "send"
+      }, {
+        "name": "serve-static"
+      }, {
+        "name": "setprototypeof"
+      }, {
+        "name": "statuses"
+      }, {
+        "name": "type-is"
+      }, {
+        "name": "utils-merge"
+      }, {
+        "name": "vary"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "after"
+      }, {
+        "name": "body-parser"
+      }, {
+        "name": "cookie-parser"
+      }, {
+        "name": "ejs"
+      }, {
+        "name": "express-session"
+      }, {
+        "name": "hbs"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "marked"
+      }, {
+        "name": "method-override"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "morgan"
+      }, {
+        "name": "multiparty"
+      }, {
+        "name": "pbkdf2-password"
+      }, {
+        "name": "should"
+      }, {
+        "name": "supertest"
+      }, {
+        "name": "connect-redis"
+      }, {
+        "name": "cookie-session"
+      }, {
+        "name": "vhost"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Fast, unopinionated, minimalist web framework",
+  "scores": [
+    ["Quality", 0.9875902729791323],
+    ["Popularity", 0.954106077679211],
+    ["Maintenance", 0.966830997631255],
+    ["Final", 0.9686050582524028]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 1],
+      ["Health", 0.7142857142857143],
+      ["Branding", 1]
+    ],
+    [
+      ["Community Interest", 42175],
+      ["Downloads Count", 12109320],
+      ["Downloads Acceleration", 50195.585121765616],
+      ["Dependents Count", 15132]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9855068493150685],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.4891854458549637]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "flaschenode"],
+    ["version", "v0.0.5"]
+  ],
+  "stars": ["stars", 3],
+  "forks": ["forks", 0],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "flaschenode",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "caption"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "imagemagick-native"
+      }, {
+        "name": "mocha"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Makes it easy for people who like js to interact with the flaschen-taschen",
+  "scores": [
+    ["Quality", 0.7012676688083928],
+    ["Popularity", 0.04104408434601072],
+    ["Maintenance", 0.9933230557990655],
+    ["Final", 0.5724087996932945]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.355],
+      ["Tests", 0.6],
+      ["Health", 1],
+      ["Branding", 0]
+    ],
+    [
+      ["Community Interest", 6],
+      ["Downloads Count", 105],
+      ["Downloads Acceleration", 1.5673896499238964],
+      ["Dependents Count", 0]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.7871575342465753],
+      ["Open Issues", 0.7],
+      ["Issues Distribution", 0.7]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "got"],
+    ["version", "v7.0.0"]
+  ],
+  "stars": ["stars", 1742],
+  "forks": ["forks", 101],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "got",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "decompress-response"
+      }, {
+        "name": "duplexer3"
+      }, {
+        "name": "get-stream"
+      }, {
+        "name": "is-plain-obj"
+      }, {
+        "name": "is-retry-allowed"
+      }, {
+        "name": "is-stream"
+      }, {
+        "name": "isurl"
+      }, {
+        "name": "lowercase-keys"
+      }, {
+        "name": "p-cancelable"
+      }, {
+        "name": "p-timeout"
+      }, {
+        "name": "safe-buffer"
+      }, {
+        "name": "timed-out"
+      }, {
+        "name": "url-parse-lax"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "ava"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "form-data"
+      }, {
+        "name": "get-port"
+      }, {
+        "name": "into-stream"
+      }, {
+        "name": "nyc"
+      }, {
+        "name": "pem"
+      }, {
+        "name": "pify"
+      }, {
+        "name": "tempfile"
+      }, {
+        "name": "tempy"
+      }, {
+        "name": "universal-url"
+      }, {
+        "name": "xo"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Simplified HTTP requests",
+  "scores": [
+    ["Quality", 0.9880197136915736],
+    ["Popularity", 0.7060245933700484],
+    ["Maintenance", 0.9995548321600873],
+    ["Final", 0.8933587130430196]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.9984999999999999],
+      ["Health", 1],
+      ["Branding", 0.44999999999999996]
+    ],
+    [
+      ["Community Interest", 1990],
+      ["Downloads Count", 5860645.333333333],
+      ["Downloads Acceleration", 29809.779185692532],
+      ["Dependents Count", 870]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9902876712328768],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.836570149437616]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "opn"],
+    ["version", "v5.1.0"]
+  ],
+  "stars": ["stars", 566],
+  "forks": ["forks", 31],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "opn",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "is-wsl"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "ava"
+      }, {
+        "name": "xo"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "A better node-open. Opens stuff like websites, files, executables. Cross-platform.",
+  "scores": [
+    ["Quality", 0.8282707002333971],
+    ["Popularity", 0.6380354055802918],
+    ["Maintenance", 0.999893160196763],
+    ["Final", 0.8217562080919882]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.6],
+      ["Health", 1],
+      ["Branding", 0]
+    ],
+    [
+      ["Community Interest", 705],
+      ["Downloads Count", 3976215.6666666665],
+      ["Downloads Acceleration", 24124.448154490106],
+      ["Dependents Count", 652]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.9]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "request"],
+    ["version", "v2.81.0"]
+  ],
+  "stars": ["stars", 15816],
+  "forks": ["forks", 1910],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["har-validator", "form-data", "hawk", "aws-sign2", "performance-now", "qs"]
+  ],
+  "dependencies": {
+    "name": "request",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "aws-sign2"
+      }, {
+        "name": "aws4"
+      }, {
+        "name": "caseless"
+      }, {
+        "name": "combined-stream"
+      }, {
+        "name": "extend"
+      }, {
+        "name": "forever-agent"
+      }, {
+        "name": "form-data"
+      }, {
+        "name": "har-validator"
+      }, {
+        "name": "hawk"
+      }, {
+        "name": "http-signature"
+      }, {
+        "name": "is-typedarray"
+      }, {
+        "name": "isstream"
+      }, {
+        "name": "json-stringify-safe"
+      }, {
+        "name": "mime-types"
+      }, {
+        "name": "oauth-sign"
+      }, {
+        "name": "performance-now"
+      }, {
+        "name": "qs"
+      }, {
+        "name": "safe-buffer"
+      }, {
+        "name": "stringstream"
+      }, {
+        "name": "tough-cookie"
+      }, {
+        "name": "tunnel-agent"
+      }, {
+        "name": "uuid"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "bluebird"
+      }, {
+        "name": "browserify"
+      }, {
+        "name": "browserify-istanbul"
+      }, {
+        "name": "buffer-equal"
+      }, {
+        "name": "codecov"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "function-bind"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "karma"
+      }, {
+        "name": "karma-browserify"
+      }, {
+        "name": "karma-cli"
+      }, {
+        "name": "karma-coverage"
+      }, {
+        "name": "karma-phantomjs-launcher"
+      }, {
+        "name": "karma-tap"
+      }, {
+        "name": "phantomjs-prebuilt"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "server-destroy"
+      }, {
+        "name": "tape"
+      }, {
+        "name": "taper"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Simplified HTTP request client.",
+  "scores": [
+    ["Quality", 0.9022789481037612],
+    ["Popularity", 0.9473183987657592],
+    ["Maintenance", 0.6647580307125657],
+    ["Final", 0.834910434748542]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.7395],
+      ["Health", 0.5],
+      ["Branding", 0.6]
+    ],
+    [
+      ["Community Interest", 19402],
+      ["Downloads Count", 24305846.333333332],
+      ["Downloads Acceleration", 53814.75079908673],
+      ["Dependents Count", 21328]
+    ],
+    [
+      ["Releases Frequency", 0.7511986301369863],
+      ["Commits Frequency", 0.8613356164383562],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "request-promise"],
+    ["version", "v4.2.1"]
+  ],
+  "stars": ["stars", 1825],
+  "forks": ["forks", 122],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "request-promise",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "request-promise-core"
+      }, {
+        "name": "bluebird"
+      }, {
+        "name": "stealthy-require"
+      }, {
+        "name": "tough-cookie"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "body-parser"
+      }, {
+        "name": "chai"
+      }, {
+        "name": "chalk"
+      }, {
+        "name": "gulp"
+      }, {
+        "name": "gulp-coveralls"
+      }, {
+        "name": "gulp-eslint"
+      }, {
+        "name": "gulp-istanbul"
+      }, {
+        "name": "gulp-mocha"
+      }, {
+        "name": "lodash"
+      }, {
+        "name": "publish-please"
+      }, {
+        "name": "request"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "run-sequence"
+      }]
+    }, {
+      "name": "peerDependency",
+      "children": [{
+        "name": "request"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.",
+  "scores": [
+    ["Quality", 0.9300553237091305],
+    ["Popularity", 0.6754942914880886],
+    ["Maintenance", 0.9852895622781355],
+    ["Final", 0.8602909459309175]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 1],
+      ["Health", 0.5],
+      ["Branding", 0.44999999999999996]
+    ],
+    [
+      ["Community Interest", 2161],
+      ["Downloads Count", 1846228.3333333333],
+      ["Downloads Acceleration", 10917.196575342467],
+      ["Dependents Count", 1871]
+    ],
+    [
+      ["Releases Frequency", 0.9795376712328767],
+      ["Commits Frequency", 0.7017294520547945],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.5824766509314249]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "update-notifier"],
+    ["version", "v2.2.0"]
+  ],
+  "stars": ["stars", 678],
+  "forks": ["forks", 49],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["import-lazy"]
+  ],
+  "dependencies": {
+    "name": "update-notifier",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "boxen"
+      }, {
+        "name": "chalk"
+      }, {
+        "name": "configstore"
+      }, {
+        "name": "import-lazy"
+      }, {
+        "name": "is-npm"
+      }, {
+        "name": "latest-version"
+      }, {
+        "name": "semver-diff"
+      }, {
+        "name": "xdg-basedir"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "clear-module"
+      }, {
+        "name": "fixture-stdout"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "strip-ansi"
+      }, {
+        "name": "xo"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Update notifications for your CLI app",
+  "scores": [
+    ["Quality", 0.9429540841190216],
+    ["Popularity", 0.6736882881888997],
+    ["Maintenance", 0.999893160196763],
+    ["Final", 0.8686397321706882]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.85],
+      ["Health", 0.75],
+      ["Branding", 0.15]
+    ],
+    [
+      ["Community Interest", 847],
+      ["Downloads Count", 4374649],
+      ["Downloads Acceleration", 18835.728633942163],
+      ["Dependents Count", 1357]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.9]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "yargs"],
+    ["version", "v8.0.2"]
+  ],
+  "stars": ["stars", 3051],
+  "forks": ["forks", 227],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "yargs",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "camelcase"
+      }, {
+        "name": "cliui"
+      }, {
+        "name": "decamelize"
+      }, {
+        "name": "get-caller-file"
+      }, {
+        "name": "os-locale"
+      }, {
+        "name": "read-pkg-up"
+      }, {
+        "name": "require-directory"
+      }, {
+        "name": "require-main-filename"
+      }, {
+        "name": "set-blocking"
+      }, {
+        "name": "string-width"
+      }, {
+        "name": "which-module"
+      }, {
+        "name": "y18n"
+      }, {
+        "name": "yargs-parser"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "chai"
+      }, {
+        "name": "chalk"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "cpr"
+      }, {
+        "name": "cross-spawn"
+      }, {
+        "name": "es6-promise"
+      }, {
+        "name": "hashish"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "nyc"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "standard"
+      }, {
+        "name": "standard-version"
+      }, {
+        "name": "which"
+      }, {
+        "name": "yargs-test-extends"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "yargs the modern, pirate-themed, successor to optimist.",
+  "scores": [
+    ["Quality", 0.9876854397013927],
+    ["Popularity", 0.8593110379887503],
+    ["Maintenance", 0.9933085611376968],
+    ["Final", 0.9447224916046744]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.9166666666666666],
+      ["Health", 1],
+      ["Branding", 1]
+    ],
+    [
+      ["Community Interest", 3802],
+      ["Downloads Count", 26241104],
+      ["Downloads Acceleration", 120187.01537290716],
+      ["Dependents Count", 5237]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9576027397260274],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.6525723201143808]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "webpack"],
+    ["version", "v2.6.1"]
+  ],
+  "stars": ["stars", 28924],
+  "forks": ["forks", 3570],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["ajv-keywords", "loader-utils", "ajv", "node-libs-browser", "acorn", "webpack-sources", "yargs", "uglify-js"]
+  ],
+  "dependencies": {
+    "name": "webpack",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "acorn"
+      }, {
+        "name": "acorn-dynamic-import"
+      }, {
+        "name": "ajv"
+      }, {
+        "name": "ajv-keywords"
+      }, {
+        "name": "async"
+      }, {
+        "name": "enhanced-resolve"
+      }, {
+        "name": "interpret"
+      }, {
+        "name": "json-loader"
+      }, {
+        "name": "json5"
+      }, {
+        "name": "loader-runner"
+      }, {
+        "name": "loader-utils"
+      }, {
+        "name": "memory-fs"
+      }, {
+        "name": "mkdirp"
+      }, {
+        "name": "node-libs-browser"
+      }, {
+        "name": "source-map"
+      }, {
+        "name": "supports-color"
+      }, {
+        "name": "tapable"
+      }, {
+        "name": "uglify-js"
+      }, {
+        "name": "watchpack"
+      }, {
+        "name": "webpack-sources"
+      }, {
+        "name": "yargs"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "beautify-lint"
+      }, {
+        "name": "benchmark"
+      }, {
+        "name": "bundle-loader"
+      }, {
+        "name": "codacy-coverage"
+      }, {
+        "name": "codecov.io"
+      }, {
+        "name": "coffee-loader"
+      }, {
+        "name": "coffee-script"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "css-loader"
+      }, {
+        "name": "es6-promise-polyfill"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-plugin-node"
+      }, {
+        "name": "express"
+      }, {
+        "name": "extract-text-webpack-plugin"
+      }, {
+        "name": "file-loader"
+      }, {
+        "name": "i18n-webpack-plugin"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "jade"
+      }, {
+        "name": "jade-loader"
+      }, {
+        "name": "js-beautify"
+      }, {
+        "name": "less"
+      }, {
+        "name": "less-loader"
+      }, {
+        "name": "lodash"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "mocha-lcov-reporter"
+      }, {
+        "name": "nsp"
+      }, {
+        "name": "raw-loader"
+      }, {
+        "name": "react"
+      }, {
+        "name": "react-dom"
+      }, {
+        "name": "script-loader"
+      }, {
+        "name": "should"
+      }, {
+        "name": "simple-git"
+      }, {
+        "name": "sinon"
+      }, {
+        "name": "style-loader"
+      }, {
+        "name": "url-loader"
+      }, {
+        "name": "val-loader"
+      }, {
+        "name": "vm-browserify"
+      }, {
+        "name": "webpack-dev-middleware"
+      }, {
+        "name": "worker-loader"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.",
+  "scores": [
+    ["Quality", 0.9302167043191192],
+    ["Popularity", 0.8815390958338456],
+    ["Maintenance", 0.7741197443238315],
+    ["Final", 0.8585456053509226]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.9924999999999999],
+      ["Health", 0.5],
+      ["Branding", 0.6]
+    ],
+    [
+      ["Community Interest", 34096],
+      ["Downloads Count", 6236414],
+      ["Downloads Acceleration", 37500.58224885845],
+      ["Dependents Count", 3408]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.14561414265155248]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "react"],
+    ["version", "v15.6.1"]
+  ],
+  "stars": ["stars", 69123],
+  "forks": ["forks", 12879],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [
+    ["fbjs"]
+  ],
+  "dependencies": {
+    "name": "react",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "create-react-class"
+      }, {
+        "name": "fbjs"
+      }, {
+        "name": "loose-envify"
+      }, {
+        "name": "object-assign"
+      }, {
+        "name": "prop-types"
+      }]
+    }]
+  },
+  "test": ["testScript", null],
+  "description": "React is a JavaScript library for building user interfaces.",
+  "scores": [
+    ["Quality", 0.941765526575332],
+    ["Popularity", 0.9074162784370767],
+    ["Maintenance", 0.9533777409932873],
+    ["Final", 0.9338075647732269]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.6685000000000001],
+      ["Health", 0.75],
+      ["Branding", 0.85]
+    ],
+    [
+      ["Community Interest", 87219],
+      ["Downloads Count", 4211078.666666667],
+      ["Downloads Acceleration", 20103.450304414007],
+      ["Dependents Count", 9757]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.44721158586887094]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "redux"],
+    ["version", "v3.7.0"]
+  ],
+  "stars": ["stars", 31757],
+  "forks": ["forks", 6598],
+  "vulnerabilities": [null],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "redux",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "lodash"
+      }, {
+        "name": "lodash-es"
+      }, {
+        "name": "loose-envify"
+      }, {
+        "name": "symbol-observable"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "babel-cli"
+      }, {
+        "name": "babel-core"
+      }, {
+        "name": "babel-eslint"
+      }, {
+        "name": "babel-jest"
+      }, {
+        "name": "babel-plugin-check-es2015-constants"
+      }, {
+        "name": "babel-plugin-transform-es2015-arrow-functions"
+      }, {
+        "name": "babel-plugin-transform-es2015-block-scoped-functions"
+      }, {
+        "name": "babel-plugin-transform-es2015-block-scoping"
+      }, {
+        "name": "babel-plugin-transform-es2015-classes"
+      }, {
+        "name": "babel-plugin-transform-es2015-computed-properties"
+      }, {
+        "name": "babel-plugin-transform-es2015-destructuring"
+      }, {
+        "name": "babel-plugin-transform-es2015-for-of"
+      }, {
+        "name": "babel-plugin-transform-es2015-function-name"
+      }, {
+        "name": "babel-plugin-transform-es2015-literals"
+      }, {
+        "name": "babel-plugin-transform-es2015-modules-commonjs"
+      }, {
+        "name": "babel-plugin-transform-es2015-object-super"
+      }, {
+        "name": "babel-plugin-transform-es2015-parameters"
+      }, {
+        "name": "babel-plugin-transform-es2015-shorthand-properties"
+      }, {
+        "name": "babel-plugin-transform-es2015-spread"
+      }, {
+        "name": "babel-plugin-transform-es2015-sticky-regex"
+      }, {
+        "name": "babel-plugin-transform-es2015-template-literals"
+      }, {
+        "name": "babel-plugin-transform-es2015-unicode-regex"
+      }, {
+        "name": "babel-plugin-transform-es3-member-expression-literals"
+      }, {
+        "name": "babel-plugin-transform-es3-property-literals"
+      }, {
+        "name": "babel-plugin-transform-object-rest-spread"
+      }, {
+        "name": "babel-register"
+      }, {
+        "name": "cross-env"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-config-react-app"
+      }, {
+        "name": "eslint-plugin-flowtype"
+      }, {
+        "name": "eslint-plugin-import"
+      }, {
+        "name": "eslint-plugin-jsx-a11y"
+      }, {
+        "name": "eslint-plugin-react"
+      }, {
+        "name": "gitbook-cli"
+      }, {
+        "name": "glob"
+      }, {
+        "name": "jest"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "rollup"
+      }, {
+        "name": "rollup-plugin-babel"
+      }, {
+        "name": "rollup-plugin-node-resolve"
+      }, {
+        "name": "rollup-plugin-replace"
+      }, {
+        "name": "rollup-plugin-uglify"
+      }, {
+        "name": "rxjs"
+      }, {
+        "name": "typescript"
+      }, {
+        "name": "typescript-definition-tester"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "Predictable state container for JavaScript apps",
+  "scores": [
+    ["Quality", 0.9777508084791169],
+    ["Popularity", 0.8054801079436399],
+    ["Maintenance", 0.7128512246647967],
+    ["Final", 0.8247412089566879]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.85],
+      ["Health", 1],
+      ["Branding", 0.85]
+    ],
+    [
+      ["Community Interest", 39879],
+      ["Downloads Count", 2237983.6666666665],
+      ["Downloads Acceleration", 11648.33215372907],
+      ["Dependents Count", 2195]
+    ],
+    [
+      ["Releases Frequency", 0.06164383561643837],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.9373310390669689]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "gulp"],
+    ["version", "v3.9.1"]
+  ],
+  "stars": ["stars", 26582],
+  "forks": ["forks", 3776],
+  "vulnerabilities": [
+    [{
+      "id": 118,
+      "updatedAt": "2016-08-09T14:16:01.000Z",
+      "createdAt": "2016-05-25T16:37:20.000Z",
+      "publishDate": "2016-06-20T15:52:52.000Z",
+      "overview": "Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```",
+      "recommendation": "Updated to version 3.0.2 or greater",
+      "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "cvssScore": 7.5,
+      "module": "minimatch",
+      "version": "2.0.10",
+      "vulnerableVersions": "<=3.0.1",
+      "patchedVersions": ">=3.0.2",
+      "title": "Regular Expression Denial of Service",
+      "path": ["gulp@3.9.1", "vinyl-fs@0.3.14", "glob-stream@3.1.18", "minimatch@2.0.10"],
+      "advisory": "https://nodesecurity.io/advisories/118"
+    }, {
+      "id": 118,
+      "updatedAt": "2016-08-09T14:16:01.000Z",
+      "createdAt": "2016-05-25T16:37:20.000Z",
+      "publishDate": "2016-06-20T15:52:52.000Z",
+      "overview": "Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```",
+      "recommendation": "Updated to version 3.0.2 or greater",
+      "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "cvssScore": 7.5,
+      "module": "minimatch",
+      "version": "0.2.14",
+      "vulnerableVersions": "<=3.0.1",
+      "patchedVersions": ">=3.0.2",
+      "title": "Regular Expression Denial of Service",
+      "path": ["gulp@3.9.1", "vinyl-fs@0.3.14", "glob-watcher@0.0.6", "gaze@0.5.2", "globule@0.1.0", "minimatch@0.2.14"],
+      "advisory": "https://nodesecurity.io/advisories/118"
+    }]
+  ],
+  "outdatedDependencies": [
+    ["deprecated", "semver", "vinyl-fs"]
+  ],
+  "dependencies": {
+    "name": "gulp",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "archy"
+      }, {
+        "name": "chalk"
+      }, {
+        "name": "deprecated"
+      }, {
+        "name": "gulp-util"
+      }, {
+        "name": "interpret"
+      }, {
+        "name": "liftoff"
+      }, {
+        "name": "minimist"
+      }, {
+        "name": "orchestrator"
+      }, {
+        "name": "pretty-hrtime"
+      }, {
+        "name": "semver"
+      }, {
+        "name": "tildify"
+      }, {
+        "name": "v8flags"
+      }, {
+        "name": "vinyl-fs"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "coveralls"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-config-gulp"
+      }, {
+        "name": "graceful-fs"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "jscs"
+      }, {
+        "name": "jscs-preset-gulp"
+      }, {
+        "name": "marked-man"
+      }, {
+        "name": "mkdirp"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "mocha-lcov-reporter"
+      }, {
+        "name": "q"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "should"
+      }]
+    }]
+  },
+  "test": ["testScript", true],
+  "description": "The streaming build system",
+  "scores": [
+    ["Quality", 0.8668733237291909],
+    ["Popularity", 0.8267265232014072],
+    ["Maintenance", 0.9976024193452844],
+    ["Final", 0.8985771270100993]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 1],
+      ["Health", 0.23076923076923073],
+      ["Branding", 1]
+    ],
+    [
+      ["Community Interest", 32963],
+      ["Downloads Count", 3106355.3333333335],
+      ["Downloads Acceleration", 6198.945148401828],
+      ["Dependents Count", 4231]
+    ],
+    [
+      ["Releases Frequency", 0.7591609589041095],
+      ["Commits Frequency", 0.7160445205479452],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.8724763631298306]
+    ]
+  ]
+}]

@@ -19,14 +19,12 @@ const parsePkgJSON = () => {
             }
             let contents = JSON.parse(data); //try and catch all the JSON parse, reject(new Error('OH SHiT'))
             let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
-            //console.log(packages)
             resolve(packages)
         });
     });
 }
 
 const npmSearchQuery = function(requests) {
-    // console.log('made it to query' + requests)
     return Promise.map(requests, request.get, {concurrency: 1}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
@@ -57,9 +55,7 @@ const pkgInfoParse = function(pkgInfo) {
             ? parsedPkg.collected.github.forksCount
             : 0]
 
-        filteredPkg.vulnerabilities = [parsedPkg.collected.source && parsedPkg.collected.source.vulnerabilities ? parsedPkg.collected.source.vulnerabilities : null];
         filteredPkg.outdatedDependencies = [parsedPkg.collected.source && parsedPkg.collected.source.outdatedDependencies ? Object.keys(parsedPkg.collected.source.outdatedDependencies) : null];
-
         let dependencies = {"name": parsedPkg.collected.metadata.name,
                           "children": []};
 
@@ -86,8 +82,6 @@ const pkgInfoParse = function(pkgInfo) {
         }
 
         filteredPkg.dependencies = dependencies;
-
-        filteredPkg.test = ['testScript', parsedPkg.collected.metadata.hasTestScript]
         filteredPkg.description = parsedPkg.collected.metadata.description
         filteredPkg.scores = [['Quality', parsedPkg.score.detail.quality], ['Popularity', parsedPkg.score.detail.popularity], ['Maintenance', parsedPkg.score.detail.maintenance], ['Final', parsedPkg.score.final]];
 
@@ -101,11 +95,8 @@ const pkgInfoParse = function(pkgInfo) {
           subScores.push(sScores)
         }
         filteredPkg.subScores = subScores;
-
-
         filteredInfo.push(filteredPkg)
     })
-
     return JSON.stringify(filteredInfo)
 }
 
@@ -119,12 +110,10 @@ exports.parse = function(userPkgs) {
                   return "https://api.npms.io/v2/package/" + name
               })
               npmSearchQuery(packageUrls).then(function(result) {
-
                   fs.writeFile('data.json', result, (err) => {
                       if (err) {
                           throw err;
                       }
-                      //console.log('data logged')
                   })
 
                   resolve(result)

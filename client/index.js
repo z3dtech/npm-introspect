@@ -181,10 +181,36 @@ window.onload = function() {
           .attr("r", function(d) { return 15; });
 
           enterNodes.append("text")
-          .attr("dy", ".35em")
+          .attr("dy", ".35vh")
           .attr("x", 25)
-          .style("text-anchor", function(d) {
-          return d.children ? "start" : "start"; })
+          .style("text-anchor", "start")
+          .style("font-size", function(d){
+            //I have to adjust y of font if I want this to work out
+            //nice, I think I can scale the text nicely, also I
+            //could have the x coor change to buy room
+            //get rid of
+            //make pkg names scale with bar groups
+            let fontSize
+            if (d.children) {
+              fontSize = '20px';
+            }
+            else if (d.parent.children.length < 5) {
+              fontSize = '15px';
+            }
+            else if (d.parent.children.length >= 5 && d.parent.children.length < 25) {
+              fontSize = '12px';
+            }
+            else if (d.parent.children.length >= 25 && d.parent.children.length < 35) {
+              fontSize = '9px';
+            }
+            else if (d.parent.children.length > 35) {
+              fontSize = '6px';
+            }
+            else{
+              fontSize = '12px';
+            }
+            return fontSize;
+          })
           .text(function(d) { return d.data.name; });
 
           updateNodes.merge(enterNodes);
