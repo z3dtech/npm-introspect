@@ -9,7 +9,7 @@ ul{
 
 
 /*
-                            HEADER
+                              HEADER
 */
 .pkgInformation{
   display: flex;
@@ -18,8 +18,8 @@ ul{
 
   -webkit-align-items: center;
 align-items: center;
--webkit-justify-content: center;
-justify-content: center;
+-webkit-justify-content: flex-start;
+justify-content: flex-start;
 }
 
 .header{
@@ -27,27 +27,37 @@ justify-content: center;
   flex-direction: column;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .title{
   align-self: center;
   order: 1;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .name{
   font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .version{
   font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .gitStats{
   order: 2;
   -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
   font-family: monospace;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 #stars{
   order: 1;
@@ -67,6 +77,8 @@ img{
   text-align: center;
   width: 75%;
   font-family: sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 
@@ -78,6 +90,8 @@ img{
   order: 4;
   color: #c72210;
   font-family: monospace;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 /*
                                 SUB-SCORE
@@ -90,6 +104,8 @@ img{
   order: 1;
   font-size: 13px;
   font-family: sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #finalScore{
@@ -97,15 +113,23 @@ img{
   text-align: center;
   font-size: 15px;
   font-family: sans-serif;
+  margin-top: 0;
+  margin-bottom: 0.5em;
 }
 
 .qualityScore{
+  margin-top: 0;
+  margin-bottom: 0;
   order: 1;
 }
 .popularityScore{
+  margin-top: 0;
+  margin-bottom: 0;
   order: 2;
 }
 .maintenanceScore{
+  margin-top: 0;
+  margin-bottom: 0;
   order: 3;
 }
 /*
@@ -114,6 +138,8 @@ img{
 .dependencies{
   margin: 0 auto;
   order: 2;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .node circle {
 fill: #425351;
@@ -135,7 +161,7 @@ stroke-opacity: 0.4;
 stroke-width: 1.5px;
 }
 /*
-                    GROUPED BAR CHART AND LEGEND
+                        GROUPED BAR CHART AND LEGEND
 */
 
 
@@ -145,8 +171,8 @@ stroke-width: 1.5px;
 
     -webkit-align-items: center;
     align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
 }
 .scoreChart{
   /*margin-left: 100px;*/
@@ -155,7 +181,7 @@ stroke-width: 1.5px;
   overflow-y: auto;
 }
 .legend{
-  width: 10em;
+  width: 12em;
   font-family: monospace;
   font-weight: lighter;
 }
@@ -170,7 +196,7 @@ stroke-width: 1.5px;
 
 
 /*
-                            ERROR
+                              ERROR
 */
 .error{
   text-align: center;

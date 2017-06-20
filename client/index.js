@@ -27,6 +27,9 @@ window.onload = function() {
           .range([0, scoreHeight]),
         sX1 = d3.scaleBand()
           .padding(0.05),
+        fontScale = d3.scaleLinear()
+          .domain([0,80])
+          .range([15,4]),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
         const options = {
@@ -48,29 +51,34 @@ window.onload = function() {
     const spinMount = document.getElementById('spinner')
     const spinner = new Spinner(options).spin(spinMount)
 
-    const url = '/datam.json'
+    const url = '/data.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
-        return JSON.parse(xhr.responseText);
-    }).get(processData)
+        return [JSON.parse(xhr.responseText), xhr.responseText];
+    }).get(buildVisualization)
 
-    function processData(err, rawData) {
-        if (err) {
-          console.log(err);
-          console.log(err.currentTarget.status)
+    function buildVisualization(error, rawData){
+        if (error) {
+          console.log(error);
+          console.log(error.currentTarget.status)
           spinner.stop();
           const respError = document.createElement('p');
           respError.className = 'error';
-          respError.innerText = 'request error ' + err.currentTarget.status;
+          respError.innerText = 'request error ' + error.currentTarget.status;
           spinMount.appendChild(respError);
         }
-        const data = JSON.parse(rawData);
+
+        try{
+          const data = JSON.parse(rawData[0]);
+        }catch(error){
+          console.log(error)
+          console.log(rawData[1])
+          spinner.stop();
+          const parseErr = document.createElement('p');
+          parseErr.className = 'error';
+          parseErr.innerText = 'response error,\n module not found';
+          spinMount.appendChild(parseErr)
+        }
         spinner.stop();
-
-      // d3.json('../backupData.json', function(err, data) {
-      //     if (err) {
-      //         console.log(err)
-      //     };
-
 
         console.dir(data)
         const pkgs = (function(){
@@ -133,6 +141,17 @@ window.onload = function() {
 
         const outdated = d3.select('.outdatedDependencies').append('ul');
 
+        const computeNodeCount = function(node){
+          console.log(node)
+          let nodeCount = 0;
+
+          for(let i = 0; i < node.parent.parent.children.length; i++){
+            nodeCount += node.parent.parent.children[i].children.length
+          }
+          console.log(nodeCount)
+          return nodeCount
+        }
+
         const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
@@ -181,33 +200,23 @@ window.onload = function() {
           .attr("r", function(d) { return 15; });
 
           enterNodes.append("text")
-          .attr("dy", ".35vh")
+          .attr("dy", ".25em")
           .attr("x", 25)
           .style("text-anchor", "start")
+
           .style("font-size", function(d){
-            //I have to adjust y of font if I want this to work out
-            //nice, I think I can scale the text nicely, also I
-            //could have the x coor change to buy room
-            //get rid of
-            //make pkg names scale with bar groups
             let fontSize
-            if (d.children) {
-              fontSize = '20px';
+            if (d.depth == 0) {
+              fontSize = 23;
             }
-            else if (d.parent.children.length < 5) {
-              fontSize = '15px';
-            }
-            else if (d.parent.children.length >= 5 && d.parent.children.length < 25) {
-              fontSize = '12px';
-            }
-            else if (d.parent.children.length >= 25 && d.parent.children.length < 35) {
-              fontSize = '9px';
-            }
-            else if (d.parent.children.length > 35) {
-              fontSize = '6px';
+            else if (d.depth == 1){
+              fontSize = 17
             }
             else{
-              fontSize = '12px';
+              const nc = computeNodeCount(d)
+              if (nc >= 80){fontSize = 4}
+              else{fontSize = fontScale(computeNodeCount(d))}
+
             }
             return fontSize;
           })

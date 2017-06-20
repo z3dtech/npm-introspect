@@ -13,10 +13,8 @@
   "bin": {},
   "keywords": [
     "npm",
-    "d3",
-    "npmjs",
-    "search",
-    "dependency"
+    "npms",
+    "d3"
   ],
   "author": "",
   "license": "MIT",
@@ -27,10 +25,8 @@
   "dependencies": {
     "bluebird": "^3.4.7",
     "d3": "^4.5.0",
-    "d3-selection-multi": "^1.0.0",
     "express": "^4.14.1",
     "flaschenode": "0.0.4",
-    "got": "^6.7.1",
     "opn": "^5.1.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
@@ -38,6 +34,8 @@
     "yargs": "^6.6.0"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
     "webpack": "^1.14.0"
   }
 }

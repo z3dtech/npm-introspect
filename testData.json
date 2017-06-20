@@ -3,9 +3,8 @@
     ["name", "bluebird"],
     ["version", "v3.5.0"]
   ],
-  "stars": ["stars", 14789],
-  "forks": ["forks", 1818],
-  "vulnerabilities": [null],
+  "stars": ["stars", 14805],
+  "forks": ["forks", 1820],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "bluebird",
@@ -62,13 +61,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Full featured Promises/A+ implementation with exceptionally good performance",
   "scores": [
-    ["Quality", 0.8777700268291548],
-    ["Popularity", 0.92629482893145],
-    ["Maintenance", 0.9997513519350345],
-    ["Final", 0.937447171352016]
+    ["Quality", 0.8777850279392823],
+    ["Popularity", 0.9259413236313401],
+    ["Maintenance", 0.9969701337494796],
+    ["Final", 0.9363545184650716]
   ],
   "subScores": [
     [
@@ -78,16 +76,91 @@
       ["Branding", 0]
     ],
     [
-      ["Community Interest", 17542],
-      ["Downloads Count", 14936457.333333334],
-      ["Downloads Acceleration", 44831.655974124806],
-      ["Dependents Count", 12458]
+      ["Community Interest", 17563],
+      ["Downloads Count", 14758124.333333334],
+      ["Downloads Acceleration", 40398.761015981756],
+      ["Dependents Count", 12508]
+    ],
+    [
+      ["Releases Frequency", 0.7215753424657535],
+      ["Commits Frequency", 0.8401198630136986],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.8748508858528722]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "chai"],
+    ["version", "v4.0.2"]
+  ],
+  "stars": ["stars", 4244],
+  "forks": ["forks", 396],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "chai",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "assertion-error"
+      }, {
+        "name": "check-error"
+      }, {
+        "name": "deep-eql"
+      }, {
+        "name": "get-func-name"
+      }, {
+        "name": "pathval"
+      }, {
+        "name": "type-detect"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "browserify"
+      }, {
+        "name": "bump-cli"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "karma"
+      }, {
+        "name": "karma-firefox-launcher"
+      }, {
+        "name": "karma-mocha"
+      }, {
+        "name": "karma-phantomjs-launcher"
+      }, {
+        "name": "karma-sauce-launcher"
+      }, {
+        "name": "mocha"
+      }]
+    }]
+  },
+  "description": "BDD/TDD assertion library for node.js and the browser. Test framework agnostic.",
+  "scores": [
+    ["Quality", 0.9638824949279491],
+    ["Popularity", 0.7608804566825081],
+    ["Maintenance", 0.9784367089214112],
+    ["Final", 0.8979257564397564]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.8699999999999999],
+      ["Tests", 0.866],
+      ["Health", 1],
+      ["Branding", 1]
+    ],
+    [
+      ["Community Interest", 5108],
+      ["Downloads Count", 3977602],
+      ["Downloads Acceleration", 14439.383314307463],
+      ["Dependents Count", 2388]
     ],
     [
       ["Releases Frequency", 1],
-      ["Commits Frequency", 0.8409417808219178],
+      ["Commits Frequency", 0.9443561643835616],
       ["Open Issues", 1],
-      ["Issues Distribution", 0.8776704870187599]
+      ["Issues Distribution", 0.5374881871417043]
     ]
   ]
 }, {
@@ -97,7 +170,6 @@
   ],
   "stars": ["stars", 65375],
   "forks": ["forks", 17110],
-  "vulnerabilities": [null],
   "outdatedDependencies": [
     ["d3-axis", "d3-timer", "d3-shape", "d3-zoom"]
   ],
@@ -187,13 +259,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Data-Driven Documents",
   "scores": [
-    ["Quality", 0.9094768010747679],
-    ["Popularity", 0.7270206212178394],
-    ["Maintenance", 0.9999064506037582],
-    ["Final", 0.8772675154599894]
+    ["Quality", 0.9095681199560421],
+    ["Popularity", 0.7281470190162166],
+    ["Maintenance", 0.9999067297752565],
+    ["Final", 0.8776892480638283]
   ],
   "subScores": [
     [
@@ -222,7 +293,6 @@
   ],
   "stars": ["stars", 31],
   "forks": ["forks", 9],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "d3-selection-multi",
@@ -250,13 +320,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Multi-value map syntax for D3 selections.",
   "scores": [
-    ["Quality", 0.8282707002333971],
-    ["Popularity", 0.17238332810326987],
-    ["Maintenance", 0.9998867345871956],
-    ["Final", 0.658775732011682]
+    ["Quality", 0.8283142091706588],
+    ["Popularity", 0.17315123227692916],
+    ["Maintenance", 0.9998876910654535],
+    ["Final", 0.6590578859210315]
   ],
   "subScores": [
     [
@@ -283,11 +352,10 @@
     ["name", "express"],
     ["version", "v4.15.3"]
   ],
-  "stars": ["stars", 32394],
-  "forks": ["forks", 5858],
-  "vulnerabilities": [null],
+  "stars": ["stars", 32435],
+  "forks": ["forks", 5868],
   "outdatedDependencies": [
-    ["array-flatten", "debug", "qs", "path-to-regexp"]
+    ["debug", "qs", "array-flatten", "path-to-regexp"]
   ],
   "dependencies": {
     "name": "express",
@@ -391,13 +459,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Fast, unopinionated, minimalist web framework",
   "scores": [
-    ["Quality", 0.9875902729791323],
-    ["Popularity", 0.954106077679211],
-    ["Maintenance", 0.966830997631255],
-    ["Final", 0.9686050582524028]
+    ["Quality", 0.9876465109658216],
+    ["Popularity", 0.9542972644578156],
+    ["Maintenance", 0.9670321465902652],
+    ["Final", 0.9687592471565747]
   ],
   "subScores": [
     [
@@ -407,16 +474,16 @@
       ["Branding", 1]
     ],
     [
-      ["Community Interest", 42175],
-      ["Downloads Count", 12109320],
-      ["Downloads Acceleration", 50195.585121765616],
-      ["Dependents Count", 15132]
+      ["Community Interest", 42229],
+      ["Downloads Count", 12031321.666666666],
+      ["Downloads Acceleration", 46810.40251141551],
+      ["Dependents Count", 15198]
     ],
     [
       ["Releases Frequency", 1],
       ["Commits Frequency", 0.9855068493150685],
       ["Open Issues", 1],
-      ["Issues Distribution", 0.4891854458549637]
+      ["Issues Distribution", 0.48950808111296024]
     ]
   ]
 }, {
@@ -426,7 +493,6 @@
   ],
   "stars": ["stars", 3],
   "forks": ["forks", 0],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "flaschenode",
@@ -444,13 +510,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Makes it easy for people who like js to interact with the flaschen-taschen",
   "scores": [
-    ["Quality", 0.7012676688083928],
-    ["Popularity", 0.04104408434601072],
-    ["Maintenance", 0.9933230557990655],
-    ["Final", 0.5724087996932945]
+    ["Quality", 0.7012812985539993],
+    ["Popularity", 0.04115280071164261],
+    ["Maintenance", 0.9933473493610794],
+    ["Final", 0.5724594420916524]
   ],
   "subScores": [
     [
@@ -479,7 +544,6 @@
   ],
   "stars": ["stars", 1742],
   "forks": ["forks", 101],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "got",
@@ -541,13 +605,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Simplified HTTP requests",
   "scores": [
-    ["Quality", 0.9880197136915736],
-    ["Popularity", 0.7060245933700484],
-    ["Maintenance", 0.9995548321600873],
-    ["Final", 0.8933587130430196]
+    ["Quality", 0.9880189279313776],
+    ["Popularity", 0.7085577977224786],
+    ["Maintenance", 0.9995562564070035],
+    ["Final", 0.894245597324732]
   ],
   "subScores": [
     [
@@ -571,12 +634,130 @@
   ]
 }, {
   "title": [
+    ["name", "mocha"],
+    ["version", "v3.4.2"]
+  ],
+  "stars": ["stars", 12584],
+  "forks": ["forks", 1834],
+  "outdatedDependencies": [
+    ["debug", "lodash.create", "glob", "supports-color"]
+  ],
+  "dependencies": {
+    "name": "mocha",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "browser-stdout"
+      }, {
+        "name": "commander"
+      }, {
+        "name": "debug"
+      }, {
+        "name": "diff"
+      }, {
+        "name": "escape-string-regexp"
+      }, {
+        "name": "glob"
+      }, {
+        "name": "growl"
+      }, {
+        "name": "json3"
+      }, {
+        "name": "lodash.create"
+      }, {
+        "name": "mkdirp"
+      }, {
+        "name": "supports-color"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "assert"
+      }, {
+        "name": "browserify"
+      }, {
+        "name": "coffee-script"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-config-semistandard"
+      }, {
+        "name": "eslint-config-standard"
+      }, {
+        "name": "eslint-plugin-promise"
+      }, {
+        "name": "eslint-plugin-standard"
+      }, {
+        "name": "expect.js"
+      }, {
+        "name": "istanbul-combine"
+      }, {
+        "name": "karma"
+      }, {
+        "name": "karma-browserify"
+      }, {
+        "name": "karma-chrome-launcher"
+      }, {
+        "name": "karma-expect"
+      }, {
+        "name": "karma-mocha"
+      }, {
+        "name": "karma-phantomjs-launcher"
+      }, {
+        "name": "karma-sauce-launcher"
+      }, {
+        "name": "karma-spec-reporter"
+      }, {
+        "name": "nyc"
+      }, {
+        "name": "phantomjs"
+      }, {
+        "name": "rimraf"
+      }, {
+        "name": "should"
+      }, {
+        "name": "through2"
+      }, {
+        "name": "watchify"
+      }]
+    }]
+  },
+  "description": "simple, flexible, fun test framework",
+  "scores": [
+    ["Quality", 0.9390676288299487],
+    ["Popularity", 0.8247216493870643],
+    ["Maintenance", 0.6666666666666665],
+    ["Final", 0.8037061992677904]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.982],
+      ["Health", 0.5],
+      ["Branding", 0.7]
+    ],
+    [
+      ["Community Interest", 15483],
+      ["Downloads Count", 5081741.333333333],
+      ["Downloads Acceleration", 13374.568493150684],
+      ["Dependents Count", 3100]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0]
+    ]
+  ]
+}, {
+  "title": [
     ["name", "opn"],
     ["version", "v5.1.0"]
   ],
   "stars": ["stars", 566],
   "forks": ["forks", 31],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "opn",
@@ -594,13 +775,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "A better node-open. Opens stuff like websites, files, executables. Cross-platform.",
   "scores": [
-    ["Quality", 0.8282707002333971],
-    ["Popularity", 0.6380354055802918],
-    ["Maintenance", 0.999893160196763],
-    ["Final", 0.8217562080919882]
+    ["Quality", 0.8283142091706588],
+    ["Popularity", 0.6405339232839025],
+    ["Maintenance", 0.9998934560106996],
+    ["Final", 0.8226438455043084]
   ],
   "subScores": [
     [
@@ -627,11 +807,10 @@
     ["name", "request"],
     ["version", "v2.81.0"]
   ],
-  "stars": ["stars", 15816],
-  "forks": ["forks", 1910],
-  "vulnerabilities": [null],
+  "stars": ["stars", 15840],
+  "forks": ["forks", 1914],
   "outdatedDependencies": [
-    ["har-validator", "form-data", "hawk", "aws-sign2", "performance-now", "qs"]
+    ["form-data", "hawk", "har-validator", "qs", "performance-now", "aws-sign2"]
   ],
   "dependencies": {
     "name": "request",
@@ -727,13 +906,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Simplified HTTP request client.",
   "scores": [
-    ["Quality", 0.9022789481037612],
-    ["Popularity", 0.9473183987657592],
-    ["Maintenance", 0.6647580307125657],
-    ["Final", 0.834910434748542]
+    ["Quality", 0.9024028273728854],
+    ["Popularity", 0.9460780160035108],
+    ["Maintenance", 0.6647794657755652],
+    ["Final", 0.8345209668345422]
   ],
   "subScores": [
     [
@@ -743,10 +921,10 @@
       ["Branding", 0.6]
     ],
     [
-      ["Community Interest", 19402],
-      ["Downloads Count", 24305846.333333332],
-      ["Downloads Acceleration", 53814.75079908673],
-      ["Dependents Count", 21328]
+      ["Community Interest", 19434],
+      ["Downloads Count", 24010202.666666668],
+      ["Downloads Acceleration", 47303.644653729076],
+      ["Dependents Count", 21404]
     ],
     [
       ["Releases Frequency", 0.7511986301369863],
@@ -762,7 +940,6 @@
   ],
   "stars": ["stars", 1825],
   "forks": ["forks", 122],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "request-promise",
@@ -813,13 +990,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.",
   "scores": [
-    ["Quality", 0.9300553237091305],
-    ["Popularity", 0.6754942914880886],
-    ["Maintenance", 0.9852895622781355],
-    ["Final", 0.8602909459309175]
+    ["Quality", 0.9301512585281637],
+    ["Popularity", 0.6767533365457405],
+    ["Maintenance", 0.9853409351071732],
+    ["Final", 0.8607783726369689]
   ],
   "subScores": [
     [
@@ -848,7 +1024,6 @@
   ],
   "stars": ["stars", 678],
   "forks": ["forks", 49],
-  "vulnerabilities": [null],
   "outdatedDependencies": [
     ["import-lazy"]
   ],
@@ -888,13 +1063,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Update notifications for your CLI app",
   "scores": [
-    ["Quality", 0.9429540841190216],
-    ["Popularity", 0.6736882881888997],
-    ["Maintenance", 0.999893160196763],
-    ["Final", 0.8686397321706882]
+    ["Quality", 0.9430179161813969],
+    ["Popularity", 0.6748511603511418],
+    ["Maintenance", 0.9998934560106996],
+    ["Final", 0.8690659905810634]
   ],
   "subScores": [
     [
@@ -921,9 +1095,8 @@
     ["name", "yargs"],
     ["version", "v8.0.2"]
   ],
-  "stars": ["stars", 3051],
-  "forks": ["forks", 227],
-  "vulnerabilities": [null],
+  "stars": ["stars", 3063],
+  "forks": ["forks", 230],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "yargs",
@@ -989,13 +1162,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "yargs the modern, pirate-themed, successor to optimist.",
   "scores": [
-    ["Quality", 0.9876854397013927],
-    ["Popularity", 0.8593110379887503],
-    ["Maintenance", 0.9933085611376968],
-    ["Final", 0.9447224916046744]
+    ["Quality", 0.9876937130508315],
+    ["Popularity", 0.8595745053319099],
+    ["Maintenance", 0.9933162721561255],
+    ["Final", 0.9448198860360619]
   ],
   "subScores": [
     [
@@ -1005,28 +1177,27 @@
       ["Branding", 1]
     ],
     [
-      ["Community Interest", 3802],
-      ["Downloads Count", 26241104],
-      ["Downloads Acceleration", 120187.01537290716],
-      ["Dependents Count", 5237]
+      ["Community Interest", 3820],
+      ["Downloads Count", 26113983],
+      ["Downloads Acceleration", 112777.14570015218],
+      ["Dependents Count", 5268]
     ],
     [
       ["Releases Frequency", 1],
       ["Commits Frequency", 0.9576027397260274],
       ["Open Issues", 1],
-      ["Issues Distribution", 0.6525723201143808]
+      ["Issues Distribution", 0.6523591824880324]
     ]
   ]
 }, {
   "title": [
     ["name", "webpack"],
-    ["version", "v2.6.1"]
+    ["version", "v3.0.0"]
   ],
-  "stars": ["stars", 28924],
-  "forks": ["forks", 3570],
-  "vulnerabilities": [null],
+  "stars": ["stars", 28989],
+  "forks": ["forks", 3580],
   "outdatedDependencies": [
-    ["ajv-keywords", "loader-utils", "ajv", "node-libs-browser", "acorn", "webpack-sources", "yargs", "uglify-js"]
+    ["acorn", "yargs", "node-libs-browser"]
   ],
   "dependencies": {
     "name": "webpack",
@@ -1044,6 +1215,8 @@
         "name": "async"
       }, {
         "name": "enhanced-resolve"
+      }, {
+        "name": "escope"
       }, {
         "name": "interpret"
       }, {
@@ -1067,7 +1240,7 @@
       }, {
         "name": "tapable"
       }, {
-        "name": "uglify-js"
+        "name": "uglifyjs-webpack-plugin"
       }, {
         "name": "watchpack"
       }, {
@@ -1158,32 +1331,31 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.",
   "scores": [
-    ["Quality", 0.9302167043191192],
-    ["Popularity", 0.8815390958338456],
-    ["Maintenance", 0.7741197443238315],
-    ["Final", 0.8585456053509226]
+    ["Quality", 0.9518194247368067],
+    ["Popularity", 0.8830193675359277],
+    ["Maintenance", 0.7728003289942804],
+    ["Final", 0.8650827212066148]
   ],
   "subScores": [
     [
       ["Carefulness", 0.9199999999999999],
-      ["Tests", 0.9924999999999999],
-      ["Health", 0.5],
+      ["Tests", 0.8174999999999999],
+      ["Health", 0.7272727272727273],
       ["Branding", 0.6]
     ],
     [
-      ["Community Interest", 34096],
-      ["Downloads Count", 6236414],
-      ["Downloads Acceleration", 37500.58224885845],
-      ["Dependents Count", 3408]
+      ["Community Interest", 34174],
+      ["Downloads Count", 6196712.666666667],
+      ["Downloads Acceleration", 34257.50909436834],
+      ["Dependents Count", 3429]
     ],
     [
       ["Releases Frequency", 1],
       ["Commits Frequency", 1],
       ["Open Issues", 1],
-      ["Issues Distribution", 0.14561414265155248]
+      ["Issues Distribution", 0.14362901172775977]
     ]
   ]
 }, {
@@ -1191,9 +1363,8 @@
     ["name", "react"],
     ["version", "v15.6.1"]
   ],
-  "stars": ["stars", 69123],
-  "forks": ["forks", 12879],
-  "vulnerabilities": [null],
+  "stars": ["stars", 69323],
+  "forks": ["forks", 12911],
   "outdatedDependencies": [
     ["fbjs"]
   ],
@@ -1214,32 +1385,160 @@
       }]
     }]
   },
-  "test": ["testScript", null],
   "description": "React is a JavaScript library for building user interfaces.",
   "scores": [
-    ["Quality", 0.941765526575332],
-    ["Popularity", 0.9074162784370767],
-    ["Maintenance", 0.9533777409932873],
-    ["Final", 0.9338075647732269]
+    ["Quality", 0.9118384953718353],
+    ["Popularity", 0.9087303841129735],
+    ["Maintenance", 0.9530127898655236],
+    ["Final", 0.9251616595040245]
   ],
   "subScores": [
     [
       ["Carefulness", 0.9999999999999999],
-      ["Tests", 0.6685000000000001],
+      ["Tests", 0.5015],
       ["Health", 0.75],
       ["Branding", 0.85]
     ],
     [
-      ["Community Interest", 87219],
-      ["Downloads Count", 4211078.666666667],
-      ["Downloads Acceleration", 20103.450304414007],
-      ["Dependents Count", 9757]
+      ["Community Interest", 87470],
+      ["Downloads Count", 4202137],
+      ["Downloads Acceleration", 19123.195605022833],
+      ["Dependents Count", 9813]
     ],
     [
       ["Releases Frequency", 1],
       ["Commits Frequency", 1],
       ["Open Issues", 1],
-      ["Issues Distribution", 0.44721158586887094]
+      ["Issues Distribution", 0.44580752750728303]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "kefir"],
+    ["version", "v3.7.2"]
+  ],
+  "stars": ["stars", 1255],
+  "forks": ["forks", 85],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "kefir",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "symbol-observable"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "@reactivex/rxjs"
+      }, {
+        "name": "babel-preset-es2015-loose-rollup"
+      }, {
+        "name": "coffee-script"
+      }, {
+        "name": "flow-bin"
+      }, {
+        "name": "inquirer"
+      }, {
+        "name": "jasmine-node"
+      }, {
+        "name": "prettier"
+      }, {
+        "name": "pug"
+      }, {
+        "name": "rollup"
+      }, {
+        "name": "rollup-plugin-babel"
+      }, {
+        "name": "rollup-plugin-commonjs"
+      }, {
+        "name": "rollup-plugin-node-resolve"
+      }, {
+        "name": "rollup-plugin-uglify"
+      }, {
+        "name": "semver"
+      }, {
+        "name": "shelljs"
+      }, {
+        "name": "sinon"
+      }, {
+        "name": "transducers-js"
+      }, {
+        "name": "transducers.js"
+      }, {
+        "name": "zen-observable"
+      }]
+    }]
+  },
+  "description": "Reactive Programming library for JavaScript inspired by Bacon.js and RxJS with focus on high performance and low memory usage",
+  "scores": [
+    ["Quality", 0.9597066664059279],
+    ["Popularity", 0.32973732936982025],
+    ["Maintenance", 0.9535055975099727],
+    ["Final", 0.7370470243297058]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.8699999999999999],
+      ["Tests", 0.85],
+      ["Health", 1],
+      ["Branding", 0.44999999999999996]
+    ],
+    [
+      ["Community Interest", 1438],
+      ["Downloads Count", 17412.666666666668],
+      ["Downloads Acceleration", 79.154299847793],
+      ["Dependents Count", 106]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9076164383561645],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.4472059152018637]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "jest"],
+    ["version", "v20.0.4"]
+  ],
+  "stars": ["stars", 10669],
+  "forks": ["forks", 1330],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "jest",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "jest-cli"
+      }]
+    }]
+  },
+  "description": "Delightful JavaScript Testing.",
+  "scores": [
+    ["Quality", 0.9435294983497728],
+    ["Popularity", 0.6861960852609292],
+    ["Maintenance", 0.9994655962904584],
+    ["Final", 0.8730404380479174]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.6355000000000001],
+      ["Health", 1],
+      ["Branding", 0.55]
+    ],
+    [
+      ["Community Interest", 12409],
+      ["Downloads Count", 1243290],
+      ["Downloads Acceleration", 11244.88240106545],
+      ["Dependents Count", 602]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.8272965552391943]
     ]
   ]
 }, {
@@ -1249,7 +1548,6 @@
   ],
   "stars": ["stars", 31757],
   "forks": ["forks", 6598],
-  "vulnerabilities": [null],
   "outdatedDependencies": [null],
   "dependencies": {
     "name": "redux",
@@ -1359,13 +1657,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "Predictable state container for JavaScript apps",
   "scores": [
-    ["Quality", 0.9777508084791169],
-    ["Popularity", 0.8054801079436399],
-    ["Maintenance", 0.7128512246647967],
-    ["Final", 0.8247412089566879]
+    ["Quality", 0.9777658157800082],
+    ["Popularity", 0.8054582220571438],
+    ["Maintenance", 0.7130417258144193],
+    ["Final", 0.8248047264890496]
   ],
   "subScores": [
     [
@@ -1389,46 +1686,224 @@
   ]
 }, {
   "title": [
+    ["name", "agenda"],
+    ["version", "v0.9.1"]
+  ],
+  "stars": ["stars", 2895],
+  "forks": ["forks", 354],
+  "outdatedDependencies": [
+    ["cron"]
+  ],
+  "dependencies": {
+    "name": "agenda",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "cron"
+      }, {
+        "name": "date.js"
+      }, {
+        "name": "human-interval"
+      }, {
+        "name": "moment-timezone"
+      }, {
+        "name": "mongodb"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "blanket"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "expect.js"
+      }, {
+        "name": "mocha"
+      }, {
+        "name": "mocha-lcov-reporter"
+      }, {
+        "name": "q"
+      }]
+    }]
+  },
+  "description": "Light weight job scheduler for Node.js",
+  "scores": [
+    ["Quality", 0.9091179013797123],
+    ["Popularity", 0.35049069114116127],
+    ["Maintenance", 0.6043846102740555],
+    ["Final", 0.6069417259092396]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.49999999999999994],
+      ["Tests", 0.991],
+      ["Health", 0.75],
+      ["Branding", 0.6]
+    ],
+    [
+      ["Community Interest", 3488],
+      ["Downloads Count", 32650.666666666668],
+      ["Downloads Acceleration", 111.90820015220694],
+      ["Dependents Count", 35]
+    ],
+    [
+      ["Releases Frequency", 0.8462328767123288],
+      ["Commits Frequency", 0.18554794520547943],
+      ["Open Issues", 0.707856598016781],
+      ["Issues Distribution", 0]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "chai"],
+    ["version", "v4.0.2"]
+  ],
+  "stars": ["stars", 4244],
+  "forks": ["forks", 396],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "chai",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "assertion-error"
+      }, {
+        "name": "check-error"
+      }, {
+        "name": "deep-eql"
+      }, {
+        "name": "get-func-name"
+      }, {
+        "name": "pathval"
+      }, {
+        "name": "type-detect"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "browserify"
+      }, {
+        "name": "bump-cli"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "karma"
+      }, {
+        "name": "karma-firefox-launcher"
+      }, {
+        "name": "karma-mocha"
+      }, {
+        "name": "karma-phantomjs-launcher"
+      }, {
+        "name": "karma-sauce-launcher"
+      }, {
+        "name": "mocha"
+      }]
+    }]
+  },
+  "description": "BDD/TDD assertion library for node.js and the browser. Test framework agnostic.",
+  "scores": [
+    ["Quality", 0.9638824949279491],
+    ["Popularity", 0.7608804566825081],
+    ["Maintenance", 0.9784367089214112],
+    ["Final", 0.8979257564397564]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.8699999999999999],
+      ["Tests", 0.866],
+      ["Health", 1],
+      ["Branding", 1]
+    ],
+    [
+      ["Community Interest", 5108],
+      ["Downloads Count", 3977602],
+      ["Downloads Acceleration", 14439.383314307463],
+      ["Dependents Count", 2388]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9443561643835616],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.5374881871417043]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "braintree"],
+    ["version", "v2.1.1"]
+  ],
+  "stars": ["stars", 192],
+  "forks": ["forks", 39],
+  "outdatedDependencies": [
+    ["dateformat", "xml2js", "readable-stream", "semver", "wrap-promise"]
+  ],
+  "dependencies": {
+    "name": "braintree",
+    "children": [{
+      "name": "dependency",
+      "children": [{
+        "name": "dateformat"
+      }, {
+        "name": "depd"
+      }, {
+        "name": "readable-stream"
+      }, {
+        "name": "semver"
+      }, {
+        "name": "underscore"
+      }, {
+        "name": "xml2js"
+      }, {
+        "name": "wrap-promise"
+      }]
+    }, {
+      "name": "devDependency",
+      "children": [{
+        "name": "chai"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-config-braintree"
+      }, {
+        "name": "mocha"
+      }]
+    }]
+  },
+  "description": "A library for integrating with Braintree.",
+  "scores": [
+    ["Quality", 0.7801963595945354],
+    ["Popularity", 0.23263126611078994],
+    ["Maintenance", 0.9998934560106996],
+    ["Final", 0.6654425606208818]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9999999999999999],
+      ["Tests", 0.6],
+      ["Health", 0.5],
+      ["Branding", 0]
+    ],
+    [
+      ["Community Interest", 325],
+      ["Downloads Count", 37682],
+      ["Downloads Acceleration", 3.1941590563166073],
+      ["Dependents Count", 15]
+    ],
+    [
+      ["Releases Frequency", 1],
+      ["Commits Frequency", 0.9],
+      ["Open Issues", 1],
+      ["Issues Distribution", 0.9]
+    ]
+  ]
+}, {
+  "title": [
     ["name", "gulp"],
     ["version", "v3.9.1"]
   ],
   "stars": ["stars", 26582],
   "forks": ["forks", 3776],
-  "vulnerabilities": [
-    [{
-      "id": 118,
-      "updatedAt": "2016-08-09T14:16:01.000Z",
-      "createdAt": "2016-05-25T16:37:20.000Z",
-      "publishDate": "2016-06-20T15:52:52.000Z",
-      "overview": "Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```",
-      "recommendation": "Updated to version 3.0.2 or greater",
-      "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "cvssScore": 7.5,
-      "module": "minimatch",
-      "version": "2.0.10",
-      "vulnerableVersions": "<=3.0.1",
-      "patchedVersions": ">=3.0.2",
-      "title": "Regular Expression Denial of Service",
-      "path": ["gulp@3.9.1", "vinyl-fs@0.3.14", "glob-stream@3.1.18", "minimatch@2.0.10"],
-      "advisory": "https://nodesecurity.io/advisories/118"
-    }, {
-      "id": 118,
-      "updatedAt": "2016-08-09T14:16:01.000Z",
-      "createdAt": "2016-05-25T16:37:20.000Z",
-      "publishDate": "2016-06-20T15:52:52.000Z",
-      "overview": "Minimatch is a minimal matching utility that works by converting glob expressions into JavaScript `RegExp` objects.  The primary function, `minimatch(path, pattern)` is vulnerable to ReDoS in the `pattern` parameter.  This is because of the regular expression on line 521 of minimatch.js: `/((?:\\\\{2})*)(\\\\?)\\|/g,`.  The problematic portion of the regex is `((?:\\\\{2})*)` which matches against `\\\\`.\n\nA proof of concept is as follows:\n```\nvar minimatch = require(“minimatch”);\n\n// utility function for generating long strings\nvar genstr = function (len, chr) {\n  var result = “”;\n  for (i=0; i<=len; i++) {\n    result = result + chr;\n  }\n  return result;\n}\n\nvar exploit = “[!” + genstr(1000000, “\\\\”) + “A”;\n\n// minimatch exploit.\nconsole.log(“starting minimatch”);\nminimatch(“foo”, exploit);\nconsole.log(“finishing minimatch”);\n```",
-      "recommendation": "Updated to version 3.0.2 or greater",
-      "cvssVector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "cvssScore": 7.5,
-      "module": "minimatch",
-      "version": "0.2.14",
-      "vulnerableVersions": "<=3.0.1",
-      "patchedVersions": ">=3.0.2",
-      "title": "Regular Expression Denial of Service",
-      "path": ["gulp@3.9.1", "vinyl-fs@0.3.14", "glob-watcher@0.0.6", "gaze@0.5.2", "globule@0.1.0", "minimatch@0.2.14"],
-      "advisory": "https://nodesecurity.io/advisories/118"
-    }]
-  ],
   "outdatedDependencies": [
     ["deprecated", "semver", "vinyl-fs"]
   ],
@@ -1496,13 +1971,12 @@
       }]
     }]
   },
-  "test": ["testScript", true],
   "description": "The streaming build system",
   "scores": [
-    ["Quality", 0.8668733237291909],
-    ["Popularity", 0.8267265232014072],
-    ["Maintenance", 0.9976024193452844],
-    ["Final", 0.8985771270100993]
+    ["Quality", 0.8669264737067928],
+    ["Popularity", 0.8282644619692054],
+    ["Maintenance", 0.9976227128161368],
+    ["Final", 0.8991384532869076]
   ],
   "subScores": [
     [
@@ -1522,6 +1996,104 @@
       ["Commits Frequency", 0.7160445205479452],
       ["Open Issues", 1],
       ["Issues Distribution", 0.8724763631298306]
+    ]
+  ]
+}, {
+  "title": [
+    ["name", "lodash"],
+    ["version", "v4.17.4"]
+  ],
+  "stars": ["stars", 24146],
+  "forks": ["forks", 2438],
+  "outdatedDependencies": [null],
+  "dependencies": {
+    "name": "lodash",
+    "children": [{
+      "name": "devDependency",
+      "children": [{
+        "name": "async"
+      }, {
+        "name": "benchmark"
+      }, {
+        "name": "chalk"
+      }, {
+        "name": "cheerio"
+      }, {
+        "name": "codecov.io"
+      }, {
+        "name": "coveralls"
+      }, {
+        "name": "curl-amd"
+      }, {
+        "name": "docdown"
+      }, {
+        "name": "dojo"
+      }, {
+        "name": "ecstatic"
+      }, {
+        "name": "eslint"
+      }, {
+        "name": "eslint-plugin-import"
+      }, {
+        "name": "fs-extra"
+      }, {
+        "name": "glob"
+      }, {
+        "name": "istanbul"
+      }, {
+        "name": "jquery"
+      }, {
+        "name": "lodash"
+      }, {
+        "name": "lodash-doc-globals"
+      }, {
+        "name": "markdown-doctest"
+      }, {
+        "name": "optional-dev-dependency"
+      }, {
+        "name": "platform"
+      }, {
+        "name": "qunit-extras"
+      }, {
+        "name": "qunitjs"
+      }, {
+        "name": "request"
+      }, {
+        "name": "requirejs"
+      }, {
+        "name": "sauce-tunnel"
+      }, {
+        "name": "uglify-js"
+      }, {
+        "name": "webpack"
+      }]
+    }]
+  },
+  "description": "Lodash modular utilities.",
+  "scores": [
+    ["Quality", 0.7594713374236951],
+    ["Popularity", 0.9695910558369973],
+    ["Maintenance", 0.9999139073883683],
+    ["Final", 0.9171681383559864]
+  ],
+  "subScores": [
+    [
+      ["Carefulness", 0.9199999999999999],
+      ["Tests", 0.1485],
+      ["Health", 1],
+      ["Branding", 0.4]
+    ],
+    [
+      ["Community Interest", 28422],
+      ["Downloads Count", 43062528.666666664],
+      ["Downloads Acceleration", 79162.94062024349],
+      ["Dependents Count", 36861]
+    ],
+    [
+      ["Releases Frequency", 0.9],
+      ["Commits Frequency", 1],
+      ["Open Issues", 1],
+      ["Issues Distribution", 1]
     ]
   ]
 }]

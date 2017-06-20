@@ -14,7 +14,7 @@ const parsePkgJSON = () => {
     return new Promise((resolve, reject) => { //the package.json address needs to be changed for root
         fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
             if (error){
-              console.log('error in parse ln 39' + data)
+              console.log('Cannot find package.json, please run in project root')
               reject(error)
             }
             let contents = JSON.parse(data); //try and catch all the JSON parse, reject(new Error('OH SHiT'))
@@ -28,7 +28,7 @@ const npmSearchQuery = function(requests) {
     return Promise.map(requests, request.get, {concurrency: 1}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
-        return 'npmSearch: ' + error
+        return error
     })
 }
 
@@ -42,8 +42,9 @@ const pkgInfoParse = function(pkgInfo) {
 
         try {
             parsedPkg = JSON.parse(pkg)
+
         } catch (error) {
-            console.log(error)
+            console.log(error + 'error in parseInfo')
         }
 
         filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
@@ -101,23 +102,17 @@ const pkgInfoParse = function(pkgInfo) {
 }
 
 exports.parse = function(userPkgs) {
-    console.log(userPkgs)
       return new Promise((resolve, reject) => {
+
           parsePkgJSON().then((packages) => {
              packages.push(...userPkgs)
-             console.log(packages)
               let packageUrls = packages.map((name) => {
                   return "https://api.npms.io/v2/package/" + name
               })
               npmSearchQuery(packageUrls).then(function(result) {
-                  fs.writeFile('data.json', result, (err) => {
-                      if (err) {
-                          throw err;
-                      }
-                  })
-
                   resolve(result)
               }).catch(function(error) {
+
                   reject('here is an error' + error)
               })
           })

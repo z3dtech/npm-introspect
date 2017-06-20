@@ -18,8 +18,8 @@ module.exports.run = (argv) => {
     app.get('/style.css', function(req, res) {
         res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/style.css')
     })
-    app.get('/datam.json', function(req, res) {
-        console.log('Recieving API results...')
+    app.get('/data.json', function(req, res) {
+        console.log('Recieving NPM scores...')
 
         const pkgs = argv._;
         requestData.parse(pkgs)
@@ -42,7 +42,7 @@ module.exports.run = (argv) => {
     })
 
     app.get('*', function(req, res) {
-        res.send('Something unaccounted for')
+        res.send('A wrong url has been requested, please check spelling')
     })
 
     app.listen(argv.p, function() {
