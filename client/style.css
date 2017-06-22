@@ -181,7 +181,7 @@ stroke-width: 1.5px;
   overflow-y: auto;
 }
 .legend{
-  width: 12em;
+  width: 30vw;
   font-family: monospace;
   font-weight: lighter;
 }

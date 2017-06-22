@@ -34,8 +34,9 @@
     "yargs": "^6.6.0"
   },
   "devDependencies": {
+    "ajv": "^5.2.0",
     "chai": "^4.0.2",
-    "mocha": "^3.4.2",
-    "webpack": "^1.14.0"
+    "chai-json-schema": "^1.4.0",
+    "mocha": "^3.4.2"
   }
 }

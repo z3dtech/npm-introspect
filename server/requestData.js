@@ -25,7 +25,7 @@ const parsePkgJSON = () => {
 }
 
 const npmSearchQuery = function(requests) {
-    return Promise.map(requests, request.get, {concurrency: 1}).then(function(apiResults) {
+    return Promise.map(requests, request.get, {concurrency: 6}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
         return error
@@ -112,8 +112,7 @@ exports.parse = function(userPkgs) {
               npmSearchQuery(packageUrls).then(function(result) {
                   resolve(result)
               }).catch(function(error) {
-
-                  reject('here is an error' + error)
+                  reject(error)
               })
           })
       })

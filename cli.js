@@ -9,7 +9,7 @@ const server = require('./server/server')
 updateNotifier({pkg}).notify();
 
 const args =  yargs
-  .usage("Usage: additional packages to visualize -p 8080") //make proper usage string 
+  .usage("futureName [additional packages] [port]")
   .example("react redux mocha -p 5000")
   .option('p', {
     alias: 'port',

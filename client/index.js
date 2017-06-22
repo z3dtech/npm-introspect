@@ -6,27 +6,18 @@ window.onload = function() {
             bottom: 100,
             left: 10
         },
-        width = window.innerHeight,
-        height = window.innerWidth,
-        scoreWidth = width * 0.8 ,
-        scoreHeight = height * 0.20,
+        height = window.innerHeight,
+        width = window.innerWidth,
+        scoreWidth = width * 0.5,
+        scoreHeight = height * 0.30,
         line = d3.line(),
         axis = d3.axisLeft(),
-
         y = d3.scaleLinear()
           .domain([1, 0])
           .range([0, scoreHeight]),
-        sX0 = d3.scaleBand()  //group spacing
-          .rangeRound([0, width])
-          .paddingInner(0.3),
-        axisScale = d3.scaleBand()  //group spacing
-          .rangeRound([0, width])
-          .paddingInner(0.3),
         vertAxis = d3.scaleLinear()
           .domain([1, 0])
           .range([0, scoreHeight]),
-        sX1 = d3.scaleBand()
-          .padding(0.05),
         fontScale = d3.scaleLinear()
           .domain([0,80])
           .range([15,4]),
@@ -44,7 +35,7 @@ window.onload = function() {
           corners: 1.0,
           opacity: 0,
           className: 'spinner',
-        }
+        };
 
     const chartHide = document.getElementsByClassName('scoreChart')[0].style;
     chartHide.visibility='hidden';
@@ -63,20 +54,21 @@ window.onload = function() {
           spinner.stop();
           const respError = document.createElement('p');
           respError.className = 'error';
-          respError.innerText = 'request error ' + error.currentTarget.status;
+          respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
           spinMount.appendChild(respError);
         }
 
+        let data;
         try{
-          const data = JSON.parse(rawData[0]);
+          data = JSON.parse(rawData[0]);
         }catch(error){
           console.log(error)
           console.log(rawData[1])
           spinner.stop();
           const parseErr = document.createElement('p');
           parseErr.className = 'error';
-          parseErr.innerText = 'response error,\n module not found';
-          spinMount.appendChild(parseErr)
+          parseErr.innerText = 'response error,\n package not found, \n error code in console';
+          spinMount.appendChild(parseErr);
         }
         spinner.stop();
 
@@ -96,12 +88,18 @@ window.onload = function() {
           }
           return names
         })()
+        const groupScoreWidth = (width/20) * data.length,
+        groupBand = d3.scaleBand()
+          .rangeRound([0, groupScoreWidth])
+          .paddingInner(0.3),
+        barBand = d3.scaleBand()
+          .padding(0.05);
 
         const subScoreHeading = ['quality', 'popularity', 'maintenance'];
         const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
-        sX0.domain(pkgs)
-        sX1.domain(scoreHeading).rangeRound([0, sX0.bandwidth() ]);
+        groupBand.domain(pkgs)
+        barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
 
         const scoreScale = (function(){
           let scale = [[], [], [], []];
@@ -117,12 +115,14 @@ window.onload = function() {
         chartHide.visibility='visible'
 
         const scoresContainer = d3.select('.scoreChart')
-          .attr('width', scoreWidth - 100)
-          .attr('height', scoreHeight )
+          .attr('width', scoreWidth)
+          .attr('height', scoreHeight)
 
         const scores = d3.select('.scores')
-          .attr('width', scoreWidth + (scoreWidth*.3))
-          .attr('height', scoreHeight+ (scoreHeight*.3))
+          .attr('width', groupScoreWidth)
+          .attr('height', scoreHeight)
+
+
 
         const handleClick = function(e, that){
           buildInformation(e)
@@ -142,13 +142,11 @@ window.onload = function() {
         const outdated = d3.select('.outdatedDependencies').append('ul');
 
         const computeNodeCount = function(node){
-          console.log(node)
           let nodeCount = 0;
 
           for(let i = 0; i < node.parent.parent.children.length; i++){
             nodeCount += node.parent.parent.children[i].children.length
           }
-          console.log(nodeCount)
           return nodeCount
         }
 
@@ -157,7 +155,7 @@ window.onload = function() {
           const treemap = d3.tree()
           .size([depHeight, depWidth]);
 
-          d3.selectAll('g.node').remove() //this is a hack because the root will not remove properly
+          d3.selectAll('g.node').remove() //workaround because the root will not remove properly
 
           const stratify = d3.stratify()
             .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
@@ -256,7 +254,7 @@ window.onload = function() {
             forkMount.appendChild(forkCount);
           }
           function buildStars(){
-            const star = '\u2605'; //U+2606 for other star
+            const star = '\u2605'; //U+2606 for other unicode star
             document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
           }
           function buildDescription(){
@@ -326,7 +324,7 @@ window.onload = function() {
           .on('click', function(e){
             handleClick(e)})
           .attr('transform', (d) => {
-            return 'translate(' + sX0(d.title[1]) + ',0)';
+            return 'translate(' + groupBand(d.title[1]) + ',0)';
           })
           .on('mouseover', function() {
            d3.selectAll(this.childNodes).style('fill', function(d){
@@ -345,9 +343,8 @@ window.onload = function() {
             return d.scores})
           .enter().append('rect')
           .merge(buildScoresChart)
-          .attr('x', (d, i) => {return sX1(d[0])})
-          //try adding a proper y coordinate
-          .attr('width', (d) => {return sX1.bandwidth()})
+          .attr('x', (d, i) => {return barBand(d[0])})
+          .attr('width', (d) => {return barBand.bandwidth()})
           .attr('fill', (d) => {return color(d[0])})
           // .attr('height', 0) //comment out for vertical drop
           // .attr('y', height) //comment out for vertical drop
@@ -362,8 +359,8 @@ window.onload = function() {
 
         scores.append('g')
         .attr('class', 'axis')
-        .attr("transform", "translate(" + [1, 130]  + ")")
-        .call(d3.axisBottom(axisScale.domain(pkgNames)))
+        .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
+        .call(d3.axisBottom(groupBand.domain(pkgNames)))
         .selectAll('text')
         .attr('text-anchor', 'center')
         .attr('transform', 'rotate(90)')
