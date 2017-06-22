@@ -1,12 +1,6 @@
 'use strict'
 window.onload = function() {
-    const margin = {
-            top: 100,
-            right: 10,
-            bottom: 100,
-            left: 10
-        },
-        height = window.innerHeight,
+    const height = window.innerHeight,
         width = window.innerWidth,
         scoreWidth = width * 0.5,
         scoreHeight = height * 0.30,
@@ -46,6 +40,7 @@ window.onload = function() {
     d3.request(url).mimeType('application/json').response(function(xhr) {
         return [JSON.parse(xhr.responseText), xhr.responseText];
     }).get(buildVisualization)
+
 
     function buildVisualization(error, rawData){
         if (error) {
@@ -121,8 +116,6 @@ window.onload = function() {
         const scores = d3.select('.scores')
           .attr('width', groupScoreWidth)
           .attr('height', scoreHeight)
-
-
 
         const handleClick = function(e, that){
           buildInformation(e)
@@ -212,7 +205,7 @@ window.onload = function() {
             }
             else{
               const nc = computeNodeCount(d)
-              if (nc >= 80){fontSize = 4}
+              if (nc >= 70){fontSize = 4}
               else{fontSize = fontScale(computeNodeCount(d))}
 
             }
@@ -226,6 +219,7 @@ window.onload = function() {
         }
 
         const title = d3.select('.title').append('g')
+
         const buildInformation = function(pkg){
 
           function buildTitle() {

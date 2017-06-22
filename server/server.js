@@ -6,17 +6,17 @@ const app = express();
 const path = require('path');
 const opn = require('opn');
 
-
+'/style.css', {root: path.join(__dirname, '../client')}
 module.exports.run = (argv) => {
 
     app.get('/fork.png', function(req, res){
-      res.sendFile('/home/nicholas/code/javascipt/npm-landscape/assets/fork.png')
+      res.sendFile('/fork.png', {root: path.join( __dirname, '../assets')})
     })
     app.get('/index.js', function(req, res) {
-        res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/index.js')
+        res.sendFile('/index.js', {root: path.join(__dirname, '../client')})
     })
     app.get('/style.css', function(req, res) {
-        res.sendFile('/home/nicholas/code/javascipt/npm-landscape/client/style.css')
+        res.sendFile('/style.css', {root: path.join(__dirname, '../client')})
     })
     app.get('/data.json', function(req, res) {
         console.log('Recieving NPM scores...')
@@ -36,9 +36,7 @@ module.exports.run = (argv) => {
     })
 
     app.get('/', function(req, res) {
-        const indexPath = '/home/nicholas/code/javascipt/npm-landscape/client/index.html'
-        //console.log(indexPath) //this will probably break on publish
-        res.sendFile(indexPath)
+        res.sendFile('/index.html', {root: path.join(__dirname, '../client')})
     })
 
     app.get('*', function(req, res) {
