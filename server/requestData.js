@@ -11,13 +11,13 @@ const formatString = function(string) {
 }
 
 const parsePkgJSON = () => {
-    return new Promise((resolve, reject) => { //the package.json address needs to be changed for root
+    return new Promise((resolve, reject) => {
         fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
             if (error){
               console.log('Cannot find package.json, please run in project root')
               reject(error)
             }
-            let contents = JSON.parse(data); //try and catch all the JSON parse, reject(new Error('OH SHiT'))
+            let contents = JSON.parse(data);
             let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
             resolve(packages)
         });
@@ -36,7 +36,6 @@ const pkgInfoParse = function(pkgInfo) {
     let filteredInfo = []
 
     pkgInfo.forEach((pkg) => {
-      //  if (!pkg) continue; // I need to know what end up here in the case of bad module
         let parsedPkg = {}
         let filteredPkg = {}
 

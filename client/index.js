@@ -23,7 +23,7 @@ window.onload = function() {
           .range([15,4]),
         color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
-        const options = {
+        const spinOptions = {
           lines: 17,
           length: 12,
           width: 5,
@@ -40,7 +40,7 @@ window.onload = function() {
     const chartHide = document.getElementsByClassName('scoreChart')[0].style;
     chartHide.visibility='hidden';
     const spinMount = document.getElementById('spinner')
-    const spinner = new Spinner(options).spin(spinMount)
+    const spinner = new Spinner(spinOptions).spin(spinMount)
 
     const url = '/data.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
