@@ -1,13 +1,25 @@
 'use strict';
 
 const requestData = require('../server/requestData');
+const less = require('./less.js')
 const express = require('express');
 const app = express();
 const path = require('path');
 const opn = require('opn');
 
-'/style.css', {root: path.join(__dirname, '../client')}
 module.exports.run = (argv) => {
+    console.log('Recieving NPM scores...')
+    const pkgs = argv._;
+
+    if (argv.l || argv.less == true ){
+      requestData.parse(pkgs)
+      .then(function (data) {
+        less.buildTable(data)
+      }).catch(function(e){
+        console.log(e)
+      })
+      return;
+    }
 
     app.get('/fork.png', function(req, res){
       res.sendFile('/fork.png', {root: path.join( __dirname, '../assets')})
@@ -19,20 +31,18 @@ module.exports.run = (argv) => {
         res.sendFile('/style.css', {root: path.join(__dirname, '../client')})
     })
     app.get('/data.json', function(req, res) {
-        console.log('Recieving NPM scores...')
 
-        const pkgs = argv._;
-        requestData.parse(pkgs)
-        .then(function (data) {
-            res.json(data)
-            res.setHeader('Content-Type', 'application/json');
-            res.send(data);
+          requestData.parse(pkgs)
+          .then(function (data) {
+              res.json(data)
+              res.setHeader('Content-Type', 'application/json');
+              res.send(data);
+            })
+            .catch(function (e) {
+                res.status(500, {
+                    error: e
+                });
           })
-          .catch(function (e) {
-              res.status(500, {
-                  error: e
-              });
-        })
     })
 
     app.get('/', function(req, res) {
@@ -43,10 +53,9 @@ module.exports.run = (argv) => {
         res.send('A wrong url has been requested, please check spelling')
     })
 
-    app.listen(argv.p, function() {
-        console.log('Launching visiualization on port ' + argv.p)
-        opn('http://localhost:' + argv.p + '/');
-
-    })
+      app.listen(argv.p, function() {
+          console.log('Launching visiualization on port ' + argv.p)
+          opn('http://localhost:' + argv.p + '/');
+          })
 
 }

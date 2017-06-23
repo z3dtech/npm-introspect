@@ -11,6 +11,11 @@ updateNotifier({pkg}).notify();
 const args =  yargs
   .usage("futureName [additional packages] [port]")
   .example("react redux mocha -p 5000")
+  .option('l', {
+    alias: 'less',
+    describe: 'Skip visualization and output data',
+    default: false
+  })
   .option('p', {
     alias: 'port',
     describe: 'Specify port to use',
@@ -22,3 +27,6 @@ const args =  yargs
   .argv;
 
   server.run(args)
+
+
+//add a command that instead
