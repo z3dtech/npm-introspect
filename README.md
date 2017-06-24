@@ -12,7 +12,11 @@ Credible scores for npm packages help the Javascript community converge on quali
 introspect -l
 ```
 
+```bash
+introspect react redux kefir -p 5000
+```
 
+//:mag_right: Command line tool to visualize the quality of packages
 
 
 
