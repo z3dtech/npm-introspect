@@ -64,7 +64,7 @@ window.onload = function() {
           spinner.stop();
           const parseErr = document.createElement('p');
           parseErr.className = 'error';
-          parseErr.innerText = 'response error,\n package not found, \n error code in console';
+          parseErr.innerText = 'response error,\n packages not found, \n error code in console';
           spinMount.appendChild(parseErr);
         }
         spinner.stop();

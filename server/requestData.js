@@ -15,7 +15,7 @@ const parsePkgJSON = () => {
         fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
             if (error){
               console.log('Cannot find package.json, please run in project root')
-              reject(error)
+              reject('error')
             }
             let contents = JSON.parse(data);
             let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
@@ -28,6 +28,7 @@ const npmSearchQuery = function(requests) {
     return Promise.map(requests, request.get, {concurrency: 6}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
+
         return error
     })
 }
@@ -43,7 +44,7 @@ const pkgInfoParse = function(pkgInfo) {
             parsedPkg = JSON.parse(pkg)
 
         } catch (error) {
-            console.log(error + 'error in parseInfo')
+            throw 'Error- response not valid JSON'
         }
 
         filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
@@ -111,7 +112,8 @@ exports.parse = function(userPkgs) {
               npmSearchQuery(packageUrls).then(function(result) {
                   resolve(result)
               }).catch(function(error) {
-                  reject(error)
+
+                  reject('error')
               })
           })
       })

@@ -4,19 +4,20 @@
   "description": "",
   "main": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nohmapp/npm-landscape.git"
   },
-  "bin": {},
+  "bin": {"introspect": "./cli.js"},
   "keywords": [
     "npm",
     "npms",
-    "d3"
+    "d3",
+    "cli"
   ],
-  "author": "",
+  "author": "Nohmapp",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nohmapp/npm-landscape/issues"

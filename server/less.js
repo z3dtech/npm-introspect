@@ -18,6 +18,7 @@ exports.buildTable = function(rawData){
 
 for (pkg of data){
     table.push(
+
       [chalk.magenta(pkg.title[0][1]), chalk.blue(pkg.scores[0][1].toFixed(2)), chalk.yellow(pkg.scores[1][1].toFixed(2)), chalk.green(pkg.scores[2][1].toFixed(2)), pkg.scores[3][1].toFixed(2)]
     )
   }

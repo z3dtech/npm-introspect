@@ -7,7 +7,7 @@ chai.use(require('chai-json-schema'));
 // const ajv = new Ajv();
 
 describe('requestData', function(){
-  it('validates valid JSON', function(){
+  it('returns valid JSON', function(){
     requestData.parse().then(function(results){
       assert.jsonSchema(results, schema.schema)
     })
@@ -15,20 +15,20 @@ describe('requestData', function(){
 })
 
 
-const goodPkgNames = ['react', 'redux', 'kefir']
-describe('requestData', function(){
-  it('returns valid JSON', function(){
-    requestData.parse(goodPkgNames).then(function(results){
-      assert.jsonSchema(results, schema.schema)
-    })
-  })
-})
-
 const badPkgNames = ['react', 'redux', 'reduz'];
 describe('requestData', function(){
-  it('fails for package name misspell', function(){
+  it('fails because of misspelled package name', function(){
     requestData.parse(badPkgNames).then(function(results){
       assert.jsonSchema(results, schema.schema)
     })
   })
 })
+
+// const goodPkgNames = ['react', 'redux', 'kefir'];
+// describe('requestData', function(){
+//   it('returns valid JSON', function(){
+//     requestData.parse(goodPkgNames).then(function(results){
+//       assert.jsonSchema(results, schema.schema)
+//     })
+//   })
+// })
