@@ -21,11 +21,7 @@ Promote a transparent and more functional open source ecosystem. Use npm-introsp
 ```bash
 npm i npm-introspect -g 
 ```
-
-
-
-
-
+### Usage
 
 ```bash
 introspect react redux kefir -p 5000
@@ -41,7 +37,7 @@ Install npm-introspect globally and run it from the command line to launch a ric
 Credible scores for npm packages help the Javascript community converge on quality packages to maintain. Introspect, powered by [npms.io](https://npms.io/) allows you to examine the packages you are using and explore the rich graph of npm's packages.
 
 ```bash
-introspect -l
+introspect -ld
 ```
 
 
