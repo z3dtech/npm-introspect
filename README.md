@@ -1,4 +1,4 @@
-# Introspect
+# npm-introspect
 
 Introspect is a tool for visualizing the quality and condition of packages in your project.
 

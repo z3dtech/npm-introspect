@@ -27,6 +27,3 @@ const args =  yargs
   .argv;
 
   server.run(args)
-
-
-//add a command that instead

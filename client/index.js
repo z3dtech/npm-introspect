@@ -139,7 +139,6 @@ window.onload = function() {
 
         const computeNodeCount = function(node){
           let nodeCount = 0;
-
           for(let i = 0; i < node.parent.parent.children.length; i++){
             nodeCount += node.parent.parent.children[i].children.length
           }
