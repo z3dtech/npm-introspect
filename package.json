@@ -17,7 +17,7 @@
     "d3",
     "cli"
   ],
-  "author": "Nohmapp",
+  "author": "Nicholas Hohman <nohmapp@gmail.com> (https://github.com/nohmapp)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nohmapp/npm-landscape/issues"
