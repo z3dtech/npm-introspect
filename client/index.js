@@ -1,6 +1,5 @@
 'use strict'
 window.onload = function() {
-  //initial varibales for scales and element sizing
     const height = window.innerHeight,
         width = window.innerWidth,
         scoreWidth = width * 0.5,
@@ -44,7 +43,6 @@ window.onload = function() {
 
 
     function buildVisualization(error, rawData){
-      //if there is an error with the response data
         if (error) {
           console.log(error);
           console.log(error.currentTarget.status)
@@ -70,7 +68,6 @@ window.onload = function() {
         spinner.stop();
 
         console.dir(data)
-        //arrays to be used with scales for the bar chart
         const pkgs = (function(){
           let names = []
           for(let pkg in data){
@@ -145,7 +142,6 @@ window.onload = function() {
           return nodeCount
         }
 
-        //major element 1 of 3- dependency graph
         const buildDependencies = function(pkg){
 
           const treemap = d3.tree()
@@ -224,7 +220,6 @@ window.onload = function() {
         const title = d3.select('.title').append('g')
 
 
-        //major element 2 of 3- all textual info about packages
         const buildInformation = function(pkg){
 
           function buildTitle() {
@@ -292,7 +287,6 @@ window.onload = function() {
           buildDescription()
         }
 
-        //major element 3 of 3 - grouped bar chart and legend
         const legend = d3.select('.legend').append('g')
           .attr("transform", () => { return "translate(0," + 20 + ")"; })
           .attr('text-anchor', 'start')

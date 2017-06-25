@@ -12,13 +12,17 @@ const formatString = function(string) {
 
 const parsePkgJSON = () => {
     return new Promise((resolve, reject) => {
-        fs.readFile(path.resolve('package.json'), 'utf-8', (error, data) => {
+
+        fs.readFile('package.json', 'utf-8', (error, data) => {
             if (error){
-              console.log('Cannot find package.json, please run in project root')
               reject('error')
+              throw 'Cannot find package.json, please run in project root'
             }
             let contents = JSON.parse(data);
-            let packages = Object.keys(contents['dependencies']).concat(Object.keys(contents['devDependencies']));
+            const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
+            const devDependencies = contents['devDependencies'] && contents ? Object.keys(contents['devDependencies']) : []
+
+            let packages = dependencies.concat(devDependencies)
             resolve(packages)
         });
     });
@@ -28,7 +32,6 @@ const npmSearchQuery = function(requests) {
     return Promise.map(requests, request.get, {concurrency: 6}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
-
         return error
     })
 }

@@ -16,9 +16,8 @@ introspect -l
 introspect react redux kefir -p 5000
 ```
 
-//:mag_right: Command line tool to visualize the quality of packages
 
-
+Command line tool to examine and visualize package quality
 
 gif, show the tools and options
 

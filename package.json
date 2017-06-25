@@ -8,11 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nohmapp/npm-landscape.git"
+    "url": "git+https://github.com/nohmapp/npm-introspect.git"
   },
-  "bin": {"introspect": "./cli.js"},
+  "bin": {
+    "introspect": "./cli.js"
+  },
   "keywords": [
-    "npm",
     "npms",
     "d3",
     "cli"
@@ -29,7 +30,6 @@
     "cli-table": "^0.3.1",
     "d3": "^4.5.0",
     "express": "^4.14.1",
-    "flaschenode": "0.0.4",
     "opn": "^5.1.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
@@ -37,7 +37,6 @@
     "yargs": "^6.6.0"
   },
   "devDependencies": {
-    "ajv": "^5.2.0",
     "chai": "^4.0.2",
     "chai-json-schema": "^1.4.0",
     "mocha": "^3.4.2"
