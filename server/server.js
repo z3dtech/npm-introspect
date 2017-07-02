@@ -1,7 +1,7 @@
 'use strict';
 
 const requestData = require('../server/requestData');
-const less = require('./less.js')
+const less = require('./less')
 const express = require('express');
 const app = express();
 const path = require('path');

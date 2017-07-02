@@ -1,8 +1,8 @@
 {
-  "name": "npm-landscape",
+  "name": "npm-introspect",
   "version": "1.0.0",
-  "description": "",
-  "main": "cli.js",
+  "description": "Command line tool to examine and visualize package quality",
+  "main": "client/index.js",
   "scripts": {
     "test": "mocha"
   },
