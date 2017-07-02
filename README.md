@@ -1,12 +1,14 @@
 # npm-introspect
 
-Introspect is a command line tool to examine and visualize package quality.
+:mag_right: Introspect is a command line tool to examine and visualize package quality.
 
 ![gif of introspect being launched](https://github.com/Nohmapp/npm-introspect/blob/master/assets/screenshot.gif?raw=true)
 
 ## The Problem
 
-Have you ever searched for a library in npm and found 30 different, uniquely inadequate options?
+Have you ever searched for a module in npm and found 20 different, uniquely inadequate options? 
+
+There's 20 different packages, most of them are incomplete or unused. 7 of them might do what you want, one is specialized for a use case different than yours, three have very little documentation, one is reportedly 'bloated', another is fairly new and supported by a small group- finding quality packages is difficult and npm lacks the built in support to do it. 
 
 [Npm](https://www.npmjs.com/) contains more than double the amount of packages of the next most populated package manager. It is a victim of its own success. Npm is a market of imperfect information, poor packages can have many github stars and common use cases often lack a clear, well-maintained solution.
 
@@ -25,9 +27,13 @@ npm i npm-introspect -g
 
 ```bash
 introspect [any additional packages to analyze] [port]
+```
+
+## Example
+```bash
 introspect react redux kefir -p 5000
 ```
-If you want an option with less overhead run introspect with the -less option, or -l flag.
+If you want to run introspect with less overhead use the -less option, or -l flag.
 
 ```bash
 introspect react redux kefir -l
