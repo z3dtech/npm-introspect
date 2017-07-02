@@ -9,7 +9,7 @@ const server = require('./server/server')
 updateNotifier({pkg}).notify();
 
 const args =  yargs
-  .usage("futureName [additional packages] [port]")
+  .usage("introspect [additional packages] [port]")
   .example("react redux mocha -p 5000")
   .option('l', {
     alias: 'less',
