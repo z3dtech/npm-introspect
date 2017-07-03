@@ -1,6 +1,6 @@
 # npm-introspect
 
-:mag_right: Introspect is a command line tool to examine and visualize package quality.
+:mag_right: Introspect is a command line tool to examine and visualize the quality of your project's dependencies.
 
 ![gif of introspect being launched](https://github.com/Nohmapp/npm-introspect/blob/master/assets/screenshot.gif?raw=true)
 
@@ -28,7 +28,7 @@ npm i npm-introspect -g
 ```bash
 introspect [any additional packages to analyze] [port]
 ```
-Run ```introspect``` in the root directory of any project you are interested in analyzing. It will parse the package.json and return the visualization. 
+Run ```introspect``` in the root directory of any project you are interested in analyzing. It will parse the package.json and return a visualization of your project's dependencies. 
 
 It will throw an error if it does not find a package.json.
 
