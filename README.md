@@ -37,6 +37,7 @@ It will throw an error if it does not find a package.json.
 introspect react redux kefir -p 5000
 ```
 If you want to run introspect with less overhead use the -less option, or -l flag.
+With the -l flag introspect will output scores to the terminal and not startup a server.
 
 ```bash
 introspect react redux kefir -l
