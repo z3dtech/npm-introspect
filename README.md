@@ -14,7 +14,7 @@ There's 20 different packages, most of them are incomplete or unused. 7 of them 
 
 ## The Solution
 
-[Npms.io](https://github.com/npms-io/npms-analyzer) is an effort to clearly signal code quality so that the npm community can converge on the best modules to use and maintain. Npms computes scores for npm modules across quality, maintenance, and popularity. Npm-introspect is a tool that uses the npms scores and other npm package data to create rich visualizations to explore the packages on which our projects depend. Run introspect in your project root and it will parse the packages in your package.json and launch the visualization locally. There is also a command to skip the visualization and output the most important data to the command line.
+[Npms.io](https://npms.io/) is an effort to clearly signal code quality so that the npm community can converge on the best modules to use and maintain. Npms computes scores for npm modules across quality, maintenance, and popularity. Npm-introspect is a tool that uses the npms scores and other npm package data to create rich visualizations to explore the packages on which our projects depend. Run introspect in your project root and it will parse the packages in your package.json and launch the visualization locally. There is also a command to skip the visualization and output the most important data to the command line.
 
 Promote a transparent and more functional open source ecosystem. Use npm-introspect and [npms.io](https://npms.io/)
 
@@ -28,6 +28,9 @@ npm i npm-introspect -g
 ```bash
 introspect [any additional packages to analyze] [port]
 ```
+Run ```introspect``` in the root directory of any project you are interested in analyzing. It will parse the package.json and return the visualization. 
+
+It will throw an error if it does not find a package.json.
 
 ## Example
 ```bash
