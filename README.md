@@ -26,17 +26,24 @@ npm i npm-introspect -g
 ## Usage
 
 ```bash
-introspect [any additional packages to analyze] [port]
+introspect [any additional packages to analyze] [port] 
 ```
 Run ```introspect``` in the root directory of any project you are interested in analyzing. It will parse the package.json and return a visualization of your project's dependencies.
 
 It will throw an error if it does not find a package.json.
 
+If you want to run introspect with less overhead use the -less option, or -l flag.
+With the -l flag introspect will output scores to the terminal and not startup a server.
+
+```bash
+introspect [any additional packages to analyze] [less] 
+```
+
 ## Example
 ```bash
 introspect react redux kefir -p 5000
 ```
-If you want to run introspect with less overhead use the -less option, or -l flag.
+Here is an example with the less option
 
 ```bash
 introspect react redux kefir -l
