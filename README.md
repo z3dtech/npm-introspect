@@ -37,6 +37,7 @@ introspect react redux kefir -l
 ```
 ![gif of introspect with less](https://github.com/Nohmapp/npm-introspect/blob/master/assets/less.gif?raw=true)
 
+![png of introspect with less option](https://github.com/Nohmapp/npm-introspect/blob/master/assets/screenshot_less.png?raw=true)
 
 ## The Problem
 
