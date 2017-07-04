@@ -10,7 +10,8 @@ updateNotifier({pkg}).notify();
 
 const args =  yargs
   .usage("introspect [additional packages] [port]")
-  .example("react redux mocha -p 5000")
+  .example("introspect react redux mocha -p 5000")
+  .example("introspect -less")
   .option('l', {
     alias: 'less',
     describe: 'Skip visualization and output data',
