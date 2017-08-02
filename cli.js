@@ -2,9 +2,12 @@
 'use strict';
 
 const yargs = require('yargs');
+const check = require('check-node-version');
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 const server = require('./server/server')
+
+const wanted = {node: "6.4.0"};
 
 updateNotifier({pkg}).notify();
 
@@ -27,4 +30,15 @@ const args =  yargs
   .alias('h', 'help')
   .argv;
 
-  server.run(args)
+check( wanted, function(error, result){
+  if(error){
+    throw 'While checking for correct node version there has been an error'
+  }
+  if (result.node.version.major !== 6 && result.node.version.major !== 7 ){
+    console.log('This package requires node -v ≥ 6.4.0, please update to run')
+    process.exit(1)
+  }
+  else{
+    server.run(args)
+  }
+});

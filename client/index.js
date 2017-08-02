@@ -67,6 +67,9 @@ window.onload = function() {
         }
         spinner.stop();
 
+        data.sort(function(a, b){
+          return d3.ascending(a.title[0][1], b.title[0][1])
+        })
         console.dir(data)
         const pkgs = (function(){
           let names = []
@@ -353,16 +356,16 @@ window.onload = function() {
 
         scores.append('g')
         .attr('class', 'axis')
-        .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
+        .attr("transform", "translate(" + [0, (scoreHeight / 2)]  + ")")
         .call(d3.axisBottom(groupBand.domain(pkgNames)))
         .selectAll('text')
-        .attr('text-anchor', 'center')
+        .attr('text-anchor', 'middle')
         .attr('transform', 'rotate(90)')
 
         // vertical axis
         // scores.append('g')
         // .attr('class', 'axisVertical')
         // .attr("transform", "translate(" + [25, 0]  + ")")
-        // .call(d3.axisLeft(vertAxis)) //no right s
+        // .call(d3.axisLeft(vertAxis))
       }
     }
