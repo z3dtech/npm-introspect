@@ -34,7 +34,7 @@ check( wanted, function(error, result){
   if(error){
     throw 'While checking for correct node version there has been an error'
   }
-  if (result.node.version.major !== 6 && result.node.version.major !== 7 ){
+  if (result.node.version.major < 6 ){
     console.log('This package requires node -v ≥ 6.4.0, please update to run')
     process.exit(1)
   }
