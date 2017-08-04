@@ -418,6 +418,29 @@ $( "#searchButton" ).click( function() {
   document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
 });
 
+$( "#upload" ).change( function() {
+  if( $( "#upload" ).val() !== "" ) {
+      let input = $("#upload").prop( "files" )[0];
+      console.log( 'file upload' );
+      let reader = new FileReader();
+      reader.onload = function(){
+        console.log( JSON.parse( reader.result ) )
+        $( "#searchBar option" ).remove( );
+        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+        for( var i = 0; i < dependencies.length; i++ ) {
+          updateSearch( dependencies[ i ], false );
+        }
+        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+        for( var i = 0; i < devDependencies.length; i++ ) {
+          updateSearch( devDependencies[ i ], false );
+        }
+        $( "#searchButton" ).click();
+      };
+      reader.readAsText( input );
+  }
+  $( "#upload" ).val("");
+})
+
 
 const updateSearch = function( name, triggerUpdate ) {
   let curSearch =$( "#searchBar" ).val();
