@@ -244,10 +244,10 @@ Hack to hide file upload
 
 select2 hacks 
 
+*/
 .select2-results {
   display: none !important;
 }
-*/
 .select2-results__option[aria-selected=true] {
     display: none;
 }

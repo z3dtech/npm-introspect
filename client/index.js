@@ -42,16 +42,6 @@ var spinOptions = {
 window.onload = function(  ) {
     template = document.getElementById( "content-wrapper" ).innerHTML;
     spinner = new Spinner(spinOptions).spin(spinMount);
-    $( "#searchBar" ).select2({
-      tags: true,
-    //  maximumSelectionLength: maxPackages
-    }).on("select2:select", function(e) {
-      if( $(this).val().indexOf( e.params.data.text ) === -1 ){
-        $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
-      }
-    }).on("select2:unselect", function(e) {
-      $( this ).remove( "option[value='" + e.params.data.text + "']" )
-    });
     const url = '/data.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
         let parsedData = JSON.parse( JSON.parse(xhr.responseText) );
@@ -257,6 +247,8 @@ window.onload = function(  ) {
             const exit = update.exit().remove();
             update.merge(enter).text(function(d){
               return  d[1]});
+            // make it a link? discussable
+            $( "span.name" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "span.name" ).text()+"</a>" );
           }
 
           function buildForks() {
@@ -396,6 +388,40 @@ window.onload = function(  ) {
         
       }
 
+/* Select2 hacks start here */
+
+var input = "";
+$( "#searchBar" ).select2({
+  tags: true,
+}).on("select2:select", function(e) {
+  if( $(this).val().indexOf( e.params.data.text ) === -1 ){
+    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
+  }
+});
+$(document).keyup(function( e ){
+    if(e.which == 13 ) { //Enter keycode
+      let currentSearch = $( "#searchBar" ).val();
+      let startsWith = false;
+      currentSearch.forEach(function(search) {
+        console.log( search );
+        console.log( input );
+        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
+          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
+            startsWith = true;
+          }
+      });
+      if( currentSearch.indexOf( input ) !== -1 ) { 
+        $( "#searchBar" ).find( "option[value='"+ input +"']:first" ).remove();
+        updateSearch( input );
+      } else if( startsWith ) {
+        updateSearch( input );
+      }
+    } else {
+      input = $("#select2-searchBar-results").find( "li:first" ).text()   
+    }
+  });
+
+/* End of select2 hacks */
 
 
 $( "#searchBar" ).on( 'focusout', function( )  {
@@ -443,9 +469,14 @@ $( "#upload" ).change( function() {
 
 
 const updateSearch = function( name, triggerUpdate ) {
-  let curSearch =$( "#searchBar" ).val();
+  if( typeof name === "undefined" || !name || name === "" ) {
+    return false;
+  }
+  let curSearch = $( "#searchBar" ).val();
   if( curSearch.indexOf( 'name' ) === -1 ) {
     $( "#searchBar" ).append( new Option( name, name, true, true ) )
+  } else {
+    $( "#searchBar" ).find( "option[value='"+ name +"']:first" ).remove();
   }
   if( triggerUpdate ) {
     document.getElementById( "searchButton" ).click();
