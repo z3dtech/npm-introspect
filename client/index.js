@@ -486,10 +486,10 @@ const updateSearch = function( name, triggerUpdate ) {
   if( curSearch.indexOf( 'name' ) === -1 ) {
     document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
   } else {
-    document.getElementById( "#searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
   }
   if( triggerUpdate ) {
-    document.getElementById( "searchButton" ).trigger( "click" );
+    triggerBuild();
   }
 } 
 
