@@ -1,8 +1,8 @@
 'use strict'
 
-const maxPackages = 8;
+var maxPackages;
 
-var chartHide, spinMount, spinner, template;
+var chartHide, spinMount, spinner, template, maxPackages;
 
 var height = window.innerHeight,
     width = window.innerWidth,
@@ -40,6 +40,7 @@ var spinOptions = {
     spinMount = document.getElementById('spinner')
 
 window.onload = function(  ) {
+    maxPackages = getPackageCount();
     template = document.getElementById( "content-wrapper" ).innerHTML;
     spinner = new Spinner(spinOptions).spin(spinMount);
     const url = '/data.json'
@@ -388,6 +389,16 @@ window.onload = function(  ) {
         
       }
 
+
+$( "#searchBar" ).on( 'focusout', function( )  {
+  triggerBuild();  
+});
+
+
+$( "#searchButton" ).click( function() {
+ triggerBuild();
+});
+
 /* Select2 hacks start here */
 
 var input = "";
@@ -424,14 +435,6 @@ $(document).keyup(function( e ){
 /* End of select2 hacks */
 
 
-$( "#searchBar" ).on( 'focusout', function( )  {
-  document.getElementById( "searchButton" ).click()  
-});
-
-
-$( "#searchButton" ).click( function() {
- triggerBuild();
-});
 
 $( "#upload" ).change( function() {
   if( $( "#upload" ).val() !== "" ) {
@@ -449,7 +452,7 @@ $( "#upload" ).change( function() {
         for( var i = 0; i < devDependencies.length; i++ ) {
           updateSearch( devDependencies[ i ], false );
         }
-        $( "#searchButton" ).click();
+       triggerBuild();
       };
       reader.readAsText( input );
   }
@@ -475,6 +478,7 @@ const triggerBuild = function() {
     return [JSON.parse(xhr.responseText), xhr.responseText];
   }).get(buildVisualization); 
   document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+  return true;
 }
 
 const updateSearch = function( name, triggerUpdate ) {
@@ -492,12 +496,20 @@ const updateSearch = function( name, triggerUpdate ) {
   }
 } 
 
-const buildSearchBar = function( init ) {
-  $("option:selected").prop("selected", false);
-  console.log( "here's what we are working with:" );
-  console.log( init );
-  let packages = JSON.parse( init );
-  for( var i = 0; i < packages.length; i++ ) {
-    //console.log( packages[ i ].title )
-  }
+const getPackageCount = function() {
+  console.log( window.innerWidth );
+  return 10;
 }
+
+$( window ).resize( function( e ) {
+  if( window.innerWidth > width * 1.2 || window.innerWidth < width * 0.8 ) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    let rebuildOnResize = new Promise( function(res, rej) {
+      triggerBuild();
+      res();
+    }).then( function() {
+      spiner.stop();
+    })
+  }
+} )
