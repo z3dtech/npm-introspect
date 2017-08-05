@@ -1,7 +1,4 @@
 'use strict'
-
-var maxPackages;
-
 var chartHide, spinMount, spinner, template, maxPackages;
 
 var height = window.innerHeight,
@@ -21,7 +18,7 @@ var height = window.innerHeight,
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
-var spinOptions = {
+const spinOptions = {
       lines: 17,
       length: 12,
       width: 5,
@@ -40,7 +37,6 @@ var spinOptions = {
     spinMount = document.getElementById('spinner')
 
 window.onload = function(  ) {
-    maxPackages = getPackageCount();
     template = document.getElementById( "content-wrapper" ).innerHTML;
     spinner = new Spinner(spinOptions).spin(spinMount);
     const url = '/data.json'
@@ -63,7 +59,7 @@ window.onload = function(  ) {
           respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
           spinMount.appendChild(respError);
         }
-
+        maxPackages = getPackageCount();
         let data;
         try{
           data = JSON.parse(rawData[0]).reverse();
@@ -390,12 +386,38 @@ window.onload = function(  ) {
       }
 
 
-$( "#searchBar" ).on( 'focusout', function( )  {
-  triggerBuild();  
+
+window.addEventListener('resize', function( e ) {
+  if( maxPackages !== getPackageCount() ) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    triggerBuild()
+    spinner.stop();
+  }
 });
 
+document.getElementById( "upload" ).addEventListener( "change", function() {
+  if( document.getElementById( "upload" ).value !== "" ) {
+      let input = this.files[0];
+      let reader = new FileReader();
+      reader.onload = function(){
+        document.getElementById( "searchBar" ).options.length = 0;
+        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+        for( var i = 0; i < dependencies.length; i++ ) {
+          updateSearch( dependencies[ i ], false );
+        }
+        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+        for( var i = 0; i < devDependencies.length; i++ ) {
+          updateSearch( devDependencies[ i ], false );
+        }
+       triggerBuild();
+      };
+      reader.readAsText( input );
+  }
+   document.getElementById( "upload" ).value = "";
+})
 
-$( "#searchButton" ).click( function() {
+document.getElementById( "searchButton" ).addEventListener( "click", function() {
  triggerBuild();
 });
 
@@ -409,9 +431,9 @@ $( "#searchBar" ).select2({
     $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
   }
 });
-$(document).keyup(function( e ){
+$( ".select2-container" ).keyup(function( e ){
     if(e.which == 13 ) { //Enter keycode
-      let currentSearch = $( "#searchBar" ).val();
+      let currentSearch = $( "#searchBar").val();;
       let startsWith = false;
       currentSearch.forEach(function(search) {
         console.log( search );
@@ -422,42 +444,17 @@ $(document).keyup(function( e ){
           }
       });
       if( currentSearch.indexOf( input ) !== -1 ) { 
-        $( "#searchBar" ).find( "option[value='"+ input +"']:first" ).remove();
+        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
         updateSearch( input );
       } else if( startsWith ) {
         updateSearch( input );
       }
     } else {
-      input = $("#select2-searchBar-results").find( "li:first" ).text()   
+      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;  
     }
   });
 
 /* End of select2 hacks */
-
-
-
-$( "#upload" ).change( function() {
-  if( $( "#upload" ).val() !== "" ) {
-      let input = $("#upload").prop( "files" )[0];
-      console.log( 'file upload' );
-      let reader = new FileReader();
-      reader.onload = function(){
-        console.log( JSON.parse( reader.result ) )
-        $( "#searchBar option" ).remove( );
-        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
-        for( var i = 0; i < dependencies.length; i++ ) {
-          updateSearch( dependencies[ i ], false );
-        }
-        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-        for( var i = 0; i < devDependencies.length; i++ ) {
-          updateSearch( devDependencies[ i ], false );
-        }
-       triggerBuild();
-      };
-      reader.readAsText( input );
-  }
-  $( "#upload" ).val("");
-})
 
 
 const triggerBuild = function() {
@@ -485,31 +482,17 @@ const updateSearch = function( name, triggerUpdate ) {
   if( typeof name === "undefined" || !name || name === "" ) {
     return false;
   }
-  let curSearch = $( "#searchBar" ).val();
+  let curSearch = document.getElementById( "searchBar" ).value;
   if( curSearch.indexOf( 'name' ) === -1 ) {
-    $( "#searchBar" ).append( new Option( name, name, true, true ) )
+    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
   } else {
-    $( "#searchBar" ).find( "option[value='"+ name +"']:first" ).remove();
+    document.getElementById( "#searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
   }
   if( triggerUpdate ) {
-    document.getElementById( "searchButton" ).click();
+    document.getElementById( "searchButton" ).trigger( "click" );
   }
 } 
 
 const getPackageCount = function() {
-  console.log( window.innerWidth );
-  return 10;
+  return Math.round( innerWidth / 150 ); 
 }
-
-$( window ).resize( function( e ) {
-  if( window.innerWidth > width * 1.2 || window.innerWidth < width * 0.8 ) {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    let rebuildOnResize = new Promise( function(res, rej) {
-      triggerBuild();
-      res();
-    }).then( function() {
-      spiner.stop();
-    })
-  }
-} )
