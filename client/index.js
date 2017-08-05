@@ -248,7 +248,7 @@ window.onload = function(  ) {
             update.merge(enter).text(function(d){
               return  d[1]});
             // make it a link? discussable
-            $( "span.name" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "span.name" ).text()+"</a>" );
+            $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
           }
 
           function buildForks() {
@@ -430,18 +430,7 @@ $( "#searchBar" ).on( 'focusout', function( )  {
 
 
 $( "#searchButton" ).click( function() {
-  $( ".error" ).remove();
-  let pkg = $( "#searchBar" ).val();
-  if( !pkg || pkg.length === 0 ) {
-    return;
-  }
-  document.getElementById( "content-wrapper" ).innerHTML = template;
-  spinner = new Spinner(spinOptions).spin(spinMount)
-  let search = "/search/"+pkg;  
-  d3.request(search).mimeType('application/json').response(function(xhr) {
-    return [JSON.parse(xhr.responseText), xhr.responseText];
-  }).get(buildVisualization); 
-  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+ triggerBuild();
 });
 
 $( "#upload" ).change( function() {
@@ -467,6 +456,26 @@ $( "#upload" ).change( function() {
   $( "#upload" ).val("");
 })
 
+
+const triggerBuild = function() {
+  $( ".error" ).remove();
+  let pkg = $( "#searchBar" ).val();
+  if( !pkg || pkg.length === 0 ) {
+    return;
+  }
+  for( let i = 0; i < pkg.length; i++ ) {
+    if( pkg[i].indexOf( "/" ) !== -1 ) {
+      pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
+    }
+  }
+  document.getElementById( "content-wrapper" ).innerHTML = template;
+  spinner = new Spinner(spinOptions).spin(spinMount)
+  let search = "/search/"+pkg;  
+  d3.request(search).mimeType('application/json').response(function(xhr) {
+    return [JSON.parse(xhr.responseText), xhr.responseText];
+  }).get(buildVisualization); 
+  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+}
 
 const updateSearch = function( name, triggerUpdate ) {
   if( typeof name === "undefined" || !name || name === "" ) {

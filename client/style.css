@@ -227,6 +227,10 @@ stroke-width: 1.5px;
   margin-top: -1px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /*
 Hack to hide file upload
 */
