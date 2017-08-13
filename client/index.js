@@ -49,6 +49,108 @@ window.onload = function(  ) {
     }).get(buildVisualization)
 
     }
+  
+document.getElementById( "upload" ).addEventListener( "change", function() {
+  if( document.getElementById( "upload" ).value !== "" ) {
+      let input = this.files[0];
+      let reader = new FileReader();
+      reader.onload = function(){
+        document.getElementById( "searchBar" ).options.length = 0;
+        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+        for( var i = 0; i < dependencies.length; i++ ) {
+          updateSearch( dependencies[ i ], false );
+        }
+        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+        for( var i = 0; i < devDependencies.length; i++ ) {
+          updateSearch( devDependencies[ i ], false );
+        }
+       triggerBuild();
+      };
+      reader.readAsText( input );
+  }
+   document.getElementById( "upload" ).value = "";
+})
+
+document.getElementById( "searchButton" ).addEventListener( "click", function() {
+ triggerBuild();
+});
+
+/* Select2 hacks start here */
+
+var input = "";
+$( "#searchBar" ).select2({
+  tags: true,
+}).on("select2:select", function(e) {
+  if( $(this).val().indexOf( e.params.data.text ) === -1 ){
+    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
+  }
+});
+$( ".select2-container" ).keyup(function( e ){
+    if(e.which == 13 ) { //Enter keycode
+      let currentSearch = $( "#searchBar").val();;
+      let startsWith = false;
+      currentSearch.forEach(function(search) {
+        console.log( search );
+        console.log( input );
+        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
+          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
+            startsWith = true;
+          }
+      });
+      if( currentSearch.indexOf( input ) !== -1 ) { 
+        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
+        updateSearch( input );
+      } else if( startsWith ) {
+        updateSearch( input );
+      }
+    } else {
+      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;  
+    }
+  });
+
+/* End of select2 hacks */
+
+
+const triggerBuild = function() {
+  $( ".error" ).remove();
+  let pkg = $( "#searchBar" ).val();
+  if( !pkg || pkg.length === 0 ) {
+    return;
+  }
+  for( let i = 0; i < pkg.length; i++ ) {
+    if( pkg[i].indexOf( "/" ) !== -1 ) {
+      pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
+    }
+  }
+  document.getElementById( "content-wrapper" ).innerHTML = template;
+  spinner = new Spinner(spinOptions).spin(spinMount)
+  let search = "/search/"+pkg;  
+  d3.request(search).mimeType('application/json').response(function(xhr) {
+    return [JSON.parse(xhr.responseText), xhr.responseText];
+  }).get(buildVisualization); 
+  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+  return true;
+}
+
+const updateSearch = function( name, triggerUpdate ) {
+  if( typeof name === "undefined" || !name || name === "" ) {
+    return false;
+  }
+  let curSearch = document.getElementById( "searchBar" ).value;
+  if( curSearch.indexOf( 'name' ) === -1 ) {
+    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
+  } else {
+    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+  }
+  if( triggerUpdate ) {
+    triggerBuild();
+  }
+} 
+
+const getPackageCount = function() {
+  return Math.round( innerWidth / 150 ); 
+}
+
  function buildVisualization(error, rawData) {
         if (error) {
           console.log(error);
@@ -395,104 +497,3 @@ window.addEventListener('resize', function( e ) {
     spinner.stop();
   }
 });
-
-document.getElementById( "upload" ).addEventListener( "change", function() {
-  if( document.getElementById( "upload" ).value !== "" ) {
-      let input = this.files[0];
-      let reader = new FileReader();
-      reader.onload = function(){
-        document.getElementById( "searchBar" ).options.length = 0;
-        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
-        for( var i = 0; i < dependencies.length; i++ ) {
-          updateSearch( dependencies[ i ], false );
-        }
-        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-        for( var i = 0; i < devDependencies.length; i++ ) {
-          updateSearch( devDependencies[ i ], false );
-        }
-       triggerBuild();
-      };
-      reader.readAsText( input );
-  }
-   document.getElementById( "upload" ).value = "";
-})
-
-document.getElementById( "searchButton" ).addEventListener( "click", function() {
- triggerBuild();
-});
-
-/* Select2 hacks start here */
-
-var input = "";
-$( "#searchBar" ).select2({
-  tags: true,
-}).on("select2:select", function(e) {
-  if( $(this).val().indexOf( e.params.data.text ) === -1 ){
-    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
-  }
-});
-$( ".select2-container" ).keyup(function( e ){
-    if(e.which == 13 ) { //Enter keycode
-      let currentSearch = $( "#searchBar").val();;
-      let startsWith = false;
-      currentSearch.forEach(function(search) {
-        console.log( search );
-        console.log( input );
-        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
-          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
-            startsWith = true;
-          }
-      });
-      if( currentSearch.indexOf( input ) !== -1 ) { 
-        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
-        updateSearch( input );
-      } else if( startsWith ) {
-        updateSearch( input );
-      }
-    } else {
-      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;  
-    }
-  });
-
-/* End of select2 hacks */
-
-
-const triggerBuild = function() {
-  $( ".error" ).remove();
-  let pkg = $( "#searchBar" ).val();
-  if( !pkg || pkg.length === 0 ) {
-    return;
-  }
-  for( let i = 0; i < pkg.length; i++ ) {
-    if( pkg[i].indexOf( "/" ) !== -1 ) {
-      pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
-    }
-  }
-  document.getElementById( "content-wrapper" ).innerHTML = template;
-  spinner = new Spinner(spinOptions).spin(spinMount)
-  let search = "/search/"+pkg;  
-  d3.request(search).mimeType('application/json').response(function(xhr) {
-    return [JSON.parse(xhr.responseText), xhr.responseText];
-  }).get(buildVisualization); 
-  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
-  return true;
-}
-
-const updateSearch = function( name, triggerUpdate ) {
-  if( typeof name === "undefined" || !name || name === "" ) {
-    return false;
-  }
-  let curSearch = document.getElementById( "searchBar" ).value;
-  if( curSearch.indexOf( 'name' ) === -1 ) {
-    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
-  } else {
-    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
-  }
-  if( triggerUpdate ) {
-    triggerBuild();
-  }
-} 
-
-const getPackageCount = function() {
-  return Math.round( innerWidth / 150 ); 
-}
