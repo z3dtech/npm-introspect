@@ -1,4 +1,5 @@
 'use strict'
+window.onload = function(  ) {
 var chartHide, spinMount, spinner, template, maxPackages;
 
 var height = window.innerHeight,
@@ -36,7 +37,7 @@ const spinOptions = {
     chartHide.visibility='hidden';
     spinMount = document.getElementById('spinner')
 
-window.onload = function(  ) {
+
     template = document.getElementById( "content-wrapper" ).innerHTML;
     spinner = new Spinner(spinOptions).spin(spinMount);
     const url = '/data.json'
@@ -48,7 +49,7 @@ window.onload = function(  ) {
         return [JSON.parse(xhr.responseText), xhr.responseText];
     }).get(buildVisualization)
 
-    }
+
   
 document.getElementById( "upload" ).addEventListener( "change", function() {
   if( document.getElementById( "upload" ).value !== "" ) {
@@ -497,3 +498,4 @@ window.addEventListener('resize', function( e ) {
     spinner.stop();
   }
 });
+}
