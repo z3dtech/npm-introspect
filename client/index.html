@@ -2,89 +2,109 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>npm-introspect</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
-
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 </head>
 
 <body>
   <div id="spinner"></div>
-  <div class="pkgInformation">
-    <div class= 'header'>
-    <div class='title'></div>
-    <div class='gitStats'>
-      <span id="stars"></span>
-      <div class = 'forks'></div>
-    </div>
-    <p id='description'></p>
-    <div class="outdatedDependencies"></div>
-  </div>
-      <svg class="dependencies"></svg>
-      <div class="subScores">
-        <b><div id ="finalScore"></div></b>
-        <ul class="qualityScore">
-          <li>
-            <b><span id="qualityH"></span></b>
-          </li>
-          <li>
-            <span id="quality0"></span>
-          </li>
-          <li>
-            <span id="quality1"></span>
-          </li>
-          <li>
-            <span id="quality2"></span>
-          </li>
-          <li>
-            <span id="quality3"></span>
-          </li>
-        </ul>
-        <ul class="popularityScore">
-          <li>
-            <b><span id="popularityH"></span></b>
-          </li>
-          <li>
-            <span id="popularity0"></span>
-          </li>
-          <li>
-            <span id="popularity1"></span>
-          </li>
-          <li>
-            <span id="popularity2"></span>
-          </li>
-          <li>
-            <span id="popularity3"></span>
-          </li>
-        </ul>
-        <ul class="maintenanceScore">
-          <li>
-            <b><span id="maintenanceH"></span></b>
-          </li>
-          <li>
-            <span id="maintenance0"></span>
-          </li>
-          <li>
-            <span id="maintenance1"></span>
-          </li>
-          <li>
-            <span id="maintenance2"></span>
-          </li>
-          <li>
-            <span id="maintenance3"></span>
-          </li>
-        </ul>
+  <div id="search">
+    <select type="text" class="searchBar" id="searchBar" multiple>
+    </select>
+    <button id="searchButton">
+      <svg id="searchIcon" class="searchIcon" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+    </button>
+    <button id="uploadButton">
+    Upload package.json
+    </button>
+    <span class="hiddenFileUpload">
+      <input type="file" id="upload" />
+    </span>
+ </div>
+  <div id="content-wrapper">
+    <div class="pkgInformation">
+      <div class= 'header'>
+      <div class='title'></div>
+      <div class='gitStats'>
+        <span id="stars"></span>
+        <div class = 'forks'></div>
       </div>
-  </div>
-
-  <div class="mainContainer">
-        <div class="scoreChart">
-          <svg class="scores"></svg>
+      <p id='description'></p>
+      <div class="outdatedDependencies"></div>
+    </div>
+        <svg class="dependencies"></svg>
+        <div class="subScores">
+          <b><div id ="finalScore"></div></b>
+          <ul class="qualityScore">
+            <li>
+              <b><span id="qualityH"></span></b>
+            </li>
+            <li>
+              <span id="quality0"></span>
+            </li>
+            <li>
+              <span id="quality1"></span>
+            </li>
+            <li>
+              <span id="quality2"></span>
+            </li>
+            <li>
+              <span id="quality3"></span>
+            </li>
+          </ul>
+          <ul class="popularityScore">
+            <li>
+              <b><span id="popularityH"></span></b>
+            </li>
+            <li>
+              <span id="popularity0"></span>
+            </li>
+            <li>
+              <span id="popularity1"></span>
+            </li>
+            <li>
+              <span id="popularity2"></span>
+            </li>
+            <li>
+              <span id="popularity3"></span>
+            </li>
+          </ul>
+          <ul class="maintenanceScore">
+            <li>
+              <b><span id="maintenanceH"></span></b>
+            </li>
+            <li>
+              <span id="maintenance0"></span>
+            </li>
+            <li>
+              <span id="maintenance1"></span>
+            </li>
+            <li>
+              <span id="maintenance2"></span>
+            </li>
+            <li>
+              <span id="maintenance3"></span>
+            </li>
+          </ul>
         </div>
-        <svg class="legend"></svg>
+    </div>
+
+    <div class="mainContainer">
+          <div class="scoreChart">
+            <svg class="scores"></svg>
+          </div>
+          <svg class="legend"></svg>
+    </div>
   </div>
   <script src="index.js"></script>
-</body>
-
+</body> 
 </html>

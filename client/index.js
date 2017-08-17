@@ -1,48 +1,158 @@
 'use strict'
-window.onload = function() {
-    const height = window.innerHeight,
-        width = window.innerWidth,
-        scoreWidth = width * 0.5,
-        scoreHeight = height * 0.30,
-        line = d3.line(),
-        axis = d3.axisLeft(),
-        y = d3.scaleLinear()
-          .domain([1, 0])
-          .range([0, scoreHeight]),
-        vertAxis = d3.scaleLinear()
-          .domain([1, 0])
-          .range([0, scoreHeight]),
-        fontScale = d3.scaleLinear()
-          .domain([0,80])
-          .range([15,4]),
-        color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
+window.onload = function(  ) {
+var chartHide, spinMount, spinner, template, maxPackages;
 
-        const spinOptions = {
-          lines: 17,
-          length: 12,
-          width: 5,
-          radius: 40,
-          color: "#5D796A",
-          scale: 1.75,
-          speed: 1.9,
-          trail: 60,
-          corners: 1.0,
-          opacity: 0,
-          className: 'spinner',
-        };
+var height = window.innerHeight,
+    width = window.innerWidth,
+    scoreWidth = width * 0.5,
+    scoreHeight = height * 0.30,
+    line = d3.line(),
+    axis = d3.axisLeft(),
+    y = d3.scaleLinear()
+      .domain([1, 0])
+      .range([0, scoreHeight]),
+    vertAxis = d3.scaleLinear()
+      .domain([1, 0])
+      .range([0, scoreHeight]),
+    fontScale = d3.scaleLinear()
+      .domain([0,80])
+      .range([15,4]),
+    color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
-    const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+const spinOptions = {
+      lines: 17,
+      length: 12,
+      width: 5,
+      radius: 40,
+      color: "#5D796A",
+      scale: 1.75,
+      speed: 1.9,
+      trail: 60,
+      corners: 1.0,
+      opacity: 0,
+      className: 'spinner',
+    };
+
+    chartHide = document.getElementsByClassName('scoreChart')[0].style;
     chartHide.visibility='hidden';
-    const spinMount = document.getElementById('spinner')
-    const spinner = new Spinner(spinOptions).spin(spinMount)
+    spinMount = document.getElementById('spinner')
 
+
+    template = document.getElementById( "content-wrapper" ).innerHTML;
+    spinner = new Spinner(spinOptions).spin(spinMount);
     const url = '/data.json'
     d3.request(url).mimeType('application/json').response(function(xhr) {
+        let parsedData = JSON.parse( JSON.parse(xhr.responseText) );
+        for( var i = 0; i < parsedData.length; i++ ) {
+          updateSearch( parsedData[ i ].title[0][1] );
+        }
         return [JSON.parse(xhr.responseText), xhr.responseText];
     }).get(buildVisualization)
 
 
-    function buildVisualization(error, rawData){
+  
+document.getElementById( "upload" ).addEventListener( "change", function() {
+  if( document.getElementById( "upload" ).value !== "" ) {
+      let input = this.files[0];
+      let reader = new FileReader();
+      reader.onload = function(){
+        document.getElementById( "searchBar" ).options.length = 0;
+        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+        for( var i = 0; i < dependencies.length; i++ ) {
+          updateSearch( dependencies[ i ], false );
+        }
+        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+        for( var i = 0; i < devDependencies.length; i++ ) {
+          updateSearch( devDependencies[ i ], false );
+        }
+       triggerBuild();
+      };
+      reader.readAsText( input );
+  }
+   document.getElementById( "upload" ).value = "";
+})
+
+document.getElementById( "searchButton" ).addEventListener( "click", function() {
+ triggerBuild();
+});
+
+/* Select2 hacks start here */
+
+var input = "";
+$( "#searchBar" ).select2({
+  tags: true,
+}).on("select2:select", function(e) {
+  if( $(this).val().indexOf( e.params.data.text ) === -1 ){
+    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
+  }
+});
+$( ".select2-container" ).keyup(function( e ){
+    if(e.which == 13 ) { //Enter keycode
+      let currentSearch = $( "#searchBar").val();;
+      let startsWith = false;
+      currentSearch.forEach(function(search) {
+        console.log( search );
+        console.log( input );
+        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
+          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
+            startsWith = true;
+          }
+      });
+      if( currentSearch.indexOf( input ) !== -1 ) { 
+        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
+        updateSearch( input );
+      } else if( startsWith ) {
+        updateSearch( input );
+      }
+    } else {
+      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;  
+    }
+  });
+
+/* End of select2 hacks */
+
+
+const triggerBuild = function() {
+  $( ".error" ).remove();
+  let pkg = $( "#searchBar" ).val();
+  if( !pkg || pkg.length === 0 ) {
+    return;
+  }
+  for( let i = 0; i < pkg.length; i++ ) {
+    if( pkg[i].indexOf( "/" ) !== -1 ) {
+      pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
+    }
+  }
+  document.getElementById( "content-wrapper" ).innerHTML = template;
+  spinner = new Spinner(spinOptions).spin(spinMount)
+  let search = "/search/"+pkg;  
+  d3.request(search).mimeType('application/json').response(function(xhr) {
+    return [JSON.parse(xhr.responseText), xhr.responseText];
+  }).get(buildVisualization); 
+  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+  return true;
+}
+
+const updateSearch = function( name, triggerUpdate ) {
+  if( typeof name === "undefined" || !name || name === "" ) {
+    return false;
+  }
+  let curSearch = document.getElementById( "searchBar" ).value;
+  if( curSearch.indexOf( 'name' ) === -1 ) {
+    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
+  } else {
+    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+  }
+  if( triggerUpdate ) {
+    triggerBuild();
+  }
+} 
+
+const getPackageCount = function() {
+  return Math.round( innerWidth / 150 ); 
+}
+
+ function buildVisualization(error, rawData) {
         if (error) {
           console.log(error);
           console.log(error.currentTarget.status)
@@ -52,25 +162,25 @@ window.onload = function() {
           respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
           spinMount.appendChild(respError);
         }
-
+        maxPackages = getPackageCount();
         let data;
         try{
-          data = JSON.parse(rawData[0]);
+          data = JSON.parse(rawData[0]).reverse();
+          if( data.length > maxPackages ) {
+            data = data.slice( 0, maxPackages );
+          }
         }catch(error){
           console.log(error)
           console.log(rawData[1])
           spinner.stop();
           const parseErr = document.createElement('p');
           parseErr.className = 'error';
-          parseErr.innerText = 'response error,\n packages not found, \n error code in console';
+          parseErr.innerText = 'response error,\n package ' + JSON.parse(rawData[1]).options.uri.match(/\/([^\/]+)\/?$/)[1] + ' not found, \n error code in console';
           spinMount.appendChild(parseErr);
         }
         spinner.stop();
 
-        data.sort(function(a, b){
-          return d3.ascending(a.title[0][1], b.title[0][1])
-        })
-        console.dir(data)
+        //console.dir(data)
         const pkgs = (function(){
           let names = []
           for(let pkg in data){
@@ -121,6 +231,7 @@ window.onload = function() {
           .attr('height', scoreHeight)
 
         const handleClick = function(e, that){
+          console.log( e )
           buildInformation(e)
           buildDependencies(e)
         }
@@ -213,7 +324,9 @@ window.onload = function() {
             }
             return fontSize;
           })
-          .text(function(d) { return d.data.name; });
+          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+              updateSearch( d.data.name, true )
+          });
 
           updateNodes.merge(enterNodes);
 
@@ -234,6 +347,8 @@ window.onload = function() {
             const exit = update.exit().remove();
             update.merge(enter).text(function(d){
               return  d[1]});
+            // make it a link? discussable
+            $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
           }
 
           function buildForks() {
@@ -268,7 +383,9 @@ window.onload = function() {
             .text(
               function(d){
                 return 'Outdated Dependency: ' + d;
-              })
+              }).on( 'click', function( e ) {
+              updateSearch( e, true );
+            } )
             outdatedDependencies.exit().remove()
           }
 
@@ -356,16 +473,29 @@ window.onload = function() {
 
         scores.append('g')
         .attr('class', 'axis')
-        .attr("transform", "translate(" + [0, (scoreHeight / 2)]  + ")")
+        .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
         .call(d3.axisBottom(groupBand.domain(pkgNames)))
         .selectAll('text')
-        .attr('text-anchor', 'middle')
+        .attr('text-anchor', 'center')
         .attr('transform', 'rotate(90)')
 
         // vertical axis
         // scores.append('g')
         // .attr('class', 'axisVertical')
         // .attr("transform", "translate(" + [25, 0]  + ")")
-        // .call(d3.axisLeft(vertAxis))
+        // .call(d3.axisLeft(vertAxis)) //no right s
+
+        
       }
-    }
+
+
+
+window.addEventListener('resize', function( e ) {
+  if( maxPackages !== getPackageCount() ) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    triggerBuild()
+    spinner.stop();
+  }
+});
+}
