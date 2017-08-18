@@ -50,7 +50,7 @@ const spinOptions = {
     }).get(buildVisualization)
 
 
-  
+
 document.getElementById( "upload" ).addEventListener( "change", function() {
   if( document.getElementById( "upload" ).value !== "" ) {
       let input = this.files[0];
@@ -83,7 +83,7 @@ $( "#searchBar" ).select2({
   tags: true,
 }).on("select2:select", function(e) {
   if( $(this).val().indexOf( e.params.data.text ) === -1 ){
-    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );  
+    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
   }
 });
 $( ".select2-container" ).keyup(function( e ){
@@ -98,14 +98,14 @@ $( ".select2-container" ).keyup(function( e ){
             startsWith = true;
           }
       });
-      if( currentSearch.indexOf( input ) !== -1 ) { 
+      if( currentSearch.indexOf( input ) !== -1 ) {
         document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
         updateSearch( input );
       } else if( startsWith ) {
         updateSearch( input );
       }
     } else {
-      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;  
+      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
     }
   });
 
@@ -125,10 +125,10 @@ const triggerBuild = function() {
   }
   document.getElementById( "content-wrapper" ).innerHTML = template;
   spinner = new Spinner(spinOptions).spin(spinMount)
-  let search = "/search/"+pkg;  
+  let search = "/search/"+pkg;
   d3.request(search).mimeType('application/json').response(function(xhr) {
     return [JSON.parse(xhr.responseText), xhr.responseText];
-  }).get(buildVisualization); 
+  }).get(buildVisualization);
   document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
   return true;
 }
@@ -146,11 +146,46 @@ const updateSearch = function( name, triggerUpdate ) {
   if( triggerUpdate ) {
     triggerBuild();
   }
-} 
+}
 
 const getPackageCount = function() {
-  return Math.round( innerWidth / 150 ); 
+  return Math.round( innerWidth / 150 );
 }
+
+  const visualization = {
+    buildStars: function(starAmount){
+        const star = '\u2605'; //U+2606 for other unicode star
+        document.getElementById('stars').innerText = star + ' ' + starAmount
+    },
+
+   buildForks: function(forkAmount){
+       const forkMount = document.getElementsByClassName('forks')[0];
+       while (forkMount.hasChildNodes()){
+         forkMount.removeChild(forkMount.lastChild);
+       }
+       const fork = document.createElement('img');
+       fork.src = 'fork.png';
+       fork.alt = 'Fork Count';
+       const forkCount = document.createElement('span');
+       forkCount.id = 'forks';
+       forkCount.innerText = forkAmount;
+       forkMount.appendChild(fork);
+       forkMount.appendChild(forkCount);
+     },
+
+   buildSubScores: function(scores, subScores){
+       document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
+       for (let i = 0; i < subScoreHeading.length; i++){
+         document.getElementById(subScoreHeading[i] + 'H').innerText = scores[i][0] + ': ' + scores[i][1].toFixed(2)
+         for(let j = 0; j < 4; j++){
+           document.getElementById(subScoreHeading[i] + j).innerText = subScores[i][j][0] + ': ' + subScores[i][j][1].toFixed(2)
+         }
+       }
+     },
+  buildDescription: function(description){
+       document.getElementById('description').innerText = description;
+     }
+  }
 
  function buildVisualization(error, rawData) {
         if (error) {
@@ -180,7 +215,7 @@ const getPackageCount = function() {
         }
         spinner.stop();
 
-        //console.dir(data)
+
         const pkgs = (function(){
           let names = []
           for(let pkg in data){
@@ -324,7 +359,7 @@ const getPackageCount = function() {
             }
             return fontSize;
           })
-          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+          .text(function(d) { return d.data.name; }).on("click", function( d,i ) {
               updateSearch( d.data.name, true )
           });
 
@@ -351,27 +386,9 @@ const getPackageCount = function() {
             $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
           }
 
-          function buildForks() {
-            const forkMount = document.getElementsByClassName('forks')[0];
-            while (forkMount.hasChildNodes()){
-              forkMount.removeChild(forkMount.lastChild);
-            }
-            const fork = document.createElement('img');
-            fork.src = 'fork.png';
-            fork.alt = 'Fork Count';
-            const forkCount = document.createElement('span');
-            forkCount.id = 'forks';
-            forkCount.innerText = pkg.forks[1];
-            forkMount.appendChild(fork);
-            forkMount.appendChild(forkCount);
-          }
-          function buildStars(){
-            const star = '\u2605'; //U+2606 for other unicode star
-            document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
-          }
-          function buildDescription(){
-            document.getElementById('description').innerText = pkg.description;
-          }
+
+
+
           function buildOutdated(){
             let outdatedDependencies = outdated.selectAll('li')
             .data(pkg.outdatedDependencies[0] || [])
@@ -389,22 +406,14 @@ const getPackageCount = function() {
             outdatedDependencies.exit().remove()
           }
 
-          function buildSS(){
-            document.getElementById('finalScore').innerText = pkg.scores[3][0] + ': ' + pkg.scores[3][1].toFixed(2);
-            for (let i = 0; i < subScoreHeading.length; i++){
-              document.getElementById(subScoreHeading[i] + 'H').innerText = pkg.scores[i][0] + ': ' + pkg.scores[i][1].toFixed(2)
-              for(let j = 0; j < 4; j++){
-                document.getElementById(subScoreHeading[i] + j).innerText = pkg.subScores[i][j][0] + ': ' + pkg.subScores[i][j][1].toFixed(2)  //set up pretty print
-              }
-            }
-          }
 
-          buildSS()
-          buildTitle()
-          buildForks()
-          buildStars()
+
+          visualization.buildSubScores(pkg.scores, pkg.subScores)
+          visualization.buildTitle(pkg.title) //will not work until I decouple d3
+          visualization.buildForks(pkg.forks[1])
+          visualization.buildStars(pkg.stars[1])
           buildOutdated()
-          buildDescription()
+          visualization.buildDescription(pkg.description)
         }
 
         const legend = d3.select('.legend').append('g')
@@ -485,7 +494,7 @@ const getPackageCount = function() {
         // .attr("transform", "translate(" + [25, 0]  + ")")
         // .call(d3.axisLeft(vertAxis)) //no right s
 
-        
+
       }
 
 
