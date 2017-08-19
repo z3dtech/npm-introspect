@@ -1,5 +1,5 @@
 'use strict'
-window.onload = function(  ) {
+window.onload = function() {
 var chartHide, spinMount, spinner, template, maxPackages;
 
 var height = window.innerHeight,
@@ -152,6 +152,11 @@ const getPackageCount = function() {
   return Math.round( innerWidth / 150 );
 }
 
+const subScoreHeading = ['quality', 'popularity', 'maintenance'];
+const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
+
+
+
   const visualization = {
     buildStars: function(starAmount){
         const star = '\u2605'; //U+2606 for other unicode star
@@ -182,9 +187,108 @@ const getPackageCount = function() {
          }
        }
      },
+
   buildDescription: function(description){
        document.getElementById('description').innerText = description;
-     }
+     },
+
+  buildTitle: function(title){
+      document.getElementById('name').innerText = title[0][1];
+      document.getElementById('version').innerText = title[1][1];
+      $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
+     },
+
+  computeNodeCount: function(node){
+    let nodeCount = 0;
+    for(let i = 0; i < node.parent.parent.children.length; i++){
+      nodeCount += node.parent.parent.children[i].children.length
+    }
+    return nodeCount
+   },
+
+  buildDependencies: function(pkgDependencies){
+    const margin = {top: 50, right: 500, bottom: 50, left: 100},
+    depWidth = width * .6,
+    depHeight = height * .45;
+
+    const dependencies = d3.select('.dependencies')
+    .attr('width', depWidth + margin.right + margin.left)
+    .attr('height', depHeight + margin.top + margin.bottom)
+    .append('g')
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    const treemap = d3.tree()
+    .size([depHeight, depWidth]);  //
+
+    d3.selectAll('g.node').remove()
+
+    const stratify = d3.stratify()
+      .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+
+    let nodes = d3.hierarchy(pkgDependencies, function(d) {    //pkg dependencies
+    return d.children;
+    });
+
+    nodes = treemap(nodes);
+
+    const updateLinks = dependencies.selectAll(".link")
+    .data(nodes.descendants().slice(1))
+    const enterLinks = updateLinks.enter().append("path")
+      .attr("class", "link")
+    const exitLink = updateLinks.exit().remove();
+     updateLinks.merge(enterLinks)
+        .transition()
+        .duration(1000)
+        .ease(d3.easeLinear)
+        .attr("d", function(d) {
+                return "M" + d.y + "," + d.x
+                  + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                  + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                  + " " + d.parent.y + "," + d.parent.x;
+                });
+
+    const updateNodes = dependencies.selectAll("g.node")
+    .data(nodes.descendants(), d => d);
+    const enterNodes = updateNodes.enter().append("g")
+    .attr("class", function(d) {
+          return "node" +
+    (d.children ? " node--internal" : " node--leaf"); })
+    .attr("transform", function(d) {
+    return "translate(" + d.y + "," + d.x + ")"; });
+    enterNodes.append("circle")
+    .attr("r", function(d) { return 15; });
+    enterNodes.append("text")
+    .attr("dy", ".25em")
+    .attr("x", 25)
+    .style("text-anchor", "start")
+    .style("font-size", function(d){
+      let fontSize
+      if (d.depth == 0) {
+        fontSize = 23;
+      }
+      else if (d.depth == 1){
+        fontSize = 17
+      }
+      else{
+        const nc = visualization.computeNodeCount(d)
+        if (nc >= 70){fontSize = 4}
+        else{fontSize = fontScale(visualization.computeNodeCount(d))}
+      }
+      return fontSize;
+    })
+    .text(function(d) { return d.name; }).on("click", function( d,i ) {
+      console.log(d)
+      console.log('made it to 282')
+        updateSearch( name, true )
+    });
+
+    updateNodes.merge(enterNodes);
+
+    const exitNode = updateNodes.exit().remove();
+  }
+
+
   }
 
  function buildVisualization(error, rawData) {
@@ -231,6 +335,7 @@ const getPackageCount = function() {
           }
           return names
         })()
+
         const groupScoreWidth = (width/20) * data.length,
         groupBand = d3.scaleBand()
           .rangeRound([0, groupScoreWidth])
@@ -238,8 +343,8 @@ const getPackageCount = function() {
         barBand = d3.scaleBand()
           .padding(0.05);
 
-        const subScoreHeading = ['quality', 'popularity', 'maintenance'];
-        const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
+
+    // const outdated = d3.select('.outdatedDependencies').append('ul');
 
         groupBand.domain(pkgs)
         barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
@@ -268,225 +373,135 @@ const getPackageCount = function() {
         const handleClick = function(e, that){
           console.log( e )
           buildInformation(e)
-          buildDependencies(e)
         }
 
-        const margin = {top: 50, right: 500, bottom: 50, left: 100},
-        depWidth = width * .6,
-        depHeight = height * .45;
 
-        const dependencies = d3.select('.dependencies')
-        .attr('width', depWidth + margin.right + margin.left)
-        .attr('height', depHeight + margin.top + margin.bottom)
-        .append('g')
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        const outdated = d3.select('.outdatedDependencies').append('ul');
 
-        const computeNodeCount = function(node){
-          let nodeCount = 0;
-          for(let i = 0; i < node.parent.parent.children.length; i++){
-            nodeCount += node.parent.parent.children[i].children.length
-          }
-          return nodeCount
-        }
-
-        const buildDependencies = function(pkg){
-
-          const treemap = d3.tree()
-          .size([depHeight, depWidth]);
-
-          d3.selectAll('g.node').remove() //workaround because the root will not remove properly
-
-          const stratify = d3.stratify()
-            .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
-
-          let nodes = d3.hierarchy(pkg.dependencies, function(d) {
-          return d.children;
-          });
-          nodes = treemap(nodes);
-
-          const updateLinks = dependencies.selectAll(".link")
-          .data(nodes.descendants().slice(1))
-
-          const enterLinks = updateLinks.enter().append("path")
-            .attr("class", "link")
-
-          const exitLink = updateLinks.exit().remove();
-
-           updateLinks.merge(enterLinks)
-              .transition()
-              .duration(1000)
-              .ease(d3.easeLinear)
-              .attr("d", function(d) {
-                      return "M" + d.y + "," + d.x
-                        + "C" + (d.y + d.parent.y) / 2 + "," + d.x
-                        + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
-                        + " " + d.parent.y + "," + d.parent.x;
-                      });
-
-          const updateNodes = dependencies.selectAll("g.node")
-          .data(nodes.descendants(), d => d);
-
-          const enterNodes = updateNodes.enter().append("g")
-          .attr("class", function(d) {
-                return "node" +
-          (d.children ? " node--internal" : " node--leaf"); })
-          .attr("transform", function(d) {
-          return "translate(" + d.y + "," + d.x + ")"; });
-
-          enterNodes.append("circle")
-          .attr("r", function(d) { return 15; });
-
-          enterNodes.append("text")
-          .attr("dy", ".25em")
-          .attr("x", 25)
-          .style("text-anchor", "start")
-
-          .style("font-size", function(d){
-            let fontSize
-            if (d.depth == 0) {
-              fontSize = 23;
-            }
-            else if (d.depth == 1){
-              fontSize = 17
-            }
-            else{
-              const nc = computeNodeCount(d)
-              if (nc >= 70){fontSize = 4}
-              else{fontSize = fontScale(computeNodeCount(d))}
-
-            }
-            return fontSize;
-          })
-          .text(function(d) { return d.data.name; }).on("click", function( d,i ) {
-              updateSearch( d.data.name, true )
-          });
-
-          updateNodes.merge(enterNodes);
-
-          const exitNode = updateNodes.exit().remove();
-        }
-
-        const title = d3.select('.title').append('g')
 
 
         const buildInformation = function(pkg){
 
-          function buildTitle() {
-            const update = title.selectAll('span')
-            .data(pkg.title);
-            const enter = update.enter()
-            .append('span').attr('class', function(d){
-                      return d[0]});
-            const exit = update.exit().remove();
-            update.merge(enter).text(function(d){
-              return  d[1]});
-            // make it a link? discussable
-            $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
-          }
+          // function buildOutdated(){
+          //   let outdatedDependencies = outdated.selectAll('li')
+          //   .data(pkg.outdatedDependencies[0] || [])
+          //
+          //   outdatedDependencies
+          //   .enter()
+          //   .append('li')
+          //   .merge(outdatedDependencies)
+          //   .text(
+          //     function(d){
+          //       return 'Outdated Dependency: ' + d;
+          //     }).on( 'click', function( e ) {
+          //     updateSearch( e, true );
+          //   } )
+          //   outdatedDependencies.exit().remove()
+          // }
 
 
-
-
-          function buildOutdated(){
-            let outdatedDependencies = outdated.selectAll('li')
-            .data(pkg.outdatedDependencies[0] || [])
-
-            outdatedDependencies
-            .enter()
-            .append('li')
-            .merge(outdatedDependencies)
-            .text(
-              function(d){
-                return 'Outdated Dependency: ' + d;
-              }).on( 'click', function( e ) {
-              updateSearch( e, true );
-            } )
-            outdatedDependencies.exit().remove()
-          }
-
-
-
+          visualization.buildDependencies(pkg.dependencies)
           visualization.buildSubScores(pkg.scores, pkg.subScores)
           visualization.buildTitle(pkg.title) //will not work until I decouple d3
           visualization.buildForks(pkg.forks[1])
           visualization.buildStars(pkg.stars[1])
-          buildOutdated()
+        //  buildOutdated()
           visualization.buildDescription(pkg.description)
         }
 
-        const legend = d3.select('.legend').append('g')
-          .attr("transform", () => { return "translate(0," + 20 + ")"; })
-          .attr('text-anchor', 'start')
-          .selectAll('g')
-          .data(scoreHeading)
-          .enter().append('g')
-          .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
 
-          legend.append('rect')
-          .attr("x",  20)
-          .attr("width", 15)
-          .attr("height", 15)
-          .attr("fill", color);
 
-          legend.append('text')
-          .attr("x", 45)
-          .attr("y", 12)
-          .text(function(d) {
-            return d; });
 
-        handleClick(data[0])
-        const buildScoresChart = scores.append('g')
-          .selectAll('g')
-          .data(data);
+ const pkgBarCharts = {
 
-          buildScoresChart
-          .enter()
-          .append('g')
-          .on('click', function(e){
-            handleClick(e)})
-          .attr('transform', (d) => {
-            return 'translate(' + groupBand(d.title[1]) + ',0)';
-          })
-          .on('mouseover', function() {
-           d3.selectAll(this.childNodes).style('fill', function(d){
-             let bar = d3.select(this).style('fill')
-             return d3.rgb(bar).darker(2)
-           })
-          })
-          .on('mouseout', function() {
-           d3.selectAll(this.childNodes).style('fill', function(d){
-             let bar = d3.select(this).style('fill')
-             return d3.rgb(bar).brighter(2)
-           })
-          })
-          .selectAll('rect')
-          .data(function(d) {
-            return d.scores})
-          .enter().append('rect')
-          .merge(buildScoresChart)
-          .attr('x', (d, i) => {return barBand(d[0])})
-          .attr('width', (d) => {return barBand.bandwidth()})
-          .attr('fill', (d) => {return color(d[0])})
-          // .attr('height', 0) //comment out for vertical drop
-          // .attr('y', height) //comment out for vertical drop
-          .transition()
-            .duration(1000)
-            .ease(d3.easeLinear)
-            .delay((d, i) => {return i * 400})
-            .attr('height', (d) => {return height - y(d[1])})
-            .attr('y', (d, i) => {return y(d[1])})
+   buildLegend: function(){
+      const legend = d3.select('.legend').append('g')
+     .attr("transform", () => { return "translate(0," + 20 + ")"; })
+     .attr('text-anchor', 'start')
+     .selectAll('g')
+     .data(scoreHeading)
+     .enter().append('g')
+     .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
 
-            buildScoresChart.exit().remove();
+     legend.append('rect')
+     .attr("x",  20)
+     .attr("width", 15)
+     .attr("height", 15)
+     .attr("fill", color);
 
-        scores.append('g')
-        .attr('class', 'axis')
-        .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
-        .call(d3.axisBottom(groupBand.domain(pkgNames)))
-        .selectAll('text')
-        .attr('text-anchor', 'center')
-        .attr('transform', 'rotate(90)')
+     legend.append('text')
+     .attr("x", 45)
+     .attr("y", 12)
+     .text(function(d) {
+       return d; });
+     },
+
+  buildScores : function(){
+
+   const buildScoresChart = scores.append('g')
+     .selectAll('g')
+     .data(data);
+
+     buildScoresChart
+     .enter()
+     .append('g')
+     .on('click', function(e){
+       handleClick(e)})
+     .attr('transform', (d) => {
+       return 'translate(' + groupBand(d.title[1]) + ',0)';
+     })
+     .on('mouseover', function() {
+      d3.selectAll(this.childNodes).style('fill', function(d){
+        let bar = d3.select(this).style('fill')
+        return d3.rgb(bar).darker(2)
+      })
+     })
+     .on('mouseout', function() {
+      d3.selectAll(this.childNodes).style('fill', function(d){
+        let bar = d3.select(this).style('fill')
+        return d3.rgb(bar).brighter(2)
+      })
+     })
+     .selectAll('rect')
+     .data(function(d) {
+       return d.scores})
+     .enter().append('rect')
+     .merge(buildScoresChart)
+     .attr('x', (d, i) => {return barBand(d[0])})
+     .attr('width', (d) => {return barBand.bandwidth()})
+     .attr('fill', (d) => {return color(d[0])})
+     // .attr('height', 0) //comment out for vertical drop
+     // .attr('y', height) //comment out for vertical drop
+     .transition()
+       .duration(1000)
+       .ease(d3.easeLinear)
+       .delay((d, i) => {return i * 400})
+       .attr('height', (d) => {return height - y(d[1])})
+       .attr('y', (d, i) => {return y(d[1])})
+
+       buildScoresChart.exit().remove();
+
+   scores.append('g')
+   .attr('class', 'axis')
+   .attr("transform", "translate(" + [0, (scoreHeight- 20)]  + ")")
+   .call(d3.axisBottom(groupBand.domain(pkgNames)))
+   .selectAll('text')
+   .attr('text-anchor', 'center')
+   .attr('transform', 'rotate(0)')
+
+ }
+
+ }
+
+
+
+
+        handleClick(data[0]);
+        pkgBarCharts.buildScores();
+        pkgBarCharts.buildLegend();
+
+
+
 
         // vertical axis
         // scores.append('g')
@@ -499,12 +514,13 @@ const getPackageCount = function() {
 
 
 
-window.addEventListener('resize', function( e ) {
-  if( maxPackages !== getPackageCount() ) {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    triggerBuild()
-    spinner.stop();
-  }
-});
+// window.addEventListener('resize', function( e ) {
+//   if( maxPackages !== getPackageCount() ) {
+//     width = window.innerWidth;
+//     height = window.innerHeight;
+//     triggerBuild()
+//     spinner.stop();
+//   }
+// });
+
 }
