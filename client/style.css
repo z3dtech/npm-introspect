@@ -173,12 +173,7 @@ stroke-width: 1.5px;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
-.scoreChart{
-  /*margin-left: 100px;*/
-  margin: 0 auto;
-  overflow-x: auto;
-  overflow-y: auto;
-}
+
 .legend{
   width: 30vw;
   font-family: monospace;

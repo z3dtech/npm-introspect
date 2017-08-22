@@ -10,6 +10,20 @@ const formatString = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const dashToSpace = function(string){
+  return string.replace(/-/g,'+')
+}
+
+const isOutdated = function(outdatedPkgs){
+  return function(pkg){
+    if (outdatedPkgs[0]){
+      return outdatedPkgs[0].includes(pkg)
+    }else{
+      return false;
+    }
+  }
+}
+
 const parsePkgJSON = () => {
     return new Promise((resolve, reject) => {
 
@@ -28,13 +42,14 @@ const parsePkgJSON = () => {
     });
 }
 
-const npmSearchQuery = function(requests) {
-    return Promise.map(requests, request.get, {concurrency: 6}).then(function(apiResults) {
+const npmSearch = function(infoRequests, suggestionRequests) {
+     return Promise.map(infoRequests, request.get, {concurrency: 6}).then(function(apiResults) {
         return pkgInfoParse(apiResults)
     }).catch(function(error) {
         return error
     })
 }
+
 
 const pkgInfoParse = function(pkgInfo) {
     let filteredInfo = []
@@ -63,24 +78,26 @@ const pkgInfoParse = function(pkgInfo) {
         let dependencies = {"name": parsedPkg.collected.metadata.name,
                           "children": []};
 
+        const outdatedPkgs = isOutdated(filteredPkg.outdatedDependencies)
         if (parsedPkg.collected.metadata.dependencies){
             let depChildren = [];
+
           Object.keys(parsedPkg.collected.metadata.dependencies).forEach((name) => {
-            depChildren.push({'name': name});
+            depChildren.push({'name': name, "outdated": outdatedPkgs(name)});
           })
           dependencies.children.push({"name": "dependency", "children": depChildren})
         }
         if (parsedPkg.collected.metadata.devDependencies){
           let devDepChildren = [];
         Object.keys(parsedPkg.collected.metadata.devDependencies).forEach((name) => {
-            devDepChildren.push({'name': name});
+            devDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
           })
           dependencies.children.push({"name": "devDependency", "children": devDepChildren})
         }
         if (parsedPkg.collected.metadata.peerDependencies){
           let peerDepChildren = [];
         Object.keys(parsedPkg.collected.metadata.peerDependencies).forEach((name) => {
-            peerDepChildren.push({'name': name});
+            peerDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
           })
           dependencies.children.push({"name": "peerDependency", "children": peerDepChildren})
         }
@@ -110,10 +127,12 @@ exports.parse = function(userPkgs) {
           parsePkgJSON().then((packages) => {
              packages.push(...userPkgs)
               let packageUrls = packages.map((name) => {
-                  return "https://api.npms.io/v2/package/" + name
+                  return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
               })
-              console.log( packageUrls );
-              npmSearchQuery(packageUrls).then(function(result) {
+              let suggestionURls = packages.map((name) => {
+                  return "https://api.npms.io/v2/search/suggestions?q=" +  dashToSpace(encodeURIComponent(name));
+              })
+              npmSearch(packageUrls, suggestionURls).then(function(result) {
                   resolve(result)
               }).catch(function(error) {
 
@@ -123,21 +142,21 @@ exports.parse = function(userPkgs) {
       })
   }
 
-
-exports.parseSearch = function(userPkgs) {
-      return new Promise((resolve, reject) => {
-
-          let packages = [];
-          packages.push(...userPkgs)
-          let packageUrls = packages.map((name) => {
-              return "https://api.npms.io/v2/package/" + name
-          })
-          console.log( packageUrls );
-          npmSearchQuery(packageUrls).then(function(result) {
-              resolve(result)
-          }).catch(function(error) {
-
-              reject('error')
-          })
-          })
-  }
+// Ask Zach what how this is different
+// exports.parseSearch = function(userPkgs) {
+//       return new Promise((resolve, reject) => {
+//
+//           let packages = [];
+//           packages.push(...userPkgs)
+//           let packageUrls = packages.map((name) => {
+//               return "https://api.npms.io/v2/package/" + name
+//           })
+//           console.log( packageUrls );
+//           npmSearchQuery(packageUrls).then(function(result) {
+//               resolve(result)
+//           }).catch(function(error) {
+//
+//               reject('error')
+//           })
+//           })
+//   }

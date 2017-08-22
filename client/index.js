@@ -148,9 +148,9 @@ const updateSearch = function( name, triggerUpdate ) {
   }
 }
 
-const getPackageCount = function() {
-  return Math.round( innerWidth / 150 );
-}
+// const getPackageCount = function() {
+//   return Math.round( innerWidth / 150 );
+// }
 
 const subScoreHeading = ['quality', 'popularity', 'maintenance'];
 const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
@@ -301,7 +301,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
           spinMount.appendChild(respError);
         }
-        maxPackages = getPackageCount();
+        //maxPackages = getPackageCount();
         let data;
         try{
           data = JSON.parse(rawData[0]).reverse();
@@ -362,6 +362,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
         chartHide.visibility='visible'
 
+        //////// Here is where the surrounding container is
         const scoresContainer = d3.select('.scoreChart')
           .attr('width', scoreWidth)
           .attr('height', scoreHeight)
