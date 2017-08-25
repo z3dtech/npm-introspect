@@ -134,7 +134,7 @@ const triggerBuild = function() {
 }
 
 const updateSearch = function( name, triggerUpdate ) {
-  if( typeof name === "undefined" || !name || name === "" ) {
+  if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
     return false;
   }
   let curSearch = document.getElementById( "searchBar" ).value;
@@ -301,7 +301,11 @@ const getPackageCount = function() {
           return "translate(" + d.y + "," + d.x + ")"; });
 
           enterNodes.append("circle")
-          .attr("r", function(d) { return 15; });
+          .attr("r", function(d) { return 15; })
+          .style("cursor", "pointer" )
+          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+              updateSearch( d.data.name, true )
+          });
 
           enterNodes.append("text")
           .attr("dy", ".25em")
@@ -324,7 +328,9 @@ const getPackageCount = function() {
             }
             return fontSize;
           })
-          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+          .text(function(d) { return d.data.name; })
+          .style("cursor", "pointer" )
+          .on("click", function( d,i ) {
               updateSearch( d.data.name, true )
           });
 
@@ -383,7 +389,9 @@ const getPackageCount = function() {
             .text(
               function(d){
                 return 'Outdated Dependency: ' + d;
-              }).on( 'click', function( e ) {
+              })
+            .style("cursor", "pointer" )
+            .on( 'click', function( e ) {
               updateSearch( e, true );
             } )
             outdatedDependencies.exit().remove()
