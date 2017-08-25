@@ -231,6 +231,10 @@ a {
   text-decoration: none;
 }
 
+.node--leaf {
+  cursor: pointer;
+}
+
 /*
 Hack to hide file upload
 */

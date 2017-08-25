@@ -302,7 +302,6 @@ const getPackageCount = function() {
 
           enterNodes.append("circle")
           .attr("r", function(d) { return 15; })
-          .style("cursor", "pointer" )
           .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
               updateSearch( d.data.name, true )
           });
@@ -329,7 +328,6 @@ const getPackageCount = function() {
             return fontSize;
           })
           .text(function(d) { return d.data.name; })
-          .style("cursor", "pointer" )
           .on("click", function( d,i ) {
               updateSearch( d.data.name, true )
           });
@@ -390,7 +388,6 @@ const getPackageCount = function() {
               function(d){
                 return 'Outdated Dependency: ' + d;
               })
-            .style("cursor", "pointer" )
             .on( 'click', function( e ) {
               updateSearch( e, true );
             } )
