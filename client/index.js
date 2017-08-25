@@ -356,18 +356,18 @@ const getPackageCount = function() {
             while (forkMount.hasChildNodes()){
               forkMount.removeChild(forkMount.lastChild);
             }
-            const fork = document.createElement('img');
-            fork.src = 'fork.png';
-            fork.alt = 'Fork Count';
+            const fork = document.createElement('i');
+            fork.className = 'fa fa-code-fork';
             const forkCount = document.createElement('span');
             forkCount.id = 'forks';
-            forkCount.innerText = pkg.forks[1];
+            forkCount.innerText = " " + pkg.forks[1];
             forkMount.appendChild(fork);
             forkMount.appendChild(forkCount);
           }
           function buildStars(){
-            const star = '\u2605'; //U+2606 for other unicode star
-            document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
+            const star = document.createElement('i');
+            star.className = "fa fa-star";
+            document.getElementById('stars').innerHTML = "<i class='fa fa-star'></i>" + ' ' + pkg.stars[1]
           }
           function buildDescription(){
             document.getElementById('description').innerText = pkg.description;
