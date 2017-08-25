@@ -44,12 +44,40 @@ const parsePkgJSON = () => {
 
 const npmSearch = function(infoRequests, suggestionRequests) {
      return Promise.map(infoRequests, request.get, {concurrency: 6}).then(function(apiResults) {
-        return pkgInfoParse(apiResults)
-    }).catch(function(error) {
-        return error
-    })
+            return pkgInfoParse(apiResults)
+        }).catch(function(error) {
+              return error
+        })
+
+    // Promise.map(suggestionRequests, request.get, {concurrency: 6}).then(function(apiResults){
+    //   return suggestionParse(apiResults)
+    // })
 }
 
+// const suggestionParse = function(pkgSuggestions){
+//     let filteredSuggestions = [];
+//
+//     pkgSuggestions.forEach((pkg) =>{
+//       let parsedPkg = {}
+//       let filteredPkg = {}
+//
+//       try {
+//           parsedPkg = JSON.parse(pkg)
+//       } catch (error) {
+//           throw 'Error- response is not valid JSON'
+//       }
+//
+//
+//       filteredPkg.name = parsedPkg[0].package.name
+//       filteredPkg.related = []
+//       for( let i = 1; i <= 10; i ++){
+//         filteredPkg.related.push({"name" : parsedPkg[i].package.name, "scores" : [['Quality', parsedPkg[i].score.detail.quality], ['Popularity', parsedPkg[i].score.detail.popularity], ['Maintenance', parsedPkg[i].score.detail.maintenance], ['Final', parsedPkg[i].score.final]] })
+//       }
+//       filteredSuggestions.push(filteredPkg);
+//       console.log(filteredPkg)
+//     })
+//     return JSON.stringify(filteredInfo)
+// }
 
 const pkgInfoParse = function(pkgInfo) {
     let filteredInfo = []

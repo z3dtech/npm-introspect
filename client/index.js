@@ -4,6 +4,8 @@ var chartHide, spinMount, spinner, template, maxPackages;
 
 var height = window.innerHeight,
     width = window.innerWidth,
+    depWidth = width * .6,
+    depHeight = height * .45,
     scoreWidth = width * 0.5,
     scoreHeight = height * 0.30,
     line = d3.line(),
@@ -18,6 +20,17 @@ var height = window.innerHeight,
       .domain([0,80])
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
+
+    const margin = {top: 50, right: 500, bottom: 50, left: 100}
+    // depWidth = width * .6,
+    // depHeight = height * .45;
+
+    const dependencies = d3.select('.dependencies')
+    .attr('width', depWidth + margin.right + margin.left)
+    .attr('height', depHeight + margin.top + margin.bottom)
+    .append('g')
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 const spinOptions = {
       lines: 17,
@@ -156,7 +169,6 @@ const subScoreHeading = ['quality', 'popularity', 'maintenance'];
 const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
 
-
   const visualization = {
     buildStars: function(starAmount){
         const star = '\u2605'; //U+2606 for other unicode star
@@ -207,19 +219,9 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
    },
 
   buildDependencies: function(pkgDependencies){
-    const margin = {top: 50, right: 500, bottom: 50, left: 100},
-    depWidth = width * .6,
-    depHeight = height * .45;
-
-    const dependencies = d3.select('.dependencies')
-    .attr('width', depWidth + margin.right + margin.left)
-    .attr('height', depHeight + margin.top + margin.bottom)
-    .append('g')
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 
     const treemap = d3.tree()
-    .size([depHeight, depWidth]);  //
+    .size([depHeight, depWidth]);
 
     d3.selectAll('g.node').remove()
 
@@ -234,10 +236,13 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
     const updateLinks = dependencies.selectAll(".link")
     .data(nodes.descendants().slice(1))
+
     const enterLinks = updateLinks.enter().append("path")
       .attr("class", "link")
+
     const exitLink = updateLinks.exit().remove();
-     updateLinks.merge(enterLinks)
+
+    updateLinks.merge(enterLinks)
         .transition()
         .duration(1000)
         .ease(d3.easeLinear)
@@ -250,14 +255,17 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
     const updateNodes = dependencies.selectAll("g.node")
     .data(nodes.descendants(), d => d);
+
     const enterNodes = updateNodes.enter().append("g")
     .attr("class", function(d) {
           return "node" +
-    (d.children ? " node--internal" : " node--leaf"); })
+    (d.children ? " node--internal" : d.data.outdated ? " node--outdated" : " node--leaf" ); }) //ternary chains
     .attr("transform", function(d) {
     return "translate(" + d.y + "," + d.x + ")"; });
+
     enterNodes.append("circle")
     .attr("r", function(d) { return 15; });
+
     enterNodes.append("text")
     .attr("dy", ".25em")
     .attr("x", 25)
@@ -277,10 +285,10 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
       }
       return fontSize;
     })
-    .text(function(d) { return d.name; }).on("click", function( d,i ) {
-      console.log(d)
-      console.log('made it to 282')
-        updateSearch( name, true )
+    .text(function(d) {
+      return d.data.name;
+    }).on("click", function( d,i ) {
+      //  updateSearch( name, true )
     });
 
     updateNodes.merge(enterNodes);
@@ -344,7 +352,24 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           .padding(0.05);
 
 
-    // const outdated = d3.select('.outdatedDependencies').append('ul');
+          const sizeOfChart = 90
+          const numbOfScoreRows = Math.floor(scoreWidth/ (sizeOfChart*data.length))
+          const sizeOfScoreRow = Math.floor(sizeOfChart * (scoreWidth/numbOfScoreRows))
+
+
+          groupBand = d3.scaleBand()
+            .rangeRound([0, groupScoreWidth])
+            .paddingInner(0.3),
+          barBand = d3.scaleBand()
+            .padding(0.05);
+
+            // scoreWidth = width * 0.5,
+            // scoreHeight = height * 0.30,
+            // line = d3.line(),
+            // axis = d3.axisLeft(),
+            // y = d3.scaleLinear()
+            //   .domain([1, 0])
+            //   .range([0, scoreHeight]),
 
         groupBand.domain(pkgs)
         barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
@@ -361,54 +386,29 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           })()
 
         chartHide.visibility='visible'
-
-        //////// Here is where the surrounding container is
-        const scoresContainer = d3.select('.scoreChart')
-          .attr('width', scoreWidth)
-          .attr('height', scoreHeight)
+/////////////////////////////////adfasdfas////////////////
 
         const scores = d3.select('.scores')
           .attr('width', groupScoreWidth)
-          .attr('height', scoreHeight)
+          .attr('height', scoreHeight* 4)
 
-        const handleClick = function(e, that){
-          console.log( e )
-          buildInformation(e)
-        }
-
-
-
-
-
-
-        const buildInformation = function(pkg){
-
-          // function buildOutdated(){
-          //   let outdatedDependencies = outdated.selectAll('li')
-          //   .data(pkg.outdatedDependencies[0] || [])
-          //
-          //   outdatedDependencies
-          //   .enter()
-          //   .append('li')
-          //   .merge(outdatedDependencies)
-          //   .text(
-          //     function(d){
-          //       return 'Outdated Dependency: ' + d;
-          //     }).on( 'click', function( e ) {
-          //     updateSearch( e, true );
-          //   } )
-          //   outdatedDependencies.exit().remove()
-          // }
-
-
+        const handleClick = function(pkg){
           visualization.buildDependencies(pkg.dependencies)
           visualization.buildSubScores(pkg.scores, pkg.subScores)
           visualization.buildTitle(pkg.title) //will not work until I decouple d3
           visualization.buildForks(pkg.forks[1])
           visualization.buildStars(pkg.stars[1])
-        //  buildOutdated()
           visualization.buildDescription(pkg.description)
         }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -448,8 +448,11 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
      .append('g')
      .on('click', function(e){
        handleClick(e)})
-     .attr('transform', (d) => {
-       return 'translate(' + groupBand(d.title[1]) + ',0)';
+     .attr('transform', (d, i) => {
+       if(i < 5) return 'translate(' + [groupBand(d.title[1]),  (0)] + ')';
+       else if(i < 10) return 'translate(' + [groupBand(d.title[1]),  (200)] + ')';
+       else if(i < 15) return 'translate(' + [groupBand(d.title[1]),  (400)] + ')';
+       else return 'translate(' + [groupBand(d.title[1]),  (600)] + ')';
      })
      .on('mouseover', function() {
       d3.selectAll(this.childNodes).style('fill', function(d){
@@ -468,8 +471,15 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        return d.scores})
      .enter().append('rect')
      .merge(buildScoresChart)
+     .attr('height', (d) => {
+       return 50
+     })
      .attr('x', (d, i) => {return barBand(d[0])})
-     .attr('width', (d) => {return barBand.bandwidth()})
+     .attr('width', (d) => {
+       console.log(barBand.bandwidth())
+       return barBand.bandwidth()})
+       //return '1em'})
+
      .attr('fill', (d) => {return color(d[0])})
      // .attr('height', 0) //comment out for vertical drop
      // .attr('y', height) //comment out for vertical drop
@@ -477,8 +487,13 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        .duration(1000)
        .ease(d3.easeLinear)
        .delay((d, i) => {return i * 400})
-       .attr('height', (d) => {return height - y(d[1])})
-       .attr('y', (d, i) => {return y(d[1])})
+       .attr('height', (d, i) => {
+           return 50 - y(d[1])
+         })
+       .attr('y', (d, i) => {
+           console.log(y(d[1]))
+           return y(d[1])})
+
 
        buildScoresChart.exit().remove();
 
@@ -525,3 +540,25 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 // });
 
 }
+
+
+
+//const buildInformation = function(pkg){
+
+  // function buildOutdated(){
+  //   let outdatedDependencies = outdated.selectAll('li')
+  //   .data(pkg.outdatedDependencies[0] || [])
+  //
+  //   outdatedDependencies
+  //   .enter()
+  //   .append('li')
+  //   .merge(outdatedDependencies)
+  //   .text(
+  //     function(d){
+  //       return 'Outdated Dependency: ' + d;
+  //     }).on( 'click', function( e ) {
+  //     updateSearch( e, true );
+  //   } )
+  //   outdatedDependencies.exit().remove()
+  // }
+//}

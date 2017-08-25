@@ -81,22 +81,9 @@ img{
 }
 
 
-
-/*
-                                 OUTDATED DEPENDENCIES
-*/
-.outdatedDependencies{
-  order: 4;
-  color: #c72210;
-  font-family: monospace;
-  margin-top: 0;
-  margin-bottom: 0;
-}
 /*
                                 SUB-SCORE
 */
-
-
 
 .subScores{
   flex-direction: row;
@@ -134,16 +121,24 @@ img{
 /*
                                DEPENDENCIES
 */
+
+
 .dependencies{
   margin: 0 auto;
   order: 2;
   margin-top: 0;
   margin-bottom: 0;
 }
-.node circle {
+.node--leaf circle {
 fill: #425351;
 stroke: #2C2F32;
 }
+
+.node--outdated circle {
+fill: #c10303; /*#c72210;*/
+stroke: #2C2F32;
+}
+
 .node text {
 font: 12px monospace;
 }
@@ -165,6 +160,7 @@ stroke-width: 1.5px;
 
 
 .mainContainer{
+  background-color: blue;
   display: flex;
   flex-direction: row;
 
@@ -173,6 +169,14 @@ stroke-width: 1.5px;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
+
+.scoreChart{
+  background-color: yellow;
+}
+.scores{
+  background-color: green;
+}
+
 
 .legend{
   width: 30vw;
