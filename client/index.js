@@ -344,24 +344,37 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           return names
         })()
 
-        const groupScoreWidth = (width/20) * data.length,
-        groupBand = d3.scaleBand()
-          .rangeRound([0, groupScoreWidth])
-          .paddingInner(0.3),
-        barBand = d3.scaleBand()
-          .padding(0.05);
+      //  const groupScoreWidth = (width/20) * data.length,
 
+          const sizeOfChart = 90,
+          numbOfScoreRows =  Math.ceil((sizeOfChart*data.length) / scoreWidth),
+          sizeOfScoreRow = Math.floor(sizeOfChart * (scoreWidth/numbOfScoreRows)),
+          pkgsPerRow= Math.floor(data.length / numbOfScoreRows);
 
-          const sizeOfChart = 90
-          const numbOfScoreRows = Math.floor(scoreWidth/ (sizeOfChart*data.length))
-          const sizeOfScoreRow = Math.floor(sizeOfChart * (scoreWidth/numbOfScoreRows))
+          console.log(data.length); //1260 pixels
+          console.log(sizeOfScoreRow) //50625
+          console.log(numbOfScoreRows) //1
+          console.log(scoreWidth) //562.5
 
-
-          groupBand = d3.scaleBand()
-            .rangeRound([0, groupScoreWidth])
+          const groupBand = d3.scaleBand()
+            .rangeRound([0, scoreWidth]) //not accountin for how rows work out
             .paddingInner(0.3),
           barBand = d3.scaleBand()
-            .padding(0.05);
+            .padding(0.05),
+          rowHeightScale = function(idx){
+            const onRow = Math.ceil(idx / pkgsPerRow),
+            rowScale = d3.scaleLinear()
+            .domain([0, numbOfScoreRows])
+            .range([0, scoreHeight]) //later account for margin
+            return rowScale(onRow)
+          },
+          groupTranslate = function(){
+
+          } //
+
+          // .attr('transform', (d, i) => {
+          //   return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
+          // this function outputs the scales as an array- and it must process the x axis
 
             // scoreWidth = width * 0.5,
             // scoreHeight = height * 0.30,
@@ -371,7 +384,10 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
             //   .domain([1, 0])
             //   .range([0, scoreHeight]),
 
-        groupBand.domain(pkgs)
+        groupBand.domain(pkgs) //probably need to mess with this
+      //  console.log(pkgs % sizeOfScoreRow)
+
+        //on new rows
         barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
 
         const scoreScale = (function(){
@@ -386,10 +402,9 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           })()
 
         chartHide.visibility='visible'
-/////////////////////////////////adfasdfas////////////////
 
         const scores = d3.select('.scores')
-          .attr('width', groupScoreWidth)
+          .attr('width', scoreWidth)
           .attr('height', scoreHeight* 4)
 
         const handleClick = function(pkg){
@@ -449,10 +464,10 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
      .on('click', function(e){
        handleClick(e)})
      .attr('transform', (d, i) => {
-       if(i < 5) return 'translate(' + [groupBand(d.title[1]),  (0)] + ')';
-       else if(i < 10) return 'translate(' + [groupBand(d.title[1]),  (200)] + ')';
-       else if(i < 15) return 'translate(' + [groupBand(d.title[1]),  (400)] + ')';
-       else return 'translate(' + [groupBand(d.title[1]),  (600)] + ')';
+       return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
+      //  else if(i < 10) return 'translate(' + [groupBand(d.title[1]),  (200)] + ')';
+      //  else if(i < 15) return 'translate(' + [groupBand(d.title[1]),  (400)] + ')';
+      //  else return 'translate(' + [groupBand(d.title[1]),  (600)] + ')';
      })
      .on('mouseover', function() {
       d3.selectAll(this.childNodes).style('fill', function(d){
@@ -471,12 +486,8 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        return d.scores})
      .enter().append('rect')
      .merge(buildScoresChart)
-     .attr('height', (d) => {
-       return 50
-     })
      .attr('x', (d, i) => {return barBand(d[0])})
      .attr('width', (d) => {
-       console.log(barBand.bandwidth())
        return barBand.bandwidth()})
        //return '1em'})
 
@@ -488,7 +499,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        .ease(d3.easeLinear)
        .delay((d, i) => {return i * 400})
        .attr('height', (d, i) => {
-           return 50 - y(d[1])
+           return height - y(d[1])
          })
        .attr('y', (d, i) => {
            console.log(y(d[1]))
@@ -499,10 +510,10 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
    scores.append('g')
    .attr('class', 'axis')
-   .attr("transform", "translate(" + [0, (scoreHeight- 20)]  + ")")
+   .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
    .call(d3.axisBottom(groupBand.domain(pkgNames)))
    .selectAll('text')
-   .attr('text-anchor', 'center')
+   .attr('text-anchor', 'middle') //check later
    .attr('transform', 'rotate(0)')
 
  }
