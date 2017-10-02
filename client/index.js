@@ -469,69 +469,47 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        return d; });
      },
 
+//there should be a function that
+// returns the function for creating an entire
+// bar chart for that data, then I can arbitrarily
+// place the graph however i'd like
+
   buildScores : function(){
-
-   const buildScoresChart = scores.append('g')
-     .selectAll('g')
-     .data(data);
-
-     buildScoresChart
-     .enter()
-     .append('g')
-     .on('click', function(e){
-       handleClick(e)})
-     .attr('transform', (d, i) => {
-       return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
-      //  else if(i < 10) return 'translate(' + [groupBand(d.title[1]),  (200)] + ')';
-      //  else if(i < 15) return 'translate(' + [groupBand(d.title[1]),  (400)] + ')';
-      //  else return 'translate(' + [groupBand(d.title[1]),  (600)] + ')';
-     })
-     .on('mouseover', function() {
-      d3.selectAll(this.childNodes).style('fill', function(d){
-        let bar = d3.select(this).style('fill')
-        return d3.rgb(bar).darker(2)
-      })
-     })
-     .on('mouseout', function() {
-      d3.selectAll(this.childNodes).style('fill', function(d){
-        let bar = d3.select(this).style('fill')
-        return d3.rgb(bar).brighter(2)
-      })
-     })
-     .selectAll('rect')
-     .data(function(d) {
-       return d.scores})
-     .enter().append('rect')
-     .merge(buildScoresChart)
-     .attr('x', (d, i) => {return barBand(d[0])})
-     .attr('width', (d) => {
-       return barBand.bandwidth()})
-       //return '1em'})
-
-     .attr('fill', (d) => {return color(d[0])})
-     // .attr('height', 0) //comment out for vertical drop
-     // .attr('y', height) //comment out for vertical drop
-     .transition()
-       .duration(1000)
-       .ease(d3.easeLinear)
-       .delay((d, i) => {return i * 400})
-       .attr('height', (d, i) => {
-           return height - y(d[1])
-         })
-       .attr('y', (d, i) => {
-           console.log(y(d[1]))
-           return y(d[1])})
+    //loop through this and place it
+    // all in a more traditional div
+    // where they can flow around eachother
+    //hopefully
+    //each one should start with an appended
+    //svg to a div
+    //isolate the click handlers and other methods
+    //and jus tpoint to them to keep the architecture simple
 
 
-       buildScoresChart.exit().remove();
+  //  const buildScoresChart = scores.append('g')
+    //   .selectAll('g')
+    //   .data(data);
+    //.merge(outdatedDependencies)
+    //   buildScoresChart
+    //   .enter()
+    //   .append('g')
 
-   scores.append('g')
-   .attr('class', 'axis')
-   .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
-   .call(d3.axisBottom(groupBand.domain(pkgNames)))
-   .selectAll('text')
-   .attr('text-anchor', 'middle') //check later
-   .attr('transform', 'rotate(0)')
+  //  buildScoresChart.exit().remove();
+
+
+ },
+
+ buildBarChart: function(pkg, mount){
+   const chart = mount.append('g')
+    .selectAll('g')
+    .data(pkg)
+    .merge(chart)
+
+    chart
+    .enter()
+    .append()
+
+    chart.exit().remove();
+
 
  }
 
@@ -590,3 +568,67 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
   //   outdatedDependencies.exit().remove()
   // }
 //}
+
+
+
+
+
+
+// const buildScoresChart = scores.append('g')
+//   .selectAll('g')
+//   .data(data);
+//
+//   buildScoresChart
+//   .enter()
+//   .append('g')
+//   .on('click', function(e){
+//     handleClick(e)})
+//   .attr('transform', (d, i) => {
+//     return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
+//   })
+//   .on('mouseover', function() {
+//    d3.selectAll(this.childNodes).style('fill', function(d){
+//      let bar = d3.select(this).style('fill')
+//      return d3.rgb(bar).darker(2)
+//    })
+//   })
+//   .on('mouseout', function() {
+//    d3.selectAll(this.childNodes).style('fill', function(d){
+//      let bar = d3.select(this).style('fill')
+//      return d3.rgb(bar).brighter(2)
+//    })
+//   })
+//   .selectAll('rect')
+//   .data(function(d) {
+//     return d.scores})
+//   .enter().append('rect')
+//   .merge(buildScoresChart)
+//   .attr('x', (d, i) => {return barBand(d[0])})
+//   .attr('width', (d) => {
+//     return barBand.bandwidth()})
+//     //return '1em'})
+//
+//   .attr('fill', (d) => {return color(d[0])})
+//   // .attr('height', 0) //comment out for vertical drop
+//   // .attr('y', height) //comment out for vertical drop
+//   .transition()
+//     .duration(1000)
+//     .ease(d3.easeLinear)
+//     .delay((d, i) => {return i * 400})
+//     .attr('height', (d, i) => {
+//         return height - y(d[1])
+//       })
+//     .attr('y', (d, i) => {
+//         console.log(y(d[1]))
+//         return y(d[1])})
+//
+//
+//     buildScoresChart.exit().remove();
+//
+// scores.append('g')
+// .attr('class', 'axis')
+// .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
+// .call(d3.axisBottom(groupBand.domain(pkgNames)))
+// .selectAll('text')
+// .attr('text-anchor', 'middle') //check later
+// .attr('transform', 'rotate(0)')
