@@ -9,11 +9,9 @@ const formatString = function(string) {
     string = string.replace(/([a-z])([A-Z])/g, '$1 $2')
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
 const dashToSpace = function(string){
   return string.replace(/-/g,'+')
 }
-
 const isOutdated = function(outdatedPkgs){
   return function(pkg){
     if (outdatedPkgs[0]){
@@ -24,7 +22,7 @@ const isOutdated = function(outdatedPkgs){
   }
 }
 
-const parsePkgJSON = () => {
+const parsePkgJSON = function() {
     return new Promise((resolve, reject) => {
 
         fs.readFile('package.json', 'utf-8', (error, data) => {
@@ -42,44 +40,15 @@ const parsePkgJSON = () => {
     });
 }
 
-const npmSearch = function(infoRequests, suggestionRequests) {
+const npmSearch = function(infoRequests, noDevDep) {
      return Promise.map(infoRequests, request.get, {concurrency: 6}).then(function(apiResults) {
-            return pkgInfoParse(apiResults)
+            return pkgInfoParse(apiResults, noDevDep)
         }).catch(function(error) {
               return error
         })
-
-    // Promise.map(suggestionRequests, request.get, {concurrency: 6}).then(function(apiResults){
-    //   return suggestionParse(apiResults)
-    // })
 }
 
-// const suggestionParse = function(pkgSuggestions){
-//     let filteredSuggestions = [];
-//
-//     pkgSuggestions.forEach((pkg) =>{
-//       let parsedPkg = {}
-//       let filteredPkg = {}
-//
-//       try {
-//           parsedPkg = JSON.parse(pkg)
-//       } catch (error) {
-//           throw 'Error- response is not valid JSON'
-//       }
-//
-//
-//       filteredPkg.name = parsedPkg[0].package.name
-//       filteredPkg.related = []
-//       for( let i = 1; i <= 10; i ++){
-//         filteredPkg.related.push({"name" : parsedPkg[i].package.name, "scores" : [['Quality', parsedPkg[i].score.detail.quality], ['Popularity', parsedPkg[i].score.detail.popularity], ['Maintenance', parsedPkg[i].score.detail.maintenance], ['Final', parsedPkg[i].score.final]] })
-//       }
-//       filteredSuggestions.push(filteredPkg);
-//       console.log(filteredPkg)
-//     })
-//     return JSON.stringify(filteredInfo)
-// }
-
-const pkgInfoParse = function(pkgInfo) {
+const pkgInfoParse = function(pkgInfo, noDevDep) {
     let filteredInfo = []
 
     pkgInfo.forEach((pkg) => {
@@ -107,27 +76,31 @@ const pkgInfoParse = function(pkgInfo) {
                           "children": []};
 
         const outdatedPkgs = isOutdated(filteredPkg.outdatedDependencies)
+
         if (parsedPkg.collected.metadata.dependencies){
             let depChildren = [];
-
           Object.keys(parsedPkg.collected.metadata.dependencies).forEach((name) => {
             depChildren.push({'name': name, "outdated": outdatedPkgs(name)});
           })
           dependencies.children.push({"name": "dependency", "children": depChildren})
         }
-        if (parsedPkg.collected.metadata.devDependencies){
-          let devDepChildren = [];
-        Object.keys(parsedPkg.collected.metadata.devDependencies).forEach((name) => {
-            devDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
-          })
-          dependencies.children.push({"name": "devDependency", "children": devDepChildren})
-        }
-        if (parsedPkg.collected.metadata.peerDependencies){
-          let peerDepChildren = [];
-        Object.keys(parsedPkg.collected.metadata.peerDependencies).forEach((name) => {
-            peerDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
-          })
-          dependencies.children.push({"name": "peerDependency", "children": peerDepChildren})
+
+        //user has used no dev dependencies flag
+        if(!noDevDep){
+          if (parsedPkg.collected.metadata.devDependencies){
+            let devDepChildren = [];
+          Object.keys(parsedPkg.collected.metadata.devDependencies).forEach((name) => {
+              devDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
+            })
+            dependencies.children.push({"name": "devDependency", "children": devDepChildren})
+          }
+          if (parsedPkg.collected.metadata.peerDependencies){
+            let peerDepChildren = [];
+          Object.keys(parsedPkg.collected.metadata.peerDependencies).forEach((name) => {
+              peerDepChildren.push({'name': name, "outdated": outdatedPkgs(name)});
+            })
+            dependencies.children.push({"name": "peerDependency", "children": peerDepChildren})
+          }
         }
 
         filteredPkg.dependencies = dependencies;
@@ -149,7 +122,7 @@ const pkgInfoParse = function(pkgInfo) {
     return JSON.stringify(filteredInfo)
 }
 
-exports.parse = function(userPkgs) {
+exports.parse = function(userPkgs, noDevDep) {
       return new Promise((resolve, reject) => {
 
           parsePkgJSON().then((packages) => {
@@ -157,10 +130,7 @@ exports.parse = function(userPkgs) {
               let packageUrls = packages.map((name) => {
                   return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
               })
-              let suggestionURls = packages.map((name) => {
-                  return "https://api.npms.io/v2/search/suggestions?q=" +  dashToSpace(encodeURIComponent(name));
-              })
-              npmSearch(packageUrls, suggestionURls).then(function(result) {
+              npmSearch(packageUrls, noDevDep).then(function(result) {
                   resolve(result)
               }).catch(function(error) {
 

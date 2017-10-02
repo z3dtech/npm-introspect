@@ -36,7 +36,7 @@ const spinOptions = {
       lines: 17,
       length: 12,
       width: 5,
-      radius: 40,
+      radius: 20,
       color: "#5D796A",
       scale: 1.75,
       speed: 1.9,
@@ -189,6 +189,22 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        forkMount.appendChild(fork);
        forkMount.appendChild(forkCount);
      },
+
+   buildOutdated: function(outdatedDependencies){
+      const outdatedMount = document.getElementsByClassName('outdatedDependencies')[0];
+      while (outdatedMount.hasChildNodes()) {
+        outdatedMount.removeChild(outdatedMount.lastChild);
+      }
+      const outdated = document.createElement('ul');
+      outdatedMount.appendChild(outdated)
+      for(let i = 0; i < outdatedDependencies[0].length; i++){
+        const li = document.createElement('li')
+        outdated.appendChild(li)
+        li.innerHTML = outdatedDependencies[0][i]
+        console.log(outdatedDependencies[0][i])
+      }
+
+    },
 
    buildSubScores: function(scores, subScores){
        document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
@@ -409,6 +425,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
         const handleClick = function(pkg){
           visualization.buildDependencies(pkg.dependencies)
+          visualization.buildOutdated(pkg.outdatedDependencies)
           visualization.buildSubScores(pkg.scores, pkg.subScores)
           visualization.buildTitle(pkg.title) //will not work until I decouple d3
           visualization.buildForks(pkg.forks[1])
