@@ -6,8 +6,8 @@ var height = window.innerHeight,
     width = window.innerWidth,
     depWidth = width * .6,
     depHeight = height * .45,
-    scoreWidth = width * 0.5,
-    scoreHeight = height * 0.30,
+    scoreWidth = width * 0.8,
+    scoreHeight = height * 0.10,
     line = d3.line(),
     axis = d3.axisLeft(),
     y = d3.scaleLinear()
@@ -22,8 +22,6 @@ var height = window.innerHeight,
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
 
     const margin = {top: 50, right: 500, bottom: 50, left: 100}
-    // depWidth = width * .6,
-    // depHeight = height * .45;
 
     const dependencies = d3.select('.dependencies')
     .attr('width', depWidth + margin.right + margin.left)
@@ -342,6 +340,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           spinMount.appendChild(parseErr);
         }
         spinner.stop();
+        console.log(data)
 
 
         const pkgs = (function(){
@@ -360,50 +359,18 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           return names
         })()
 
-      //  const groupScoreWidth = (width/20) * data.length,
-
-          const sizeOfChart = 90,
-          numbOfScoreRows =  Math.ceil((sizeOfChart*data.length) / scoreWidth),
-          sizeOfScoreRow = Math.floor(sizeOfChart * (scoreWidth/numbOfScoreRows)),
-          pkgsPerRow= Math.floor(data.length / numbOfScoreRows);
-
-          console.log(data.length); //1260 pixels
-          console.log(sizeOfScoreRow) //50625
-          console.log(numbOfScoreRows) //1
-          console.log(scoreWidth) //562.5
 
           const groupBand = d3.scaleBand()
             .rangeRound([0, scoreWidth]) //not accountin for how rows work out
             .paddingInner(0.3),
           barBand = d3.scaleBand()
             .padding(0.05),
-          rowHeightScale = function(idx){
-            const onRow = Math.ceil(idx / pkgsPerRow),
-            rowScale = d3.scaleLinear()
-            .domain([0, numbOfScoreRows])
-            .range([0, scoreHeight]) //later account for margin
-            return rowScale(onRow)
-          },
           groupTranslate = function(){
 
-          } //
+          }
 
-          // .attr('transform', (d, i) => {
-          //   return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
-          // this function outputs the scales as an array- and it must process the x axis
 
-            // scoreWidth = width * 0.5,
-            // scoreHeight = height * 0.30,
-            // line = d3.line(),
-            // axis = d3.axisLeft(),
-            // y = d3.scaleLinear()
-            //   .domain([1, 0])
-            //   .range([0, scoreHeight]),
-
-        groupBand.domain(pkgs) //probably need to mess with this
-      //  console.log(pkgs % sizeOfScoreRow)
-
-        //on new rows
+        groupBand.domain(pkgs)
         barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
 
         const scoreScale = (function(){
@@ -475,6 +442,15 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 // place the graph however i'd like
 
   buildScores : function(){
+    const sco = d3.select('.scoreChart')
+    const s = sco.append('svg')
+    const o = sco.append('svg')
+    const u = sco.append('svg')
+    pkgBarCharts.buildBarChart(data[0], s)
+    pkgBarCharts.buildBarChart(data[1], o)
+    pkgBarCharts.buildBarChart(data[1], u)
+
+
     //loop through this and place it
     // all in a more traditional div
     // where they can flow around eachother
@@ -483,6 +459,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
     //svg to a div
     //isolate the click handlers and other methods
     //and jus tpoint to them to keep the architecture simple
+
 
 
   //  const buildScoresChart = scores.append('g')
@@ -499,20 +476,39 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
  },
 
  buildBarChart: function(pkg, mount){
-   const chart = mount.append('g')
+   mount.attr('class', () => {
+        return 'package'
+      }).attr('width', () => {
+        return 100;
+      })
+   const chart = mount.append('g')//g
     .selectAll('g')
-    .data(pkg)
-    .merge(chart)
+    .attr('class', () => {
+      return 'package'
+    })
+    .data(pkg.scores)
+
 
     chart
     .enter()
-    .append()
+    .append('rect')
+    .merge(chart)
+    .attr('x', (d, i) => {return barBand(d[0])}) //barband
+    .attr('width', (d) => {
+      return barBand.bandwidth()})  //barbandwith needs to be bigger
+    .attr('fill', (d) => {return color(d[0])})
+    .attr('height', (d, i) => {
+          console.log(y(d[1]))
+          console.log(height)
+          return height - y(d[1])
+
+        })
+    .attr('y', (d, i) => {
+          return y(d[1])})
 
     chart.exit().remove();
 
-
  }
-
  }
 
 
@@ -520,7 +516,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
         handleClick(data[0]);
         pkgBarCharts.buildScores();
-        pkgBarCharts.buildLegend();
+    //    pkgBarCharts.buildLegend();
 
 
 

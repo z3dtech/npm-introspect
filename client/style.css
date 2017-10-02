@@ -172,14 +172,19 @@ stroke-width: 1.5px;
 
 .scoreChart{
   background-color: yellow;
+  display: inline-block;
 }
 .scores{
   background-color: green;
 }
 
+.package{
+  display: inline-block;
+}
+
 
 .legend{
-  width: 30vw;
+  /*width: 30vw;*/
   font-family: monospace;
   font-weight: lighter;
 }
