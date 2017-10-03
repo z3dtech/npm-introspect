@@ -179,7 +179,10 @@ stroke-width: 1.5px;
 }
 
 .package{
+  border: 1px #FBF1D0 solid;
+  border-radius: 5px;
   display: inline-block;
+
 }
 
 
@@ -192,8 +195,8 @@ stroke-width: 1.5px;
   visibility: hidden;
 }
 
-.axis{
-  font-size: 14px;
+.label{
+  font-size: 10px;
 }
 
 

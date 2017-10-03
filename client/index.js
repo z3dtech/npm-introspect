@@ -181,12 +181,14 @@ const updateSearch = function( name, triggerUpdate ) {
       }
       const outdated = document.createElement('ul');
       outdatedMount.appendChild(outdated)
-      for(let i = 0; i < outdatedDependencies[0].length; i++){
-        const li = document.createElement('li')
-        outdated.appendChild(li)
-        li.innerHTML = outdatedDependencies[0][i]
-        console.log(outdatedDependencies[0][i])
-      }
+      if (outdatedDependencies[0] != null){
+        for(let i = 0; i < outdatedDependencies[0].length; i++){
+          const li = document.createElement('li')
+          outdated.appendChild(li)
+          li.innerHTML = outdatedDependencies[0][i]
+          console.log(outdatedDependencies[0][i])
+        }
+    }
 
     },
 
@@ -366,28 +368,38 @@ const updateSearch = function( name, triggerUpdate ) {
           visualization.buildDescription(pkg.description)
         }
 
+  const chartBorderHeight = winHeight*0.2,
+  chartBorderWidth = (winWidth * 0.8)*0.2,
+  marginWidth = 5,
+  marginBottom = 20,
+  chartHeight= chartBorderHeight - marginBottom,
+  chartWidth = chartBorderWidth - (marginWidth*2)
 
- const pkgBarCharts = {
+
+ const bChart = {
+
+   labelScale: function(text){
+    if(text.length > 10){
+      text = text.substring(0,10)+'...';
+    }
+    return text
+   },
 
    barHeight: function(){
-     const chartHeight = winHeight*0.2;
-
      return d3.scaleLinear()
       .domain([1, 0])
-      .range([0, chartHeight])
+      .range([0, chartHeight]);
    },
 
    barWidth: function(){
-     //size fo chart attrs should be
-     //based on wv or em units
-     const chartWidth = (winWidth * 0.8)*0.2;
-
      return d3.scaleBand()
       .padding(0.05)
       .domain(scoreHeading)
       .rangeRound([0, chartWidth]);
+   }
+ }
 
-   },
+ const pkgBarCharts = {
 
    buildLegend: function(){
       const legend = d3.select('.legend').append('g')
@@ -418,43 +430,47 @@ const updateSearch = function( name, triggerUpdate ) {
     const u = sco.append('svg')
     pkgBarCharts.buildBarChart(data[0], s)
     pkgBarCharts.buildBarChart(data[1], o)
-    pkgBarCharts.buildBarChart(data[1], u)
+    pkgBarCharts.buildBarChart(data[2], u)
 
  },
 
  buildBarChart: function(pkg, mount){
 
-   const bWidth = pkgBarCharts.barWidth()
-   const bHeight = pkgBarCharts.barHeight()
+   const bWidth = bChart.barWidth(),
+         bHeight = bChart.barHeight()
 
-   mount.attr('class', () => {
-        return 'package'
-      }).attr('width', () => {
-        return 100;
-      })
+   mount.attr('class', 'package')
+        .attr('width', chartBorderWidth)
+        .attr('height', chartBorderHeight)
+
    const chart = mount.append('g')
     .selectAll('g')
-    .attr('class', () => {
-      return 'package'
-    })
     .data(pkg.scores)
 
     chart
     .enter()
     .append('rect')
     .merge(chart)
-    .attr('x', (d, i) => {return bWidth(d[0])})
+    .attr('x', (d, i) => {return bWidth(d[0]) + marginWidth})
     .attr('width', (d) => {
-      return bWidth.bandwidth()})
+      return bWidth.bandwidth() })
     .attr('fill', (d) => {return color(d[0])})
     .attr('height', (d, i) => {
-          return winHeight - bHeight(d[1])
+          return chartHeight - bHeight(d[1])
         })
     .attr('y', (d, i) => {
           return bHeight(d[1])
         })
 
     chart.exit().remove();
+
+    mount.append('g')
+    .attr('class', 'label')
+    .attr("transform", "translate(" + [(chartBorderWidth/2), (chartBorderHeight - (marginBottom/3))]  + ")")
+    .append('text')
+    .attr('text-anchor', 'middle')
+    .attr('transform', 'rotate(0)')
+    .text(bChart.labelScale(pkg.title[0][1]))
   }
  }
 
