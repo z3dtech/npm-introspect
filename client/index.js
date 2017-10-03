@@ -2,28 +2,21 @@
 window.onload = function() {
 var chartHide, spinMount, spinner, template, maxPackages;
 
-var height = window.innerHeight,
-    width = window.innerWidth,
-    depWidth = width * .6,
-    depHeight = height * .45,
-    scoreWidth = width * 0.8,
-    scoreHeight = height * 0.10,
+var winHeight = window.innerHeight,
+    winWidth = window.innerWidth,
+    depWidth = winWidth * .6,
+    depHeight = winHeight * .45,
     line = d3.line(),
     axis = d3.axisLeft(),
-    y = d3.scaleLinear()
-      .domain([1, 0])
-      .range([0, scoreHeight]),
-    vertAxis = d3.scaleLinear()
-      .domain([1, 0])
-      .range([0, scoreHeight]),
     fontScale = d3.scaleLinear()
       .domain([0,80])
       .range([15,4]),
-    color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]); //add colors
+    color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
 
-    const margin = {top: 50, right: 500, bottom: 50, left: 100}
-
-    const dependencies = d3.select('.dependencies')
+    const margin = {top: 50, right: 500, bottom: 50, left: 100},
+    subScoreHeading = ['quality', 'popularity', 'maintenance'],
+    scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final'],
+    dependencies = d3.select('.dependencies')
     .attr('width', depWidth + margin.right + margin.left)
     .attr('height', depHeight + margin.top + margin.bottom)
     .append('g')
@@ -158,13 +151,6 @@ const updateSearch = function( name, triggerUpdate ) {
     triggerBuild();
   }
 }
-
-// const getPackageCount = function() {
-//   return Math.round( innerWidth / 150 );
-// }
-
-const subScoreHeading = ['quality', 'popularity', 'maintenance'];
-const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
 
   const visualization = {
@@ -309,8 +295,6 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
     const exitNode = updateNodes.exit().remove();
   }
-
-
   }
 
  function buildVisualization(error, rawData) {
@@ -323,7 +307,7 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
           spinMount.appendChild(respError);
         }
-        //maxPackages = getPackageCount();
+
         let data;
         try{
           data = JSON.parse(rawData[0]).reverse();
@@ -359,20 +343,6 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
           return names
         })()
 
-
-          const groupBand = d3.scaleBand()
-            .rangeRound([0, scoreWidth]) //not accountin for how rows work out
-            .paddingInner(0.3),
-          barBand = d3.scaleBand()
-            .padding(0.05),
-          groupTranslate = function(){
-
-          }
-
-
-        groupBand.domain(pkgs)
-        barBand.domain(scoreHeading).rangeRound([0, groupBand.bandwidth()]);
-
         const scoreScale = (function(){
           let scale = [[], [], [], []];
           for (let pkg in data){
@@ -386,10 +356,6 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
 
         chartHide.visibility='visible'
 
-        const scores = d3.select('.scores')
-          .attr('width', scoreWidth)
-          .attr('height', scoreHeight* 4)
-
         const handleClick = function(pkg){
           visualization.buildDependencies(pkg.dependencies)
           visualization.buildOutdated(pkg.outdatedDependencies)
@@ -401,18 +367,27 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
  const pkgBarCharts = {
+
+   barHeight: function(){
+     const chartHeight = winHeight*0.2;
+
+     return d3.scaleLinear()
+      .domain([1, 0])
+      .range([0, chartHeight])
+   },
+
+   barWidth: function(){
+     //size fo chart attrs should be
+     //based on wv or em units
+     const chartWidth = (winWidth * 0.8)*0.2;
+
+     return d3.scaleBand()
+      .padding(0.05)
+      .domain(scoreHeading)
+      .rangeRound([0, chartWidth]);
+
+   },
 
    buildLegend: function(){
       const legend = d3.select('.legend').append('g')
@@ -436,11 +411,6 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
        return d; });
      },
 
-//there should be a function that
-// returns the function for creating an entire
-// bar chart for that data, then I can arbitrarily
-// place the graph however i'd like
-
   buildScores : function(){
     const sco = d3.select('.scoreChart')
     const s = sco.append('svg')
@@ -450,65 +420,42 @@ const scoreHeading = ['Quality', 'Popularity', 'Maintenance', 'Final']
     pkgBarCharts.buildBarChart(data[1], o)
     pkgBarCharts.buildBarChart(data[1], u)
 
-
-    //loop through this and place it
-    // all in a more traditional div
-    // where they can flow around eachother
-    //hopefully
-    //each one should start with an appended
-    //svg to a div
-    //isolate the click handlers and other methods
-    //and jus tpoint to them to keep the architecture simple
-
-
-
-  //  const buildScoresChart = scores.append('g')
-    //   .selectAll('g')
-    //   .data(data);
-    //.merge(outdatedDependencies)
-    //   buildScoresChart
-    //   .enter()
-    //   .append('g')
-
-  //  buildScoresChart.exit().remove();
-
-
  },
 
  buildBarChart: function(pkg, mount){
+
+   const bWidth = pkgBarCharts.barWidth()
+   const bHeight = pkgBarCharts.barHeight()
+
    mount.attr('class', () => {
         return 'package'
       }).attr('width', () => {
         return 100;
       })
-   const chart = mount.append('g')//g
+   const chart = mount.append('g')
     .selectAll('g')
     .attr('class', () => {
       return 'package'
     })
     .data(pkg.scores)
 
-
     chart
     .enter()
     .append('rect')
     .merge(chart)
-    .attr('x', (d, i) => {return barBand(d[0])}) //barband
+    .attr('x', (d, i) => {return bWidth(d[0])})
     .attr('width', (d) => {
-      return barBand.bandwidth()})  //barbandwith needs to be bigger
+      return bWidth.bandwidth()})
     .attr('fill', (d) => {return color(d[0])})
     .attr('height', (d, i) => {
-          console.log(y(d[1]))
-          console.log(height)
-          return height - y(d[1])
-
+          return winHeight - bHeight(d[1])
         })
     .attr('y', (d, i) => {
-          return y(d[1])})
+          return bHeight(d[1])
+        })
 
     chart.exit().remove();
-
- }
+  }
  }
 
 
