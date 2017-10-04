@@ -79,7 +79,16 @@ img{
   margin-top: 0;
   margin-bottom: 0;
 }
-
+/*
+                             OUTDATED DEPENDENCIES
+*/
+.outdatedDependencies{
+  order: 4;
+  color: #c72210;
+  font-family: monospace;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 /*
                                 SUB-SCORE
@@ -160,7 +169,6 @@ stroke-width: 1.5px;
 
 
 .mainContainer{
-  background-color: blue;
   display: flex;
   flex-direction: row;
 
@@ -171,7 +179,6 @@ stroke-width: 1.5px;
 }
 
 .scoreChart{
-  background-color: yellow;
   display: inline-block;
 }
 .scores{
@@ -179,7 +186,7 @@ stroke-width: 1.5px;
 }
 
 .package{
-  border: 1px #FBF1D0 solid;
+  /*border: 1px #FBF1D0 solid;*/
   border-radius: 5px;
   display: inline-block;
 
@@ -196,7 +203,7 @@ stroke-width: 1.5px;
 }
 
 .label{
-  font-size: 10px;
+  font-size: 14px;
 }
 
 

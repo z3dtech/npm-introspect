@@ -152,6 +152,7 @@ const updateSearch = function( name, triggerUpdate ) {
   }
 }
 
+        const outdated = d3.select('.outdatedDependencies').append('ul');
 
   const visualization = {
     buildStars: function(starAmount){
@@ -174,23 +175,39 @@ const updateSearch = function( name, triggerUpdate ) {
        forkMount.appendChild(forkCount);
      },
 
-   buildOutdated: function(outdatedDependencies){
-      const outdatedMount = document.getElementsByClassName('outdatedDependencies')[0];
-      while (outdatedMount.hasChildNodes()) {
-        outdatedMount.removeChild(outdatedMount.lastChild);
-      }
-      const outdated = document.createElement('ul');
-      outdatedMount.appendChild(outdated)
-      if (outdatedDependencies[0] != null){
-        for(let i = 0; i < outdatedDependencies[0].length; i++){
-          const li = document.createElement('li')
-          outdated.appendChild(li)
-          li.innerHTML = outdatedDependencies[0][i]
-          console.log(outdatedDependencies[0][i])
-        }
-    }
+     buildOutdated: function(outdatedDeps){
+                 let outdatedDependencies = outdated.selectAll('li')
+                 .data(outdatedDeps[0] || [])
 
-    },
+                 outdatedDependencies
+                 .enter()
+                 .append('li')
+                 .merge(outdatedDependencies)
+                 .text(
+                   function(d){
+                     return 'Outdated Dependency: ' + d;
+                   }).on( 'click', function( e ) {
+                   updateSearch( e, true );
+                 } )
+                 outdatedDependencies.exit().remove()
+               },
+  //  buildOutdated: function(outdatedDependencies){
+  //     const outdatedMount = document.getElementsByClassName('outdatedDependencies')[0];
+  //     while (outdatedMount.hasChildNodes()) {
+  //       outdatedMount.removeChild(outdatedMount.lastChild);
+  //     }
+  //     const outdated = document.createElement('ul');
+  //     outdatedMount.appendChild(outdated)
+  //     if (outdatedDependencies[0] != null){
+  //       for(let i = 0; i < outdatedDependencies[0].length; i++){
+  //         const li = document.createElement('li')
+  //         outdated.appendChild(li)
+  //         li.innerHTML = outdatedDependencies[0][i]
+  //         console.log(outdatedDependencies[0][i])
+  //       }
+  //   }
+   //
+  //   },
 
    buildSubScores: function(scores, subScores){
        document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
@@ -370,7 +387,7 @@ const updateSearch = function( name, triggerUpdate ) {
 
   const chartBorderHeight = winHeight*0.2,
   chartBorderWidth = (winWidth * 0.8)*0.2,
-  marginWidth = 5,
+  marginWidth = 30,
   marginBottom = 20,
   chartHeight= chartBorderHeight - marginBottom,
   chartWidth = chartBorderWidth - (marginWidth*2)
@@ -527,5 +544,5 @@ const updateSearch = function( name, triggerUpdate ) {
 // .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
 // .call(d3.axisBottom(groupBand.domain(pkgNames)))
 // .selectAll('text')
-// .attr('text-anchor', 'middle') //check later
+// .attr('text-anchor', 'middle')
 // .attr('transform', 'rotate(0)')
