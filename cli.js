@@ -22,7 +22,7 @@ const args =  yargs
   })
   .option('d', {
     alias: 'noDev',
-    describe: 'Don\'t include child dev or peer dependencies',
+    describe: 'Don\'t include dev or peer dependencies',
     default: false
   })
   .option('p', {

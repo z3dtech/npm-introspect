@@ -358,7 +358,7 @@ const updateSearch = function( name, triggerUpdate ) {
 
         chartHide.visibility='visible'
 
-        const handleClick = function(pkg){
+        const handleClick = function(empty, pkg){
           visualization.buildDependencies(pkg.dependencies)
           visualization.buildOutdated(pkg.outdatedDependencies)
           visualization.buildSubScores(pkg.scores, pkg.subScores)
@@ -424,14 +424,16 @@ const updateSearch = function( name, triggerUpdate ) {
      },
 
   buildScores : function(){
-    const sco = d3.select('.scoreChart')
-    const s = sco.append('svg')
-    const o = sco.append('svg')
-    const u = sco.append('svg')
-    pkgBarCharts.buildBarChart(data[0], s)
-    pkgBarCharts.buildBarChart(data[1], o)
-    pkgBarCharts.buildBarChart(data[2], u)
 
+    const barGraphs = document.getElementsByClassName('scoreChart')[0];
+    while (barGraphs.hasChildNodes()) {
+      barGraphs.removeChild(barGraphs.lastChild);
+    }
+
+    for(let i = 0; i < data.length; i++){
+      const graph = d3.select('.scoreChart').append('svg')
+      pkgBarCharts.buildBarChart(data[i], graph)
+    }
  },
 
  buildBarChart: function(pkg, mount){
@@ -442,8 +444,24 @@ const updateSearch = function( name, triggerUpdate ) {
    mount.attr('class', 'package')
         .attr('width', chartBorderWidth)
         .attr('height', chartBorderHeight)
+        .on('click', function(e){
+          handleClick(0, pkg)
+         })
+
 
    const chart = mount.append('g')
+    .on('mouseover', function() {
+      d3.selectAll(this.childNodes).style('fill', function(d){
+        let bar = d3.select(this).style('fill')
+        return d3.rgb(bar).darker(2)
+      })
+     })
+    .on('mouseout', function() {
+      d3.selectAll(this.childNodes).style('fill', function(d){
+        let bar = d3.select(this).style('fill')
+        return d3.rgb(bar).brighter(2)
+      })
+     })
     .selectAll('g')
     .data(pkg.scores)
 
@@ -451,16 +469,23 @@ const updateSearch = function( name, triggerUpdate ) {
     .enter()
     .append('rect')
     .merge(chart)
-    .attr('x', (d, i) => {return bWidth(d[0]) + marginWidth})
-    .attr('width', (d) => {
-      return bWidth.bandwidth() })
-    .attr('fill', (d) => {return color(d[0])})
+    .attr('x', (d, i) => { return bWidth(d[0]) + marginWidth })
+    .attr('width', (d) => { return bWidth.bandwidth() })
+    .attr('fill', (d) => { return color(d[0]) })
+    .attr('height', (d, i) => { return chartHeight - bHeight(d[1]) })
+    .attr('y', (d, i) => { return bHeight(d[1]) })
+    .attr('height', 0)
+    .attr('y', chartHeight)
+    .transition()
+    .duration(1000)
+    .ease(d3.easeLinear)
+    .delay((d, i) => {return i * 400})
     .attr('height', (d, i) => {
-          return chartHeight - bHeight(d[1])
-        })
+        return chartHeight - bHeight(d[1])
+      })
     .attr('y', (d, i) => {
-          return bHeight(d[1])
-        })
+        return bHeight(d[1])
+      });
 
     chart.exit().remove();
 
@@ -477,18 +502,9 @@ const updateSearch = function( name, triggerUpdate ) {
 
 
 
-        handleClick(data[0]);
+        handleClick(0, data[0]);
         pkgBarCharts.buildScores();
-    //    pkgBarCharts.buildLegend();
-
-
-
-
-        // vertical axis
-        // scores.append('g')
-        // .attr('class', 'axisVertical')
-        // .attr("transform", "translate(" + [25, 0]  + ")")
-        // .call(d3.axisLeft(vertAxis)) //no right s
+        pkgBarCharts.buildLegend();
 
 
       }
@@ -506,84 +522,6 @@ const updateSearch = function( name, triggerUpdate ) {
 
 }
 
-
-
-//const buildInformation = function(pkg){
-
-  // function buildOutdated(){
-  //   let outdatedDependencies = outdated.selectAll('li')
-  //   .data(pkg.outdatedDependencies[0] || [])
-  //
-  //   outdatedDependencies
-  //   .enter()
-  //   .append('li')
-  //   .merge(outdatedDependencies)
-  //   .text(
-  //     function(d){
-  //       return 'Outdated Dependency: ' + d;
-  //     }).on( 'click', function( e ) {
-  //     updateSearch( e, true );
-  //   } )
-  //   outdatedDependencies.exit().remove()
-  // }
-//}
-
-
-
-
-
-
-// const buildScoresChart = scores.append('g')
-//   .selectAll('g')
-//   .data(data);
-//
-//   buildScoresChart
-//   .enter()
-//   .append('g')
-//   .on('click', function(e){
-//     handleClick(e)})
-//   .attr('transform', (d, i) => {
-//     return 'translate(' + [groupBand(d.title[1]),  rowHeightScale(i)] + ')';
-//   })
-//   .on('mouseover', function() {
-//    d3.selectAll(this.childNodes).style('fill', function(d){
-//      let bar = d3.select(this).style('fill')
-//      return d3.rgb(bar).darker(2)
-//    })
-//   })
-//   .on('mouseout', function() {
-//    d3.selectAll(this.childNodes).style('fill', function(d){
-//      let bar = d3.select(this).style('fill')
-//      return d3.rgb(bar).brighter(2)
-//    })
-//   })
-//   .selectAll('rect')
-//   .data(function(d) {
-//     return d.scores})
-//   .enter().append('rect')
-//   .merge(buildScoresChart)
-//   .attr('x', (d, i) => {return barBand(d[0])})
-//   .attr('width', (d) => {
-//     return barBand.bandwidth()})
-//     //return '1em'})
-//
-//   .attr('fill', (d) => {return color(d[0])})
-//   // .attr('height', 0) //comment out for vertical drop
-//   // .attr('y', height) //comment out for vertical drop
-//   .transition()
-//     .duration(1000)
-//     .ease(d3.easeLinear)
-//     .delay((d, i) => {return i * 400})
-//     .attr('height', (d, i) => {
-//         return height - y(d[1])
-//       })
-//     .attr('y', (d, i) => {
-//         console.log(y(d[1]))
-//         return y(d[1])})
-//
-//
-//     buildScoresChart.exit().remove();
-//
 // scores.append('g')
 // .attr('class', 'axis')
 // .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
