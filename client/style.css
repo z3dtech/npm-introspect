@@ -194,9 +194,8 @@ stroke-width: 1.5px;
 
 
 .legend{
-  /*width: 30vw;*/
-  /*font-family: monospace;
-  font-weight: lighter;*/
+  font-family: monospace;
+  font-weight: lighter;
 }
 .domain{
   visibility: hidden;
@@ -204,6 +203,7 @@ stroke-width: 1.5px;
 
 .label{
   font-size: 14px;
+  font-family: sans-serif;
 }
 
 

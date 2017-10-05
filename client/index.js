@@ -9,9 +9,16 @@ var winHeight = window.innerHeight,
     line = d3.line(),
     axis = d3.axisLeft(),
     fontScale = d3.scaleLinear()
-      .domain([0,80])
+      .domain([0,50])
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
+
+    const chartBorderHeight = winHeight*0.2,
+    chartBorderWidth = (winWidth * 0.9)*0.10,
+    marginWidth = chartBorderWidth / 6,
+    marginBottom = 20,
+    chartHeight= chartBorderHeight - marginBottom,
+    chartWidth = chartBorderWidth - (marginWidth*2)
 
     const margin = {top: 50, right: 500, bottom: 50, left: 100},
     subScoreHeading = ['quality', 'popularity', 'maintenance'],
@@ -152,7 +159,7 @@ const updateSearch = function( name, triggerUpdate ) {
   }
 }
 
-        const outdated = d3.select('.outdatedDependencies').append('ul');
+const outdated = d3.select('.outdatedDependencies').append('ul');
 
   const visualization = {
     buildStars: function(starAmount){
@@ -175,39 +182,22 @@ const updateSearch = function( name, triggerUpdate ) {
        forkMount.appendChild(forkCount);
      },
 
-     buildOutdated: function(outdatedDeps){
-                 let outdatedDependencies = outdated.selectAll('li')
-                 .data(outdatedDeps[0] || [])
+   buildOutdated: function(outdatedDeps){
+               let outdatedDependencies = outdated.selectAll('li')
+               .data(outdatedDeps[0] || [])
 
-                 outdatedDependencies
-                 .enter()
-                 .append('li')
-                 .merge(outdatedDependencies)
-                 .text(
-                   function(d){
-                     return 'Outdated Dependency: ' + d;
-                   }).on( 'click', function( e ) {
-                   updateSearch( e, true );
-                 } )
-                 outdatedDependencies.exit().remove()
-               },
-  //  buildOutdated: function(outdatedDependencies){
-  //     const outdatedMount = document.getElementsByClassName('outdatedDependencies')[0];
-  //     while (outdatedMount.hasChildNodes()) {
-  //       outdatedMount.removeChild(outdatedMount.lastChild);
-  //     }
-  //     const outdated = document.createElement('ul');
-  //     outdatedMount.appendChild(outdated)
-  //     if (outdatedDependencies[0] != null){
-  //       for(let i = 0; i < outdatedDependencies[0].length; i++){
-  //         const li = document.createElement('li')
-  //         outdated.appendChild(li)
-  //         li.innerHTML = outdatedDependencies[0][i]
-  //         console.log(outdatedDependencies[0][i])
-  //       }
-  //   }
-   //
-  //   },
+               outdatedDependencies
+               .enter()
+               .append('li')
+               .merge(outdatedDependencies)
+               .text(
+                 function(d){
+                   return 'Outdated Dependency: ' + d;
+                 }).on( 'click', function( e ) {
+                 updateSearch( e, true );
+               } )
+               outdatedDependencies.exit().remove()
+             },
 
    buildSubScores: function(scores, subScores){
        document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
@@ -299,7 +289,7 @@ const updateSearch = function( name, triggerUpdate ) {
       }
       else{
         const nc = visualization.computeNodeCount(d)
-        if (nc >= 70){fontSize = 4}
+        if (nc >= 50){fontSize = 3}
         else{fontSize = fontScale(visualization.computeNodeCount(d))}
       }
       return fontSize;
@@ -385,19 +375,16 @@ const updateSearch = function( name, triggerUpdate ) {
           visualization.buildDescription(pkg.description)
         }
 
-  const chartBorderHeight = winHeight*0.2,
-  chartBorderWidth = (winWidth * 0.8)*0.2,
-  marginWidth = 30,
-  marginBottom = 20,
-  chartHeight= chartBorderHeight - marginBottom,
-  chartWidth = chartBorderWidth - (marginWidth*2)
+
 
 
  const bChart = {
 
-   labelScale: function(text){
-    if(text.length > 10){
-      text = text.substring(0,10)+'...';
+  labelScale: function(text){
+    const labelFontSize = 14
+    const textLimit = Math.floor((chartBorderWidth/labelFontSize)*1.5)
+    if(text.length > textLimit){
+      text = text.substring(0,textLimit)+'..';
     }
     return text
    },
@@ -420,7 +407,7 @@ const updateSearch = function( name, triggerUpdate ) {
 
    buildLegend: function(){
       const legend = d3.select('.legend').append('g')
-     .attr("transform", () => { return "translate(0," + 20 + ")"; })
+     .attr("transform", () => { return "translate(" + [0,0] + ")"; })
      .attr('text-anchor', 'start')
      .selectAll('g')
      .data(scoreHeading)
@@ -516,15 +503,12 @@ const updateSearch = function( name, triggerUpdate ) {
   }
  }
 
+      handleClick(0, data[0]);
+      pkgBarCharts.buildScores();
+      pkgBarCharts.buildLegend();
 
 
-
-        handleClick(0, data[0]);
-        pkgBarCharts.buildScores();
-        pkgBarCharts.buildLegend();
-
-
-      }
+    }
 
 
 
