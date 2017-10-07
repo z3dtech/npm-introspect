@@ -1,45 +1,13 @@
 'use strict'
 window.onload = function() {
-
-
-}
-
-const initialize = {
-  const data = request.get('/datam.json')
-
-  chartHide = document.getElementsByClassName('scoreChart')[0].style;
+  const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+  const mount = document.getElementById('placeholder')
+  mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
   chartHide.visibility='hidden';
-  //console.log(data)
-  //need to do somehting that takes the request as cb
+
+  request.get('/datam.json', request.build)
 
 }
-
-
-const request = {
-  get: function(url){
-    d3.request(url)
-      .mimeType('application/json')
-      .response(function(xhr) { return JSON.parse(xhr.responseText); })
-      .get(function(error, d){
-        if(error) request.error(error)
-        return JSON.parse(d) })
-    },
-
-  error: function(err){
-    const mount = document.getElementById('placeholder')
-    console.log(err)
-    console.log(err.currentTarget.status)
-    mount.innerText = 'response error ' + err.currentTarget.status + '\n error code in console';
-  }
-
-  }
-
-}
-
-
-
-
-
 
 var winHeight = window.innerHeight,
     winWidth = window.innerWidth,
@@ -72,355 +40,313 @@ var winHeight = window.innerHeight,
 
 
 
+ const handleClick = function(empty, pkg){
+   visualization.buildDependencies(pkg.dependencies)
+   visualization.buildOutdated(pkg.outdatedDependencies)
+   visualization.buildSubScores(pkg.scores, pkg.subScores)
+   visualization.buildTitle(pkg.title) //will not work until I decouple d3
+   visualization.buildForks(pkg.forks[1])
+   visualization.buildStars(pkg.stars[1])
+   visualization.buildDescription(pkg.description)
+ }
 
 
-
-
-
-/*
-Object for building the visualization minus the barchart
-*/
-
-  const visualization = {
-    buildStars: function(starAmount){
-        const star = '\u2605'; //U+2606 for other unicode star
-        document.getElementById('stars').innerText = star + ' ' + starAmount
+const request = {
+  get: function(url, cb){
+    d3.request(url)
+      .mimeType('application/json')
+      .response(function(xhr) { return JSON.parse(xhr.responseText); })
+      .get(function(error, d){
+        if(error) request.error(error)
+        cb(JSON.parse(d)) })
     },
 
-   buildForks: function(forkAmount){
-       const forkMount = document.getElementsByClassName('forks')[0];
-       while (forkMount.hasChildNodes()){
-         forkMount.removeChild(forkMount.lastChild);
-       }
-       const fork = document.createElement('img');
-       fork.src = 'fork.png';
-       fork.alt = 'Fork Count';
-       const forkCount = document.createElement('span');
-       forkCount.id = 'forks';
-       forkCount.innerText = forkAmount;
-       forkMount.appendChild(fork);
-       forkMount.appendChild(forkCount);
-     },
+  error: function(err){
+    const mount = document.getElementById('placeholder')
+    console.log(err)
+    console.log(err.currentTarget.status)
+    mount.innerText = 'response error ' + err.currentTarget.status + '\n error code in console';
+  },
 
-   buildOutdated: function(outdatedDeps){
-               let outdatedDependencies = outdated.selectAll('li')
-               .data(outdatedDeps[0] || [])
+  build: function(data){
+    chartHide.visibility='visible' //maybe needs if
 
-               outdatedDependencies
-               .enter()
-               .append('li')
-               .merge(outdatedDependencies)
-               .text(
-                 function(d){
-                   return 'Outdated Dependency: ' + d;
-                 }).on( 'click', function( e ) {
-                 updateSearch( e, true );
-               } )
-               outdatedDependencies.exit().remove()
-             },
-
-   buildSubScores: function(scores, subScores){
-       document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
-       for (let i = 0; i < subScoreHeading.length; i++){
-         document.getElementById(subScoreHeading[i] + 'H').innerText = scores[i][0] + ': ' + scores[i][1].toFixed(2)
-         for(let j = 0; j < 4; j++){
-           document.getElementById(subScoreHeading[i] + j).innerText = subScores[i][j][0] + ': ' + subScores[i][j][1].toFixed(2)
-         }
-       }
-     },
-
-  buildDescription: function(description){
-       document.getElementById('description').innerText = description;
-     },
-
-  buildTitle: function(title){
-      document.getElementById('name').innerText = title[0][1];
-      document.getElementById('version').innerText = title[1][1];
-      $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
-     },
-
-  computeNodeCount: function(node){
-    let nodeCount = 0;
-    for(let i = 0; i < node.parent.parent.children.length; i++){
-      nodeCount += node.parent.parent.children[i].children.length
-    }
-    return nodeCount
-   },
-
-  buildDependencies: function(pkgDependencies){
-
-    const treemap = d3.tree()
-    .size([depHeight, depWidth]);
-
-    d3.selectAll('g.node').remove()
-
-    const stratify = d3.stratify()
-      .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
-
-    let nodes = d3.hierarchy(pkgDependencies, function(d) {    //pkg dependencies
-    return d.children;
-    });
-
-    nodes = treemap(nodes);
-
-    const updateLinks = dependencies.selectAll(".link")
-    .data(nodes.descendants().slice(1))
-
-    const enterLinks = updateLinks.enter().append("path")
-      .attr("class", "link")
-
-    const exitLink = updateLinks.exit().remove();
-
-    updateLinks.merge(enterLinks)
-        .transition()
-        .duration(1000)
-        .ease(d3.easeLinear)
-        .attr("d", function(d) {
-                return "M" + d.y + "," + d.x
-                  + "C" + (d.y + d.parent.y) / 2 + "," + d.x
-                  + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
-                  + " " + d.parent.y + "," + d.parent.x;
-                });
-
-    const updateNodes = dependencies.selectAll("g.node")
-    .data(nodes.descendants(), d => d);
-
-    const enterNodes = updateNodes.enter().append("g")
-    .attr("class", function(d) {
-          return "node" +
-    (d.children ? " node--internal" : d.data.outdated ? " node--outdated" : " node--leaf" ); }) //ternary chains
-    .attr("transform", function(d) {
-    return "translate(" + d.y + "," + d.x + ")"; });
-
-    enterNodes.append("circle")
-    .attr("r", function(d) { return 15; });
-
-    enterNodes.append("text")
-    .attr("dy", ".25em")
-    .attr("x", 25)
-    .style("text-anchor", "start")
-    .style("font-size", function(d){
-      let fontSize
-      if (d.depth == 0) {
-        fontSize = 23;
-      }
-      else if (d.depth == 1){
-        fontSize = 17
-      }
-      else{
-        const nc = visualization.computeNodeCount(d)
-        if (nc >= 50){fontSize = 3}
-        else{fontSize = fontScale(visualization.computeNodeCount(d))}
-      }
-      return fontSize;
-    })
-    .text(function(d) {
-      return d.data.name;
-    }).on("click", function( d,i ) {
-      //  updateSearch( name, true )
-    });
-
-    updateNodes.merge(enterNodes);
-
-    const exitNode = updateNodes.exit().remove();
+    handleClick(0, data[0]);
+    pkgBarCharts.barChartContainer(data);
+    pkgBarCharts.buildLegend();
   }
 }
 
-/*/////////////////////////////
-Meaty bit -
-here i did deal with error in loading data and then
-json.parse the raw data in to the udable global
-data object
-*/////////////////////
 
- function buildVisualization(error, rawData) {
+const bChart = {
 
-
-
-
-
-        const pkgs = (function(){
-          let names = []
-          for(let pkg in data){
-          names.push(data[pkg].title[1])
-          }
-          return names
-        })()
-
-        const pkgNames = (function(){
-          let names = []
-          for(let pkg in data){
-          names.push(data[pkg].title[0][1])
-          }
-          return names
-        })()
-
-        const scoreScale = (function(){
-          let scale = [[], [], [], []];
-          for (let pkg in data){
-
-            data[pkg].scores.forEach((cat, i) => {
-              scale[i].push(data[pkg].scores[i][1])
-              })
-            }
-            return scale
-          })()
-
-        chartHide.visibility='visible'
-
-        const handleClick = function(empty, pkg){
-          visualization.buildDependencies(pkg.dependencies)
-          visualization.buildOutdated(pkg.outdatedDependencies)
-          visualization.buildSubScores(pkg.scores, pkg.subScores)
-          visualization.buildTitle(pkg.title) //will not work until I decouple d3
-          visualization.buildForks(pkg.forks[1])
-          visualization.buildStars(pkg.stars[1])
-          visualization.buildDescription(pkg.description)
-        }
-
-      }
-
-      handleClick(0, data[0]);
-      pkgBarCharts.barChartContainer();
-      pkgBarCharts.buildLegend();
-
-
-
-///////////////////
-//sub object for the indivdual bar charts
-//////////////////
- const bChart = {
-
-  labelScale: function(text){
-    const labelFontSize = 14
-    const textLimit = Math.floor((chartBorderWidth/labelFontSize)*1.5)
-    if(text.length > textLimit){
-      text = text.substring(0,textLimit)+'..';
-    }
-    return text
-   },
-
-   barHeight: function(){
-     return d3.scaleLinear()
-      .domain([1, 0])
-      .range([0, chartHeight]);
-   },
-
-   barWidth: function(){
-     return d3.scaleBand()
-      .padding(0.05)
-      .domain(scoreHeading)
-      .rangeRound([0, chartWidth]);
+ labelScale: function(text){
+   const labelFontSize = 14
+   const textLimit = Math.floor((chartBorderWidth/labelFontSize)*1.5)
+   if(text.length > textLimit){
+     text = text.substring(0,textLimit)+'..';
    }
+   return text
+  },
+
+  barHeight: function(){
+    return d3.scaleLinear()
+     .domain([1, 0])
+     .range([0, chartHeight]);
+  },
+
+  barWidth: function(){
+    return d3.scaleBand()
+     .padding(0.05)
+     .domain(scoreHeading)
+     .rangeRound([0, chartWidth]);
+  }
+}
+
+const pkgBarCharts = {
+
+  buildLegend: function(){
+     const legend = d3.select('.legend').append('g')
+    .attr("transform", () => { return "translate(" + [0,0] + ")"; })
+    .attr('text-anchor', 'start')
+    .selectAll('g')
+    .data(scoreHeading)
+    .enter().append('g')
+    .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
+
+    legend.append('rect')
+    .attr("x",  20)
+    .attr("width", 15)
+    .attr("height", 15)
+    .attr("fill", color);
+
+    legend.append('text')
+    .attr("x", 45)
+    .attr("y", 12)
+    .text(function(d) {
+      return d; });
+    },
+
+ barChartContainer : function(data){
+
+   const barGraphs = document.getElementsByClassName('scoreChart')[0];
+   while (barGraphs.hasChildNodes()) {
+     barGraphs.removeChild(barGraphs.lastChild);
+   }
+
+   for(let i = 0; i < data.length; i++){
+     const graph = d3.select('.scoreChart').append('svg')
+     pkgBarCharts.buildBarChart(data[i], graph)
+   }
+},
+
+buildBarChart: function(pkg, mount){
+
+  const bWidth = bChart.barWidth(),
+        bHeight = bChart.barHeight()
+
+  mount.attr('class', 'package')
+       .attr('width', chartBorderWidth)
+       .attr('height', chartBorderHeight)
+       .on('click', function(e){
+         handleClick(0, pkg)
+        })
+
+
+  const chart = mount.append('g')
+   .on('mouseover', function() {
+     d3.selectAll(this.childNodes).style('fill', function(d){
+       let bar = d3.select(this).style('fill')
+       return d3.rgb(bar).darker(2)
+     })
+    })
+   .on('mouseout', function() {
+     d3.selectAll(this.childNodes).style('fill', function(d){
+       let bar = d3.select(this).style('fill')
+       return d3.rgb(bar).brighter(2)
+     })
+    })
+   .selectAll('g')
+   .data(pkg.scores)
+
+   chart
+   .enter()
+   .append('rect')
+   .merge(chart)
+   .attr('x', (d, i) => { return bWidth(d[0]) + marginWidth })
+   .attr('width', (d) => { return bWidth.bandwidth() })
+   .attr('fill', (d) => { return color(d[0]) })
+   .attr('height', (d, i) => { return chartHeight - bHeight(d[1]) })
+   .attr('y', (d, i) => { return bHeight(d[1]) })
+   .attr('height', 0)
+   .attr('y', chartHeight)
+   .transition()
+   .duration(1000)
+   .ease(d3.easeLinear)
+   .delay((d, i) => {return i * 400})
+   .attr('height', (d, i) => {
+       return chartHeight - bHeight(d[1])
+     })
+   .attr('y', (d, i) => {
+       return bHeight(d[1])
+     });
+
+   chart.exit().remove();
+
+   mount.append('g')
+   .attr('class', 'label')
+   .attr("transform", "translate(" + [(chartBorderWidth/2), (chartBorderHeight - (marginBottom/3))]  + ")")
+   .append('text')
+   .attr('text-anchor', 'middle')
+   .attr('transform', 'rotate(0)')
+   .text(bChart.labelScale(pkg.title[0][1]))
  }
+}
 
-/////////////////////////////////////
-// build the barChart
-//////////////////////////////////
+const visualization = {
+  buildStars: function(starAmount){
+      const star = '\u2605'; //U+2606 for other unicode star
+      document.getElementById('stars').innerText = star + ' ' + starAmount
+  },
 
+ buildForks: function(forkAmount){
+     const forkMount = document.getElementsByClassName('forks')[0];
+     while (forkMount.hasChildNodes()){
+       forkMount.removeChild(forkMount.lastChild);
+     }
+     const fork = document.createElement('img');
+     fork.src = 'fork.png';
+     fork.alt = 'Fork Count';
+     const forkCount = document.createElement('span');
+     forkCount.id = 'forks';
+     forkCount.innerText = forkAmount;
+     forkMount.appendChild(fork);
+     forkMount.appendChild(forkCount);
+   },
 
+ buildOutdated: function(outdatedDeps){
+             let outdatedDependencies = outdated.selectAll('li')
+             .data(outdatedDeps[0] || [])
 
- const pkgBarCharts = {
+             outdatedDependencies
+             .enter()
+             .append('li')
+             .merge(outdatedDependencies)
+             .text(
+               function(d){
+                 return 'Outdated Dependency: ' + d;
+               }).on( 'click', function( e ) {
+               updateSearch( e, true );
+             } )
+             outdatedDependencies.exit().remove()
+           },
 
-   buildLegend: function(){
-      const legend = d3.select('.legend').append('g')
-     .attr("transform", () => { return "translate(" + [0,0] + ")"; })
-     .attr('text-anchor', 'start')
-     .selectAll('g')
-     .data(scoreHeading)
-     .enter().append('g')
-     .attr("transform", function(d, i) { return "translate(0," + i * 25 + ")"; });
+ buildSubScores: function(scores, subScores){
+     document.getElementById('finalScore').innerText = scores[3][0] + ': ' + scores[3][1].toFixed(2);
+     for (let i = 0; i < subScoreHeading.length; i++){
+       document.getElementById(subScoreHeading[i] + 'H').innerText = scores[i][0] + ': ' + scores[i][1].toFixed(2)
+       for(let j = 0; j < 4; j++){
+         document.getElementById(subScoreHeading[i] + j).innerText = subScores[i][j][0] + ': ' + subScores[i][j][1].toFixed(2)
+       }
+     }
+   },
 
-     legend.append('rect')
-     .attr("x",  20)
-     .attr("width", 15)
-     .attr("height", 15)
-     .attr("fill", color);
+buildDescription: function(description){
+     document.getElementById('description').innerText = description;
+   },
 
-     legend.append('text')
-     .attr("x", 45)
-     .attr("y", 12)
-     .text(function(d) {
-       return d; });
-     },
+buildTitle: function(title){
+    document.getElementById('name').innerText = title[0][1];
+    document.getElementById('version').innerText = title[1][1];
+    $( "div.title" ).html( "<a target='_new' href='https://www.npmjs.com/package/"+$( "span.name" ).text()+"'>"+$( "div.title" ).html()+"</a>" );
+   },
 
-  barChartContainer : function(){
-
-    const barGraphs = document.getElementsByClassName('scoreChart')[0];
-    while (barGraphs.hasChildNodes()) {
-      barGraphs.removeChild(barGraphs.lastChild);
-    }
-
-    for(let i = 0; i < data.length; i++){
-      const graph = d3.select('.scoreChart').append('svg')
-      pkgBarCharts.buildBarChart(data[i], graph)
-    }
+computeNodeCount: function(node){
+  let nodeCount = 0;
+  for(let i = 0; i < node.parent.parent.children.length; i++){
+    nodeCount += node.parent.parent.children[i].children.length
+  }
+  return nodeCount
  },
 
- buildBarChart: function(pkg, mount){
+buildDependencies: function(pkgDependencies){
 
-   const bWidth = bChart.barWidth(),
-         bHeight = bChart.barHeight()
+  const treemap = d3.tree()
+  .size([depHeight, depWidth]);
 
-   mount.attr('class', 'package')
-        .attr('width', chartBorderWidth)
-        .attr('height', chartBorderHeight)
-        .on('click', function(e){
-          handleClick(0, pkg)
-         })
+  d3.selectAll('g.node').remove()
 
+  const stratify = d3.stratify()
+    .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
-   const chart = mount.append('g')
-    .on('mouseover', function() {
-      d3.selectAll(this.childNodes).style('fill', function(d){
-        let bar = d3.select(this).style('fill')
-        return d3.rgb(bar).darker(2)
-      })
-     })
-    .on('mouseout', function() {
-      d3.selectAll(this.childNodes).style('fill', function(d){
-        let bar = d3.select(this).style('fill')
-        return d3.rgb(bar).brighter(2)
-      })
-     })
-    .selectAll('g')
-    .data(pkg.scores)
+  let nodes = d3.hierarchy(pkgDependencies, function(d) {    //pkg dependencies
+  return d.children;
+  });
 
-    chart
-    .enter()
-    .append('rect')
-    .merge(chart)
-    .attr('x', (d, i) => { return bWidth(d[0]) + marginWidth })
-    .attr('width', (d) => { return bWidth.bandwidth() })
-    .attr('fill', (d) => { return color(d[0]) })
-    .attr('height', (d, i) => { return chartHeight - bHeight(d[1]) })
-    .attr('y', (d, i) => { return bHeight(d[1]) })
-    .attr('height', 0)
-    .attr('y', chartHeight)
-    .transition()
-    .duration(1000)
-    .ease(d3.easeLinear)
-    .delay((d, i) => {return i * 400})
-    .attr('height', (d, i) => {
-        return chartHeight - bHeight(d[1])
-      })
-    .attr('y', (d, i) => {
-        return bHeight(d[1])
-      });
+  nodes = treemap(nodes);
 
-    chart.exit().remove();
+  const updateLinks = dependencies.selectAll(".link")
+  .data(nodes.descendants().slice(1))
 
-    mount.append('g')
-    .attr('class', 'label')
-    .attr("transform", "translate(" + [(chartBorderWidth/2), (chartBorderHeight - (marginBottom/3))]  + ")")
-    .append('text')
-    .attr('text-anchor', 'middle')
-    .attr('transform', 'rotate(0)')
-    .text(bChart.labelScale(pkg.title[0][1]))
-  }
- }
+  const enterLinks = updateLinks.enter().append("path")
+    .attr("class", "link")
 
+  const exitLink = updateLinks.exit().remove();
 
+  updateLinks.merge(enterLinks)
+      .transition()
+      .duration(1000)
+      .ease(d3.easeLinear)
+      .attr("d", function(d) {
+              return "M" + d.y + "," + d.x
+                + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                + " " + d.parent.y + "," + d.parent.x;
+              });
+
+  const updateNodes = dependencies.selectAll("g.node")
+  .data(nodes.descendants(), d => d);
+
+  const enterNodes = updateNodes.enter().append("g")
+  .attr("class", function(d) {
+        return "node" +
+  (d.children ? " node--internal" : d.data.outdated ? " node--outdated" : " node--leaf" ); }) //ternary chains
+  .attr("transform", function(d) {
+  return "translate(" + d.y + "," + d.x + ")"; });
+
+  enterNodes.append("circle")
+  .attr("r", function(d) { return 15; });
+
+  enterNodes.append("text")
+  .attr("dy", ".25em")
+  .attr("x", 25)
+  .style("text-anchor", "start")
+  .style("font-size", function(d){
+    let fontSize
+    if (d.depth == 0) {
+      fontSize = 23;
+    }
+    else if (d.depth == 1){
+      fontSize = 17
+    }
+    else{
+      const nc = visualization.computeNodeCount(d)
+      if (nc >= 50){fontSize = 3}
+      else{fontSize = fontScale(visualization.computeNodeCount(d))}
+    }
+    return fontSize;
+  })
+  .text(function(d) {
+    return d.data.name;
+  }).on("click", function( d,i ) {
+    //  updateSearch( name, true )
+  });
+
+  updateNodes.merge(enterNodes);
+
+  const exitNode = updateNodes.exit().remove();
+}
+}
 
 
 
@@ -508,7 +434,9 @@ data object
 // }
 
 // const updateSearch = function( name, triggerUpdate ) {
-//   if( typeof name === "undefined" || !name || name === "" ) {
+//   });
+//   if( typeof name === "undefined" || !name || name === ""  name === "dependency" || name === "devDependency" ) {
+//   {
 //     return false;
 //   }
 //   let curSearch = document.getElementById( "searchBar" ).value;
