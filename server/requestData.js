@@ -28,7 +28,7 @@ const parsePkgJSON = function() {
         fs.readFile('package.json', 'utf-8', (error, data) => {
             if (error){
               reject('error')
-              throw 'Cannot find package.json, please run in project root'
+              console.log('Could not find package.json, please run in project root to parse package.json');
             }
             let contents = JSON.parse(data);
             const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
@@ -122,7 +122,7 @@ const pkgInfoParse = function(pkgInfo, noDevDep) {
     return JSON.stringify(filteredInfo)
 }
 
-exports.parse = function(userPkgs, noDevDep) {
+const pkgRequest = function(userPkgs, noDevDep) {
       return new Promise((resolve, reject) => {
 
           parsePkgJSON().then((packages) => {
@@ -139,6 +139,15 @@ exports.parse = function(userPkgs, noDevDep) {
           })
       })
   }
+
+exports.parseJSON = parsePkgJSON;
+exports.request = pkgRequest;
+
+
+
+
+
+
 
 // Ask Zach what how this is different
 // exports.parseSearch = function(userPkgs) {

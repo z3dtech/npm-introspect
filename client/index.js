@@ -1,6 +1,45 @@
 'use strict'
 window.onload = function() {
-var chartHide, spinMount, spinner, template, maxPackages;
+
+
+}
+
+const initialize = {
+  const data = request.get('/datam.json')
+
+  chartHide = document.getElementsByClassName('scoreChart')[0].style;
+  chartHide.visibility='hidden';
+  //console.log(data)
+  //need to do somehting that takes the request as cb
+
+}
+
+
+const request = {
+  get: function(url){
+    d3.request(url)
+      .mimeType('application/json')
+      .response(function(xhr) { return JSON.parse(xhr.responseText); })
+      .get(function(error, d){
+        if(error) request.error(error)
+        return JSON.parse(d) })
+    },
+
+  error: function(err){
+    const mount = document.getElementById('placeholder')
+    console.log(err)
+    console.log(err.currentTarget.status)
+    mount.innerText = 'response error ' + err.currentTarget.status + '\n error code in console';
+  }
+
+  }
+
+}
+
+
+
+
+
 
 var winHeight = window.innerHeight,
     winWidth = window.innerWidth,
@@ -12,6 +51,8 @@ var winHeight = window.innerHeight,
       .domain([0,50])
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
+
+    const outdated = d3.select('.outdatedDependencies').append('ul');
 
     const chartBorderHeight = winHeight*0.2,
     chartBorderWidth = (winWidth * 0.9)*0.10,
@@ -30,136 +71,15 @@ var winHeight = window.innerHeight,
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-const spinOptions = {
-      lines: 17,
-      length: 12,
-      width: 5,
-      radius: 20,
-      color: "#5D796A",
-      scale: 1.75,
-      speed: 1.9,
-      trail: 60,
-      corners: 1.0,
-      opacity: 0,
-      className: 'spinner',
-    };
-
-    chartHide = document.getElementsByClassName('scoreChart')[0].style;
-    chartHide.visibility='hidden';
-    spinMount = document.getElementById('spinner')
-
-
-    template = document.getElementById( "content-wrapper" ).innerHTML;
-    spinner = new Spinner(spinOptions).spin(spinMount);
-    const url = '/data.json'
-    d3.request(url).mimeType('application/json').response(function(xhr) {
-        let parsedData = JSON.parse( JSON.parse(xhr.responseText) );
-        for( var i = 0; i < parsedData.length; i++ ) {
-          updateSearch( parsedData[ i ].title[0][1] );
-        }
-        return [JSON.parse(xhr.responseText), xhr.responseText];
-    }).get(buildVisualization)
 
 
 
-document.getElementById( "upload" ).addEventListener( "change", function() {
-  if( document.getElementById( "upload" ).value !== "" ) {
-      let input = this.files[0];
-      let reader = new FileReader();
-      reader.onload = function(){
-        document.getElementById( "searchBar" ).options.length = 0;
-        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
-        for( var i = 0; i < dependencies.length; i++ ) {
-          updateSearch( dependencies[ i ], false );
-        }
-        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-        for( var i = 0; i < devDependencies.length; i++ ) {
-          updateSearch( devDependencies[ i ], false );
-        }
-       triggerBuild();
-      };
-      reader.readAsText( input );
-  }
-   document.getElementById( "upload" ).value = "";
-})
-
-document.getElementById( "searchButton" ).addEventListener( "click", function() {
- triggerBuild();
-});
-
-/* Select2 hacks start here */
-
-var input = "";
-$( "#searchBar" ).select2({
-  tags: true,
-}).on("select2:select", function(e) {
-  if( $(this).val().indexOf( e.params.data.text ) === -1 ){
-    $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
-  }
-});
-$( ".select2-container" ).keyup(function( e ){
-    if(e.which == 13 ) { //Enter keycode
-      let currentSearch = $( "#searchBar").val();;
-      let startsWith = false;
-      currentSearch.forEach(function(search) {
-        console.log( search );
-        console.log( input );
-        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
-          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
-            startsWith = true;
-          }
-      });
-      if( currentSearch.indexOf( input ) !== -1 ) {
-        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
-        updateSearch( input );
-      } else if( startsWith ) {
-        updateSearch( input );
-      }
-    } else {
-      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
-    }
-  });
-
-/* End of select2 hacks */
 
 
-const triggerBuild = function() {
-  $( ".error" ).remove();
-  let pkg = $( "#searchBar" ).val();
-  if( !pkg || pkg.length === 0 ) {
-    return;
-  }
-  for( let i = 0; i < pkg.length; i++ ) {
-    if( pkg[i].indexOf( "/" ) !== -1 ) {
-      pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
-    }
-  }
-  document.getElementById( "content-wrapper" ).innerHTML = template;
-  spinner = new Spinner(spinOptions).spin(spinMount)
-  let search = "/search/"+pkg;
-  d3.request(search).mimeType('application/json').response(function(xhr) {
-    return [JSON.parse(xhr.responseText), xhr.responseText];
-  }).get(buildVisualization);
-  document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
-  return true;
-}
 
-const updateSearch = function( name, triggerUpdate ) {
-  if( typeof name === "undefined" || !name || name === "" ) {
-    return false;
-  }
-  let curSearch = document.getElementById( "searchBar" ).value;
-  if( curSearch.indexOf( 'name' ) === -1 ) {
-    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
-  } else {
-    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
-  }
-  if( triggerUpdate ) {
-    triggerBuild();
-  }
-}
-
-const outdated = d3.select('.outdatedDependencies').append('ul');
+/*
+Object for building the visualization minus the barchart
+*/
 
   const visualization = {
     buildStars: function(starAmount){
@@ -304,36 +224,19 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
 
     const exitNode = updateNodes.exit().remove();
   }
-  }
+}
+
+/*/////////////////////////////
+Meaty bit -
+here i did deal with error in loading data and then
+json.parse the raw data in to the udable global
+data object
+*/////////////////////
 
  function buildVisualization(error, rawData) {
-        if (error) {
-          console.log(error);
-          console.log(error.currentTarget.status)
-          spinner.stop();
-          const respError = document.createElement('p');
-          respError.className = 'error';
-          respError.innerText = 'response error ' + error.currentTarget.status + '\n error code in console';
-          spinMount.appendChild(respError);
-        }
 
-        let data;
-        try{
-          data = JSON.parse(rawData[0]).reverse();
-          if( data.length > maxPackages ) {
-            data = data.slice( 0, maxPackages );
-          }
-        }catch(error){
-          console.log(error)
-          console.log(rawData[1])
-          spinner.stop();
-          const parseErr = document.createElement('p');
-          parseErr.className = 'error';
-          parseErr.innerText = 'response error,\n package ' + JSON.parse(rawData[1]).options.uri.match(/\/([^\/]+)\/?$/)[1] + ' not found, \n error code in console';
-          spinMount.appendChild(parseErr);
-        }
-        spinner.stop();
-        console.log(data)
+
+
 
 
         const pkgs = (function(){
@@ -375,9 +278,17 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
           visualization.buildDescription(pkg.description)
         }
 
+      }
+
+      handleClick(0, data[0]);
+      pkgBarCharts.barChartContainer();
+      pkgBarCharts.buildLegend();
 
 
 
+///////////////////
+//sub object for the indivdual bar charts
+//////////////////
  const bChart = {
 
   labelScale: function(text){
@@ -403,6 +314,12 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
    }
  }
 
+/////////////////////////////////////
+// build the barChart
+//////////////////////////////////
+
+
+
  const pkgBarCharts = {
 
    buildLegend: function(){
@@ -427,7 +344,7 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
        return d; });
      },
 
-  buildScores : function(){
+  barChartContainer : function(){
 
     const barGraphs = document.getElementsByClassName('scoreChart')[0];
     while (barGraphs.hasChildNodes()) {
@@ -503,13 +420,107 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
   }
  }
 
-      handleClick(0, data[0]);
-      pkgBarCharts.buildScores();
-      pkgBarCharts.buildLegend();
 
 
-    }
 
+
+
+
+
+// document.getElementById( "upload" ).addEventListener( "change", function() {
+//   if( document.getElementById( "upload" ).value !== "" ) {
+//       let input = this.files[0];
+//       let reader = new FileReader();
+//       reader.onload = function(){
+//         document.getElementById( "searchBar" ).options.length = 0;
+//         let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+//         for( var i = 0; i < dependencies.length; i++ ) {
+//           updateSearch( dependencies[ i ], false );
+//         }
+//         let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+//         for( var i = 0; i < devDependencies.length; i++ ) {
+//           updateSearch( devDependencies[ i ], false );
+//         }
+//        triggerBuild();
+//       };
+//       reader.readAsText( input );
+//   }
+//    document.getElementById( "upload" ).value = "";
+// })
+//
+// document.getElementById( "searchButton" ).addEventListener( "click", function() {
+//  triggerBuild();
+// });
+
+
+
+// var input = "";
+// $( "#searchBar" ).select2({
+//   tags: true,
+// }).on("select2:select", function(e) {
+//   if( $(this).val().indexOf( e.params.data.text ) === -1 ){
+//     $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
+//   }
+// });
+// $( ".select2-container" ).keyup(function( e ){
+//     if(e.which == 13 ) { //Enter keycode
+//       let currentSearch = $( "#searchBar").val();;
+//       let startsWith = false;
+//       currentSearch.forEach(function(search) {
+//         console.log( search );
+//         console.log( input );
+//         console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
+//           if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
+//             startsWith = true;
+//           }
+//       });
+//       if( currentSearch.indexOf( input ) !== -1 ) {
+//         document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
+//         updateSearch( input );
+//       } else if( startsWith ) {
+//         updateSearch( input );
+//       }
+//     } else {
+//       input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
+//     }
+//   });
+
+
+// const triggerBuild = function() {
+//   $( ".error" ).remove();
+//   let pkg = $( "#searchBar" ).val();
+//   if( !pkg || pkg.length === 0 ) {
+//     return;
+//   }
+//   for( let i = 0; i < pkg.length; i++ ) {
+//     if( pkg[i].indexOf( "/" ) !== -1 ) {
+//       pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
+//     }
+//   }
+//   document.getElementById( "content-wrapper" ).innerHTML = template;
+//   spinner = new Spinner(spinOptions).spin(spinMount)
+//   let search = "/search/"+pkg;
+//   d3.request(search).mimeType('application/json').response(function(xhr) {
+//     return [JSON.parse(xhr.responseText), xhr.responseText];
+//   }).get(buildVisualization);
+//   document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
+//   return true;
+// }
+
+// const updateSearch = function( name, triggerUpdate ) {
+//   if( typeof name === "undefined" || !name || name === "" ) {
+//     return false;
+//   }
+//   let curSearch = document.getElementById( "searchBar" ).value;
+//   if( curSearch.indexOf( 'name' ) === -1 ) {
+//     document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
+//   } else {
+//     document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+//   }
+//   if( triggerUpdate ) {
+//     triggerBuild();
+//   }
+// }
 
 
 // window.addEventListener('resize', function( e ) {
@@ -520,13 +531,3 @@ const outdated = d3.select('.outdatedDependencies').append('ul');
 //     spinner.stop();
 //   }
 // });
-
-}
-
-// scores.append('g')
-// .attr('class', 'axis')
-// .attr("transform", "translate(" + [0, (scoreHeight/2)]  + ")")
-// .call(d3.axisBottom(groupBand.domain(pkgNames)))
-// .selectAll('text')
-// .attr('text-anchor', 'middle')
-// .attr('transform', 'rotate(0)')

@@ -12,7 +12,7 @@ module.exports.run = (args) => {
     var pkgs = args._;
 
     if (args.l || args.less == true ){
-        requestData.parse(pkgs, args.d)
+        requestData.request(pkgs, args.d)
         .then(function (data) {
           less.buildTable(data)
         }).catch(function(e){
@@ -68,7 +68,7 @@ module.exports.run = (args) => {
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res) {
-      requestData.parse(pkgs, noDevDep)
+      requestData.request(pkgs, noDevDep)
       .then(function (data) {
           res.json(data)
           res.setHeader('Content-Type', 'application/json');

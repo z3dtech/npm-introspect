@@ -186,13 +186,11 @@ stroke-width: 1.5px;
 }
 
 .package{
-  /*border: 1px #FBF1D0 solid;*/
+  border: 1px #FBF1D0 solid;
   border-radius: 5px;
   display: inline-block;
 
 }
-
-
 .legend{
   font-family: monospace;
   font-weight: lighter;
