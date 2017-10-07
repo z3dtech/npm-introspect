@@ -134,7 +134,7 @@ const triggerBuild = function() {
 }
 
 const updateSearch = function( name, triggerUpdate ) {
-  if( typeof name === "undefined" || !name || name === "" ) {
+  if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
     return false;
   }
   let curSearch = document.getElementById( "searchBar" ).value;
@@ -301,7 +301,10 @@ const getPackageCount = function() {
           return "translate(" + d.y + "," + d.x + ")"; });
 
           enterNodes.append("circle")
-          .attr("r", function(d) { return 15; });
+          .attr("r", function(d) { return 15; })
+          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+              updateSearch( d.data.name, true )
+          });
 
           enterNodes.append("text")
           .attr("dy", ".25em")
@@ -324,7 +327,8 @@ const getPackageCount = function() {
             }
             return fontSize;
           })
-          .text(function(d) { return d.data.name; }).on("click", function( d,i ) { 
+          .text(function(d) { return d.data.name; })
+          .on("click", function( d,i ) {
               updateSearch( d.data.name, true )
           });
 
@@ -356,18 +360,18 @@ const getPackageCount = function() {
             while (forkMount.hasChildNodes()){
               forkMount.removeChild(forkMount.lastChild);
             }
-            const fork = document.createElement('img');
-            fork.src = 'fork.png';
-            fork.alt = 'Fork Count';
+            const fork = document.createElement('i');
+            fork.className = 'fa fa-code-fork';
             const forkCount = document.createElement('span');
             forkCount.id = 'forks';
-            forkCount.innerText = pkg.forks[1];
+            forkCount.innerText = " " + pkg.forks[1];
             forkMount.appendChild(fork);
             forkMount.appendChild(forkCount);
           }
           function buildStars(){
-            const star = '\u2605'; //U+2606 for other unicode star
-            document.getElementById('stars').innerText = star + ' ' + pkg.stars[1]
+            const star = document.createElement('i');
+            star.className = "fa fa-star";
+            document.getElementById('stars').innerHTML = "<i class='fa fa-star'></i>" + ' ' + pkg.stars[1]
           }
           function buildDescription(){
             document.getElementById('description').innerText = pkg.description;
@@ -383,7 +387,8 @@ const getPackageCount = function() {
             .text(
               function(d){
                 return 'Outdated Dependency: ' + d;
-              }).on( 'click', function( e ) {
+              })
+            .on( 'click', function( e ) {
               updateSearch( e, true );
             } )
             outdatedDependencies.exit().remove()

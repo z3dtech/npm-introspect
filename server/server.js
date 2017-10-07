@@ -20,10 +20,6 @@ module.exports.run = (argv) => {
       })
       return;
     }
-
-    app.get('/fork.png', function(req, res){
-      res.sendFile('/fork.png', {root: path.join( __dirname, '../assets')})
-    })
     app.get('/index.js', function(req, res) {
         res.sendFile('/index.js', {root: path.join(__dirname, '../client')})
     })
