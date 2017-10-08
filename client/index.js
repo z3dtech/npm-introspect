@@ -1,11 +1,15 @@
 'use strict'
 window.onload = function() {
-  const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+
+
+
+
+
   const mount = document.getElementById('placeholder')
   mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
   chartHide.visibility='hidden';
 
-  request.get('/datam.json', request.build)
+  request.get('/data.json', request.build)
 
 }
 
@@ -21,6 +25,7 @@ var winHeight = window.innerHeight,
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
 
     const outdated = d3.select('.outdatedDependencies').append('ul');
+    const chartHide = document.getElementsByClassName('scoreChart')[0].style;
 
     const chartBorderHeight = winHeight*0.2,
     chartBorderWidth = (winWidth * 0.9)*0.10,
@@ -53,9 +58,12 @@ var winHeight = window.innerHeight,
 
 const request = {
   get: function(url, cb){
-    d3.request(url)
+    return d3.request(url)
       .mimeType('application/json')
-      .response(function(xhr) { return JSON.parse(xhr.responseText); })
+      .response(function(xhr) {
+        console.log(xhr)
+        return JSON.parse(xhr.responseText);
+      })
       .get(function(error, d){
         if(error) request.error(error)
         cb(JSON.parse(d)) })

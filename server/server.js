@@ -18,6 +18,7 @@ module.exports.run = (args) => {
         }).catch(function(e){
           console.log(e)
       })
+      console.log('here')
       return;
     }
     else{
@@ -67,7 +68,7 @@ module.exports.run = (args) => {
 }
 
 const getNPM = function(pkgs, noDevDep){
-    return app.get('/data.json', function(req, res) {
+    return app.get('/data.json', function(req, res){
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
           res.json(data)
