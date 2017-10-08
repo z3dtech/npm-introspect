@@ -1,16 +1,10 @@
 'use strict'
 window.onload = function() {
-
-
-
-
-
   const mount = document.getElementById('placeholder')
+
   mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
   chartHide.visibility='hidden';
-
   request.get('/data.json', request.build)
-
 }
 
 var winHeight = window.innerHeight,
@@ -24,8 +18,9 @@ var winHeight = window.innerHeight,
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
 
-    const outdated = d3.select('.outdatedDependencies').append('ul');
+    const mount = document.getElementById('placeholder')
     const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+    const outdated = d3.select('.outdatedDependencies').append('ul');
 
     const chartBorderHeight = winHeight*0.2,
     chartBorderWidth = (winWidth * 0.9)*0.10,
@@ -77,7 +72,8 @@ const request = {
   },
 
   build: function(data){
-    chartHide.visibility='visible' //maybe needs if
+    chartHide.visibility='visible'
+    mount.style.visibility = 'hidden'
 
     handleClick(0, data[0]);
     pkgBarCharts.barChartContainer(data);
