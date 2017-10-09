@@ -248,16 +248,20 @@ a {
   text-decoration: none;
 }
 
+.node--leaf {
+  cursor: pointer;
+}
+
 /*
 Hack to hide file upload
 */
 
 .hiddenFileUpload {
   position: absolute;
-  margin-left: -170px;
+  margin-left: -45px;
   z-index: 9;
   opacity: 0;
-  width: 180px;
+  width: 60px;
 }
 
 

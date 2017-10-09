@@ -380,11 +380,6 @@ buildDependencies: function(pkgDependencies){
 }
 }
 
-
-
-
-
-
 // document.getElementById( "upload" ).addEventListener( "change", function() {
 //   if( document.getElementById( "upload" ).value !== "" ) {
 //       let input = this.files[0];
