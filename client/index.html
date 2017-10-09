@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>npm-introspect</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
@@ -13,24 +14,27 @@
 </head>
 
 <body>
-  <div id="spinner"></div>
+  <div id="placeholder"></div>
   <div id="search">
-    <select type="text" class="searchBar" id="searchBar" multiple>
+    <select type="text" class="searchBar" id="searchBar" placeholder="This is a placeholder" multiple>
     </select>
     <button id="searchButton">
-     <i class="fa fa-search"></i>
+      <i class="fa fa-search"></i>
     </button>
     <button id="uploadButton">
-     <i class="fa fa-upload"></i>
+    <i class="fa fa-upload"></i>
     </button>
     <span class="hiddenFileUpload" >
-      <input type="file" id="upload" title="Upload package.json" />
+    <input type="file" id="upload" title="Upload package.json" />
     </span>
  </div>
   <div id="content-wrapper">
     <div class="pkgInformation">
       <div class= 'header'>
-      <div class='title'></div>
+      <div class='title'>
+        <span id="name"></span>
+        <span id="version"></span>
+      </div>
       <div class='gitStats'>
         <span id="stars"></span>
         <div class = 'forks'></div>
@@ -97,11 +101,11 @@
 
     <div class="mainContainer">
           <div class="scoreChart">
-            <svg class="scores"></svg>
+
           </div>
           <svg class="legend"></svg>
     </div>
   </div>
   <script src="index.js"></script>
-</body> 
+</body>
 </html>

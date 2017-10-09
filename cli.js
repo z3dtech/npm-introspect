@@ -20,6 +20,11 @@ const args =  yargs
     describe: 'Skip visualization and output data',
     default: false
   })
+  .option('d', {
+    alias: 'noDev',
+    describe: 'Don\'t include dev or peer dependencies',
+    default: false
+  })
   .option('p', {
     alias: 'port',
     describe: 'Specify port to use',
