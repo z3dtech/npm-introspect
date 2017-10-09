@@ -1,8 +1,22 @@
 'use strict'
 window.onload = function() {
-  const mount = document.getElementById('placeholder')
+  const mount = document.getElementById('placeholder');
+  const spinOptions = {
+      lines: 17,
+      length: 8,
+      width: 3,
+      radius: 20,
+      color: "#5D796A",
+      scale: 1.75,
+      speed: 1.9,
+      trail: 45,
+      corners: 1.0,
+      opacity: 0,
+      className: 'spinner',
+    };
 
-  mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
+  //mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
+  spinner.spin(mount);
   chartHide.visibility='hidden';
   request.get('/data.json', request.build)
 }
@@ -38,7 +52,21 @@ var winHeight = window.innerHeight,
     .append('g')
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    const spinOptions = {
+        lines: 17,
+        length: 8,
+        width: 3,
+        radius: 20,
+        color: "#5D796A",
+        scale: 1.75,
+        speed: 1.9,
+        trail: 45,
+        corners: 1.0,
+        opacity: 0,
+        className: 'spinner',
+      };
 
+   const spinner = new Spinner(spinOptions)
 
  const handleClick = function(empty, pkg){
    visualization.buildDependencies(pkg.dependencies)
@@ -64,11 +92,11 @@ const request = {
         cb(JSON.parse(d)) })
     },
 
-  error: function(err){
+  error: function(error){
     const mount = document.getElementById('placeholder')
-    console.log(err)
-    console.log(err.currentTarget.status)
-    mount.innerText = 'response error ' + err.currentTarget.status + '\n error code in console';
+    spinner.stop();
+    console.log(error)
+    mount.innerText = 'response error :' + '\n error code in console';
   },
 
   build: function(data){

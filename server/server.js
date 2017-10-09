@@ -18,11 +18,15 @@ module.exports.run = (args) => {
         }).catch(function(e){
           console.log(e)
       })
-      console.log('here')
       return;
     }
     else{
-      getNPM(pkgs, args.d)
+      getJSON(pkgs).then(function(pkgURLs){
+        getNPM(pkgURLs, args.d)
+      }).catch(function(error){
+        //If I want to provide a default package
+        console.log(error)
+      })
     }
 
     app.get('/fork.png', function(req, res){
@@ -41,30 +45,22 @@ module.exports.run = (args) => {
     app.get('*', function(req, res) {
         res.send('A wrong url has been requested, please check spelling')
     })
-
     listen(args.p)
+}
 
-    // app.get( '/search/:query', function( req, res )  {
-    //   var pkg = req.params.query.split(",");
-    //   requestData.parseSearch(pkg)
-    //       .then(function (data) {
-    //           res.json(data)
-    //           res.setHeader('Content-Type', 'application/json');
-    //           res.send(data);
-    //         })
-    //         .catch(function (e) {
-    //             res.status(500, {
-    //                 error: e
-    //             });
-    //       })
-    // });
+/*
+if you are making a request for some arbitrary set of
+packages call requestData.format() to wrap in the url
+encoding and then pass to getNPM(), the second argument
+needs to be the don't show devDependencies flag, args.d
+and so has to be defined in the run function
+*/
 
-    // app.get( '/:package', function( req, res ) {
-    //   var pkgInput = req.params.package.split(",");
-    //
-    //   res.sendFile('/index.html', {root: path.join(__dirname, '../client')})
-    // });
-
+const getJSON = function(pkgs){
+  const packageUrls = requestData.parseJSON().then((packages) => {
+    return requestData.format(packages.concat(...pkgs))
+  })
+  return packageUrls;
 }
 
 const getNPM = function(pkgs, noDevDep){
