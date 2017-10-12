@@ -7,7 +7,7 @@ const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 const server = require('./server/server')
 
-const wanted = {node: "6.4.0"};
+const wanted = {node: "6.4.0"}; // mandatory
 
 updateNotifier({pkg}).notify();
 
