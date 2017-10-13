@@ -1,17 +1,43 @@
 'use strict'
 window.onload = function() {
+  $( "#searchBar" ).select2( { 
+    placeholder: 'Please search for an NPM package or upload a package.json to visualize',   
+    tags: true,
+  }).on("select2:select", function(e) {
+    if( $(this).val().indexOf( e.params.data.text ) === -1 ){
+      $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
+    }
+  });
+  var input = "";
+  $( ".select2-container" ).keyup(function( e ){
+    if(e.which == 13 ) { //Enter keycode
+      let currentSearch = $( "#searchBar").val();;
+      let startsWith = false;
+      currentSearch.forEach(function(search) {
+        console.log( search );
+        console.log( input );
+        console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
+          if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
+            startsWith = true;
+          }
+      });
+      if( currentSearch.indexOf( input ) !== -1 ) {
+        document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
+        console.log( "this is it" )
+        updateSearch( input );
+      } else if( startsWith ) {
+        updateSearch( input );
+      }
+    } else {
+      input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
+    }
+  });
 
-
-
-
-
-  const mount = document.getElementById('placeholder')
-  mount.innerText = 'Please search for an NPM package or upload a package.json to visualize'
   chartHide.visibility='hidden';
-
   request.get('/data.json', request.build)
-
 }
+
+var init = false;
 
 var winHeight = window.innerHeight,
     winWidth = window.innerWidth,
@@ -82,6 +108,16 @@ const request = {
     handleClick(0, data[0]);
     pkgBarCharts.barChartContainer(data);
     pkgBarCharts.buildLegend();
+    console.log( "build" );
+    console.log( data );
+    // necessary for initial initial population 
+    // possibly should be flagged so that not run on every build?
+    if( !init ) {
+      for( var i = 0; i < data.length; i++ ) {
+        updateSearch( data[i].title[0][1] )
+      } 
+      init = true
+    }
   }
 }
 
@@ -347,7 +383,9 @@ buildDependencies: function(pkgDependencies){
   .text(function(d) {
     return d.data.name;
   }).on("click", function( d,i ) {
-    //  updateSearch( name, true )
+      console.log( "clicked!" )
+      console.log( d );
+      updateSearch( d.data.name, true )
   });
 
   updateNodes.merge(enterNodes);
@@ -361,63 +399,35 @@ buildDependencies: function(pkgDependencies){
 
 
 
-// document.getElementById( "upload" ).addEventListener( "change", function() {
-//   if( document.getElementById( "upload" ).value !== "" ) {
-//       let input = this.files[0];
-//       let reader = new FileReader();
-//       reader.onload = function(){
-//         document.getElementById( "searchBar" ).options.length = 0;
-//         let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
-//         for( var i = 0; i < dependencies.length; i++ ) {
-//           updateSearch( dependencies[ i ], false );
-//         }
-//         let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-//         for( var i = 0; i < devDependencies.length; i++ ) {
-//           updateSearch( devDependencies[ i ], false );
-//         }
-//        triggerBuild();
-//       };
-//       reader.readAsText( input );
-//   }
-//    document.getElementById( "upload" ).value = "";
-// })
-//
-// document.getElementById( "searchButton" ).addEventListener( "click", function() {
-//  triggerBuild();
-// });
+document.getElementById( "upload" ).addEventListener( "change", function() {
+  if( document.getElementById( "upload" ).value !== "" ) {
+      let input = this.files[0];
+      let reader = new FileReader();
+      reader.onload = function(){
+        document.getElementById( "searchBar" ).options.length = 0;
+        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+        for( var i = 0; i < dependencies.length; i++ ) {
+          updateSearch( dependencies[ i ], false );
+        }
+        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+        for( var i = 0; i < devDependencies.length; i++ ) {
+          updateSearch( devDependencies[ i ], false );
+        }
+       
+        request.get('/data.json', request.build)
+      };
+      reader.readAsText( input );
+  }
+   document.getElementById( "upload" ).value = "";
+})
+
+document.getElementById( "searchButton" ).addEventListener( "click", function() {
+  request.get('/data.json', request.build)
+});
 
 
 
 // var input = "";
-// $( "#searchBar" ).select2({
-//   tags: true,
-// }).on("select2:select", function(e) {
-//   if( $(this).val().indexOf( e.params.data.text ) === -1 ){
-//     $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
-//   }
-// });
-// $( ".select2-container" ).keyup(function( e ){
-//     if(e.which == 13 ) { //Enter keycode
-//       let currentSearch = $( "#searchBar").val();;
-//       let startsWith = false;
-//       currentSearch.forEach(function(search) {
-//         console.log( search );
-//         console.log( input );
-//         console.log( search.toLowerCase().startsWith( input.toLowerCase() ) );
-//           if( search.toLowerCase().startsWith( input.toLowerCase() ) ) {
-//             startsWith = true;
-//           }
-//       });
-//       if( currentSearch.indexOf( input ) !== -1 ) {
-//         document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
-//         updateSearch( input );
-//       } else if( startsWith ) {
-//         updateSearch( input );
-//       }
-//     } else {
-//       input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
-//     }
-//   });
 
 
 // const triggerBuild = function() {
@@ -441,29 +451,23 @@ buildDependencies: function(pkgDependencies){
 //   return true;
 // }
 
-// const updateSearch = function( name, triggerUpdate ) {
-//   });
-//   if( typeof name === "undefined" || !name || name === ""  name === "dependency" || name === "devDependency" ) {
-//   {
-//     return false;
-//   }
-//   let curSearch = document.getElementById( "searchBar" ).value;
-//   if( curSearch.indexOf( 'name' ) === -1 ) {
-//     document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
-//   } else {
-//     document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
-//   }
-//   if( triggerUpdate ) {
-//     triggerBuild();
-//   }
-// }
+const updateSearch = function( name, triggerUpdate ) {
+  console.log( "add " + name + " to search" )
+  
+  if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
+    return false;
+  }
+  let curSearch = document.getElementById( "searchBar" ).value;
+  if( curSearch.indexOf( 'name' ) === -1 ) {
+    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
+  } else {
+    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+  }
+  
+  if( triggerUpdate ) {
+    request.get('/data.json', request.build)
+    //triggerBuild();
+  }
+  
+}
 
-
-// window.addEventListener('resize', function( e ) {
-//   if( maxPackages !== getPackageCount() ) {
-//     width = window.innerWidth;
-//     height = window.innerHeight;
-//     triggerBuild()
-//     spinner.stop();
-//   }
-// });

@@ -142,32 +142,3 @@ exports.request = function(userPkgs, noDevDep) {
           })
       })
   }
-
-
-//exports.parseJSON = parsePkgJSON;
-//module.exports.request = pkgRequest;
-
-
-
-
-
-
-
-// Ask Zach what how this is different
-// exports.parseSearch = function(userPkgs) {
-//       return new Promise((resolve, reject) => {
-//
-//           let packages = [];
-//           packages.push(...userPkgs)
-//           let packageUrls = packages.map((name) => {
-//               return "https://api.npms.io/v2/package/" + name
-//           })
-//           console.log( packageUrls );
-//           npmSearchQuery(packageUrls).then(function(result) {
-//               resolve(result)
-//           }).catch(function(error) {
-//
-//               reject('error')
-//           })
-//           })
-//   }
