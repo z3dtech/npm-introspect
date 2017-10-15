@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const opn = require('opn');
+const url = require('url');
 
 module.exports.run = (args) => {
     console.log('Recieving NPM scores...')
@@ -44,31 +45,19 @@ module.exports.run = (args) => {
 
     listen(args.p)
 
-    // app.get( '/search/:query', function( req, res )  {
-    //   var pkg = req.params.query.split(",");
-    //   requestData.parseSearch(pkg)
-    //       .then(function (data) {
-    //           res.json(data)
-    //           res.setHeader('Content-Type', 'application/json');
-    //           res.send(data);
-    //         })
-    //         .catch(function (e) {
-    //             res.status(500, {
-    //                 error: e
-    //             });
-    //       })
-    // });
-
-    // app.get( '/:package', function( req, res ) {
-    //   var pkgInput = req.params.package.split(",");
-    //
-    //   res.sendFile('/index.html', {root: path.join(__dirname, '../client')})
-    // });
-
 }
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
+      console.log( "query:" )
+      console.log( req.query )
+      if( req.query.search && req.query.search.length > 0 ){ 
+        pkgs = req.query.search.split(",") 
+      }
+      console.log( "packages" )
+      console.log( pkgs )
+      //let searchedPackages = ["express"]
+      //pkgs = ["express"]
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
           res.json(data)

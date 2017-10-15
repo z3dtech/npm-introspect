@@ -123,22 +123,29 @@ console.log(pkgInfo)
     return JSON.stringify(filteredInfo)
 }
 
+const requestData = function( userPkgs, noDevDep ) {
+    return new Promise((resolve, reject) => {
+        parsePkgJSON().then((packages) => {
+           if( userPkgs && userPkgs.length > 0 ) {
+            packages = [] // reset
+           }
+           packages.push(...userPkgs)
+           console.log( "built from these" )
+           console.log( packages )
+            let packageUrls = packages.map((name) => {
+                return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
+            })
+            npmSearch(packageUrls, noDevDep).then(function(result) {
+                resolve(result)
+            }).catch(function(error) {
+                reject('error')
+            })
+        })
+    })
+}
 
 exports.request = function(userPkgs, noDevDep) {
   console.log('made it home alive ma')
-      return new Promise((resolve, reject) => {
-          parsePkgJSON().then((packages) => {
-             packages.push(...userPkgs)
-
-              let packageUrls = packages.map((name) => {
-                  return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
-              })
-              npmSearch(packageUrls, noDevDep).then(function(result) {
-                  resolve(result)
-              }).catch(function(error) {
-
-                  reject('error')
-              })
-          })
-      })
-  }
+  console.log( userPkgs );
+  return requestData( userPkgs, noDevDep )
+}

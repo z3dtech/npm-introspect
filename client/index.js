@@ -34,7 +34,7 @@ window.onload = function() {
   });
 
   chartHide.visibility='hidden';
-  request.get('/data.json', request.build)
+  request.get('/data.json', [], request.build)
 }
 
 var init = false;
@@ -83,18 +83,24 @@ var winHeight = window.innerHeight,
 
 
 const request = {
-  get: function(url, cb){
+  get: function(url, payload, cb){
+    let terms = ""
+    if( payload.search ) {
+      console.log( "payload" )
+      console.log( payload.search )
+      terms = payload.search.join( "," )
+    }
+    url = url + "?search=" + encodeURI( terms )
     return d3.request(url)
       .mimeType('application/json')
       .response(function(xhr) {
-        console.log(xhr)
+        //console.log(xhr)
         return JSON.parse(xhr.responseText);
       })
       .get(function(error, d){
         if(error) request.error(error)
         cb(JSON.parse(d)) })
     },
-
   error: function(err){
     const mount = document.getElementById('placeholder')
     console.log(err)
@@ -108,11 +114,9 @@ const request = {
     handleClick(0, data[0]);
     pkgBarCharts.barChartContainer(data);
     pkgBarCharts.buildLegend();
-    console.log( "build" );
-    console.log( data );
-    // necessary for initial initial population 
-    // possibly should be flagged so that not run on every build?
     if( !init ) {
+      // necessary for initial initial tag population in search bar. 
+      // can be removed if to keep placeholder 
       for( var i = 0; i < data.length; i++ ) {
         updateSearch( data[i].title[0][1] )
       } 
@@ -409,12 +413,19 @@ document.getElementById( "upload" ).addEventListener( "change", function() {
         for( var i = 0; i < dependencies.length; i++ ) {
           updateSearch( dependencies[ i ], false );
         }
-        let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-        for( var i = 0; i < devDependencies.length; i++ ) {
-          updateSearch( devDependencies[ i ], false );
+        if( JSON.parse( reader.result ).devDependencies ) {
+
+          let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+          if( devDependencies ) {
+            for( var i = 0; i < devDependencies.length; i++ ) {
+              updateSearch( devDependencies[ i ], false );
+            } 
+          }
+         
+
         }
-       
-        request.get('/data.json', request.build)
+        
+        triggerBuild()
       };
       reader.readAsText( input );
   }
@@ -422,34 +433,8 @@ document.getElementById( "upload" ).addEventListener( "change", function() {
 })
 
 document.getElementById( "searchButton" ).addEventListener( "click", function() {
-  request.get('/data.json', request.build)
+  triggerBuild()
 });
-
-
-
-// var input = "";
-
-
-// const triggerBuild = function() {
-//   $( ".error" ).remove();
-//   let pkg = $( "#searchBar" ).val();
-//   if( !pkg || pkg.length === 0 ) {
-//     return;
-//   }
-//   for( let i = 0; i < pkg.length; i++ ) {
-//     if( pkg[i].indexOf( "/" ) !== -1 ) {
-//       pkg[i] = pkg[i].match(/\/([^\/]+)\/?$/)[1];
-//     }
-//   }
-//   document.getElementById( "content-wrapper" ).innerHTML = template;
-//   spinner = new Spinner(spinOptions).spin(spinMount)
-//   let search = "/search/"+pkg;
-//   d3.request(search).mimeType('application/json').response(function(xhr) {
-//     return [JSON.parse(xhr.responseText), xhr.responseText];
-//   }).get(buildVisualization);
-//   document.getElementsByClassName( "scores" )[0].style.visibility = "visible";
-//   return true;
-// }
 
 const updateSearch = function( name, triggerUpdate ) {
   console.log( "add " + name + " to search" )
@@ -465,9 +450,15 @@ const updateSearch = function( name, triggerUpdate ) {
   }
   
   if( triggerUpdate ) {
-    request.get('/data.json', request.build)
-    //triggerBuild();
+    triggerBuild()
   }
   
 }
 
+const triggerBuild = function() {
+  // should build based on searchbar inputs:
+  console.log( "Build based on this!" )
+  console.log( $( "#searchBar" ).val() )
+  let searchTerms = $( "#searchBar" ).val();
+  request.get('/data.json', { search: searchTerms }, request.build)
+}
