@@ -48,23 +48,19 @@ module.exports.run = (args) => {
     listen(args.p)
 }
 
-/*
-if you are making a request for some arbitrary set of
-packages call requestData.format() to wrap in the url
-encoding and then pass to getNPM(), the second argument
-needs to be the don't show devDependencies flag, args.d
-and so has to be defined in the run function
-*/
+// const getJSON = function(pkgs){
+//   const packageUrls = requestData.parseJSON().then((packages) => {
+//     return requestData.format(packages.concat(...pkgs))
+//   })
+//   return packageUrls;
 
-const getJSON = function(pkgs){
-  const packageUrls = requestData.parseJSON().then((packages) => {
-    return requestData.format(packages.concat(...pkgs))
-  })
-  return packageUrls;
 }
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
+      if( req.query.search && req.query.search.length > 0 ){ 
+        pkgs = req.query.search.split(",") 
+      }
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
           res.json(data)

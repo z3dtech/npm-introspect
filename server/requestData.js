@@ -103,42 +103,69 @@ const pkgInfoParse = function(pkgInfo, noDevDep) {
     return JSON.stringify(filteredInfo)
 }
 
-const formatURL = function(packages){
-  let packageUrls = packages.map((name) => {
-      return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
-  })
-  return packageUrls;
-}
-
-const parsePkgJSON = function() {
+const requestData = function( userPkgs, noDevDep ) {
     return new Promise((resolve, reject) => {
-        fs.readFile('package.json', 'utf-8', (error, data) => {
-            if (error){
-              reject('Could not find package.json, please run in project root to parse package.json')
-              return [];
-            }
-            let contents = JSON.parse(data);
-            const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
-            const devDependencies = contents['devDependencies'] && contents ? Object.keys(contents['devDependencies']) : []
-
-            let packages = dependencies.concat(devDependencies)
-            resolve(packages)
-        });
-    });
+        parsePkgJSON().then((packages) => {
+           if( userPkgs && userPkgs.length > 0 ) {
+            packages = [] // reset
+           }
+           packages.push(...userPkgs)
+           console.log( "built from these" )
+           console.log( packages )
+            let packageUrls = packages.map((name) => {
+                return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
+            })
+            npmSearch(packageUrls, noDevDep).then(function(result) {
+                resolve(result)
+            }).catch(function(error) {
+                reject('error')
+            })
+        })
+    })
 }
 
-const pkgRequest = function(pkgs, noDevDep) {
-      return new Promise((resolve, reject) => {
-              npmSearch(pkgs, noDevDep).then(function(result) {
-                  resolve(result)
-              }).catch(function(error) {
-                  console.log('api request to npms.io failed')
-                  reject('api request to npms.io failed')
-              })
-          })
-      }
+exports.request = function(userPkgs, noDevDep) {
+  console.log('made it home alive ma')
+  console.log( userPkgs );
+  return requestData( userPkgs, noDevDep )
+}
+
+// const formatURL = function(packages){
+//   let packageUrls = packages.map((name) => {
+//       return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
+//   })
+//   return packageUrls;
+// }
+
+// const parsePkgJSON = function() {
+//     return new Promise((resolve, reject) => {
+//         fs.readFile('package.json', 'utf-8', (error, data) => {
+//             if (error){
+//               reject('Could not find package.json, please run in project root to parse package.json')
+//               return [];
+//             }
+//             let contents = JSON.parse(data);
+//             const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
+//             const devDependencies = contents['devDependencies'] && contents ? Object.keys(contents['devDependencies']) : []
+
+//             let packages = dependencies.concat(devDependencies)
+//             resolve(packages)
+//         });
+//     });
+// }
+
+// const pkgRequest = function(pkgs, noDevDep) {
+//       return new Promise((resolve, reject) => {
+//               npmSearch(pkgs, noDevDep).then(function(result) {
+//                   resolve(result)
+//               }).catch(function(error) {
+//                   console.log('api request to npms.io failed')
+//                   reject('api request to npms.io failed')
+//               })
+//           })
+//       }
 
 
-module.exports.parseJSON = parsePkgJSON;
-module.exports.request = pkgRequest;
-module.exports.format = formatURL;
+// module.exports.parseJSON = parsePkgJSON;
+// module.exports.request = pkgRequest;
+// module.exports.format = formatURL;
