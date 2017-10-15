@@ -53,13 +53,12 @@ module.exports.run = (args) => {
 //     return requestData.format(packages.concat(...pkgs))
 //   })
 //   return packageUrls;
-
-}
+//}
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
-      if( req.query.search && req.query.search.length > 0 ){ 
-        pkgs = req.query.search.split(",") 
+      if( req.query.search && req.query.search.length > 0 ){
+        pkgs = req.query.search.split(",")
       }
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
