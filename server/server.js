@@ -6,7 +6,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const opn = require('opn');
-const url = require('url');
 
 module.exports.run = (args) => {
     console.log('Recieving NPM scores...')
@@ -49,15 +48,9 @@ module.exports.run = (args) => {
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
-      console.log( "query:" )
-      console.log( req.query )
       if( req.query.search && req.query.search.length > 0 ){ 
         pkgs = req.query.search.split(",") 
       }
-      console.log( "packages" )
-      console.log( pkgs )
-      //let searchedPackages = ["express"]
-      //pkgs = ["express"]
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
           res.json(data)
