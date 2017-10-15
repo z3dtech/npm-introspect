@@ -22,27 +22,8 @@ const isOutdated = function(outdatedPkgs){
   }
 }
 
-const parsePkgJSON = function() {
-    return new Promise((resolve, reject) => {
-
-        fs.readFile('package.json', 'utf-8', (error, data) => {
-            if (error){
-              reject('error')
-              console.log('Could not find package.json, please run in project root to parse package.json');
-            }
-            let contents = JSON.parse(data);
-            const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
-            const devDependencies = contents['devDependencies'] && contents ? Object.keys(contents['devDependencies']) : []
-
-            let packages = dependencies.concat(devDependencies)
-            resolve(packages)
-        });
-    });
-}
-
 const npmSearch = function(infoRequests, noDevDep) {
      return Promise.map(infoRequests, request.get, {concurrency: 6}).then(function(apiResults) {
-               console.log(apiResults)
             return pkgInfoParse(apiResults, noDevDep)
         }).catch(function(error) {
               return error
@@ -51,7 +32,6 @@ const npmSearch = function(infoRequests, noDevDep) {
 
 const pkgInfoParse = function(pkgInfo, noDevDep) {
     let filteredInfo = []
-console.log(pkgInfo)
     pkgInfo.forEach((pkg) => {
         let parsedPkg = {}
         let filteredPkg = {}
@@ -60,7 +40,7 @@ console.log(pkgInfo)
             parsedPkg = JSON.parse(pkg)
 
         } catch (error) {
-            throw 'Error- response not valid JSON'
+            throw 'Error, recieved invalid JSON'
         }
 
         filteredPkg.title = [['name', parsedPkg.collected.metadata.name], ['version', 'v' + parsedPkg.collected.metadata.version]]
@@ -149,3 +129,43 @@ exports.request = function(userPkgs, noDevDep) {
   console.log( userPkgs );
   return requestData( userPkgs, noDevDep )
 }
+
+// const formatURL = function(packages){
+//   let packageUrls = packages.map((name) => {
+//       return "https://api.npms.io/v2/package/" + encodeURIComponent(name);
+//   })
+//   return packageUrls;
+// }
+
+// const parsePkgJSON = function() {
+//     return new Promise((resolve, reject) => {
+//         fs.readFile('package.json', 'utf-8', (error, data) => {
+//             if (error){
+//               reject('Could not find package.json, please run in project root to parse package.json')
+//               return [];
+//             }
+//             let contents = JSON.parse(data);
+//             const dependencies = contents && contents['dependencies'] ? Object.keys(contents['dependencies']) : []
+//             const devDependencies = contents['devDependencies'] && contents ? Object.keys(contents['devDependencies']) : []
+
+//             let packages = dependencies.concat(devDependencies)
+//             resolve(packages)
+//         });
+//     });
+// }
+
+// const pkgRequest = function(pkgs, noDevDep) {
+//       return new Promise((resolve, reject) => {
+//               npmSearch(pkgs, noDevDep).then(function(result) {
+//                   resolve(result)
+//               }).catch(function(error) {
+//                   console.log('api request to npms.io failed')
+//                   reject('api request to npms.io failed')
+//               })
+//           })
+//       }
+
+
+// module.exports.parseJSON = parsePkgJSON;
+// module.exports.request = pkgRequest;
+// module.exports.format = formatURL;

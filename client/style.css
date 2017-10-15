@@ -79,6 +79,11 @@ img{
   margin-top: 0;
   margin-bottom: 0;
 }
+
+#mount{
+  /*I need to move this to the center and give big letters
+  or another message that says loading in the center*/
+}
 /*
                              OUTDATED DEPENDENCIES
 */
@@ -243,6 +248,10 @@ a {
   text-decoration: none;
 }
 
+.node--leaf {
+  cursor: pointer;
+}
+
 /*
 Hack to hide file upload
 */
@@ -253,6 +262,7 @@ Hack to hide file upload
   z-index: 9;
   opacity: 0;
   width: 90px;
+
 }
 
 
