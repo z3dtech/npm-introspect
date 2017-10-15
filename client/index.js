@@ -111,7 +111,7 @@ const request = {
   build: function(data){
     chartHide.visibility='visible' //maybe needs if
 
-    handleClick(0, data[0]);
+    handleClick(0, data[ data.length - 1]);
     pkgBarCharts.barChartContainer(data);
     pkgBarCharts.buildLegend();
     if( !init ) {
