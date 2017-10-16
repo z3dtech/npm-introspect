@@ -8,7 +8,7 @@ window.onload = function() {
       $(this).find('[value="'+e.params.data.id+'"]').replaceWith(new Option( e.params.data.text, e.params.data.text, true, true ) );
     }
   });
-  var input = "";
+  var input = ""; // why not
   $( ".select2-container" ).keyup(function( e ){
     if(e.which == 13 ) { //Enter keycode
       let currentSearch = $( "#searchBar").val();;
