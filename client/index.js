@@ -443,7 +443,7 @@ const updateSearch = function( name, triggerUpdate ) {
     return false;
   }
   let curSearch = document.getElementById( "searchBar" ).value;
-  if( curSearch.indexOf( 'name' ) === -1 ) {
+  if( curSearch.indexOf( name ) === -1 ) {
     document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
   } else {
     document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
