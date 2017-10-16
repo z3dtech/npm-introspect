@@ -55,6 +55,13 @@ module.exports.run = (args) => {
 //   return packageUrls;
 //}
 
+// const getJSON = function(pkgs){
+//   const packageUrls = requestData.parseJSON().then((packages) => {
+//     return requestData.format(packages.concat(...pkgs))
+//   })
+//   return packageUrls;
+//}
+
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
       if( req.query.search && req.query.search.length > 0 ){
