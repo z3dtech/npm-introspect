@@ -87,8 +87,9 @@ var winHeight = window.innerHeight,
       .range([15,4]),
     color = d3.scaleOrdinal().range(["#82A07D","#5D796A", "#425351","#2C2F32"]);
 
-    const outdated = d3.select('.outdatedDependencies').append('ul');
+    const mount = document.getElementById('placeholder')
     const chartHide = document.getElementsByClassName('scoreChart')[0].style;
+    const outdated = d3.select('.outdatedDependencies').append('ul');
 
     const chartBorderHeight = winHeight*0.2,
     chartBorderWidth = (winWidth * 0.9)*0.10,
@@ -106,7 +107,21 @@ var winHeight = window.innerHeight,
     .append('g')
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    const spinOptions = {
+        lines: 17,
+        length: 8,
+        width: 3,
+        radius: 20,
+        color: "#5D796A",
+        scale: 1.75,
+        speed: 1.9,
+        trail: 45,
+        corners: 1.0,
+        opacity: 0,
+        className: 'spinner',
+      };
 
+   const spinner = new Spinner(spinOptions)
 
  const handleClick = function(empty, pkg){
    visualization.buildDependencies(pkg.dependencies)
@@ -137,16 +152,18 @@ const request = {
       .get(function(error, d){
         if(error) request.error(error)
         cb(JSON.parse(d)) })
-    },
+
   error: function(err){
+
     const mount = document.getElementById('placeholder')
-    console.log(err)
-    console.log(err.currentTarget.status)
-    mount.innerText = 'response error ' + err.currentTarget.status + '\n error code in console';
+    spinner.stop();
+    console.log(error)
+    mount.innerText = 'response error :' + '\n error code in console';
   },
 
   build: function(data){
-    chartHide.visibility='visible' //maybe needs if
+    chartHide.visibility='visible'
+    mount.style.visibility = 'hidden'
 
     handleClick(0, data[ data.length - 1]);
     pkgBarCharts.barChartContainer(data);
@@ -460,7 +477,7 @@ const search = {
     console.log( $( "#searchBar" ).val() )
     let searchTerms = $( "#searchBar" ).val();
     request.get('/data.json', { search: searchTerms }, request.build)
+
   }
 
 }
-
