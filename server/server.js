@@ -21,12 +21,12 @@ module.exports.run = (args) => {
       return;
     }
     else{
-      getJSON(pkgs).then(function(pkgURLs){
-        getNPM(pkgURLs, args.d)
-      }).catch(function(error){
+     // getJSON(pkgs).then(function(pkgURLs){
+        getNPM(pkgs, args.d)
+     // }).catch(function(error){
         //If I want to provide a default package
-        console.log(error)
-      })
+     //   console.log(error)
+     // })
     }
 
     app.get('/fork.png', function(req, res){
@@ -59,6 +59,8 @@ const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
       if( req.query.search && req.query.search.length > 0 ){
         pkgs = req.query.search.split(",")
+        console.log( "packages" )
+        console.log( pkgs )
       }
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
