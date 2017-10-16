@@ -1,5 +1,8 @@
 'use strict'
 window.onload = function() {
+  
+  // EVENT HANDLERS BEGIN
+
   $( "#searchBar" ).select2( { 
     placeholder: 'Please search for an NPM package or upload a package.json to visualize',   
     tags: true,
@@ -24,14 +27,48 @@ window.onload = function() {
       if( currentSearch.indexOf( input ) !== -1 ) {
         document.getElementById("searchBar").querySelector("option[value='"+ input +"']").remove();
         console.log( "this is it" )
-        updateSearch( input );
+        search.updateSearch( input );
       } else if( startsWith ) {
-        updateSearch( input );
+        search.updateSearch( input );
       }
     } else {
       input = document.getElementById("select2-searchBar-results").querySelector( "li" ).innerText;
     }
   });
+  document.getElementById( "upload" ).addEventListener( "change", function() {
+    if( document.getElementById( "upload" ).value !== "" ) {
+        let input = this.files[0];
+        let reader = new FileReader();
+        reader.onload = function(){
+          document.getElementById( "searchBar" ).options.length = 0;
+          let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
+          for( var i = 0; i < dependencies.length; i++ ) {
+            search.updateSearch( dependencies[ i ], false );
+          }
+          if( JSON.parse( reader.result ).devDependencies ) {
+
+            let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
+            if( devDependencies ) {
+              for( var i = 0; i < devDependencies.length; i++ ) {
+                search.updateSearch( devDependencies[ i ], false );
+              } 
+            }
+           
+
+          }
+          
+          search.triggerBuild()
+        };
+        reader.readAsText( input );
+    }
+     document.getElementById( "upload" ).value = "";
+  })
+
+  document.getElementById( "searchButton" ).addEventListener( "click", function() {
+    search.triggerBuild()
+  });
+
+  // /EVENT HANDLERS
 
   chartHide.visibility='hidden';
   request.get('/data.json', [], request.build)
@@ -118,7 +155,7 @@ const request = {
       // necessary for initial initial tag population in search bar. 
       // can be removed if to keep placeholder 
       for( var i = 0; i < data.length; i++ ) {
-        updateSearch( data[i].title[0][1] )
+        search.updateSearch( data[i].title[0][1] )
       } 
       init = true
     }
@@ -284,7 +321,7 @@ const visualization = {
                function(d){
                  return 'Outdated Dependency: ' + d;
                }).on( 'click', function( e ) {
-               updateSearch( e, true );
+               search.updateSearch( e, true );
              } )
              outdatedDependencies.exit().remove()
            },
@@ -389,7 +426,7 @@ buildDependencies: function(pkgDependencies){
   }).on("click", function( d,i ) {
       console.log( "clicked!" )
       console.log( d );
-      updateSearch( d.data.name, true )
+      search.updateSearch( d.data.name, true )
   });
 
   updateNodes.merge(enterNodes);
@@ -398,67 +435,32 @@ buildDependencies: function(pkgDependencies){
 }
 }
 
-
-
-
-
-
-document.getElementById( "upload" ).addEventListener( "change", function() {
-  if( document.getElementById( "upload" ).value !== "" ) {
-      let input = this.files[0];
-      let reader = new FileReader();
-      reader.onload = function(){
-        document.getElementById( "searchBar" ).options.length = 0;
-        let dependencies = Object.keys( JSON.parse( reader.result ).dependencies );
-        for( var i = 0; i < dependencies.length; i++ ) {
-          updateSearch( dependencies[ i ], false );
-        }
-        if( JSON.parse( reader.result ).devDependencies ) {
-
-          let devDependencies = Object.keys( JSON.parse( reader.result ).devDependencies );
-          if( devDependencies ) {
-            for( var i = 0; i < devDependencies.length; i++ ) {
-              updateSearch( devDependencies[ i ], false );
-            } 
-          }
-         
-
-        }
-        
-        triggerBuild()
-      };
-      reader.readAsText( input );
+const search = {
+  updateSearch: function( name, triggerUpdate ) {
+    console.log( "add " + name + " to search" )
+    
+    if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
+      return false;
+    }
+    let curSearch = document.getElementById( "searchBar" ).value;
+    if( curSearch.indexOf( name ) === -1 ) {
+      document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
+    } else {
+      document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
+    }
+    
+    if( triggerUpdate ) {
+      search.triggerBuild()
+    }
+    
+  }, 
+  triggerBuild: function() {
+    // should build based on searchbar inputs:
+    console.log( "Build based on this!" )
+    console.log( $( "#searchBar" ).val() )
+    let searchTerms = $( "#searchBar" ).val();
+    request.get('/data.json', { search: searchTerms }, request.build)
   }
-   document.getElementById( "upload" ).value = "";
-})
 
-document.getElementById( "searchButton" ).addEventListener( "click", function() {
-  triggerBuild()
-});
-
-const updateSearch = function( name, triggerUpdate ) {
-  console.log( "add " + name + " to search" )
-  
-  if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
-    return false;
-  }
-  let curSearch = document.getElementById( "searchBar" ).value;
-  if( curSearch.indexOf( name ) === -1 ) {
-    document.getElementById( "searchBar" ).appendChild( new Option( name, name, true, true ) )
-  } else {
-    document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
-  }
-  
-  if( triggerUpdate ) {
-    triggerBuild()
-  }
-  
 }
 
-const triggerBuild = function() {
-  // should build based on searchbar inputs:
-  console.log( "Build based on this!" )
-  console.log( $( "#searchBar" ).val() )
-  let searchTerms = $( "#searchBar" ).val();
-  request.get('/data.json', { search: searchTerms }, request.build)
-}
