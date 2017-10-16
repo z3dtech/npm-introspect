@@ -42,9 +42,18 @@ module.exports.run = (args) => {
         res.send('A wrong url has been requested, please check spelling')
     })
 
+<<<<<<< HEAD
     listen(args.p)
 
 }
+=======
+// const getJSON = function(pkgs){
+//   const packageUrls = requestData.parseJSON().then((packages) => {
+//     return requestData.format(packages.concat(...pkgs))
+//   })
+//   return packageUrls;
+//}
+>>>>>>> cc312f9cac08403a9163aeb9fd65f968f3cf4c95
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
