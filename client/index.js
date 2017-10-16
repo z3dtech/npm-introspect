@@ -1,7 +1,7 @@
 'use strict'
 window.onload = function() {
-  $( "#searchBar" ).select2( { 
-    placeholder: 'Please search for an NPM package or upload a package.json to visualize',   
+  $( "#searchBar" ).select2( {
+    placeholder: 'Please search for an NPM package or upload a package.json to visualize',
     tags: true,
   }).on("select2:select", function(e) {
     if( $(this).val().indexOf( e.params.data.text ) === -1 ){
@@ -115,6 +115,8 @@ const request = {
       .get(function(error, d){
         if(error) request.error(error)
         cb(JSON.parse(d)) })
+      }
+    },
 
   error: function(err){
 
@@ -132,11 +134,11 @@ const request = {
     pkgBarCharts.barChartContainer(data);
     pkgBarCharts.buildLegend();
     if( !init ) {
-      // necessary for initial initial tag population in search bar. 
-      // can be removed if to keep placeholder 
+      // necessary for initial initial tag population in search bar.
+      // can be removed if to keep placeholder
       for( var i = 0; i < data.length; i++ ) {
         updateSearch( data[i].title[0][1] )
-      } 
+      }
       init = true
     }
   }
@@ -431,12 +433,12 @@ document.getElementById( "upload" ).addEventListener( "change", function() {
           if( devDependencies ) {
             for( var i = 0; i < devDependencies.length; i++ ) {
               updateSearch( devDependencies[ i ], false );
-            } 
+            }
           }
-         
+
 
         }
-        
+
         triggerBuild()
       };
       reader.readAsText( input );
@@ -450,7 +452,7 @@ document.getElementById( "searchButton" ).addEventListener( "click", function() 
 
 const updateSearch = function( name, triggerUpdate ) {
   console.log( "add " + name + " to search" )
-  
+
   if( typeof name === "undefined" || !name || name === "" || name === "dependency" || name === "devDependency" ) {
     return false;
   }
@@ -460,11 +462,11 @@ const updateSearch = function( name, triggerUpdate ) {
   } else {
     document.getElementById( "searchBar" ).querySelector( "option[value='"+ name +"']" ).remove();
   }
-  
+
   if( triggerUpdate ) {
     triggerBuild()
   }
-  
+
 }
 
 const triggerBuild = function() {
@@ -474,4 +476,3 @@ const triggerBuild = function() {
   let searchTerms = $( "#searchBar" ).val();
   request.get('/data.json', { search: searchTerms }, request.build)
 }
-

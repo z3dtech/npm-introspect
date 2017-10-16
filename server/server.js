@@ -18,15 +18,11 @@ module.exports.run = (args) => {
         }).catch(function(e){
           console.log(e)
       })
+      console.log('here')
       return;
     }
     else{
-      getJSON(pkgs).then(function(pkgURLs){
-        getNPM(pkgURLs, args.d)
-      }).catch(function(error){
-        //If I want to provide a default package
-        console.log(error)
-      })
+      getNPM(pkgs, args.d)
     }
 
     app.get('/fork.png', function(req, res){
@@ -45,21 +41,15 @@ module.exports.run = (args) => {
     app.get('*', function(req, res) {
         res.send('A wrong url has been requested, please check spelling')
     })
-    listen(args.p)
-}
 
-// const getJSON = function(pkgs){
-//   const packageUrls = requestData.parseJSON().then((packages) => {
-//     return requestData.format(packages.concat(...pkgs))
-//   })
-//   return packageUrls;
+    listen(args.p)
 
 }
 
 const getNPM = function(pkgs, noDevDep){
     return app.get('/data.json', function(req, res){
-      if( req.query.search && req.query.search.length > 0 ){ 
-        pkgs = req.query.search.split(",") 
+      if( req.query.search && req.query.search.length > 0 ){
+        pkgs = req.query.search.split(",")
       }
       requestData.request(pkgs, noDevDep)
       .then(function (data) {
